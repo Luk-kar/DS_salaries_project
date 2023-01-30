@@ -8,8 +8,9 @@ except ModuleNotFoundError:
     from common import requestAndParse
 
 
-# extracts desired data from listing banner
 def extract_listingBanner(listing_soup):
+    ''''extracts desired data from listing banner'''
+    # todo get more data according to the doc
     listing_bannerGroup_valid = False
 
     try:
@@ -59,8 +60,9 @@ def extract_listingBanner(listing_soup):
     return companyName, company_starRating, company_offeredRole, company_roleLocation
 
 
-# extracts desired data from listing description
 def extract_listingDesc(listing_soup):
+    '''extracts desired data from listing description'''
+
     extract_listingDesc_tmpList = []
     listing_jobDesc_raw = None
 
@@ -90,8 +92,9 @@ def extract_listingDesc(listing_soup):
     return listing_jobDesc
 
 
-# extract data from listing
 def extract_listing(url):
+    '''extract data from listing'''
+
     request_success = False
     try:
         listing_soup, requested_url = requestAndParse(url)

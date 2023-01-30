@@ -9,8 +9,9 @@ except ModuleNotFoundError:
     from common import requestAndParse
 
 
-# extract maximum number of jobs stated, only applicable for the "base" url
 def extract_maximums(base_url):
+    '''extract maximum number of jobs stated, only applicable for the "base" url'''
+
     page_soup, _ = requestAndParse(base_url)
 
     tmp_match_1 = [item for item in page_soup.find_all(
@@ -36,8 +37,9 @@ def extract_maximums(base_url):
     return (int(maxJobs), int(maxPages))
 
 
-# extract listing urls
 def extract_listings(page_soup):
+    '''extract listing urls'''
+
     # this is slower but more robust:
     # get all links regardless of type and extract those that match
     listings_list = list()
