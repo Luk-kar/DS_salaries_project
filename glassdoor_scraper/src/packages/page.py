@@ -4,7 +4,7 @@ import re
 from time import time
 # 3rd-party libraries
 try:
-    from glassdoor_scraper.src.packages.common import requestAndParse
+    from glassdoor_scraper.src.packages.utils import requestAndParse
 except ModuleNotFoundError:
     from common import requestAndParse
 

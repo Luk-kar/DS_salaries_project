@@ -15,7 +15,7 @@ import urllib.parse
 import enlighten
 
 # custom functions
-from glassdoor_scraper.src.packages.common import requestAndParse
+from glassdoor_scraper.src.packages.utils import requestAndParse
 from glassdoor_scraper.src.packages.listing import extract_listing
 from glassdoor_scraper.src.packages.page import extract_maximums, extract_listings
 

@@ -3,7 +3,7 @@
 from time import time
 # custom functions
 try:
-    from glassdoor_scraper.src.packages.common import requestAndParse
+    from glassdoor_scraper.src.packages.utils import requestAndParse
 except ModuleNotFoundError:
     from common import requestAndParse
 
