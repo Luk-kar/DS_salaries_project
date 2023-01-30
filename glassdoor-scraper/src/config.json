@@ -1,0 +1,22 @@
+{
+    "jobs": ["Data Engineer", 
+    "Big Data Engineer", 
+    "Data Architecture", 
+    "Data Manager", 
+    "Data Architect", 
+    "Data Specialist", 
+    "Business Intelligence Engineer", 
+    "Business Intelligence Developer",
+    "ETL Developer",
+    "Data Warehouse Engineer",
+    "Data Consultant",
+    "Database Engineer",
+    "Database Developer",
+    "Analytics Consultant"],
+    "url": {
+        "001_base": "https://www.glassdoor.com/Job/jobs.htm?suggestCount=0&suggestChosen=false&clickSource=searchBtn&typedKeyword=",
+        "002_keyword": "&sc.keyword=",
+        "003_job_type": "&locT=&locId=&jobType="
+    },
+    "target_num": 5
+}

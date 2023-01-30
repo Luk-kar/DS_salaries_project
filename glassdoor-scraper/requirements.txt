@@ -1,0 +1,6 @@
+beautifulsoup4
+bs4
+jsonschema
+requests
+urllib3
+enlighten

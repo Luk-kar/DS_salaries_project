@@ -1,0 +1,5 @@
+.vscode/
+*__pycache__
+
+src/bak
+src/output
