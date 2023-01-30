@@ -15,8 +15,8 @@ import urllib.parse
 import enlighten
 
 # custom functions
-from glassdoor_scraper.src.packages.listing import extract_listing
 from glassdoor_scraper.src.packages.common import requestAndParse
+from glassdoor_scraper.src.packages.listing import extract_listing
 from glassdoor_scraper.src.packages.page import extract_maximums, extract_listings
 
 
@@ -24,9 +24,10 @@ class glassdoor_scraper():
 
     def __init__(self, configfile, baseurl, targetnum) -> None:
 
-        # load first
+        # load config file configuration
         base_url, target_num = self.load_configs(path=configfile)
-        # overwrite those that are not none
+
+        # overwrite args that are not none
         if type(baseurl) != type(None):
             base_url = baseurl
             print("Using supplied baseurl")
@@ -35,7 +36,7 @@ class glassdoor_scraper():
             print("Using supplied targetnum")
         print(configfile, baseurl, targetnum)
 
-        # initialises output directory and file
+        # initializes output directory and file
         if not os.path.exists('data/RAW'):
             os.makedirs('data/RAW')
         now = datetime.now()  # current date and time
@@ -53,7 +54,7 @@ class glassdoor_scraper():
                 "[ERROR] Target number larger than maximum number of jobs. Exiting program...\n")
             os._exit(0)
 
-        # initialises enlighten_manager
+        # initializes enlighten_manager
         enlighten_manager = enlighten.get_manager()
         progress_outer = enlighten_manager.counter(
             total=target_num, desc="Total progress", unit="listings", color="green", leave=False)
@@ -62,14 +63,15 @@ class glassdoor_scraper():
         page_index = 1
         total_listingCount = 0
 
-        # initialises prev_url as base_url
-        prev_url = base_url
+        # initializes previous url as base url
+        previous_url = base_url
 
         while total_listingCount <= target_num:
+
             # clean up buffer
             list_returnedTuple = []
 
-            new_url = self.update_url(prev_url, page_index)
+            new_url = self.update_url(previous_url, page_index)
             page_soup, _ = requestAndParse(new_url)
             listings_set, jobCount = extract_listings(page_soup)
             progress_inner = enlighten_manager.counter(total=len(
@@ -83,7 +85,6 @@ class glassdoor_scraper():
             for listing_url in listings_set:
 
                 # to implement cache here
-
                 returned_tuple = extract_listing(listing_url)
                 list_returnedTuple.append(returned_tuple)
                 # print(returned_tuple)
@@ -99,13 +100,14 @@ class glassdoor_scraper():
             print("[INFO] Finished processing page index {}; Total number of jobs processed: {}".format(
                 page_index, total_listingCount))
             page_index = page_index + 1
-            prev_url = new_url
+            previous_url = new_url
             progress_outer.update(jobCount)
 
         progress_outer.close()
 
-    # loads user defined parameters
     def load_configs(self, path):
+        '''loads config file defined parameters'''
+
         with open(path) as config_file:
             configurations = json.load(config_file)
 
@@ -121,10 +123,11 @@ class glassdoor_scraper():
         target_num = int(configurations["target_num"])
         return base_url, target_num
 
-    # appends list of tuples in specified output csv file
-    # a tuple is written as a single row in csv file
-
     def fileWriter(self, listOfTuples, output_fileName):
+        '''
+        appends list of tuples in specified output csv file
+        a tuple is written as a single row in csv file
+        '''
         with open(output_fileName, 'a', newline='') as out:
             csv_out = csv.writer(out)
             for row_tuple in listOfTuples:
@@ -134,9 +137,9 @@ class glassdoor_scraper():
                 except Exception as e:
                     print("[WARN] In filewriter: {}".format(e))
 
-    # updates url according to the page_index desired
-
     def update_url(self, prev_url, page_index):
+        '''updates url according to the page_index desired'''
+
         if page_index == 1:
             prev_substring = ".htm"
             new_substring = "_IP" + str(page_index) + ".htm"
@@ -149,6 +152,7 @@ class glassdoor_scraper():
 
 
 if __name__ == "__main__":
+
     parser = argparse.ArgumentParser()
     parser.add_argument('-c', '--configfile', help="Specify location of json config file",
                         type=str, required=False, default="config.json")
