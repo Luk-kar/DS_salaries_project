@@ -15,9 +15,9 @@ import urllib.parse
 import enlighten
 
 # custom functions
-from packages.common import requestAndParse
-from packages.page import extract_maximums, extract_listings
-from packages.listing import extract_listing
+from glassdoor_scraper.src.packages.listing import extract_listing
+from glassdoor_scraper.src.packages.common import requestAndParse
+from glassdoor_scraper.src.packages.page import extract_maximums, extract_listings
 
 
 class glassdoor_scraper():
@@ -36,10 +36,10 @@ class glassdoor_scraper():
         print(configfile, baseurl, targetnum)
 
         # initialises output directory and file
-        if not os.path.exists('output'):
-            os.makedirs('output')
+        if not os.path.exists('data/RAW'):
+            os.makedirs('data/RAW')
         now = datetime.now()  # current date and time
-        output_fileName = "./output/output_" + \
+        output_fileName = "./data/RAW/jobs_" + \
             now.strftime("%d-%m-%Y") + ".csv"
         csv_header = [("companyName", "company_starRating", "company_offeredRole",
                        "company_roleLocation", "listing_jobDesc", "requested_url")]

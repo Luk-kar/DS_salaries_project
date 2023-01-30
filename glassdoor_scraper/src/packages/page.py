@@ -4,19 +4,21 @@ import re
 from time import time
 # 3rd-party libraries
 try:
-    from packages.common import requestAndParse
+    from glassdoor_scraper.src.packages.common import requestAndParse
 except ModuleNotFoundError:
     from common import requestAndParse
 
 
 # extract maximum number of jobs stated, only applicable for the "base" url
 def extract_maximums(base_url):
-    page_soup,_ = requestAndParse(base_url)
+    page_soup, _ = requestAndParse(base_url)
 
-    tmp_match_1 = [item for item in page_soup.find_all("p") if "data-test" in item.attrs][0]
+    tmp_match_1 = [item for item in page_soup.find_all(
+        "p") if "data-test" in item.attrs][0]
     # Fixed the issue of the change of offset of item.attrs from [-1] to [-2] for pages
-    tmp_match_2 = [item for item in page_soup.find_all("div") if "data-test" in item.attrs][-2]
-    
+    tmp_match_2 = [item for item in page_soup.find_all(
+        "div") if "data-test" in item.attrs][-2]
+
     maxJobs_raw = tmp_match_1.get_text()    # e.g. 7,764 Jobs
     maxPages_raw = tmp_match_2.get_text()   # e.g. Page 1 of 30
 
@@ -30,10 +32,8 @@ def extract_maximums(base_url):
 
     maxJobs = re.sub(r"\D", "", maxJobs_raw)
     maxPages = re.sub(r"\D", "", maxPages_raw)[1:]
-    
-    
-    
-    return(int(maxJobs), int(maxPages))
+
+    return (int(maxJobs), int(maxPages))
 
 
 # extract listing urls
@@ -65,7 +65,8 @@ if __name__ == "__main__":
     start_time = time()
     maxJobs, maxPages = extract_maximums(url)
     time_taken = time() - start_time
-    print("[INFO] Maximum number of jobs in range: {}, number of pages in range: {}".format(maxJobs, maxPages))
+    print("[INFO] Maximum number of jobs in range: {}, number of pages in range: {}".format(
+        maxJobs, maxPages))
     print("[INFO] returned in {} seconds".format(time_taken))
 
     url = "https://www.glassdoor.sg/Job/singapore-software-engineer-jobs-SRCH_IL.0,9_IC3235921_KO10,27_IP1.htm"
