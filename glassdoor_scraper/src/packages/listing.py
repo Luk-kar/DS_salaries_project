@@ -23,8 +23,11 @@ def extract_listingBanner(listing_soup):
         company_starRating = "NA"
         company_offeredRole = "NA"
         company_roleLocation = "NA"
+        company_salary = "NA"
+        company_applying = "NA"
 
     if listing_bannerGroup_valid:
+
         try:
             company_starRating = listing_bannerGroup.find(
                 "span", class_="css-1pmc6te e11nt52q4").getText()
@@ -57,7 +60,19 @@ def extract_listingBanner(listing_soup):
         except:
             company_roleLocation = "NA"
 
-    return companyName, company_starRating, company_offeredRole, company_roleLocation
+        try:
+            company_salary = listing_bannerGroup.find(
+                "span", class_="small css-10zcshf e1v3ed7e1").getText()
+        except:
+            company_salary = "NA"
+
+        try:
+            company_applying = listing_bannerGroup.find(
+                "span", class_="job-view-2etp8b evpplnh0").find("span").getText()  # todo
+        except:
+            company_applying = "NA"
+
+    return companyName, company_starRating, company_offeredRole, company_roleLocation, company_salary, company_applying
 
 
 def extract_listingDesc(listing_soup):
@@ -101,14 +116,14 @@ def extract_listing(url):
         request_success = True
     except Exception as e:
         print("[ERROR] Error occurred in extract_listing, requested url: {} is unavailable.".format(url))
-        return ("NA", "NA", "NA", "NA", "NA", "NA")
+        return ("NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA")
 
     if request_success:
-        companyName, company_starRating, company_offeredRole, company_roleLocation = extract_listingBanner(
+        companyName, company_starRating, company_offeredRole, company_roleLocation, company_salary, company_applying = extract_listingBanner(
             listing_soup)
         listing_jobDesc = extract_listingDesc(listing_soup)
 
-        return (companyName, company_starRating, company_offeredRole, company_roleLocation, listing_jobDesc, requested_url)
+        return (companyName, company_starRating, company_offeredRole, company_roleLocation, company_salary, listing_jobDesc, company_applying, requested_url)
 
 
 if __name__ == "__main__":

@@ -43,7 +43,7 @@ class glassdoor_scraper():
         output_fileName = "./data/RAW/jobs_" + \
             now.strftime("%d-%m-%Y") + ".csv"
         csv_header = [("companyName", "company_starRating", "company_offeredRole",
-                       "company_roleLocation", "listing_jobDesc", "requested_url")]
+                       "company_roleLocation", "salary", "listing_jobDesc", "type_apply", "requested_url")]
         self.fileWriter(listOfTuples=csv_header,
                         output_fileName=output_fileName)
 
