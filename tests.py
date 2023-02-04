@@ -13,7 +13,7 @@ import requests
 
 # Internal
 from config.get_config import get_args
-from config.Types import Config, Job_Number, Job_Similar, Url
+from config.types import Config, JobNumber, JobSimilar, Url
 
 
 class TestConfigData(unittest.TestCase):
@@ -45,7 +45,7 @@ class TestConfigData(unittest.TestCase):
     def test_jobs_similar(self):
         """assert if is any of the jobs, not an empty string"""
 
-        jobs: Job_Similar = self.config["jobs_titles"]["similar"]
+        jobs: JobSimilar = self.config["jobs_titles"]["similar"]
 
         self.assertIsInstance(jobs, list)
 
@@ -55,7 +55,7 @@ class TestConfigData(unittest.TestCase):
     def test_jobs_number(self):
         """test if is it greater than 0"""
 
-        jobs_number: Job_Number = self.config["jobs_number"]
+        jobs_number: JobNumber = self.config["jobs_number"]
         self.assertIsInstance(jobs_number, int)
         self.assertGreater(jobs_number, 0)
 
