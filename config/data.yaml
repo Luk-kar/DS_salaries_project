@@ -1,0 +1,27 @@
+---
+# The list of jobs somehow similar to data engineering:
+# https://resumeworded.com/career-profiles/data-engineer-career-profile#anchor_link2_job_4
+jobs_titles:
+    default: "Data Engineer"
+    similar:
+        - "Big Data Engineer"
+        - "Data Architecture"
+        - "Data Manager"
+        - "Data Architect"
+        - "Data Specialist"
+        - "Business Intelligence Engineer"
+        - "Business Intelligence Developer"
+        - "ETL Developer"
+        - "Data Warehouse Engineer"
+        - "Data Consultant"
+        - "Database Engineer"
+        - "Database Developer"
+        - "Analytics Consultant"
+jobs_number: 1000
+url:
+    # base + job + keyword + job + location + ?
+    001_base: "https://www.glassdoor.com/Job/jobs.htm?suggestCount=0&suggestChosen=false&clickSource=searchBtn&typedKeyword="
+    002_keyword: "&sc.keyword="
+    003_location: "&locT=&locId=&jobType="
+driver_path: "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe"
+debug_mode: false
