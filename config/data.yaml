@@ -23,5 +23,6 @@ url:
     001_base: "https://www.glassdoor.com/Job/jobs.htm?suggestCount=0&suggestChosen=false&clickSource=searchBtn&typedKeyword="
     002_keyword: "&sc.keyword="
     003_location: "&locT=&locId=&jobType="
+# Update this path for your driver app
 driver_path: "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe"
 debug_mode: false

@@ -12,27 +12,31 @@ import unittest
 import requests
 
 # Internal
-from config.get_config import get_args
+from config.get import get_config, get_url
 from config.types import Config, JobNumber, JobSimilar, Url
 
 
-class TestConfigData(unittest.TestCase):
+class StringChecker():
+    """custom checker"""
+
+    def is_empty_string(self: unittest.TestCase, string: str) -> None:
+        """assert if is it not an empty string"""
+
+        self.assertIsInstance(string, str)
+        self.assertNotEqual(string, "")
+
+
+class TestConfigData(unittest.TestCase, StringChecker):
     """
     It tests the configuration data stored in Config 
     object which is obtained from get_args method of config.get_config
     """
 
     def setUp(self):
-        """init common variables"""
-        self.config: Config = get_args()
+        """init all config values"""
+        self.config: Config = get_config()
 
-    def is_empty_string(self, string: str) -> None:
-        """assert if is it not an empty string"""
-
-        self.assertIsInstance(string, str)
-        self.assertNotEqual(string, "")
-
-    def test_args_is_dict(self):
+    def test_config_is_dict(self):
         """assert if instance of a dict"""
 
         self.assertIsInstance(self.config, dict)
@@ -71,12 +75,7 @@ class TestConfigData(unittest.TestCase):
     def test_web_exists(self):
         """check if url exists"""
 
-        url: Url = self.config["url"]
-        job: str = self.config["jobs_titles"]["default"]
-
-        web = url["001_base"] + job + \
-            url["002_keyword"] + job + \
-            url["003_location"]
+        web = get_url(self.config)
 
         status_code = requests.get(web, timeout=10).status_code
         self.assertEqual(status_code, 200)  # Response OK, server connected

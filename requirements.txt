@@ -1,6 +1,2 @@
-beautifulsoup4
-bs4
-jsonschema
-requests
-urllib3
-enlighten
+pandas==1.5.3
+selenium==4.8.0

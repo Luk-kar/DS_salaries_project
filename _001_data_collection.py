@@ -1,6 +1,10 @@
-from config.get_config import get_args
+from config.get import get_config
 
-args = get_args()
+args = get_config()
+
+
+def get_one_job():
+    pass
 
 
 def get_jobs(
