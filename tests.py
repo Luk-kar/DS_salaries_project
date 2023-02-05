@@ -10,10 +10,12 @@ import unittest
 
 # Imported
 import requests
+from selenium import webdriver
 
 # Internal
 from config.get import get_config, get_url
 from config.types import Config, JobNumber, JobSimilar, Url
+from _001_data_collection import get_driver
 
 
 class StringChecker():
@@ -75,9 +77,9 @@ class TestConfigData(unittest.TestCase, StringChecker):
     def test_web_exists(self):
         """check if url exists"""
 
-        web = get_url(self.config)
+        url = get_url(self.config)
 
-        status_code = requests.get(web, timeout=10).status_code
+        status_code = requests.get(url, timeout=10).status_code
         self.assertEqual(status_code, 200)  # Response OK, server connected
 
     def test_driver_path(self):
@@ -104,7 +106,14 @@ class TestJobDescription(unittest.TestCase):
     """It tests single-job page scraping"""
 
     def setUp(self):
-        pass
+        self.config: Config = get_config()
+        self.url = get_url(self.config)
+
+    def test_is_browser(self):
+        driver: webdriver.chrome.webdriver.WebDriver = get_driver(self.url)
+
+        self.assertIsInstance(
+            driver, webdriver.chrome.webdriver.WebDriver)  # check if html
 
 
 if __name__ == '__main__':

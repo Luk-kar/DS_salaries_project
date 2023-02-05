@@ -25,4 +25,4 @@ url:
     003_location: "&locT=&locId=&jobType="
 # Update this path for your driver app
 driver_path: "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe"
-debug_mode: false
+debug_mode: true
