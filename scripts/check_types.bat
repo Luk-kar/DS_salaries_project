@@ -1,0 +1,3 @@
+@ECHO OFF
+ECHO Checking types...
+mypy ./

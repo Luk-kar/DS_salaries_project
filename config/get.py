@@ -18,6 +18,7 @@ def get_config(path: str = 'config\\data.yaml') -> Config:
 
 
 def get_url(config: Config) -> str:
+    """It loads url data from a YAML file and returns it as a HTTP string"""
 
     url: Url = config["url"]
     job: str = config["jobs_titles"]["default"]

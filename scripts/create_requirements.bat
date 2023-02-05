@@ -1,0 +1,3 @@
+@ECHO OFF
+ECHO Creating requirements.txt file with needed libraries...
+pipreqs --force ./

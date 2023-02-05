@@ -1,0 +1,3 @@
+@ECHO OFF
+ECHO running virtual enviroment...
+pipenv shell
