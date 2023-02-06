@@ -5,6 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium import webdriver
 import requests
 import time
+from typing import Union
 # import pandas as pd
 
 config = get_config()
@@ -20,7 +21,7 @@ def get_jobs(
 ):
 
     driver = get_webpage(url, debug_mode)
-    jobs = []
+    jobs: list[dict[str, Union[str, int, bool]]] = []
 
     while len(jobs) < jobs_number:
 
@@ -69,7 +70,7 @@ def get_webpage(url, debug_mode):
 
 def get_driver(
         debug_mode: bool = config["debug_mode"],
-        path: str = config["driver_path"]) -> webdriver:
+        path: str = config["driver_path"]) -> webdriver:  # type: ignore[valid-type]
 
     options = webdriver.ChromeOptions()
     options.add_argument("USER AGENT")
