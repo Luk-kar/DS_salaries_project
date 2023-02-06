@@ -8,17 +8,18 @@ import os
 import re
 import unittest
 
-# Imported
+# Non-Standard
 import requests
 from selenium import webdriver
+from bs4 import BeautifulSoup
 
 # Internal
 from config.get import get_config, get_url
 from config.types import Config, JobNumber, JobSimilar, Url
-from _001_data_collection import get_driver
+from _001_data_collection import get_driver, get_webpage
 
 
-class StringChecker():
+class StringChecker():  # add to class
     """custom checker"""
 
     def is_empty_string(self: unittest.TestCase, string: str) -> None:
@@ -109,11 +110,21 @@ class TestJobDescription(unittest.TestCase):
         self.config: Config = get_config()
         self.url = get_url(self.config)
 
+    def is_HTML(self, page_source):
+        return bool(BeautifulSoup(page_source, "html.parser").find())
+
     def test_is_browser(self):
         driver: webdriver.chrome.webdriver.WebDriver = get_driver(self.url)
 
         self.assertIsInstance(
-            driver, webdriver.chrome.webdriver.WebDriver)  # check if html
+            driver, webdriver.chrome.webdriver.WebDriver)
+
+    def test_is_webpage_loaded(self):
+        driver: webdriver.chrome.webdriver.WebDriver = get_webpage(
+            self.url, False)
+        page_source: str = driver.page_source
+
+        self.assertTrue(self.is_HTML(page_source))
 
 
 if __name__ == '__main__':
