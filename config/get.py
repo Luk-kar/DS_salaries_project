@@ -4,9 +4,11 @@ and returns it as a Config object.
 The default file path is config\\data.yaml, 
 but it can be changed by passing a different file path as an argument.
 """
-
+# Python
 import yaml
 from yaml.loader import SafeLoader
+
+# Internal
 from config.types import Config, Url, JobDefault
 
 

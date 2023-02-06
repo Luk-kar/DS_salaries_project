@@ -8,7 +8,7 @@ import os
 import re
 import unittest
 
-# Non-Standard
+# External
 import requests
 from selenium import webdriver
 from bs4 import BeautifulSoup
@@ -19,17 +19,7 @@ from config.types import Config, JobNumber, JobSimilar, Url
 from _001_data_collection import get_driver, get_webpage
 
 
-class StringChecker():  # add to class
-    """custom checker"""
-
-    def is_empty_string(self: unittest.TestCase, string: str) -> None:
-        """assert if is it not an empty string"""
-
-        self.assertIsInstance(string, str)
-        self.assertNotEqual(string, "")
-
-
-class TestConfigData(unittest.TestCase, StringChecker):
+class TestConfigData(unittest.TestCase):
     """
     It tests the configuration data stored in Config 
     object which is obtained from get_args method of config.get_config
@@ -38,6 +28,12 @@ class TestConfigData(unittest.TestCase, StringChecker):
     def setUp(self):
         """init all config values"""
         self.config: Config = get_config()
+
+    def is_empty_string(self, string: str) -> None:
+        """assert if is it not an empty string"""
+
+        self.assertIsInstance(string, str)
+        self.assertNotEqual(string, "")
 
     def test_config_is_dict(self):
         """assert if instance of a dict"""
