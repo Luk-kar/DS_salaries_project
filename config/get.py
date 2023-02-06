@@ -9,7 +9,7 @@ import yaml
 from yaml.loader import SafeLoader
 
 # Internal
-from config.types import Config, Url, JobDefault
+from config._types import Config, Url, JobDefault
 
 
 def get_config(path: str = 'config\\data.yaml') -> Config:
@@ -25,8 +25,8 @@ def get_url(config: Config) -> str:
     url: Url = config["url"]
     job: JobDefault = config["jobs_titles"]["default"]
 
-    url = url["001_base"] + job + \
+    http = url["001_base"] + job + \
         url["002_keyword"] + job + \
         url["003_location"]
 
-    return url
+    return http

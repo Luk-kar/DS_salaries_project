@@ -10,13 +10,13 @@ import unittest
 
 # External
 import requests
-from selenium import webdriver
 from bs4 import BeautifulSoup
 
 # Internal
-from config.get import get_config, get_url
-from config.types import Config, JobNumber, JobSimilar, Url
 from _001_data_collection import get_driver, get_webpage
+from config.get import get_config, get_url
+from config._types import Config, JobNumber, JobSimilar, Url
+from _types import DriverChrome
 
 
 class TestConfigData(unittest.TestCase):
@@ -110,13 +110,13 @@ class TestJobDescription(unittest.TestCase):
         return bool(BeautifulSoup(page_source, "html.parser").find())
 
     def test_is_browser(self):
-        driver: webdriver.chrome.webdriver.WebDriver = get_driver(self.url)
+        driver: DriverChrome = get_driver(self.url)
 
         self.assertIsInstance(
-            driver, webdriver.chrome.webdriver.WebDriver)
+            driver, DriverChrome)
 
     def test_is_webpage_loaded(self):
-        driver: webdriver.chrome.webdriver.WebDriver = get_webpage(
+        driver: DriverChrome = get_webpage(
             self.url, False)
         page_source: str = driver.page_source
 

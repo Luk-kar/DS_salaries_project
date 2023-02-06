@@ -9,7 +9,7 @@ Additional parameters are:
 Arguments could be passed from the global config data file or directly into the function.
 """
 # Python
-from typing import Union
+from typing import Any, Union
 import time
 
 # External
@@ -23,21 +23,23 @@ import requests
 
 # Internal
 from config.get import get_config, get_url
+from _types import DriverChrome
 
 config = get_config()
+JobsList = list[Union[dict[str, Any], None]]
 
 
 def get_df_job_postings(
-        job_title=config["jobs_titles"]["default"],
-        jobs_number=config["jobs_number"],
-        driver_path=config["driver_path"],
+        job_title: str = config["jobs_titles"]["default"],
+        jobs_number: int = config["jobs_number"],
+        driver_path: str = config["driver_path"],
         debug_mode: bool = config["debug_mode"]
 ):
     """returns DataFrame object from searched phrase on glassdoor.com"""
 
     url = get_url(config)
     driver = get_webpage(url, debug_mode)
-    jobs: list[dict[str, Union[str, int, bool]]] = []
+    jobs: JobsList = []
 
     while len(jobs) < jobs_number:
 
@@ -64,9 +66,9 @@ def click_x_pop_up(driver):
 
     try:
         driver.find_element(By.CSS_SELECTOR, '[alt="Close"]').click()
-        print(' x out worked')
+        print('x out worked')
     except NoSuchElementException:
-        print(' x out failed')
+        print('x out failed')
 
 
 def rid_off_sign_up(driver):
@@ -81,7 +83,7 @@ def rid_off_sign_up(driver):
 def get_webpage(url, debug_mode):
     """returns browser driver"""
 
-    driver = get_driver(debug_mode)
+    driver: DriverChrome = get_driver(debug_mode)
     try:
         driver.get(url)
     except WebDriverException as error:
@@ -94,7 +96,7 @@ def get_webpage(url, debug_mode):
 
 def get_driver(
         debug_mode: bool = config["debug_mode"],
-        path: str = config["driver_path"]) -> webdriver:  # type: ignore[valid-type]
+        path: str = config["driver_path"]) -> DriverChrome:
     """returns website driver with custom options"""
 
     options = webdriver.ChromeOptions()
@@ -114,4 +116,4 @@ def get_driver(
 
 if __name__ == "__main__":
 
-    get_df_job_postings(debug_mode=True)
+    get_df_job_postings(debug_mode=True)  # test todo
