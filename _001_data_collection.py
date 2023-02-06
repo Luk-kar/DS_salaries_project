@@ -104,7 +104,7 @@ def get_driver(
     # to simulate human behavior for bot detection
     options.add_argument("USER AGENT")
 
-    if debug_mode:
+    if not debug_mode:
         options.add_argument('headless')
 
     # Change the path to where chromedriver/other browser is if you need to.
