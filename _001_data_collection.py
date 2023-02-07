@@ -46,32 +46,24 @@ def get_df_job_postings(
 
         rid_off_pop_ups(driver)
 
-        # Going through each job in this page
-        # jl for Job Listing. These are the buttons we're going to click.
-
         jobs_list_buttons = await_element(
             driver, 10, By.XPATH, '//ul[@data-test="jlGrid"]')
-
-        # jobs_list_buttons = driver.find_element(
-        #     By.XPATH, '//ul[@data-test="jlGrid"]')
 
         jobs_buttons = jobs_list_buttons.find_elements(
             By.TAG_NAME, "li")
 
-        counter = 1
         NA_value = -1
+
         for job_button in jobs_buttons:
 
-            rand_sleep = random.uniform(0.5, 1.4)
-
             print("Progress: {}".format(
-                "" + str(len(jobs_rows) + counter) + "/" + str(jobs_number)))
+                "" + str(len(jobs_rows) + 1) + "/" + str(jobs_number)))
             if len(jobs_rows) >= jobs_number:
                 break
 
             job_button.click()
 
-            counter += 1
+            rand_sleep = random.uniform(0.5, 1.4)
             time.sleep(rand_sleep)
 
             job_column = await_element(
@@ -79,20 +71,16 @@ def get_df_job_postings(
 
             click_x_pop_up(driver)
 
-            company_name = job_column.find_element(
-                By.XPATH, './/div[@data-test="employerName"]').text
-            try:
-                rating_overall = job_column.find_element(
-                    By.XPATH, './/span[@data-test="detailRating"]').text
-                company_name = company_name.replace(rating_overall, '')
-            except NoSuchElementException:
-                rating_overall = NA_value
-            location = job_column.find_element(
-                By.XPATH, './/div[@data-test="location"]').text
-            job_title = job_column.find_element(
-                By.XPATH, './/div[@data-test="jobTitle"]').text
-            description = job_column.find_element(
-                By.XPATH, './/div[@class="jobDescriptionContent desc"]').text
+            job_description = {
+                "Company Name": {"value": NA_value, "element": './/div[@data-test="employerName"]'},
+                "Rating": {"value": NA_value, "element": './/span[@data-test="detailRating"]'},
+                "Location":  {"value": NA_value, "element": './/div[@data-test="location"]'},
+                "Job Title":  {"value": NA_value, "element": './/div[@data-test="jobTitle"]'},
+                "Description":  {"value": NA_value, "element": './/div[@class="jobDescriptionContent desc"]'},
+                "Salary":  {"value": NA_value, "element": './/span[@data-test="detailSalary"]'},
+            }
+
+            get_info(job_column, job_description)
 
             try:
                 salary_estimate = job_button.find_element(
@@ -101,25 +89,25 @@ def get_df_job_postings(
                 salary_estimate = NA_value
 
             if debug_mode:
-                pass
+                print(job_description)
                 # print_job_description(
                 #     job_title, company_name, rating_overall, location, description, salary_estimate)
 
-            values = {
-                "Size": -1,
-                "Type": -1,
-                "Sector": -1,
-                "Founded": -1,
-                "Industry": -1,
-                "Revenue": -1
+            company_column = {
+                "Size": NA_value,
+                "Type": NA_value,
+                "Sector": NA_value,
+                "Founded": NA_value,
+                "Industry": NA_value,
+                "Revenue": NA_value
             }
 
             try:
                 company_info = job_column.find_element(By.ID, "EmpBasicInfo")
 
-                for k, v in values.items():
+                for k in company_column.keys():
                     try:
-                        values[k] = get_employer_info(company_info, k)
+                        company_column[k] = get_employer_info(company_info, k)
                     except NoSuchElementException:
                         pass
 
@@ -127,7 +115,25 @@ def get_df_job_postings(
                 pass
 
             if debug_mode:
-                print_key_value_pairs(values)
+                print_key_value_pairs(company_column)
+                print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+
+
+def get_info(job_column, job_description):
+
+    for values in job_description.values():
+        try:
+            values['value'] = get_job_info(
+                job_column, values['element'])
+        except NoSuchElementException:
+            pass
+    return job_description
+
+
+def get_job_info(job_column, values):
+    return job_column.find_element(
+        By.XPATH, values
+    ).text
 
 
 def print_key_value_pairs(values):
