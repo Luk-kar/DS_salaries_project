@@ -3,7 +3,7 @@ The module responsible for creating RAW data format,
 from queries from defined:
     - job title
     - number of offers
-Additional parameters are: 
+Additional parameters are:
     - driver's path for selected web browser
     - debug mode for development and debugging
 Arguments could be passed from the global config data file or directly into the function.
@@ -101,64 +101,38 @@ def get_df_job_postings(
                 salary_estimate = NA_value
 
             if debug_mode:
+                pass
                 # print_job_description(
                 #     job_title, company_name, rating_overall, location, description, salary_estimate)
-                pass
-                # Going to the Company tab...
-                # clicking on this:
-                # <div class="tab" data-tab-type="overview"><span>Company</span></div>
 
-            size = -1
-            founded = -1
-            type_of_ownership = -1
-            industry = -1
-            sector = -1
-            revenue = -1
+            values = {
+                "Size": -1,
+                "Type": -1,
+                "Sector": -1,
+                "Founded": -1,
+                "Industry": -1,
+                "Revenue": -1
+            }
 
             try:
                 company_info = job_column.find_element(By.ID, "EmpBasicInfo")
 
-                try:
-                    size = get_employer_info(company_info, "Size")
-                except NoSuchElementException:
-                    pass
-
-                try:
-                    type_of_ownership = get_employer_info(company_info, "Type")
-                except NoSuchElementException:
-                    pass
-
-                try:
-                    sector = get_employer_info(company_info, "Sector")
-                except NoSuchElementException:
-                    pass
-
-                try:
-                    founded = get_employer_info(company_info, "Founded")
-                except NoSuchElementException:
-                    pass
-
-                try:
-                    industry = get_employer_info(company_info, "Industry")
-                except NoSuchElementException:
-                    pass
-
-                try:
-                    revenue = get_employer_info(company_info, "Revenue")
-                except NoSuchElementException:
-                    pass
+                for k, v in values.items():
+                    try:
+                        values[k] = get_employer_info(company_info, k)
+                    except NoSuchElementException:
+                        pass
 
             except NoSuchElementException:
                 pass
 
             if debug_mode:
-                print("Size: {}".format(size))
-                print("Type of ownership: {}".format(type_of_ownership))
-                print("Sector: {}".format(sector))
-                print("Founded: {}".format(founded))
-                print("Industry: {}".format(industry))
-                print("Revenue: {}".format(revenue))
-                print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+                print_key_value_pairs(values)
+
+
+def print_key_value_pairs(values):
+    for k, v in values.items():
+        print(f"{k}: {v}")
 
 
 def get_employer_info(employer_info, category):
