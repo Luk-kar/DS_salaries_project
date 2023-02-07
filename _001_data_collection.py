@@ -44,7 +44,7 @@ def get_df_job_postings(
 
     while len(jobs_rows) < jobs_number:
 
-        rid_off_pop_ups(driver)
+        click_x_pop_up(driver)
 
         jobs_list_buttons = await_element(
             driver, 10, By.XPATH, '//ul[@data-test="jlGrid"]')
@@ -63,8 +63,7 @@ def get_df_job_postings(
 
             job_button.click()
 
-            rand_sleep = random.uniform(0.5, 1.4)
-            time.sleep(rand_sleep)
+            pause_for_bot_detection()
 
             job_column = await_element(
                 driver, 10, By.ID, 'JDCol')
@@ -72,55 +71,52 @@ def get_df_job_postings(
             click_x_pop_up(driver)
 
             job_description = {
-                "Company Name": {"value": NA_value, "element": './/div[@data-test="employerName"]'},
+                "Company_Name": {"value": NA_value, "element": './/div[@data-test="employerName"]'},
                 "Rating": {"value": NA_value, "element": './/span[@data-test="detailRating"]'},
                 "Location":  {"value": NA_value, "element": './/div[@data-test="location"]'},
-                "Job Title":  {"value": NA_value, "element": './/div[@data-test="jobTitle"]'},
+                "Job_Title":  {"value": NA_value, "element": './/div[@data-test="jobTitle"]'},
                 "Description":  {"value": NA_value, "element": './/div[@class="jobDescriptionContent desc"]'},
                 "Salary":  {"value": NA_value, "element": './/span[@data-test="detailSalary"]'},
             }
 
-            job_description = get_info(job_column, job_description)
+            job_description = get_values(job_column, job_description)
 
-            try:
-                job_description['Salary']['value'] = job_button.find_element(
-                    By.XPATH, './/span[@data-test="detailSalary"]').text
-            except NoSuchElementException:
-                job_description['Salary']['value'] = NA_value
+            job_button_info = {
+                "Job_Age": {"value": NA_value, "element": './/div[@data-test="job-age"]'},
+            }
 
-            if debug_mode:
-                for key, value in job_description.items():  # todo refactor
-                    v = value['value']
-                    v = v[:500] if type(v) is str else v
-                    print(f"{key}: {v}")  # todo
+            job_button_info = get_values(job_button, job_button_info)
 
-            company_column = {
-                "Size": NA_value,
-                "Type": NA_value,
-                "Sector": NA_value,
-                "Founded": NA_value,
-                "Industry": NA_value,
-                "Revenue": NA_value
+            company_description = {
+                "Size": {'value': NA_value, "element": './/div//*[text() = "Size"]//following-sibling::*'},
+                "Type_of_ownership": {'value': NA_value, "element": './/div//*[text() = "Type"]//following-sibling::*'},
+                "Sector": {'value': NA_value, "element": './/div//*[text() = "Sector"]//following-sibling::*'},
+                "Founded": {'value': NA_value, "element": './/div//*[text() = "Founded"]//following-sibling::*'},
+                "Industry": {'value': NA_value, "element": './/div//*[text() = "Industry"]//following-sibling::*'},
+                "Revenue": {'value': NA_value, "element": './/div//*[text() = "Revenue"]//following-sibling::*'},
             }
 
             try:
                 company_info = job_column.find_element(By.ID, "EmpBasicInfo")
-
-                for k in company_column.keys():
-                    try:
-                        company_column[k] = get_employer_info(company_info, k)
-                    except NoSuchElementException:
-                        pass
+                company_description = get_values(
+                    company_info, company_description)
 
             except NoSuchElementException:
                 pass
 
             if debug_mode:
-                print_key_value_pairs(company_column)
+                print_key_value_pairs(job_description)
+                print_key_value_pairs(job_button_info)
+                print_key_value_pairs(company_description)
                 print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 
 
-def get_info(source_html, job_values):
+def pause_for_bot_detection():
+    random_sleep = random.uniform(0.5, 1.4)
+    time.sleep(random_sleep)
+
+
+def get_values(source_html, job_values):
 
     for values in job_values.values():
         try:
@@ -139,8 +135,10 @@ def get_XPATH_element(source_html, element):
 
 
 def print_key_value_pairs(values):
-    for k, v in values.items():
-        print(f"{k}: {v}")
+    for key, value in values.items():
+        v = value['value']
+        v = v[:500] if type(v) is str else v
+        print(f"{key}: {v}")
 
 
 def get_employer_info(source_html, category):
