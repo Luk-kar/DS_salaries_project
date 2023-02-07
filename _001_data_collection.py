@@ -59,6 +59,7 @@ def get_df_job_postings(
             By.TAG_NAME, "li")
 
         counter = 1
+        NA_value = -1
         for job_button in jobs_buttons:
 
             rand_sleep = random.uniform(0.5, 1.4)
@@ -73,10 +74,9 @@ def get_df_job_postings(
 
             counter += 1
             time.sleep(rand_sleep)
-            collected_successfully = False
 
             job_column = await_element(
-                driver, 5, By.ID, 'JDCol')
+                driver, 10, By.ID, 'JDCol')
 
             click_x_pop_up(driver)
 
@@ -87,7 +87,7 @@ def get_df_job_postings(
                     By.XPATH, './/span[@data-test="detailRating"]').text
                 company_name = company_name.replace(rating_overall, '')
             except NoSuchElementException:
-                rating_overall = -1
+                rating_overall = NA_value
             location = job_column.find_element(
                 By.XPATH, './/div[@data-test="location"]').text
             job_title = job_column.find_element(
@@ -99,15 +99,88 @@ def get_df_job_postings(
                 salary_estimate = job_button.find_element(
                     By.XPATH, './/span[@data-test="detailSalary"]').text
             except NoSuchElementException:
-                salary_estimate = -1  # You need to set a "not found value. It's important."
+                salary_estimate = NA_value
 
             if debug_mode:
-                print(f"Job Title: {job_title}")
-                print(f"Salary Estimate: {salary_estimate}")
-                print(f"Job Description: {description[:500]}")
-                print(f"Rating: {rating_overall}")
-                print(f"Company Name: {company_name}")
-                print(f"Location: {location}")
+                # print_job_description(
+                #     job_title, company_name, rating_overall, location, description, salary_estimate)
+                pass
+                # Going to the Company tab...
+                # clicking on this:
+                # <div class="tab" data-tab-type="overview"><span>Company</span></div>
+
+            size = -1
+            founded = -1
+            type_of_ownership = -1
+            industry = -1
+            sector = -1
+            revenue = -1
+
+            try:
+                company_info = job_column.find_element(By.ID, "EmpBasicInfo")
+
+                try:
+                    size = company_info.find_element(
+                        By.XPATH, './/div//*[text() = "Size"]//following-sibling::*'
+                    ).text
+                except:
+                    pass
+
+                try:
+                    type_of_ownership = company_info.find_element(
+                        By.XPATH, './/div//*[text() = "Type"]//following-sibling::*'
+                    ).text
+                except:
+                    pass
+
+                try:
+                    sector = company_info.find_element(
+                        By.XPATH, './/div//*[text() = "Sector"]//following-sibling::*'
+                    ).text
+                except:
+                    pass
+
+                try:
+                    founded = company_info.find_element(
+                        By.XPATH, './/div//*[text() = "Founded"]//following-sibling::*'
+                    ).text
+                except:
+                    pass
+
+                try:
+                    industry = company_info.find_element(
+                        By.XPATH, './/div//*[text() = "Industry"]//following-sibling::*'
+                    ).text
+                except:
+                    pass
+
+                try:
+                    revenue = company_info.find_element(
+                        By.XPATH, './/div//*[text() = "Revenue"]//following-sibling::*'
+                    ).text
+                except:
+                    pass
+
+            except NoSuchElementException:
+                pass
+
+            if debug_mode:
+                print("Size: {}".format(size))
+                print("Type of ownership: {}".format(type_of_ownership))
+                print("Sector: {}".format(sector))
+                print("Founded: {}".format(founded))
+                print("Industry: {}".format(industry))
+                print("Revenue: {}".format(revenue))
+                print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+
+
+def print_job_description(job_title, company_name, rating_overall, location, description, salary_estimate):
+    print(f"Job Title: {job_title}")
+    print(f"Salary Estimate: {salary_estimate}")
+    print(f"Job Description: {description[:500]}")
+    print(f"Rating: {rating_overall}")
+    print(f"Company Name: {company_name}")
+    print(f"Location: {location}")
 
 
 def await_element(driver, time, by, elem):
