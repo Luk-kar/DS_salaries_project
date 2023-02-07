@@ -69,8 +69,7 @@ def get_df_job_postings(
             if len(jobs_rows) >= jobs_number:
                 break
 
-            job_button.click()  # You might
-            print("clicked", counter)
+            job_button.click()
 
             counter += 1
             time.sleep(rand_sleep)
@@ -125,37 +124,27 @@ def get_df_job_postings(
                     pass
 
                 try:
-                    type_of_ownership = company_info.find_element(
-                        By.XPATH, './/div//*[text() = "Type"]//following-sibling::*'
-                    ).text
+                    type_of_ownership = get_employer_info(company_info, "Type")
                 except:
                     pass
 
                 try:
-                    sector = company_info.find_element(
-                        By.XPATH, './/div//*[text() = "Sector"]//following-sibling::*'
-                    ).text
+                    sector = get_employer_info(company_info, "Sector")
                 except:
                     pass
 
                 try:
-                    founded = company_info.find_element(
-                        By.XPATH, './/div//*[text() = "Founded"]//following-sibling::*'
-                    ).text
+                    founded = get_employer_info(company_info, "Founded")
                 except:
                     pass
 
                 try:
-                    industry = company_info.find_element(
-                        By.XPATH, './/div//*[text() = "Industry"]//following-sibling::*'
-                    ).text
+                    industry = get_employer_info(company_info, "Industry")
                 except:
                     pass
 
                 try:
-                    revenue = company_info.find_element(
-                        By.XPATH, './/div//*[text() = "Revenue"]//following-sibling::*'
-                    ).text
+                    revenue = get_employer_info(company_info, "Revenue")
                 except:
                     pass
 
