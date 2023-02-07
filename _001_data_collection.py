@@ -120,9 +120,7 @@ def get_df_job_postings(
                 company_info = job_column.find_element(By.ID, "EmpBasicInfo")
 
                 try:
-                    size = company_info.find_element(
-                        By.XPATH, './/div//*[text() = "Size"]//following-sibling::*'
-                    ).text
+                    size = get_employer_info(company_info, "Size")
                 except:
                     pass
 
@@ -172,6 +170,12 @@ def get_df_job_postings(
                 print("Industry: {}".format(industry))
                 print("Revenue: {}".format(revenue))
                 print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+
+
+def get_employer_info(employer_info, category):
+    return employer_info.find_element(
+        By.XPATH, f'.//div//*[text() = "{category}"]//following-sibling::*'
+    ).text
 
 
 def print_job_description(job_title, company_name, rating_overall, location, description, salary_estimate):
