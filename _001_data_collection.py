@@ -120,32 +120,32 @@ def get_df_job_postings(
 
                 try:
                     size = get_employer_info(company_info, "Size")
-                except:
+                except NoSuchElementException:
                     pass
 
                 try:
                     type_of_ownership = get_employer_info(company_info, "Type")
-                except:
+                except NoSuchElementException:
                     pass
 
                 try:
                     sector = get_employer_info(company_info, "Sector")
-                except:
+                except NoSuchElementException:
                     pass
 
                 try:
                     founded = get_employer_info(company_info, "Founded")
-                except:
+                except NoSuchElementException:
                     pass
 
                 try:
                     industry = get_employer_info(company_info, "Industry")
-                except:
+                except NoSuchElementException:
                     pass
 
                 try:
                     revenue = get_employer_info(company_info, "Revenue")
-                except:
+                except NoSuchElementException:
                     pass
 
             except NoSuchElementException:
