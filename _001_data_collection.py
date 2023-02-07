@@ -16,7 +16,7 @@ import time
 # External
 from selenium import webdriver
 from selenium.common.exceptions import (
-    NoSuchElementException, ElementClickInterceptedException, WebDriverException, TimeoutException)
+    NoSuchElementException, ElementClickInterceptedException, WebDriverException, TimeoutException, NoSuchElementException)
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 import requests
@@ -58,7 +58,7 @@ def get_df_job_postings(
         jobs_buttons = jobs_list_buttons.find_elements(
             By.TAG_NAME, "li")
 
-        counter = 0
+        counter = 1
         for job_button in jobs_buttons:
 
             rand_sleep = random.uniform(0.5, 1.4)
@@ -68,8 +68,6 @@ def get_df_job_postings(
             if len(jobs_rows) >= jobs_number:
                 break
 
-            print("not clicked", counter)
-
             job_button.click()  # You might
             print("clicked", counter)
 
@@ -77,41 +75,39 @@ def get_df_job_postings(
             time.sleep(rand_sleep)
             collected_successfully = False
 
-            job_description = await_element(
+            job_column = await_element(
                 driver, 5, By.ID, 'JDCol')
 
             click_x_pop_up(driver)
 
-            while not collected_successfully:
-                try:
-                    company_name = job_description.find_element(
-                        By.XPATH, './/div[@data-test="employerName"]').text
-                    location = job_description.find_element(
-                        By.XPATH, './/div[@data-test="location"]').text
-                    job_title = job_description.find_element(
-                        By.XPATH, './/div[@data-test="jobTitle"]').text
-                    description = job_description.find_element(
-                        By.XPATH, './/div[@class="jobDescriptionContent desc"]').text
-                    try:
-                        rating_overall = job_description.find_element(
-                            By.XPATH, './/div[@data-test="rating-info"]').text
-
-                        rating_overall = rating_overall[0:3]
-
-                    except NoSuchElementException:
-                        rating_overall = -1
-
-                    print(rating_overall)
-                    collected_successfully = True
-                    # location, job_title, job_description)
-                except:
-                    time.sleep(5)
+            company_name = job_column.find_element(
+                By.XPATH, './/div[@data-test="employerName"]').text
+            try:
+                rating_overall = job_column.find_element(
+                    By.XPATH, './/span[@data-test="detailRating"]').text
+                company_name = company_name.replace(rating_overall, '')
+            except NoSuchElementException:
+                rating_overall = -1
+            location = job_column.find_element(
+                By.XPATH, './/div[@data-test="location"]').text
+            job_title = job_column.find_element(
+                By.XPATH, './/div[@data-test="jobTitle"]').text
+            description = job_column.find_element(
+                By.XPATH, './/div[@class="jobDescriptionContent desc"]').text
 
             try:
                 salary_estimate = job_button.find_element(
                     By.XPATH, './/span[@data-test="detailSalary"]').text
             except NoSuchElementException:
                 salary_estimate = -1  # You need to set a "not found value. It's important."
+
+            if debug_mode:
+                print(f"Job Title: {job_title}")
+                print(f"Salary Estimate: {salary_estimate}")
+                print(f"Job Description: {description[:500]}")
+                print(f"Rating: {rating_overall}")
+                print(f"Company Name: {company_name}")
+                print(f"Location: {location}")
 
 
 def await_element(driver, time, by, elem):
@@ -147,7 +143,7 @@ def rid_off_sign_up(driver):
 
     try:
         driver.find_element(By.CLASS_NAME, "selected").click()
-    except ElementClickInterceptedException:
+    except (ElementClickInterceptedException, NoSuchElementException):
         pass
 
 
