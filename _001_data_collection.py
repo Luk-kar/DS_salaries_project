@@ -80,7 +80,7 @@ def get_df_job_postings(
                 "Salary":  {"value": NA_value, "element": './/span[@data-test="detailSalary"]'},
             }
 
-            get_info(job_column, job_description)
+            job_description = get_info(job_column, job_description)
 
             try:
                 job_description['Salary']['value'] = job_button.find_element(
@@ -89,10 +89,10 @@ def get_df_job_postings(
                 job_description['Salary']['value'] = NA_value
 
             if debug_mode:
-                for key, value in job_description.items():
+                for key, value in job_description.items():  # todo refactor
                     v = value['value']
                     v = v[:500] if type(v) is str else v
-                    print(f"{key}: {v}")
+                    print(f"{key}: {v}")  # todo
 
             company_column = {
                 "Size": NA_value,
@@ -120,20 +120,21 @@ def get_df_job_postings(
                 print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 
 
-def get_info(job_column, job_description):
+def get_info(source_html, job_values):
 
-    for values in job_description.values():
+    for values in job_values.values():
         try:
-            values['value'] = get_job_info(
-                job_column, values['element'])
+            values['value'] = get_XPATH_element(
+                source_html, values['element'])
         except NoSuchElementException:
             pass
-    return job_description
+
+    return job_values
 
 
-def get_job_info(job_column, values):
-    return job_column.find_element(
-        By.XPATH, values
+def get_XPATH_element(source_html, element):
+    return source_html.find_element(
+        By.XPATH, element
     ).text
 
 
@@ -142,19 +143,10 @@ def print_key_value_pairs(values):
         print(f"{k}: {v}")
 
 
-def get_employer_info(employer_info, category):
-    return employer_info.find_element(
+def get_employer_info(source_html, category):
+    return source_html.find_element(
         By.XPATH, f'.//div//*[text() = "{category}"]//following-sibling::*'
     ).text
-
-
-def print_job_description(job_title, company_name, rating_overall, location, description, salary_estimate):
-    print(f"Job Title: {job_title}")
-    print(f"Salary Estimate: {salary_estimate}")
-    print(f"Job Description: {description[:500]}")
-    print(f"Rating: {rating_overall}")
-    print(f"Company Name: {company_name}")
-    print(f"Location: {location}")
 
 
 def await_element(driver, time, by, elem):
