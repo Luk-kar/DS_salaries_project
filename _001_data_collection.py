@@ -83,15 +83,16 @@ def get_df_job_postings(
             get_info(job_column, job_description)
 
             try:
-                salary_estimate = job_button.find_element(
+                job_description['Salary']['value'] = job_button.find_element(
                     By.XPATH, './/span[@data-test="detailSalary"]').text
             except NoSuchElementException:
-                salary_estimate = NA_value
+                job_description['Salary']['value'] = NA_value
 
             if debug_mode:
-                print(job_description)
-                # print_job_description(
-                #     job_title, company_name, rating_overall, location, description, salary_estimate)
+                for key, value in job_description.items():
+                    v = value['value']
+                    v = v[:500] if type(v) is str else v
+                    print(f"{key}: {v}")
 
             company_column = {
                 "Size": NA_value,
