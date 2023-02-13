@@ -125,16 +125,50 @@ def get_df_job_postings(
                 rating_description = get_values(
                     rating_info, rating_description)
 
-            except NoSuchElementException as E:
+            except NoSuchElementException:
                 pass
 
-            # rating_description = get_values(job_column, job_description)
+            reviews_by_job_title = {
+                "Pros": {"value": NA_value, "element": './/*[text() = "Pros"]//parent::div//*[contains(name(), "p")]'},
+                "Cons": {"value": NA_value, "element": './/*[text() = "Cons"]//parent::div//*[contains(name(), "p")]'},
+            }
+
+            try:
+                reviews_info = job_column.find_element(
+                    By.ID, "Reviews"
+                )
+
+                reviews_by_job_title = get_values(
+                    reviews_info, reviews_by_job_title, multi=True)
+            except NoSuchElementException:
+                pass
+
+            benefits_rating = {
+                "Benefits_rating": {"value": NA_value, "element": './/*[text() = "Pros"]//parent::div//*[contains(name(), "p")]'}
+            }  # todo
+
+            benefits_review = {
+                "Benefits_reviews": {"value": NA_value, "element": './/*[text() = "Pros"]//parent::div//*[contains(name(), "p")]'},
+            }  # todo
+
+            try:  # todo
+                reviews_info = job_column.find_element(
+                    By.ID, "Reviews"
+                )
+
+                reviews_by_job_title = get_values(
+                    reviews_info, reviews_by_job_title, multi=True)
+            except NoSuchElementException:
+                pass
 
             if debug_mode:
                 print_key_value_pairs(job_description)
                 print_key_value_pairs(job_button_info)
                 print_key_value_pairs(company_description)
                 print_key_value_pairs(rating_description)
+                print_key_value_pairs(reviews_by_job_title)
+                print_key_value_pairs(benefits_rating)
+                print_key_value_pairs(benefits_review)
                 print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 
 
@@ -145,22 +179,34 @@ def pause():
     time.sleep(random_sleep)
 
 
-def get_values(source_html, job_values):
+def get_values(source_html, job_values, multi=False):
 
     for values in job_values.values():
         try:
-            values['value'] = get_XPATH_element(
-                source_html, values['element'])
+            values['value'] = get_XPATH_text(
+                source_html, values['element'], multi)
         except NoSuchElementException:
             pass
 
     return job_values
 
 
-def get_XPATH_element(source_html, element):
-    return source_html.find_element(
-        By.XPATH, element
-    ).text
+def get_XPATH_text(source_html, element, multi=False):
+
+    if multi:
+        elements = source_html.find_elements(
+            By.XPATH, element
+        )
+
+        texts = []
+        for elem in elements:
+            texts.append(elem.text)
+        return texts
+
+    else:
+        return source_html.find_element(
+            By.XPATH, element
+        ).text
 
 
 def print_key_value_pairs(values):
