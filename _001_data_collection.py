@@ -45,7 +45,7 @@ def get_df_job_postings(
     while len(jobs_rows) < jobs_number:
 
         jobs_list_buttons = await_element(
-            driver, 10, By.XPATH, '//ul[@data-test="jlGrid"]')
+            driver, 20, By.XPATH, '//ul[@data-test="jlGrid"]')
 
         jobs_buttons = jobs_list_buttons.find_elements(
             By.TAG_NAME, "li")
@@ -63,7 +63,7 @@ def get_df_job_postings(
 
             job_button.click()
 
-            pause_for_bot_detection()
+            pause()
 
             click_x_pop_up(driver)
 
@@ -71,6 +71,8 @@ def get_df_job_postings(
 
             job_column = await_element(
                 driver, 10, By.ID, 'JDCol')
+
+            pause()
 
             job_description = {
                 "Company_Name": {"value": NA_value, "element": './/div[@data-test="employerName"]'},
@@ -87,7 +89,7 @@ def get_df_job_postings(
                 "Job_Age": {"value": NA_value, "element": './/div[@data-test="job-age"]'},
             }
 
-            job_button_info = get_values(job_button, job_button_info)
+            job_button_info = get_values(job_column, job_button_info)
 
             company_description = {
                 "Size": {'value': NA_value, "element": './/div//*[text() = "Size"]//following-sibling::*'},
@@ -130,7 +132,9 @@ def get_df_job_postings(
                 print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 
 
-def pause_for_bot_detection():
+def pause():
+    '''Pause for bot detection or to load things'''
+
     random_sleep = random.uniform(0.5, 1.4)
     time.sleep(random_sleep)
 
@@ -189,9 +193,9 @@ def click_x_pop_up(driver):
         x_button = await_element(
             driver, 3, By.CSS_SELECTOR, '[alt="Close"]')
         x_button.click()
-        print('x out worked')
+
     except (NoSuchElementException, TimeoutException):
-        print('x out failed')
+        pass
 
 
 def rid_off_sign_up(driver):
