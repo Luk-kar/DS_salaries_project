@@ -63,12 +63,12 @@ def get_df_job_postings(
 
             pause_for_bot_detection()
 
+            click_x_pop_up(driver)
+
             job_button.click()
 
             job_column = await_element(
                 driver, 10, By.ID, 'JDCol')
-
-            click_x_pop_up(driver)
 
             job_description = {
                 "Company_Name": {"value": NA_value, "element": './/div[@data-test="employerName"]'},
@@ -110,24 +110,24 @@ def get_df_job_postings(
             #     "Company_Name": {"value": NA_value, "element": './/div[@data-test="employerName"]'},
             # }
 
-            try:
-                rating_info = job_column.find_element(
-                    By.XPATH, '//div[@data-test="company-ratings"]')
-                # company_description = get_values(
-                #     rating_info, rating_description)
+            # try:
+            #     rating_info = job_column.find_element(
+            #         By.XPATH, '//div[@data-test="company-ratings"]')
+            #     # company_description = get_values(
+            #     #     rating_info, rating_description)
 
-                print("rating_info", rating_info)
-            except NoSuchElementException as E:
-                print("error:\n", E)
-                pass
+            #     print("rating_info", rating_info)
+            # except NoSuchElementException as E:
+            #     print("error:\n", E)
+            #     pass
 
             # rating_description = get_values(job_column, job_description)
 
-            # if debug_mode:
-            #     print_key_value_pairs(job_description)
-            #     print_key_value_pairs(job_button_info)
-            #     print_key_value_pairs(company_description)
-            #     print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+            if debug_mode:
+                print_key_value_pairs(job_description)
+                print_key_value_pairs(job_button_info)
+                print_key_value_pairs(company_description)
+                print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 
 
 def pause_for_bot_detection():
@@ -236,4 +236,5 @@ def get_driver(
 
 if __name__ == "__main__":
 
-    get_df_job_postings(debug_mode=True)  # test todo
+    get_df_job_postings(
+        debug_mode=True, job_title="senior back end engineer")  # test todo
