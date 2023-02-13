@@ -89,7 +89,7 @@ def get_df_job_postings(
                 "Job_Age": {"value": NA_value, "element": './/div[@data-test="job-age"]'},
             }
 
-            job_button_info = get_values(job_column, job_button_info)
+            job_button_info = get_values(job_button, job_button_info)
 
             company_description = {
                 "Size": {'value': NA_value, "element": './/div//*[text() = "Size"]//following-sibling::*'},
@@ -108,20 +108,25 @@ def get_df_job_postings(
             except NoSuchElementException:
                 pass
 
-            # rating_description = {
-            #     "Company_Name": {"value": NA_value, "element": './/div[@data-test="employerName"]'},
-            # }
+            rating_description = {
+                "Friend_recommend": {"value": NA_value, "element": './/div[@class="css-ztsow4"]'},
+                "CEO_approval": {"value": NA_value, "element": './/div[@class="css-ztsow4 ceoApprove"]'},
+                "Career_Opportunities": {"value": NA_value, "element": './/*[text() = "Career Opportunities"]/following-sibling::span[2]'},
+                "Comp_&_Benefits": {"value": NA_value, "element": './/*[text() = "Comp & Benefits"]/following-sibling::span[2]'},
+                "Culture_&_Values": {"value": NA_value, "element": './/*[text() = "Culture & Values"]/following-sibling::span[2]'},
+                "Senior_Management": {"value": NA_value, "element": './/*[text() = "Senior Management"]/following-sibling::span[2]'},
+                "Work/Life_Balance": {"value": NA_value, "element": './/*[text() = "Work/Life_Balance"]/following-sibling::span[2]'},
+            }
 
-            # try:
-            #     rating_info = job_column.find_element(
-            #         By.XPATH, '//div[@data-test="company-ratings"]')
-            #     # company_description = get_values(
-            #     #     rating_info, rating_description)
+            try:
+                rating_info = job_column.find_element(
+                    By.XPATH, '//div[@data-test="company-ratings"]')
 
-            #     print("rating_info", rating_info)
-            # except NoSuchElementException as E:
-            #     print("error:\n", E)
-            #     pass
+                rating_description = get_values(
+                    rating_info, rating_description)
+
+            except NoSuchElementException as E:
+                pass
 
             # rating_description = get_values(job_column, job_description)
 
@@ -129,6 +134,7 @@ def get_df_job_postings(
                 print_key_value_pairs(job_description)
                 print_key_value_pairs(job_button_info)
                 print_key_value_pairs(company_description)
+                print_key_value_pairs(rating_description)
                 print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 
 
