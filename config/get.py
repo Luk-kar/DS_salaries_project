@@ -19,14 +19,14 @@ def get_config(path: str = 'config\\data.yaml') -> Config:
         return yaml.load(file, Loader=SafeLoader)
 
 
-def get_url(config: Config) -> str:
+def get_url(url: Url, job_title: JobDefault) -> str:
     """It loads url data from a YAML file and returns it as a HTTP string"""
 
-    url: Url = config["url"]
-    job: JobDefault = config["jobs_titles"]["default"]
+    url: Url = url
+    job_title: JobDefault = job_title
 
-    http = url["001_base"] + job + \
-        url["002_keyword"] + job + \
+    http = url["001_base"] + job_title + \
+        url["002_keyword"] + job_title + \
         url["003_location"]
 
     return http

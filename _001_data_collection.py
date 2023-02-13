@@ -33,24 +33,24 @@ JobsList = list[Union[dict[str, Any], None]]
 def get_df_job_postings(
         job_title: str = config["jobs_titles"]["default"],
         jobs_number: int = config["jobs_number"],
-        driver_path: str = config["driver_path"],
+        driver_path: str = config["driver_path"],  # todo
         debug_mode: bool = config["debug_mode"]
 ):
     """returns DataFrame object from searched phrase on glassdoor.com"""
 
-    url = get_url(config)
+    url = get_url(config['url'], job_title)
     driver = get_webpage(url, debug_mode)
     jobs_rows: JobsList = []
 
     while len(jobs_rows) < jobs_number:
-
-        click_x_pop_up(driver)
 
         jobs_list_buttons = await_element(
             driver, 15, By.XPATH, '//ul[@data-test="jlGrid"]')
 
         jobs_buttons = jobs_list_buttons.find_elements(
             By.TAG_NAME, "li")
+
+        click_x_pop_up(driver)
 
         NA_value = -1
 
@@ -106,11 +106,28 @@ def get_df_job_postings(
             except NoSuchElementException:
                 pass
 
-            if debug_mode:
-                print_key_value_pairs(job_description)
-                print_key_value_pairs(job_button_info)
-                print_key_value_pairs(company_description)
-                print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+            # rating_description = {
+            #     "Company_Name": {"value": NA_value, "element": './/div[@data-test="employerName"]'},
+            # }
+
+            try:
+                rating_info = job_column.find_element(
+                    By.XPATH, '//div[@data-test="company-ratings"]')
+                # company_description = get_values(
+                #     rating_info, rating_description)
+
+                print("rating_info", rating_info)
+            except NoSuchElementException as E:
+                print("error:\n", E)
+                pass
+
+            # rating_description = get_values(job_column, job_description)
+
+            # if debug_mode:
+            #     print_key_value_pairs(job_description)
+            #     print_key_value_pairs(job_button_info)
+            #     print_key_value_pairs(company_description)
+            #     print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 
 
 def pause_for_bot_detection():

@@ -28,6 +28,8 @@ class TestConfigData(unittest.TestCase):
     def setUp(self):
         """init all config values"""
         self.config: Config = get_config()
+        self.url = get_url(self.config['url'],
+                           self.config["jobs_titles"]["default"])
 
     def is_empty_string(self, string: str) -> None:
         """assert if is it not an empty string"""
@@ -74,9 +76,7 @@ class TestConfigData(unittest.TestCase):
     def test_web_exists(self):
         """check if url exists"""
 
-        url = get_url(self.config)
-
-        status_code = requests.get(url, timeout=10).status_code
+        status_code = requests.get(self.url, timeout=10).status_code
         self.assertEqual(status_code, 200)  # Response OK, server connected
 
     def test_driver_path(self):
@@ -104,7 +104,8 @@ class TestJobDescription(unittest.TestCase):
 
     def setUp(self):
         self.config: Config = get_config()
-        self.url = get_url(self.config)
+        self.url = get_url(self.config['url'],
+                           self.config["jobs_titles"]["default"])
 
     def is_HTML(self, page_source):
         return bool(BeautifulSoup(page_source, "html.parser").find())
