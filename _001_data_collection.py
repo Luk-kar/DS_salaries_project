@@ -121,8 +121,11 @@ def get_df_job_postings(
             job = add_values_to_job(job, job_description)
 
             job_button_info = {
-                "Job_Age": {
+                "Job_age": {
                     "value": na_value, "element": './/div[@data-test="job-age"]'
+                },
+                "Easy_apply": {
+                    "value": na_value, "element": './/div[@class="css-pxdlb2"]/div[1]'
                 },
             }
 
@@ -261,9 +264,16 @@ def get_df_job_postings(
             job = add_values_to_job(job, benefits_review)
 
             if debug_mode:
-                for index, (key, value) in enumerate(job.items()):
-                    print(f"{index + 1}. {key}:\n{value}")
-                print("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n")
+                print_key_value_pairs(job)
+
+
+def print_key_value_pairs(job: Job):
+    '''used for debugging, when parsing html'''
+
+    for index, (key, value) in enumerate(job.items()):
+        print(f"{index + 1}. {key}:\n{value}")
+
+    print("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n")
 
 
 def add_values_to_job(job: Job, job_description: Job_values) -> Job:
@@ -320,15 +330,6 @@ def get_XPATH_text(source_html: DriverChrome, element: str, return_list=False):
     text = config["NA_value"] if text == "N/A" else text
 
     return text
-
-
-def print_key_value_pairs(values):
-    '''used for debugging, for parsing html'''
-
-    for key, value in values.items():
-        _v = value['value']
-        _v = _v[:500] if isinstance(_v) is str else _v
-        print(f"{key}: {_v}")
 
 
 def await_element(driver: DriverChrome, timeout: Annotated[int, Gt(0)], by, elem) -> DriverChrome:
