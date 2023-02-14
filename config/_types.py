@@ -16,6 +16,7 @@ The Config type is a dictionary that contains several other types:
     * All other types (JobDefault, JobSimilar, JobTitles, JobNumber, Url,
     DriverPath, and DebugMode) are used to describe the structure of these values.
 """
+from typing import Literal
 
 JobDefault = str
 JobSimilar = list[str]
@@ -25,6 +26,6 @@ JobNumber = int
 Url = dict[str, str]
 DriverPath = str
 DebugMode = bool
-NA_value = -1
+NA_value = Literal[-1]
 Config = dict[str, {'jobs_titles': JobTitles, 'jobs_number': JobNumber,  # type: ignore[valid-type, misc]
                     'url': Url, 'driver_path': DriverPath, 'debug_mode': DebugMode, "NA_value": NA_value}]  # type: ignore[valid-type, index]
