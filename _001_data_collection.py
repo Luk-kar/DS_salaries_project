@@ -33,10 +33,11 @@ JobsList = list[Union[dict[str, Any], None]]
 def get_df_job_postings(
         job_title: str = config["jobs_titles"]["default"],
         jobs_number: int = config["jobs_number"],
-        driver_path: str = config["driver_path"],  # todo
+        # todo make as not deprecated
+        driver_path: str = config["driver_path"],
         debug_mode: bool = config["debug_mode"]
 ):
-    """returns DataFrame object from searched phrase on glassdoor.com"""
+    """returns uncleaned DataFrame object from searched phrase on glassdoor.com"""
 
     url = get_url(config['url'], job_title)
     driver = get_webpage(url, debug_mode)
@@ -198,6 +199,10 @@ def get_XPATH_text(source_html, element, return_list=False):
         texts = []
         for elem in elements:
             texts.append(elem.text)
+
+        if not texts:
+            texts = -1
+
         return texts
 
     else:
