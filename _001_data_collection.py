@@ -53,7 +53,7 @@ def get_df_job_postings(
 
         click_x_pop_up(driver)
 
-        NA_value = -1
+        NA_value = config["NA_value"]
 
         for job_button in jobs_buttons:
 
@@ -201,7 +201,7 @@ def get_XPATH_text(source_html, element, return_list=False):
             texts.append(elem.text)
 
         if not texts:
-            texts = -1
+            texts = config["NA_value"]
 
         return texts
 

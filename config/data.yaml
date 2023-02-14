@@ -26,3 +26,4 @@ url:
 # Update this path for your driver app
 driver_path: "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe"
 debug_mode: true
+NA_value: -1

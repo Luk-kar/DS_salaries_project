@@ -98,6 +98,11 @@ class TestConfigData(unittest.TestCase):
 
         self.assertIsInstance(self.config["debug_mode"], bool)
 
+    def test_NA_value(self):
+        """check if NA is a single valid value everywhere"""
+
+        self.assertEqual(self.config["NA_value"], -1)
+
 
 class TestJobDescription(unittest.TestCase):
     """It tests single-job page scraping"""
