@@ -52,6 +52,7 @@ def get_df_job_postings(
     url = get_url(config['url'], job_title)
     driver = get_webpage(url, debug_mode)
     jobs = []
+    print("")  # \n
 
     while len(jobs) < jobs_cap:
 
@@ -260,8 +261,9 @@ def get_df_job_postings(
             job = add_values_to_job(job, benefits_review)
 
             if debug_mode:
-                print(job)  # todo
-                print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+                for index, (key, value) in enumerate(job.items()):
+                    print(f"{index + 1}. {key}:\n{value}")
+                print("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n")
 
 
 def add_values_to_job(job: Job, job_description: Job_values) -> Job:
