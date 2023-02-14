@@ -260,7 +260,7 @@ def get_df_job_postings(
             job = add_values_to_job(job, benefits_review)
 
             if debug_mode:
-                print(job)
+                print(job)  # todo
                 print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 
 
