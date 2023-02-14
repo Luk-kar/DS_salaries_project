@@ -144,18 +144,17 @@ def get_df_job_postings(
                 pass
 
             benefits_rating = {
-                "Benefits_rating": {"value": NA_value, "element": '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]'}
-            }  # todo
-
+                "Benefits_rating": {"value": NA_value, "element": '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]//div//div[@class="ratingNum mr-sm"]'}
+            }
             benefits_review = {
-                "Benefits_reviews": {"value": NA_value, "element": './/*[text() = "Pros"]//parent::div//*[contains(name(), "p")]'},
-            }  # todo
+                "Benefits_reviews": {"value": NA_value, "element": '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsHighlights")]/div'},
+            }
 
-            try:  # todo
+            try:
                 benefits_rating = get_values(
                     job_column, benefits_rating)
-                # benefits_review = get_values(
-                #     job_column, benefits_review, return_list=True)
+                benefits_review = get_values(
+                    job_column, benefits_review, return_list=True)
             except NoSuchElementException:
                 pass
 
