@@ -44,7 +44,6 @@ Job = list[Job_value | None]
 def get_df_job_postings(
         job_title: str = config["jobs_titles"]["default"],
         jobs_cap: Annotated[int, Gt(0)] = config["jobs_number"],
-        # todo make as not deprecated
         driver_path: str = config["driver_path"],
         debug_mode: bool = config["debug_mode"]
 ):
