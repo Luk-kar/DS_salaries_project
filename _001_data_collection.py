@@ -16,6 +16,7 @@ from annotated_types import Gt
 
 # External
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.common.exceptions import (
     ElementClickInterceptedException,
     WebDriverException,
@@ -24,8 +25,8 @@ from selenium.common.exceptions import (
 )
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+from webdriver_manager.chrome import ChromeDriverManager
 import requests
-# import pandas as pd
 
 # Internal
 from config.get import get_config, get_url
@@ -50,7 +51,7 @@ def get_df_job_postings(
     """returns uncleaned DataFrame object from searched phrase on glassdoor.com"""
 
     url = get_url(config['url'], job_title)
-    driver = get_webpage(url, debug_mode)
+    driver = get_webpage(url, debug_mode, driver_path)
     jobs = []
     print("")  # \n
 
@@ -66,12 +67,13 @@ def get_df_job_postings(
 
         na_value = config["NA_value"]
 
-        # get job links
         view_table = driver.find_element(
             By.XPATH, '//div[@data-test="JobDetailsFooter"]/div[2]//span'
         )
 
         view_table.click()
+        # todo grab all links
+        # todo add links at the end
 
         for job_button in jobs_buttons:
 
@@ -270,6 +272,14 @@ def get_df_job_postings(
             job = add_values_to_job(job, benefits_rating)
             job = add_values_to_job(job, benefits_review)
 
+            # todo add links at the end
+            link: Job_values = {
+                "Benefits_reviews": {
+                    "value": na_value
+                },
+            }
+            # job = add_values_to_job(job, link)
+
             if debug_mode:
                 print_key_value_pairs(job)
 
@@ -358,10 +368,10 @@ def click_x_pop_up(driver):
         pass
 
 
-def get_webpage(url, debug_mode):
+def get_webpage(url, debug_mode, driver_path: str = config["driver_path"]):
     """returns browser driver"""
 
-    driver: DriverChrome = get_driver(debug_mode)
+    driver: DriverChrome = get_driver(debug_mode, driver_path)
     try:
         driver.get(url)
     except WebDriverException as error:
@@ -385,9 +395,14 @@ def get_driver(
     if not debug_mode:
         options.add_argument('headless')
 
-    # Change the path to where chromedriver/other browser is if you need to.
+    if path == "auto-install":
+        service_obj = Service(ChromeDriverManager().install())
+    else:
+        service_obj = Service(path)
+
+    # auto-install if not existing
     driver = webdriver.Chrome(
-        executable_path=path, options=options)
+        service=service_obj, options=options)
     # driver.set_window_rect(width=1120, height=1000)
     return driver
 
@@ -395,4 +410,4 @@ def get_driver(
 if __name__ == "__main__":
 
     get_df_job_postings(
-        debug_mode=True, job_title="back end engineer")  # test todo
+        debug_mode=True, job_title="back end engineer")
