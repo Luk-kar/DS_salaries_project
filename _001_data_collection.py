@@ -139,12 +139,12 @@ def get_df_job_postings(
                 )
 
                 reviews_by_job_title = get_values(
-                    reviews_info, reviews_by_job_title, multi=True)
+                    reviews_info, reviews_by_job_title, return_list=True)
             except NoSuchElementException:
                 pass
 
             benefits_rating = {
-                "Benefits_rating": {"value": NA_value, "element": './/*[text() = "Pros"]//parent::div//*[contains(name(), "p")]'}
+                "Benefits_rating": {"value": NA_value, "element": '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]'}
             }  # todo
 
             benefits_review = {
@@ -152,12 +152,10 @@ def get_df_job_postings(
             }  # todo
 
             try:  # todo
-                reviews_info = job_column.find_element(
-                    By.ID, "Reviews"
-                )
-
-                reviews_by_job_title = get_values(
-                    reviews_info, reviews_by_job_title, multi=True)
+                benefits_rating = get_values(
+                    job_column, benefits_rating)
+                # benefits_review = get_values(
+                #     job_column, benefits_review, return_list=True)
             except NoSuchElementException:
                 pass
 
@@ -179,21 +177,21 @@ def pause():
     time.sleep(random_sleep)
 
 
-def get_values(source_html, job_values, multi=False):
+def get_values(source_html, job_values, return_list=False):
 
     for values in job_values.values():
         try:
             values['value'] = get_XPATH_text(
-                source_html, values['element'], multi)
+                source_html, values['element'], return_list)
         except NoSuchElementException:
             pass
 
     return job_values
 
 
-def get_XPATH_text(source_html, element, multi=False):
+def get_XPATH_text(source_html, element, return_list=False):
 
-    if multi:
+    if return_list:
         elements = source_html.find_elements(
             By.XPATH, element
         )
