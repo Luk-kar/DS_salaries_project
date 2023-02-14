@@ -66,6 +66,13 @@ def get_df_job_postings(
 
         na_value = config["NA_value"]
 
+        # get job links
+        view_table = driver.find_element(
+            By.XPATH, '//div[@data-test="JobDetailsFooter"]/div[2]//span'
+        )
+
+        view_table.click()
+
         for job_button in jobs_buttons:
 
             print(f"Progress: {len(jobs) + 1}/{jobs_cap}")
@@ -388,4 +395,4 @@ def get_driver(
 if __name__ == "__main__":
 
     get_df_job_postings(
-        debug_mode=True, job_title="senior back end engineer")  # test todo
+        debug_mode=True, job_title="back end engineer")  # test todo
