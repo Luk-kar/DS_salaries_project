@@ -10,6 +10,7 @@ Arguments could be passed from the global config data file or directly into the 
 """
 # Python
 import random
+import sys
 import time
 from typing import Annotated
 from annotated_types import Gt
@@ -66,11 +67,13 @@ def get_df_job_postings(
 
         na_value = config["NA_value"]
 
-        view_table = driver.find_element(
-            By.XPATH, '//div[@data-test="JobDetailsFooter"]/div[2]//span'
-        )
+        view_table = await_element(
+            driver, 5, By.XPATH, '//div[@data-test="JobDetailsFooter"]/div[2]//span')
+        print(view_table.text)
 
-        view_table.click()
+        pause()
+
+        view_table.click()  # todo
         # todo grab all links
         # todo add links at the end
 
@@ -397,9 +400,14 @@ def get_driver(
     if path == "auto-install":
         service_obj = Service(ChromeDriverManager().install())
     else:
-        service_obj = Service(path)
+        try:
+            service_obj = Service(path)
+        except WebDriverException as error:
+            sys.exit(
+                f'Make sure your path or driver version is correct:\n{error}'
+            )
 
-    # auto-install if not existing
+            # auto-install if not existing
     driver = webdriver.Chrome(
         service=service_obj, options=options)
     # driver.set_window_rect(width=1120, height=1000)
