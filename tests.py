@@ -14,15 +14,15 @@ from bs4 import BeautifulSoup
 
 # Internal
 from scraper.get_df_jobs import get_driver, get_webpage
-from config.get import get_config, get_url
-from config._types import Config, JobNumber, JobSimilar, Url
+from scraper.config.get import get_config, get_url
+from scraper.config._types import Config, JobNumber, JobSimilar, Url
 from _types import DriverChrome
 
 
 class TestConfigData(unittest.TestCase):
     """
     It tests the configuration data stored in Config 
-    object which is obtained from get_args method of config.get_config
+    object which is obtained from get_args method of scraper.config.get_config
     """
 
     def setUp(self):
