@@ -88,7 +88,7 @@ def get_job_row(debug_mode, driver, na_value, job_button):
 
     job_row = {}
 
-    job_column = await_element(
+    job_post = await_element(
         driver, 10, By.ID, 'JDCol')
 
     pause()
@@ -120,10 +120,9 @@ def get_job_row(debug_mode, driver, na_value, job_button):
         },
     }
 
-    job_description: Job_values = get_values(
-        job_column, job_description)
-
-    job_row = add_values_to_job(job_row, job_description)
+    job_row = add_columns_to_row_from_source(
+        job_row, job_post, job_description
+    )
 
     job_button_info = {
         "Job_age": {
@@ -134,9 +133,9 @@ def get_job_row(debug_mode, driver, na_value, job_button):
         },
     }
 
-    job_button_info = get_values(job_button, job_button_info)
-
-    job_row = add_values_to_job(job_row, job_button_info)
+    job_row = add_columns_to_row_from_source(
+        job_row, job_button, job_button_info
+    )
 
     company_description: Job_values = {
         "Size": {
@@ -166,14 +165,16 @@ def get_job_row(debug_mode, driver, na_value, job_button):
     }
 
     try:
-        company_info = job_column.find_element(By.ID, "EmpBasicInfo")
-        company_description = get_values(
-            company_info, company_description)
+        company_info = job_post.find_element(By.ID, "EmpBasicInfo")
+
+        job_row = add_columns_to_row_from_source(
+            job_row, company_info, company_description
+        )
 
     except NoSuchElementException:
-        pass
-
-    job_row = add_values_to_job(job_row, company_description)
+        job_row = add_values_to_row_from_dict(
+            job_row, company_description
+        )
 
     rating_description: Job_values = {
         "Friend_recommend": {
@@ -207,18 +208,16 @@ def get_job_row(debug_mode, driver, na_value, job_button):
     }
 
     try:
-        rating_info: DriverChrome = job_column.find_element(
+        rating_info: DriverChrome = job_post.find_element(
             By.XPATH, '//div[@data-test="company-ratings"]'
         )
 
-        rating_description = get_values(
-            rating_info, rating_description
+        job_row = add_columns_to_row_from_source(
+            job_row, rating_info, rating_description
         )
 
     except NoSuchElementException:
-        pass
-
-    job_row = add_values_to_job(job_row, rating_description)
+        job_row = add_values_to_row_from_dict(job_row, rating_description)
 
     reviews_by_job_title: Job_values = {
         "Pros": {
@@ -232,17 +231,15 @@ def get_job_row(debug_mode, driver, na_value, job_button):
     }
 
     try:
-        reviews_info: DriverChrome = job_column.find_element(
+        reviews_info: DriverChrome = job_post.find_element(
             By.ID, "Reviews"
         )
-
-        reviews_by_job_title = get_values(
-            reviews_info, reviews_by_job_title, return_list=True
+        job_row = add_columns_to_row_from_source(
+            job_row, reviews_info, reviews_by_job_title, return_list=True
         )
-    except NoSuchElementException:
-        pass
 
-    job_row = add_values_to_job(job_row, reviews_by_job_title)
+    except NoSuchElementException:
+        job_row = add_values_to_row_from_dict(job_row, reviews_by_job_title)
 
     benefits_rating: Job_values = {
         "Benefits_rating": {
@@ -258,18 +255,28 @@ def get_job_row(debug_mode, driver, na_value, job_button):
     }
 
     try:
-        benefits_rating = get_values(
-            job_column, benefits_rating)
-        benefits_review = get_values(
-            job_column, benefits_review, return_list=True)
+        job_row = add_columns_to_row_from_source(
+            job_row, job_post, benefits_rating
+        )
+        job_row = add_columns_to_row_from_source(
+            job_row, job_post, benefits_review, return_list=True
+        )
     except NoSuchElementException:
-        pass
-
-    job_row = add_values_to_job(job_row, benefits_rating)
-    job_row = add_values_to_job(job_row, benefits_review)
+        job_row = add_values_to_row_from_dict(job_row, benefits_rating)
+        job_row = add_values_to_row_from_dict(job_row, benefits_review)
 
     if debug_mode:
         print_key_value_pairs(job_row)
+
+    return job_row
+
+
+def add_columns_to_row_from_source(job_row, values_source, values_to_add, return_list=False):
+
+    values_to_add: Job_values = get_values(
+        values_source, values_to_add, return_list)
+
+    job_row = add_values_to_row_from_dict(job_row, values_to_add)
 
     return job_row
 
@@ -283,7 +290,7 @@ def print_key_value_pairs(job: Job):
     print("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n")
 
 
-def add_values_to_job(job: Job, job_description: Job_values) -> Job:
+def add_values_to_row_from_dict(job: Job, job_description: Job_values) -> Job:
     '''populate row for DataFrame object'''
 
     for key, value in job_description.items():
