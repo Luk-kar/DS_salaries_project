@@ -24,115 +24,91 @@ def get_one_job(debug_mode, driver, job_button):
 
     job_row = {}
 
-    na_value = config["NA_value"]
-
     job_post = await_element(
         driver, 10, By.ID, 'JDCol')
 
     pause()
 
-    job_description: Job_values = {
-        "Company_Name": {
-            "value": na_value,
-            "element": './/div[@data-test="employerName"]',
-            "is_list": False
-        },
-        "Rating": {
-            "value": na_value,
-            "element": './/span[@data-test="detailRating"]',
-            "is_list": False
-        },
-        "Location":  {
-            "value": na_value,
-            "element": './/div[@data-test="location"]',
-            "is_list": False
-        },
-        "Job_Title":  {
-            "value": na_value,
-            "element": './/div[@data-test="jobTitle"]',
-            "is_list": False
-        },
-        "Description":  {
-            "value": na_value,
-            "element": './/div[@class="jobDescriptionContent desc"]',
-            "is_list": False
-        },
-        "Salary":  {
-            "value": na_value,
-            "element": './/span[@data-test="detailSalary"]',
-            "is_list": False
-        },
-    }
+    # Those HTML components should be on job the post
+    get_job_descriptions_values(job_row, job_post)
+    get_job_button_values(job_row, job_button)
 
-    add_columns_to_row_from_source(
-        job_row,
-        job_post, job_description
-    )
+    # Those HTML components are optional on job the post
+    get_company_description(job_row, job_post)
+    get_company_ratings(job_row, job_post)
+    get_company_reviews_by_job_title(job_row, job_post)
+    get_company_benefits_review(job_row, job_post)
 
-    job_button_info = {
-        "Job_age": {
+    if debug_mode:
+        print_key_value_pairs(job_row)
+
+    return job_row
+
+
+def get_company_benefits_review(job_row, job_post):
+
+    na_value = config["NA_value"]
+
+    benefits_review: Job_values = {
+        "Benefits_rating": {
             "value": na_value,
-            "element": './/div[@data-test="job-age"]',
+            "element": '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]//div//div[@class="ratingNum mr-sm"]',
             "is_list": False
         },
-        "Easy_apply": {
+        "Benefits_reviews": {
             "value": na_value,
-            "element": './/div[@class="css-pxdlb2"]/div[1]',
-            "is_list": False
-        },
-    }
-
-    add_columns_to_row_from_source(
-        job_row,
-        job_button, job_button_info
-    )
-
-    company_description: Job_values = {
-        "Size": {
-            'value': na_value,
-            "element": './/div//*[text() = "Size"]//following-sibling::*',
-            "is_list": False
-        },
-        "Type_of_ownership": {
-            'value': na_value,
-            "element": './/div//*[text() = "Type"]//following-sibling::*',
-            "is_list": False
-        },
-        "Sector": {
-            'value': na_value,
-            "element": './/div//*[text() = "Sector"]//following-sibling::*',
-            "is_list": False
-        },
-        "Founded": {
-            'value': na_value,
-            "element": './/div//*[text() = "Founded"]//following-sibling::*',
-            "is_list": False
-        },
-        "Industry": {
-            'value': na_value,
-            "element": './/div//*[text() = "Industry"]//following-sibling::*',
-            "is_list": False
-        },
-        "Revenue": {
-            'value': na_value,
-            "element": './/div//*[text() = "Revenue"]//following-sibling::*',
-            "is_list": False
+            "element": '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsHighlights")]/div',
+            "is_list": True
         },
     }
 
     try:
-        company_info = job_post.find_element(By.ID, "EmpBasicInfo")
+        add_columns_to_row_from_source(
+            job_row,
+            job_post, benefits_review
+        )
+
+    except NoSuchElementException:
+        add_columns_to_row_from_dict(job_row, benefits_review)
+
+
+def get_company_reviews_by_job_title(job_row, job_post):
+
+    na_value = config["NA_value"]
+
+    reviews_by_job_title: Job_values = {
+        "Pros": {
+            "value": na_value,
+            "element": './/*[text() = "Pros"]//parent::div//*[contains(name(), "p")]',
+            "is_list": True
+        },
+        "Cons": {
+            "value": na_value,
+            "element": './/*[text() = "Cons"]//parent::div//*[contains(name(), "p")]',
+            "is_list": True
+        },
+    }
+
+    try:
+        reviews_info: DriverChrome = job_post.find_element(
+            By.ID, "Reviews"
+        )
 
         add_columns_to_row_from_source(
             job_row,
-            company_info, company_description
+            reviews_info, reviews_by_job_title
         )
 
     except NoSuchElementException:
         add_columns_to_row_from_dict(
             job_row,
-            company_description
+            reviews_by_job_title
         )
+
+
+def get_company_ratings(job_row, job_post):
+
+    na_value = config["NA_value"]
 
     rating_description: Job_values = {
         "Friend_recommend": {
@@ -188,58 +164,120 @@ def get_one_job(debug_mode, driver, job_button):
             rating_description
         )
 
-    reviews_by_job_title: Job_values = {
-        "Pros": {
-            "value": na_value,
-            "element": './/*[text() = "Pros"]//parent::div//*[contains(name(), "p")]',
-            "is_list": True
+
+def get_company_description(job_row, job_post):
+
+    na_value = config["NA_value"]
+
+    company_description: Job_values = {
+        "Size": {
+            'value': na_value,
+            "element": './/div//*[text() = "Size"]//following-sibling::*',
+            "is_list": False
         },
-        "Cons": {
-            "value": na_value,
-            "element": './/*[text() = "Cons"]//parent::div//*[contains(name(), "p")]',
-            "is_list": True
+        "Type_of_ownership": {
+            'value': na_value,
+            "element": './/div//*[text() = "Type"]//following-sibling::*',
+            "is_list": False
+        },
+        "Sector": {
+            'value': na_value,
+            "element": './/div//*[text() = "Sector"]//following-sibling::*',
+            "is_list": False
+        },
+        "Founded": {
+            'value': na_value,
+            "element": './/div//*[text() = "Founded"]//following-sibling::*',
+            "is_list": False
+        },
+        "Industry": {
+            'value': na_value,
+            "element": './/div//*[text() = "Industry"]//following-sibling::*',
+            "is_list": False
+        },
+        "Revenue": {
+            'value': na_value,
+            "element": './/div//*[text() = "Revenue"]//following-sibling::*',
+            "is_list": False
         },
     }
 
     try:
-        reviews_info: DriverChrome = job_post.find_element(
-            By.ID, "Reviews"
-        )
+        company_info = job_post.find_element(By.ID, "EmpBasicInfo")
 
         add_columns_to_row_from_source(
             job_row,
-            reviews_info, reviews_by_job_title
+            company_info, company_description
         )
 
     except NoSuchElementException:
         add_columns_to_row_from_dict(
             job_row,
-            reviews_by_job_title
+            company_description
         )
 
-    benefits_review: Job_values = {
-        "Benefits_rating": {
+
+def get_job_button_values(job_row, job_button):
+
+    na_value = config["NA_value"]
+
+    job_button_info = {
+        "Job_age": {
             "value": na_value,
-            "element": '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]//div//div[@class="ratingNum mr-sm"]',
+            "element": './/div[@data-test="job-age"]',
             "is_list": False
         },
-        "Benefits_reviews": {
+        "Easy_apply": {
             "value": na_value,
-            "element": '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsHighlights")]/div',
-            "is_list": True
+            "element": './/div[@class="css-pxdlb2"]/div[1]',
+            "is_list": False
         },
     }
 
-    try:
-        add_columns_to_row_from_source(
-            job_row,
-            job_post, benefits_review
-        )
+    add_columns_to_row_from_source(
+        job_row,
+        job_button, job_button_info
+    )
 
-    except NoSuchElementException:
-        add_columns_to_row_from_dict(job_row, benefits_review)
 
-    if debug_mode:
-        print_key_value_pairs(job_row)
+def get_job_descriptions_values(job_row, job_post):
 
-    return job_row
+    na_value = config["NA_value"]
+
+    job_description: Job_values = {
+        "Company_Name": {
+            "value": na_value,
+            "element": './/div[@data-test="employerName"]',
+            "is_list": False
+        },
+        "Rating": {
+            "value": na_value,
+            "element": './/span[@data-test="detailRating"]',
+            "is_list": False
+        },
+        "Location":  {
+            "value": na_value,
+            "element": './/div[@data-test="location"]',
+            "is_list": False
+        },
+        "Job_Title":  {
+            "value": na_value,
+            "element": './/div[@data-test="jobTitle"]',
+            "is_list": False
+        },
+        "Description":  {
+            "value": na_value,
+            "element": './/div[@class="jobDescriptionContent desc"]',
+            "is_list": False
+        },
+        "Salary":  {
+            "value": na_value,
+            "element": './/span[@data-test="detailSalary"]',
+            "is_list": False
+        },
+    }
+
+    add_columns_to_row_from_source(
+        job_row,
+        job_post, job_description
+    )

@@ -26,7 +26,7 @@ def get_df_jobs(
         driver_path: str = config["driver_path"],
         debug_mode: bool = config["debug_mode"]
 ):
-    """returns uncleaned DataFrame object from searched phrase on glassdoor.com"""
+    """returns uncleaned DataFrame object from searched job title on glassdoor.com"""
 
     url = get_url(config['url'], job_title)
     driver = get_webpage(url, debug_mode, driver_path)
