@@ -67,16 +67,6 @@ def get_df_job_postings(
 
         na_value = config["NA_value"]
 
-        view_table = await_element(
-            driver, 5, By.XPATH, '//div[@data-test="JobDetailsFooter"]/div[2]//span')
-        print(view_table.text)
-
-        pause()
-
-        view_table.click()  # todo
-        # todo grab all links
-        # todo add links at the end
-
         for job_button in jobs_buttons:
 
             print(f"Progress: {len(jobs) + 1}/{jobs_cap}")
@@ -90,200 +80,198 @@ def get_df_job_postings(
 
             click_x_pop_up(driver)
 
-            job_button.click()
+            job_row = get_job_row(debug_mode, driver,
+                                  na_value, job_button)
 
-            job_column = await_element(
-                driver, 10, By.ID, 'JDCol')
 
-            pause()
+def get_job_row(debug_mode, driver, na_value, job_button):
 
-            job = {}
+    job_row = {}
 
-            job_description: Job_values = {
-                "Company_Name": {
-                    "value": na_value,
-                    "element": './/div[@data-test="employerName"]'
-                },
-                "Rating": {
-                    "value": na_value,
-                    "element": './/span[@data-test="detailRating"]'
-                },
-                "Location":  {
-                    "value": na_value,
-                    "element": './/div[@data-test="location"]'
-                },
-                "Job_Title":  {
-                    "value": na_value,
-                    "element": './/div[@data-test="jobTitle"]'
-                },
-                "Description":  {
-                    "value": na_value,
-                    "element": './/div[@class="jobDescriptionContent desc"]'
-                },
-                "Salary":  {
-                    "value": na_value,
-                    "element": './/span[@data-test="detailSalary"]'
-                },
-            }
+    job_column = await_element(
+        driver, 10, By.ID, 'JDCol')
 
-            job_description: Job_values = get_values(
-                job_column, job_description)
+    pause()
 
-            job = add_values_to_job(job, job_description)
+    job_description: Job_values = {
+        "Company_Name": {
+            "value": na_value,
+            "element": './/div[@data-test="employerName"]'
+        },
+        "Rating": {
+            "value": na_value,
+            "element": './/span[@data-test="detailRating"]'
+        },
+        "Location":  {
+            "value": na_value,
+            "element": './/div[@data-test="location"]'
+        },
+        "Job_Title":  {
+            "value": na_value,
+            "element": './/div[@data-test="jobTitle"]'
+        },
+        "Description":  {
+            "value": na_value,
+            "element": './/div[@class="jobDescriptionContent desc"]'
+        },
+        "Salary":  {
+            "value": na_value,
+            "element": './/span[@data-test="detailSalary"]'
+        },
+    }
 
-            job_button_info = {
-                "Job_age": {
-                    "value": na_value, "element": './/div[@data-test="job-age"]'
-                },
-                "Easy_apply": {
-                    "value": na_value, "element": './/div[@class="css-pxdlb2"]/div[1]'
-                },
-            }
+    job_description: Job_values = get_values(
+        job_column, job_description)
 
-            job_button_info = get_values(job_button, job_button_info)
+    job_row = add_values_to_job(job_row, job_description)
 
-            job = add_values_to_job(job, job_button_info)
+    job_button_info = {
+        "Job_age": {
+            "value": na_value, "element": './/div[@data-test="job-age"]'
+        },
+        "Easy_apply": {
+            "value": na_value, "element": './/div[@class="css-pxdlb2"]/div[1]'
+        },
+    }
 
-            company_description: Job_values = {
-                "Size": {
-                    'value': na_value,
-                    "element": './/div//*[text() = "Size"]//following-sibling::*'
-                },
-                "Type_of_ownership": {
-                    'value': na_value,
-                    "element": './/div//*[text() = "Type"]//following-sibling::*'
-                },
-                "Sector": {
-                    'value': na_value,
-                    "element": './/div//*[text() = "Sector"]//following-sibling::*'
-                },
-                "Founded": {
-                    'value': na_value,
-                    "element": './/div//*[text() = "Founded"]//following-sibling::*'
-                },
-                "Industry": {
-                    'value': na_value,
-                    "element": './/div//*[text() = "Industry"]//following-sibling::*'
-                },
-                "Revenue": {
-                    'value': na_value,
-                    "element": './/div//*[text() = "Revenue"]//following-sibling::*'
-                },
-            }
+    job_button_info = get_values(job_button, job_button_info)
 
-            try:
-                company_info = job_column.find_element(By.ID, "EmpBasicInfo")
-                company_description = get_values(
-                    company_info, company_description)
+    job_row = add_values_to_job(job_row, job_button_info)
 
-            except NoSuchElementException:
-                pass
+    company_description: Job_values = {
+        "Size": {
+            'value': na_value,
+            "element": './/div//*[text() = "Size"]//following-sibling::*'
+        },
+        "Type_of_ownership": {
+            'value': na_value,
+            "element": './/div//*[text() = "Type"]//following-sibling::*'
+        },
+        "Sector": {
+            'value': na_value,
+            "element": './/div//*[text() = "Sector"]//following-sibling::*'
+        },
+        "Founded": {
+            'value': na_value,
+            "element": './/div//*[text() = "Founded"]//following-sibling::*'
+        },
+        "Industry": {
+            'value': na_value,
+            "element": './/div//*[text() = "Industry"]//following-sibling::*'
+        },
+        "Revenue": {
+            'value': na_value,
+            "element": './/div//*[text() = "Revenue"]//following-sibling::*'
+        },
+    }
 
-            job = add_values_to_job(job, company_description)
+    try:
+        company_info = job_column.find_element(By.ID, "EmpBasicInfo")
+        company_description = get_values(
+            company_info, company_description)
 
-            rating_description: Job_values = {
-                "Friend_recommend": {
-                    "value": na_value,
-                    "element": './/div[@class="css-ztsow4"]'
-                },
-                "CEO_approval": {
-                    "value": na_value,
-                    "element": './/div[@class="css-ztsow4 ceoApprove"]'
-                },
-                "Career_Opportunities": {
-                    "value": na_value,
-                    "element": './/*[text() = "Career Opportunities"]/following-sibling::span[2]'
-                },
-                "Comp_&_Benefits": {
-                    "value": na_value,
-                    "element": './/*[text() = "Comp & Benefits"]/following-sibling::span[2]'
-                },
-                "Culture_&_Values": {
-                    "value": na_value,
-                    "element": './/*[text() = "Culture & Values"]/following-sibling::span[2]'
-                },
-                "Senior_Management": {
-                    "value": na_value,
-                    "element": './/*[text() = "Senior Management"]/following-sibling::span[2]'
-                },
-                "Work/Life_Balance": {
-                    "value": na_value,
-                    "element": './/*[text() = "Work/Life_Balance"]/following-sibling::span[2]'
-                },
-            }
+    except NoSuchElementException:
+        pass
 
-            try:
-                rating_info: DriverChrome = job_column.find_element(
-                    By.XPATH, '//div[@data-test="company-ratings"]'
-                )
+    job_row = add_values_to_job(job_row, company_description)
 
-                rating_description = get_values(
-                    rating_info, rating_description
-                )
+    rating_description: Job_values = {
+        "Friend_recommend": {
+            "value": na_value,
+            "element": './/div[@class="css-ztsow4"]'
+        },
+        "CEO_approval": {
+            "value": na_value,
+            "element": './/div[@class="css-ztsow4 ceoApprove"]'
+        },
+        "Career_Opportunities": {
+            "value": na_value,
+            "element": './/*[text() = "Career Opportunities"]/following-sibling::span[2]'
+        },
+        "Comp_&_Benefits": {
+            "value": na_value,
+            "element": './/*[text() = "Comp & Benefits"]/following-sibling::span[2]'
+        },
+        "Culture_&_Values": {
+            "value": na_value,
+            "element": './/*[text() = "Culture & Values"]/following-sibling::span[2]'
+        },
+        "Senior_Management": {
+            "value": na_value,
+            "element": './/*[text() = "Senior Management"]/following-sibling::span[2]'
+        },
+        "Work/Life_Balance": {
+            "value": na_value,
+            "element": './/*[text() = "Work/Life_Balance"]/following-sibling::span[2]'
+        },
+    }
 
-            except NoSuchElementException:
-                pass
+    try:
+        rating_info: DriverChrome = job_column.find_element(
+            By.XPATH, '//div[@data-test="company-ratings"]'
+        )
 
-            job = add_values_to_job(job, rating_description)
+        rating_description = get_values(
+            rating_info, rating_description
+        )
 
-            reviews_by_job_title: Job_values = {
-                "Pros": {
-                    "value": na_value,
-                    "element": './/*[text() = "Pros"]//parent::div//*[contains(name(), "p")]'
-                },
-                "Cons": {
-                    "value": na_value,
-                    "element": './/*[text() = "Cons"]//parent::div//*[contains(name(), "p")]'
-                },
-            }
+    except NoSuchElementException:
+        pass
 
-            try:
-                reviews_info: DriverChrome = job_column.find_element(
-                    By.ID, "Reviews"
-                )
+    job_row = add_values_to_job(job_row, rating_description)
 
-                reviews_by_job_title = get_values(
-                    reviews_info, reviews_by_job_title, return_list=True
-                )
-            except NoSuchElementException:
-                pass
+    reviews_by_job_title: Job_values = {
+        "Pros": {
+            "value": na_value,
+            "element": './/*[text() = "Pros"]//parent::div//*[contains(name(), "p")]'
+        },
+        "Cons": {
+            "value": na_value,
+            "element": './/*[text() = "Cons"]//parent::div//*[contains(name(), "p")]'
+        },
+    }
 
-            job = add_values_to_job(job, reviews_by_job_title)
+    try:
+        reviews_info: DriverChrome = job_column.find_element(
+            By.ID, "Reviews"
+        )
 
-            benefits_rating: Job_values = {
-                "Benefits_rating": {
-                    "value": na_value,
-                    "element": '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]//div//div[@class="ratingNum mr-sm"]'
-                }
-            }
-            benefits_review: Job_values = {
-                "Benefits_reviews": {
-                    "value": na_value,
-                    "element": '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsHighlights")]/div'
-                },
-            }
+        reviews_by_job_title = get_values(
+            reviews_info, reviews_by_job_title, return_list=True
+        )
+    except NoSuchElementException:
+        pass
 
-            try:
-                benefits_rating = get_values(
-                    job_column, benefits_rating)
-                benefits_review = get_values(
-                    job_column, benefits_review, return_list=True)
-            except NoSuchElementException:
-                pass
+    job_row = add_values_to_job(job_row, reviews_by_job_title)
 
-            job = add_values_to_job(job, benefits_rating)
-            job = add_values_to_job(job, benefits_review)
+    benefits_rating: Job_values = {
+        "Benefits_rating": {
+            "value": na_value,
+            "element": '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]//div//div[@class="ratingNum mr-sm"]'
+        }
+    }
+    benefits_review: Job_values = {
+        "Benefits_reviews": {
+            "value": na_value,
+            "element": '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsHighlights")]/div'
+        },
+    }
 
-            # todo add links at the end
-            link: Job_values = {
-                "Benefits_reviews": {
-                    "value": na_value
-                },
-            }
-            # job = add_values_to_job(job, link)
+    try:
+        benefits_rating = get_values(
+            job_column, benefits_rating)
+        benefits_review = get_values(
+            job_column, benefits_review, return_list=True)
+    except NoSuchElementException:
+        pass
 
-            if debug_mode:
-                print_key_value_pairs(job)
+    job_row = add_values_to_job(job_row, benefits_rating)
+    job_row = add_values_to_job(job_row, benefits_review)
+
+    if debug_mode:
+        print_key_value_pairs(job_row)
+
+    return job_row
 
 
 def print_key_value_pairs(job: Job):
