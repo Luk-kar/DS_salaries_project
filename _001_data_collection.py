@@ -65,8 +65,6 @@ def get_df_job_postings(
 
         click_x_pop_up(driver)
 
-        na_value = config["NA_value"]
-
         for job_button in jobs_buttons:
 
             print(f"Progress: {len(jobs) + 1}/{jobs_cap}")
@@ -80,13 +78,14 @@ def get_df_job_postings(
 
             click_x_pop_up(driver)
 
-            job_row = get_job_row(debug_mode, driver,
-                                  na_value, job_button)
+            job_row = get_job_row(debug_mode, driver, job_button)
 
 
-def get_job_row(debug_mode, driver, na_value, job_button):
+def get_job_row(debug_mode, driver, job_button):
 
     job_row = {}
+
+    na_value = config["NA_value"]
 
     job_post = await_element(
         driver, 10, By.ID, 'JDCol')
