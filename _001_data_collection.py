@@ -95,27 +95,33 @@ def get_job_row(debug_mode, driver, job_button):
     job_description: Job_values = {
         "Company_Name": {
             "value": na_value,
-            "element": './/div[@data-test="employerName"]'
+            "element": './/div[@data-test="employerName"]',
+            "is_list": False
         },
         "Rating": {
             "value": na_value,
-            "element": './/span[@data-test="detailRating"]'
+            "element": './/span[@data-test="detailRating"]',
+            "is_list": False
         },
         "Location":  {
             "value": na_value,
-            "element": './/div[@data-test="location"]'
+            "element": './/div[@data-test="location"]',
+            "is_list": False
         },
         "Job_Title":  {
             "value": na_value,
-            "element": './/div[@data-test="jobTitle"]'
+            "element": './/div[@data-test="jobTitle"]',
+            "is_list": False
         },
         "Description":  {
             "value": na_value,
-            "element": './/div[@class="jobDescriptionContent desc"]'
+            "element": './/div[@class="jobDescriptionContent desc"]',
+            "is_list": False
         },
         "Salary":  {
             "value": na_value,
-            "element": './/span[@data-test="detailSalary"]'
+            "element": './/span[@data-test="detailSalary"]',
+            "is_list": False
         },
     }
 
@@ -126,10 +132,14 @@ def get_job_row(debug_mode, driver, job_button):
 
     job_button_info = {
         "Job_age": {
-            "value": na_value, "element": './/div[@data-test="job-age"]'
+            "value": na_value,
+            "element": './/div[@data-test="job-age"]',
+            "is_list": False
         },
         "Easy_apply": {
-            "value": na_value, "element": './/div[@class="css-pxdlb2"]/div[1]'
+            "value": na_value,
+            "element": './/div[@class="css-pxdlb2"]/div[1]',
+            "is_list": False
         },
     }
 
@@ -141,27 +151,33 @@ def get_job_row(debug_mode, driver, job_button):
     company_description: Job_values = {
         "Size": {
             'value': na_value,
-            "element": './/div//*[text() = "Size"]//following-sibling::*'
+            "element": './/div//*[text() = "Size"]//following-sibling::*',
+            "is_list": False
         },
         "Type_of_ownership": {
             'value': na_value,
-            "element": './/div//*[text() = "Type"]//following-sibling::*'
+            "element": './/div//*[text() = "Type"]//following-sibling::*',
+            "is_list": False
         },
         "Sector": {
             'value': na_value,
-            "element": './/div//*[text() = "Sector"]//following-sibling::*'
+            "element": './/div//*[text() = "Sector"]//following-sibling::*',
+            "is_list": False
         },
         "Founded": {
             'value': na_value,
-            "element": './/div//*[text() = "Founded"]//following-sibling::*'
+            "element": './/div//*[text() = "Founded"]//following-sibling::*',
+            "is_list": False
         },
         "Industry": {
             'value': na_value,
-            "element": './/div//*[text() = "Industry"]//following-sibling::*'
+            "element": './/div//*[text() = "Industry"]//following-sibling::*',
+            "is_list": False
         },
         "Revenue": {
             'value': na_value,
-            "element": './/div//*[text() = "Revenue"]//following-sibling::*'
+            "element": './/div//*[text() = "Revenue"]//following-sibling::*',
+            "is_list": False
         },
     }
 
@@ -182,31 +198,38 @@ def get_job_row(debug_mode, driver, job_button):
     rating_description: Job_values = {
         "Friend_recommend": {
             "value": na_value,
-            "element": './/div[@class="css-ztsow4"]'
+            "element": './/div[@class="css-ztsow4"]',
+            "is_list": False
         },
         "CEO_approval": {
             "value": na_value,
-            "element": './/div[@class="css-ztsow4 ceoApprove"]'
+            "element": './/div[@class="css-ztsow4 ceoApprove"]',
+            "is_list": False
         },
         "Career_Opportunities": {
             "value": na_value,
-            "element": './/*[text() = "Career Opportunities"]/following-sibling::span[2]'
+            "element": './/*[text() = "Career Opportunities"]/following-sibling::span[2]',
+            "is_list": False
         },
         "Comp_&_Benefits": {
             "value": na_value,
-            "element": './/*[text() = "Comp & Benefits"]/following-sibling::span[2]'
+            "element": './/*[text() = "Comp & Benefits"]/following-sibling::span[2]',
+            "is_list": False
         },
         "Culture_&_Values": {
             "value": na_value,
-            "element": './/*[text() = "Culture & Values"]/following-sibling::span[2]'
+            "element": './/*[text() = "Culture & Values"]/following-sibling::span[2]',
+            "is_list": False
         },
         "Senior_Management": {
             "value": na_value,
-            "element": './/*[text() = "Senior Management"]/following-sibling::span[2]'
+            "element": './/*[text() = "Senior Management"]/following-sibling::span[2]',
+            "is_list": False
         },
         "Work/Life_Balance": {
             "value": na_value,
-            "element": './/*[text() = "Work/Life_Balance"]/following-sibling::span[2]'
+            "element": './/*[text() = "Work/Life_Balance"]/following-sibling::span[2]',
+            "is_list": False
         },
     }
 
@@ -229,11 +252,13 @@ def get_job_row(debug_mode, driver, job_button):
     reviews_by_job_title: Job_values = {
         "Pros": {
             "value": na_value,
-            "element": './/*[text() = "Pros"]//parent::div//*[contains(name(), "p")]'
+            "element": './/*[text() = "Pros"]//parent::div//*[contains(name(), "p")]',
+            "is_list": True
         },
         "Cons": {
             "value": na_value,
-            "element": './/*[text() = "Cons"]//parent::div//*[contains(name(), "p")]'
+            "element": './/*[text() = "Cons"]//parent::div//*[contains(name(), "p")]',
+            "is_list": True
         },
     }
 
@@ -243,7 +268,7 @@ def get_job_row(debug_mode, driver, job_button):
         )
         job_row = add_columns_to_row_from_source(
             job_row,
-            reviews_info, reviews_by_job_title, return_list=True
+            reviews_info, reviews_by_job_title
         )
 
     except NoSuchElementException:
@@ -252,30 +277,26 @@ def get_job_row(debug_mode, driver, job_button):
             reviews_by_job_title
         )
 
-    benefits_rating: Job_values = {
+    benefits_review: Job_values = {
         "Benefits_rating": {
             "value": na_value,
-            "element": '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]//div//div[@class="ratingNum mr-sm"]'
-        }
-    }
-    benefits_review: Job_values = {
+            "element": '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]//div//div[@class="ratingNum mr-sm"]',
+            "is_list": False
+        },
         "Benefits_reviews": {
             "value": na_value,
-            "element": '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsHighlights")]/div'
+            "element": '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsHighlights")]/div',
+            "is_list": True
         },
     }
 
     try:
         job_row = add_columns_to_row_from_source(
             job_row,
-            job_post, benefits_rating
+            job_post, benefits_review
         )
-        job_row = add_columns_to_row_from_source(
-            job_row,
-            job_post, benefits_review, return_list=True
-        )
+
     except NoSuchElementException:
-        job_row = add_values_to_row_from_dict(job_row, benefits_rating)
         job_row = add_values_to_row_from_dict(job_row, benefits_review)
 
     if debug_mode:
@@ -284,10 +305,10 @@ def get_job_row(debug_mode, driver, job_button):
     return job_row
 
 
-def add_columns_to_row_from_source(job_row, values_source, values_to_add, return_list=False):
+def add_columns_to_row_from_source(job_row, values_source, values_to_add):
 
     values_to_add: Job_values = get_values(
-        values_source, values_to_add, return_list)
+        values_source, values_to_add)
 
     job_row = add_values_to_row_from_dict(job_row, values_to_add)
 
@@ -319,13 +340,13 @@ def pause():
     time.sleep(random_sleep)
 
 
-def get_values(source_html: DriverChrome, job_values, return_list=False):
+def get_values(source_html: DriverChrome, job_values):
     '''get values for each element in the list'''
 
     for values in job_values.values():
         try:
             values['value'] = get_XPATH_text(
-                source_html, values['element'], return_list)
+                source_html, values['element'], values["is_list"])
         except NoSuchElementException:
             pass
 
