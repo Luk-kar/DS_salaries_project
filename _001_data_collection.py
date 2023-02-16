@@ -121,7 +121,8 @@ def get_job_row(debug_mode, driver, na_value, job_button):
     }
 
     job_row = add_columns_to_row_from_source(
-        job_row, job_post, job_description
+        job_row,
+        job_post, job_description
     )
 
     job_button_info = {
@@ -134,7 +135,8 @@ def get_job_row(debug_mode, driver, na_value, job_button):
     }
 
     job_row = add_columns_to_row_from_source(
-        job_row, job_button, job_button_info
+        job_row,
+        job_button, job_button_info
     )
 
     company_description: Job_values = {
@@ -168,12 +170,14 @@ def get_job_row(debug_mode, driver, na_value, job_button):
         company_info = job_post.find_element(By.ID, "EmpBasicInfo")
 
         job_row = add_columns_to_row_from_source(
-            job_row, company_info, company_description
+            job_row,
+            company_info, company_description
         )
 
     except NoSuchElementException:
         job_row = add_values_to_row_from_dict(
-            job_row, company_description
+            job_row,
+            company_description
         )
 
     rating_description: Job_values = {
@@ -213,11 +217,15 @@ def get_job_row(debug_mode, driver, na_value, job_button):
         )
 
         job_row = add_columns_to_row_from_source(
-            job_row, rating_info, rating_description
+            job_row,
+            rating_info, rating_description
         )
 
     except NoSuchElementException:
-        job_row = add_values_to_row_from_dict(job_row, rating_description)
+        job_row = add_values_to_row_from_dict(
+            job_row,
+            rating_description
+        )
 
     reviews_by_job_title: Job_values = {
         "Pros": {
@@ -235,11 +243,15 @@ def get_job_row(debug_mode, driver, na_value, job_button):
             By.ID, "Reviews"
         )
         job_row = add_columns_to_row_from_source(
-            job_row, reviews_info, reviews_by_job_title, return_list=True
+            job_row,
+            reviews_info, reviews_by_job_title, return_list=True
         )
 
     except NoSuchElementException:
-        job_row = add_values_to_row_from_dict(job_row, reviews_by_job_title)
+        job_row = add_values_to_row_from_dict(
+            job_row,
+            reviews_by_job_title
+        )
 
     benefits_rating: Job_values = {
         "Benefits_rating": {
@@ -256,10 +268,12 @@ def get_job_row(debug_mode, driver, na_value, job_button):
 
     try:
         job_row = add_columns_to_row_from_source(
-            job_row, job_post, benefits_rating
+            job_row,
+            job_post, benefits_rating
         )
         job_row = add_columns_to_row_from_source(
-            job_row, job_post, benefits_review, return_list=True
+            job_row,
+            job_post, benefits_review, return_list=True
         )
     except NoSuchElementException:
         job_row = add_values_to_row_from_dict(job_row, benefits_rating)
