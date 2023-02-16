@@ -13,7 +13,7 @@ import requests
 from bs4 import BeautifulSoup
 
 # Internal
-from _001_data_collection import get_driver, get_webpage
+from scraper.get_df_jobs import get_driver, get_webpage
 from config.get import get_config, get_url
 from config._types import Config, JobNumber, JobSimilar, Url
 from _types import DriverChrome
