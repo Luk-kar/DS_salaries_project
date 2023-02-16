@@ -7,7 +7,7 @@ from annotated_types import Gt
 from selenium.webdriver.support.wait import WebDriverWait
 
 # Internal
-from _types import DriverChrome
+from scraper._types import DriverChrome
 
 
 def await_element(driver: DriverChrome, timeout: Annotated[int, Gt(0)], by, elem) -> DriverChrome:

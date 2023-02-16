@@ -6,7 +6,7 @@ from selenium.common.exceptions import (
 import requests
 
 # Internal
-from _types import DriverChrome
+from scraper._types import DriverChrome
 from scraper.config.get import get_config
 from scraper.helpers.get_driver import get_driver
 

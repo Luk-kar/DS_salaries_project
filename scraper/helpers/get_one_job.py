@@ -6,7 +6,7 @@ from selenium.common.exceptions import (
 from selenium.webdriver.common.by import By
 
 # Internal
-from _types import DriverChrome
+from scraper._types import DriverChrome
 from scraper._types import Job_values
 from scraper.helpers.add_columns_to_row_from_dict import add_columns_to_row_from_dict
 from scraper.helpers.add_columns_to_row_from_source import add_columns_to_row_from_source

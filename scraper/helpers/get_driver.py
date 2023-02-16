@@ -11,7 +11,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 # Internal
 from scraper.config.get import get_config
-from _types import DriverChrome
+from scraper._types import DriverChrome
 
 config = get_config()
 

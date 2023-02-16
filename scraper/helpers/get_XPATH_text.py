@@ -3,7 +3,7 @@
 from selenium.webdriver.common.by import By
 
 # Internal
-from _types import DriverChrome
+from scraper._types import DriverChrome
 from scraper.config.get import get_config
 
 config = get_config()

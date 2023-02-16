@@ -4,7 +4,7 @@ from selenium.common.exceptions import NoSuchElementException
 
 
 # Internal
-from _types import DriverChrome
+from scraper._types import DriverChrome
 from scraper.helpers.get_XPATH_text import get_XPATH_text
 
 

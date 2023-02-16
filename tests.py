@@ -16,7 +16,7 @@ from bs4 import BeautifulSoup
 from scraper.get_df_jobs import get_driver, get_webpage
 from scraper.config.get import get_config, get_url
 from scraper.config._types import Config, JobNumber, JobSimilar, Url
-from _types import DriverChrome
+from scraper._types import DriverChrome
 
 
 class TestConfigData(unittest.TestCase):
