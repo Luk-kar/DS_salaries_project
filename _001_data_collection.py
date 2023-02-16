@@ -125,7 +125,7 @@ def get_job_row(debug_mode, driver, job_button):
         },
     }
 
-    job_row = add_columns_to_row_from_source(
+    add_columns_to_row_from_source(
         job_row,
         job_post, job_description
     )
@@ -143,7 +143,7 @@ def get_job_row(debug_mode, driver, job_button):
         },
     }
 
-    job_row = add_columns_to_row_from_source(
+    add_columns_to_row_from_source(
         job_row,
         job_button, job_button_info
     )
@@ -184,7 +184,7 @@ def get_job_row(debug_mode, driver, job_button):
     try:
         company_info = job_post.find_element(By.ID, "EmpBasicInfo")
 
-        job_row = add_columns_to_row_from_source(
+        add_columns_to_row_from_source(
             job_row,
             company_info, company_description
         )
@@ -238,7 +238,7 @@ def get_job_row(debug_mode, driver, job_button):
             By.XPATH, '//div[@data-test="company-ratings"]'
         )
 
-        job_row = add_columns_to_row_from_source(
+        add_columns_to_row_from_source(
             job_row,
             rating_info, rating_description
         )
@@ -266,13 +266,14 @@ def get_job_row(debug_mode, driver, job_button):
         reviews_info: DriverChrome = job_post.find_element(
             By.ID, "Reviews"
         )
-        job_row = add_columns_to_row_from_source(
+
+        add_columns_to_row_from_source(
             job_row,
             reviews_info, reviews_by_job_title
         )
 
     except NoSuchElementException:
-        job_row = add_values_to_row_from_dict(
+        add_values_to_row_from_dict(
             job_row,
             reviews_by_job_title
         )
@@ -291,13 +292,13 @@ def get_job_row(debug_mode, driver, job_button):
     }
 
     try:
-        job_row = add_columns_to_row_from_source(
+        add_columns_to_row_from_source(
             job_row,
             job_post, benefits_review
         )
 
     except NoSuchElementException:
-        job_row = add_values_to_row_from_dict(job_row, benefits_review)
+        add_values_to_row_from_dict(job_row, benefits_review)
 
     if debug_mode:
         print_key_value_pairs(job_row)
@@ -310,9 +311,7 @@ def add_columns_to_row_from_source(job_row, values_source, values_to_add):
     values_to_add: Job_values = get_values(
         values_source, values_to_add)
 
-    job_row = add_values_to_row_from_dict(job_row, values_to_add)
-
-    return job_row
+    add_values_to_row_from_dict(job_row, values_to_add)
 
 
 def print_key_value_pairs(job: Job):
@@ -329,8 +328,6 @@ def add_values_to_row_from_dict(job: Job, job_description: Job_values) -> Job:
 
     for key, value in job_description.items():
         job[key] = value["value"]
-
-    return job
 
 
 def pause():
