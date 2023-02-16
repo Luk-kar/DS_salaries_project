@@ -31,6 +31,7 @@ def get_XPATH_text(source_html: DriverChrome, element: str, return_list=False):
         By.XPATH, element
     ).text
 
-    text = config["NA_value"] if text == "N/A" else text
+    text = config["NA_value"] if text == "N/A" or len(
+        text.strip()) == 0 else text
 
     return text

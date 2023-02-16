@@ -8,8 +8,8 @@ from _types import DriverChrome
 from scraper.helpers.get_XPATH_text import get_XPATH_text
 
 
-def get_values(source_html: DriverChrome, job_values):
-    '''get values for each element in the list'''
+def get_values_from_source(source_html: DriverChrome, job_values):
+    '''get values from a source element for an each element in the dict'''
 
     for values in job_values.values():
         try:
