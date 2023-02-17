@@ -9,11 +9,13 @@ import re
 import unittest
 
 # External
-import requests
 from bs4 import BeautifulSoup
+import requests
+from selenium.webdriver.chrome.webdriver import WebDriver
 
 # Internal
-from scraper.get_df_jobs import get_driver, get_webpage
+from scraper.helpers.get_driver import get_driver
+from scraper.helpers.get_webpage import get_webpage
 from scraper.config.get import get_config, get_url
 from scraper.config._types import Config, JobNumber, JobSimilar, Url
 from scraper._types import WebElem
@@ -116,13 +118,13 @@ class TestJobDescription(unittest.TestCase):
         return bool(BeautifulSoup(page_source, "html.parser").find())
 
     def test_is_browser(self):
-        driver: WebElem = get_driver(self.url)
+        driver: WebDriver = get_driver(self.url)
 
         self.assertIsInstance(
-            driver, WebElem)
+            driver, WebDriver)
 
     def test_is_webpage_loaded(self):
-        driver: WebElem = get_webpage(
+        driver: WebDriver = get_webpage(
             self.url, False)
         page_source: str = driver.page_source
 

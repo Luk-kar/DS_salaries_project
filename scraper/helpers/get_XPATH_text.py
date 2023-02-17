@@ -9,7 +9,6 @@ from selenium.webdriver.common.by import By
 
 # Internal
 from scraper._types import WebElem, Field_value
-from scraper.config._types import NA_value
 from scraper.config.get import get_config
 
 config = get_config()
