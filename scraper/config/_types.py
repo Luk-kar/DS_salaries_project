@@ -16,13 +16,14 @@ The Config type is a dictionary that contains several other types:
     * All other types (JobDefault, JobSimilar, JobTitles, JobNumber, Url,
     DriverPath, and DebugMode) are used to describe the structure of these values.
 """
-from typing import Literal
+from typing import Annotated, Literal
+from annotated_types import Gt
 
 JobDefault = str
 JobSimilar = list[str]
 JobTitles = dict[str, {'default': JobDefault,  # type: ignore[valid-type, misc]
                        'similar': JobSimilar}]  # type: ignore[valid-type, index]
-JobNumber = int
+JobNumber = Annotated[int, Gt(0)]
 Url = dict[str, str]
 DriverPath = str
 DebugMode = bool

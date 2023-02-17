@@ -6,9 +6,9 @@ from selenium.common.exceptions import (
 from selenium.webdriver.common.by import By
 
 # Internal
-from scraper._types import Driver, Job_elements
-from scraper.helpers.add_columns_to_row_from_dict import add_columns_to_row_from_dict
-from scraper.helpers.add_columns_to_row_from_source import add_columns_to_row_from_source
+from scraper._types import WebDriver, Job_elements, Job_values
+from scraper.helpers.add_columns_to_job_from_dict import add_columns_to_job_from_dict
+from scraper.helpers.add_columns_to_job_from_source import add_columns_to_job_from_source
 from scraper.helpers.print_key_value_pairs import print_key_value_pairs
 from scraper.helpers.await_element import await_element
 from scraper.helpers.pause import pause
@@ -18,10 +18,10 @@ from scraper.config.get import get_config
 config = get_config()
 
 
-def get_one_job(debug_mode: bool, driver: Driver, job_button: Driver):
+def get_one_job(debug_mode: bool, driver: WebDriver, job_button: WebDriver):
     '''get columns from current selected job description'''
 
-    job = {}
+    job: Job_values = {}
 
     job_post = await_element(
         driver, 10, By.ID, 'JDCol')
@@ -44,7 +44,12 @@ def get_one_job(debug_mode: bool, driver: Driver, job_button: Driver):
     return job
 
 
-def get_company_benefits_review(job, job_post):
+def get_company_benefits_review(job: Job_values, job_post: WebDriver):
+    '''
+    Updates passed dict by passed element.
+    This XPATH element is optional.
+    If some values don't exist, it updates them with NA_value.
+    '''
 
     na_value = config["NA_value"]
 
@@ -62,16 +67,21 @@ def get_company_benefits_review(job, job_post):
     }
 
     try:
-        add_columns_to_row_from_source(
+        add_columns_to_job_from_source(
             job,
             job_post, benefits_review
         )
 
     except NoSuchElementException:
-        add_columns_to_row_from_dict(job, benefits_review)
+        add_columns_to_job_from_dict(job, benefits_review)
 
 
-def get_company_reviews_by_job_title(job, job_post):
+def get_company_reviews_by_job_title(job: Job_values, job_post: WebDriver):
+    '''
+    Updates passed dict by passed element.
+    This XPATH element is optional.
+    If some values don't exist, it updates them with NA_value.
+    '''
 
     na_value = config["NA_value"]
 
@@ -89,23 +99,28 @@ def get_company_reviews_by_job_title(job, job_post):
     }
 
     try:
-        reviews_info: Driver = job_post.find_element(
+        reviews_info: WebDriver = job_post.find_element(
             By.ID, "Reviews"
         )
 
-        add_columns_to_row_from_source(
+        add_columns_to_job_from_source(
             job,
             reviews_info, reviews_by_job_title
         )
 
     except NoSuchElementException:
-        add_columns_to_row_from_dict(
+        add_columns_to_job_from_dict(
             job,
             reviews_by_job_title
         )
 
 
-def get_company_ratings(job, job_post):
+def get_company_ratings(job: Job_values, job_post: WebDriver):
+    '''
+    Updates passed dict by passed element.
+    This XPATH element is optional.
+    If some values don't exist, it updates them with NA_value.
+    '''
 
     na_value = config["NA_value"]
 
@@ -148,23 +163,28 @@ def get_company_ratings(job, job_post):
     }
 
     try:
-        rating_info: Driver = job_post.find_element(
+        rating_info: WebDriver = job_post.find_element(
             By.XPATH, '//div[@data-test="company-ratings"]'
         )
 
-        add_columns_to_row_from_source(
+        add_columns_to_job_from_source(
             job,
             rating_info, rating_description
         )
 
     except NoSuchElementException:
-        add_columns_to_row_from_dict(
+        add_columns_to_job_from_dict(
             job,
             rating_description
         )
 
 
-def get_company_description(job, job_post):
+def get_company_description(job: Job_values, job_post: WebDriver):
+    '''
+    Updates passed dict by passed element.
+    This XPATH element is optional.
+    If some values don't exist, it updates them with NA_value.
+    '''
 
     na_value = config["NA_value"]
 
@@ -202,25 +222,30 @@ def get_company_description(job, job_post):
     }
 
     try:
-        company_info = job_post.find_element(By.ID, "EmpBasicInfo")
+        company_info: WebDriver = job_post.find_element(By.ID, "EmpBasicInfo")
 
-        add_columns_to_row_from_source(
+        add_columns_to_job_from_source(
             job,
             company_info, company_description
         )
 
     except NoSuchElementException:
-        add_columns_to_row_from_dict(
+        add_columns_to_job_from_dict(
             job,
             company_description
         )
 
 
-def get_job_button_values(job, job_button):
+def get_job_button_values(job: Job_values, job_button: WebDriver):
+    '''
+    Updates passed dict by passed element.
+    This XPATH element is mandatory.
+    If some values don't exist, it updates them with NA_value.
+    '''
 
     na_value = config["NA_value"]
 
-    job_button_info = {
+    job_button_info: Job_elements = {
         "Job_age": {
             "value": na_value,
             "element": './/div[@data-test="job-age"]',
@@ -233,13 +258,18 @@ def get_job_button_values(job, job_button):
         },
     }
 
-    add_columns_to_row_from_source(
+    add_columns_to_job_from_source(
         job,
         job_button, job_button_info
     )
 
 
-def get_job_descriptions_values(job, job_post):
+def get_job_descriptions_values(job: Job_values, job_post: WebDriver):
+    '''
+    Updates passed dict by passed element.
+    This XPATH element is mandatory.
+    If some values don't exist, it updates them with NA_value.
+    '''
 
     na_value = config["NA_value"]
 
@@ -276,7 +306,7 @@ def get_job_descriptions_values(job, job_post):
         },
     }
 
-    add_columns_to_row_from_source(
+    add_columns_to_job_from_source(
         job,
         job_post, job_description
     )

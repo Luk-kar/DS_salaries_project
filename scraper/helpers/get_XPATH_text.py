@@ -3,14 +3,14 @@
 from selenium.webdriver.common.by import By
 
 # Internal
-from scraper._types import Driver
+from scraper._types import WebDriver
 from scraper.config.get import get_config
 
 config = get_config()
-Elements = list[Driver]
+Elements = list[WebDriver]
 
 
-def get_XPATH_text(source_html: Driver, element: str, return_list=False):
+def get_XPATH_text(source_html: WebDriver, element: str, return_list=False):
     '''return text or texts of selected element'''
 
     if return_list:

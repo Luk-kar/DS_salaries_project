@@ -11,14 +11,14 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 # Internal
 from scraper.config.get import get_config
-from scraper._types import Driver
+from scraper._types import WebDriver
 
 config = get_config()
 
 
 def get_driver(
         debug_mode: bool = config["debug_mode"],
-        path: str = config["driver_path"]) -> Driver:
+        path: str = config["driver_path"]):
     """Returns website's driver with custom options"""
 
     options = webdriver.ChromeOptions()

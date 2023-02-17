@@ -7,10 +7,11 @@ from selenium.common.exceptions import (
 from selenium.webdriver.common.by import By
 
 # Internal
+from scraper._types import WebDriver
 from scraper.helpers.await_element import await_element
 
 
-def click_x_pop_up(driver):
+def click_x_pop_up(driver: WebDriver):
     """riding off pop-up blocking web page elements"""
 
     try:
