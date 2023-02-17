@@ -3,12 +3,12 @@ The module returns a webdriver for a specified URL,
 and if an error occurs, it returns a HTTP status code instead.
 '''
 # External
-from selenium.common.exceptions import WebDriverException
 import sys
+from selenium.common.exceptions import WebDriverException
+from selenium.webdriver.chrome.webdriver import WebDriver
 import requests
 
 # Internal
-from scraper._types import WebDriver
 from scraper.config.get import get_config
 from scraper.config._types import DebugMode
 from scraper.helpers.get_driver import get_driver
@@ -16,7 +16,11 @@ from scraper.helpers.get_driver import get_driver
 config = get_config()
 
 
-def get_webpage(url: str, debug_mode: DebugMode, driver_path: str = config["driver_path"]) -> WebDriver:
+def get_webpage(
+    url: str,
+    debug_mode: DebugMode,
+    driver_path: str = config["driver_path"]
+) -> WebDriver:
     """returns browser driver"""
 
     driver: WebDriver = get_driver(debug_mode, driver_path)

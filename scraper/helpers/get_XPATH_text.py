@@ -8,14 +8,15 @@ a fallback "NA_value" from the configuration file.
 from selenium.webdriver.common.by import By
 
 # Internal
-from scraper._types import WebDriver
+from scraper._types import WebElem, Field_value
+from scraper.config._types import NA_value
 from scraper.config.get import get_config
 
 config = get_config()
-Elements = list[WebDriver]
+Elements = list[WebElem]
 
 
-def get_XPATH_text(source_html: WebDriver, element: str, return_list=False):
+def get_XPATH_text(source_html: WebElem, element: str, return_list=False) -> Field_value:
     '''return text or texts of selected element'''
 
     if return_list:
@@ -29,11 +30,11 @@ def get_XPATH_text(source_html: WebDriver, element: str, return_list=False):
             texts.append(elem.text)
 
         if not texts:
-            texts = config["NA_value"]
+            return config["NA_value"]
+        else:
+            return texts
 
-        return texts
-
-    text: str = source_html.find_element(
+    text = source_html.find_element(
         By.XPATH, element
     ).text
 

@@ -1,17 +1,20 @@
+'''
+This module provides a function to get a website driver 
+with custom options for web scraping using selenium, 
+webdriver_manager, with the option to enable/disable debug mode 
+and specify the path to the Chrome driver.
+'''
 # Python
 import sys
 
 # External
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from selenium.common.exceptions import (
-    WebDriverException,
-)
+from selenium.common.exceptions import WebDriverException
 from webdriver_manager.chrome import ChromeDriverManager
 
 # Internal
 from scraper.config.get import get_config
-from scraper._types import WebDriver
 
 config = get_config()
 
