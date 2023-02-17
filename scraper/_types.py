@@ -1,9 +1,13 @@
+'''
+This module provides type aliases for web scraping with Selenium.
+'''
+
 # External
+from typing import Type
 from selenium import webdriver
 
 # Internal
 from scraper.config._types import NA_value
-from typing import Type
 
 Field_value = str | NA_value
 WebDriver = Type[webdriver.chrome.webdriver.WebDriver]

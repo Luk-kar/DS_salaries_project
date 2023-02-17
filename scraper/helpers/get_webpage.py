@@ -1,8 +1,10 @@
-
+'''
+The module returns a webdriver for a specified URL, 
+and if an error occurs, it returns a HTTP status code instead.
+'''
 # External
-from selenium.common.exceptions import (
-    WebDriverException,
-)
+from selenium.common.exceptions import WebDriverException
+import sys
 import requests
 
 # Internal
@@ -22,7 +24,7 @@ def get_webpage(url: str, debug_mode: DebugMode, driver_path: str = config["driv
         driver.get(url)
     except WebDriverException as error:
         status_code = requests.get(url, timeout=3).status_code
-        print(
+        sys.exit(
             f"Failed to upload the url: {error}\n Status code: {status_code}")
 
     return driver

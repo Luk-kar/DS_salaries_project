@@ -19,7 +19,21 @@ config = get_config()
 
 
 def get_one_job(debug_mode: bool, driver: WebDriver, job_button: WebDriver):
-    '''get columns from current selected job description'''
+    '''
+    Get columns values from the current selected job posting.
+
+    Parameters:
+    - debug_mode (bool):
+        Whether or not to print debugging output
+    - driver (WebDriver):
+        The browser driver
+    - job_button (WebDriver):
+        The job button
+
+    Returns:
+    - Job_values (dict):
+        A dictionary containing columns values from the job posting
+    '''
 
     job: Job_values = {}
 
@@ -46,9 +60,19 @@ def get_one_job(debug_mode: bool, driver: WebDriver, job_button: WebDriver):
 
 def get_company_benefits_review(job: Job_values, job_post: WebDriver):
     '''
-    Updates passed dict by passed element.
-    This XPATH element is optional.
-    If some values don't exist, it updates them with NA_value.
+    Updates the passed job dictionary dictionary with reviews
+    company's benefits and their overall score.
+
+    The company benefits element is optional.
+    If some values don't exist,
+    they will be updated with the `NA_value` from the `config` file.
+
+    Parameters:
+    - job (dict): A dictionary containing job details.
+    - job_post (Webdriver): The web page source for a job.
+
+    Returns:
+    - None
     '''
 
     na_value = config["NA_value"]
@@ -78,9 +102,19 @@ def get_company_benefits_review(job: Job_values, job_post: WebDriver):
 
 def get_company_reviews_by_job_title(job: Job_values, job_post: WebDriver):
     '''
-    Updates passed dict by passed element.
-    This XPATH element is optional.
-    If some values don't exist, it updates them with NA_value.
+    Updates the passed job dictionary dictionary with reviews
+    (Pros and Cons) of the company based on the job title. 
+
+    The company reviews by job title element is optional.
+    If some values don't exist,
+    they will be updated with the `NA_value` from the `config` file.
+
+    Parameters:
+    - job (dict): A dictionary containing job details.
+    - job_post (Webdriver): The web page source for a job.
+
+    Returns:
+    - None.
     '''
 
     na_value = config["NA_value"]
@@ -117,9 +151,19 @@ def get_company_reviews_by_job_title(job: Job_values, job_post: WebDriver):
 
 def get_company_ratings(job: Job_values, job_post: WebDriver):
     '''
-    Updates passed dict by passed element.
-    This XPATH element is optional.
-    If some values don't exist, it updates them with NA_value.
+    Updates the passed job dictionary with the company rating values
+    scraped from the job posting element.
+
+    The company rating element is optional.
+    If some values don't exist,
+    they will be updated with the `NA_value` from the `config` file.
+
+    Parameters:
+    - job (dict): A dictionary containing job details.
+    - job_post (Webdriver): The web page source for a job.
+
+    Returns:
+        - None.
     '''
 
     na_value = config["NA_value"]
@@ -181,9 +225,19 @@ def get_company_ratings(job: Job_values, job_post: WebDriver):
 
 def get_company_description(job: Job_values, job_post: WebDriver):
     '''
-    Updates passed dict by passed element.
-    This XPATH element is optional.
-    If some values don't exist, it updates them with NA_value.
+    Updates the passed job dictionary with the company description values
+    scraped from the job posting element.
+
+    The company description element is optional.
+    If some values don't exist,
+    they will be updated with the `NA_value` from the `config` file.
+
+    Parameters:
+    - job (dict): A dictionary containing job details.
+    - job_post (Webdriver): The web page source for a job.
+
+    Returns:
+        - None.
     '''
 
     na_value = config["NA_value"]
@@ -238,9 +292,19 @@ def get_company_description(job: Job_values, job_post: WebDriver):
 
 def get_job_button_values(job: Job_values, job_button: WebDriver):
     '''
-    Updates passed dict by passed element.
-    This XPATH element is mandatory.
-    If some values don't exist, it updates them with NA_value.
+    Updates the passed job dictionary with the job post age and Easy apply values
+    scraped from the job posting button.
+
+    The button element should exist.
+    If some values don't exist,
+    they will be updated with the `NA_value` from the `config` file.
+
+    Parameters:
+    - job (dict): A dictionary containing job details.
+    - job_post (Webdriver): The web page source for a job.
+
+    Returns:
+    - None
     '''
 
     na_value = config["NA_value"]
@@ -266,9 +330,19 @@ def get_job_button_values(job: Job_values, job_button: WebDriver):
 
 def get_job_descriptions_values(job: Job_values, job_post: WebDriver):
     '''
-    Updates passed dict by passed element.
-    This XPATH element is mandatory.
-    If some values don't exist, it updates them with NA_value.
+    Updates the passed job dictionary with the job description values
+    scraped from the job posting.
+
+    The job description element should exist.
+    If some values don't exist,
+    they will be updated with the `NA_value` from the `config` file.
+
+    Parameters:
+    - job (dict): A dictionary containing job details.
+    - job_post (Webdriver): The web page source for a job.
+
+    Returns:
+    - None
     '''
 
     na_value = config["NA_value"]

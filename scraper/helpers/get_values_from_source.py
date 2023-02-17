@@ -1,4 +1,7 @@
-
+'''
+Module for parsing HTML source code and getting values
+for a given dictionary of job values and its elements.
+'''
 # External
 from selenium.common.exceptions import NoSuchElementException
 
@@ -9,7 +12,7 @@ from scraper.helpers.get_XPATH_text import get_XPATH_text
 
 
 def get_values_from_source(source_html: WebDriver, job_values: Job_elements):
-    '''get values from a source element for an each element in the dict'''
+    '''get values from a source element for an each element in the job values'''
 
     for values in job_values.values():
         try:

@@ -1,21 +1,7 @@
-"""
-This module defines several types used to describe the structure of a configuration data object.
-The Config type is a dictionary that contains several other types:
+'''
+This module provides type aliases for configuration values for the scraper.
+'''
 
-    * JobTitles is a dictionary with keys "default" and "similar" that
-    hold the default job title as a string and a list of similar job titles as strings.
-
-    * JobNumber is an integer representing the number of jobs to retrieve.
-
-    * Url is a dictionary holding different parts of a URL as strings.
-
-    * DriverPath is a string representing the path to a web driver.
-
-    * DebugMode is a boolean indicating whether debug mode is on or off.
-
-    * All other types (JobDefault, JobSimilar, JobTitles, JobNumber, Url,
-    DriverPath, and DebugMode) are used to describe the structure of these values.
-"""
 from typing import Annotated, Literal
 from annotated_types import Gt
 

@@ -1,8 +1,7 @@
 """
-The get_args method in this module loads configuration data from a YAML file config.get
-and returns it as a Config object.
-The default file path is config\\data.yaml, 
-but it can be changed by passing a different file path as an argument.
+This module provides functions for loading configuration and URL data from a YAML file and returning it in a structured format, 
+including the get_config() function which returns a Config object and the get_url() function which returns a HTTP string. 
+It imports the yaml library and uses the SafeLoader to safely load the YAML data.
 """
 # Python
 import yaml

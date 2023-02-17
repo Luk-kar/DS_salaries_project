@@ -1,4 +1,9 @@
 
+'''
+This module provides a function that returns the text of a selected element
+or elements using an XPath query on a web page, with the option to return a list of texts and
+a fallback "NA_value" from the configuration file.
+'''
 # External
 from selenium.webdriver.common.by import By
 
