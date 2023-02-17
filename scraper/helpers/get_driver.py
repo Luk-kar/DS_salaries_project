@@ -11,14 +11,14 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 # Internal
 from scraper.config.get import get_config
-from scraper._types import DriverChrome
+from scraper._types import Driver
 
 config = get_config()
 
 
 def get_driver(
         debug_mode: bool = config["debug_mode"],
-        path: str = config["driver_path"]) -> DriverChrome:
+        path: str = config["driver_path"]) -> Driver:
     """Returns website's driver with custom options"""
 
     options = webdriver.ChromeOptions()
@@ -39,7 +39,6 @@ def get_driver(
                 f'Make sure your path or driver version is correct:\n{error}'
             )
 
-            # auto-install if not existing
     driver = webdriver.Chrome(
         service=service_obj, options=options)
     # driver.set_window_rect(width=1120, height=1000)

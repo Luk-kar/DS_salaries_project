@@ -6,8 +6,7 @@ from selenium.common.exceptions import (
 from selenium.webdriver.common.by import By
 
 # Internal
-from scraper._types import DriverChrome
-from scraper._types import Job_values
+from scraper._types import Driver, Job_elements
 from scraper.helpers.add_columns_to_row_from_dict import add_columns_to_row_from_dict
 from scraper.helpers.add_columns_to_row_from_source import add_columns_to_row_from_source
 from scraper.helpers.print_key_value_pairs import print_key_value_pairs
@@ -19,10 +18,10 @@ from scraper.config.get import get_config
 config = get_config()
 
 
-def get_one_job(debug_mode, driver, job_button):
+def get_one_job(debug_mode: bool, driver: Driver, job_button: Driver):
     '''get columns from current selected job description'''
 
-    job_row = {}
+    job = {}
 
     job_post = await_element(
         driver, 10, By.ID, 'JDCol')
@@ -30,26 +29,26 @@ def get_one_job(debug_mode, driver, job_button):
     pause()
 
     # Those HTML components should be on job the post
-    get_job_descriptions_values(job_row, job_post)
-    get_job_button_values(job_row, job_button)
+    get_job_descriptions_values(job, job_post)
+    get_job_button_values(job, job_button)
 
     # Those HTML components are optional on job the post
-    get_company_description(job_row, job_post)
-    get_company_ratings(job_row, job_post)
-    get_company_reviews_by_job_title(job_row, job_post)
-    get_company_benefits_review(job_row, job_post)
+    get_company_description(job, job_post)
+    get_company_ratings(job, job_post)
+    get_company_reviews_by_job_title(job, job_post)
+    get_company_benefits_review(job, job_post)
 
     if debug_mode:
-        print_key_value_pairs(job_row)
+        print_key_value_pairs(job)
 
-    return job_row
+    return job
 
 
-def get_company_benefits_review(job_row, job_post):
+def get_company_benefits_review(job, job_post):
 
     na_value = config["NA_value"]
 
-    benefits_review: Job_values = {
+    benefits_review: Job_elements = {
         "Benefits_rating": {
             "value": na_value,
             "element": '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]//div//div[@class="ratingNum mr-sm"]',
@@ -64,19 +63,19 @@ def get_company_benefits_review(job_row, job_post):
 
     try:
         add_columns_to_row_from_source(
-            job_row,
+            job,
             job_post, benefits_review
         )
 
     except NoSuchElementException:
-        add_columns_to_row_from_dict(job_row, benefits_review)
+        add_columns_to_row_from_dict(job, benefits_review)
 
 
-def get_company_reviews_by_job_title(job_row, job_post):
+def get_company_reviews_by_job_title(job, job_post):
 
     na_value = config["NA_value"]
 
-    reviews_by_job_title: Job_values = {
+    reviews_by_job_title: Job_elements = {
         "Pros": {
             "value": na_value,
             "element": './/*[text() = "Pros"]//parent::div//*[contains(name(), "p")]',
@@ -90,27 +89,27 @@ def get_company_reviews_by_job_title(job_row, job_post):
     }
 
     try:
-        reviews_info: DriverChrome = job_post.find_element(
+        reviews_info: Driver = job_post.find_element(
             By.ID, "Reviews"
         )
 
         add_columns_to_row_from_source(
-            job_row,
+            job,
             reviews_info, reviews_by_job_title
         )
 
     except NoSuchElementException:
         add_columns_to_row_from_dict(
-            job_row,
+            job,
             reviews_by_job_title
         )
 
 
-def get_company_ratings(job_row, job_post):
+def get_company_ratings(job, job_post):
 
     na_value = config["NA_value"]
 
-    rating_description: Job_values = {
+    rating_description: Job_elements = {
         "Friend_recommend": {
             "value": na_value,
             "element": './/div[@class="css-ztsow4"]',
@@ -149,27 +148,27 @@ def get_company_ratings(job_row, job_post):
     }
 
     try:
-        rating_info: DriverChrome = job_post.find_element(
+        rating_info: Driver = job_post.find_element(
             By.XPATH, '//div[@data-test="company-ratings"]'
         )
 
         add_columns_to_row_from_source(
-            job_row,
+            job,
             rating_info, rating_description
         )
 
     except NoSuchElementException:
         add_columns_to_row_from_dict(
-            job_row,
+            job,
             rating_description
         )
 
 
-def get_company_description(job_row, job_post):
+def get_company_description(job, job_post):
 
     na_value = config["NA_value"]
 
-    company_description: Job_values = {
+    company_description: Job_elements = {
         "Size": {
             'value': na_value,
             "element": './/div//*[text() = "Size"]//following-sibling::*',
@@ -206,18 +205,18 @@ def get_company_description(job_row, job_post):
         company_info = job_post.find_element(By.ID, "EmpBasicInfo")
 
         add_columns_to_row_from_source(
-            job_row,
+            job,
             company_info, company_description
         )
 
     except NoSuchElementException:
         add_columns_to_row_from_dict(
-            job_row,
+            job,
             company_description
         )
 
 
-def get_job_button_values(job_row, job_button):
+def get_job_button_values(job, job_button):
 
     na_value = config["NA_value"]
 
@@ -235,16 +234,16 @@ def get_job_button_values(job_row, job_button):
     }
 
     add_columns_to_row_from_source(
-        job_row,
+        job,
         job_button, job_button_info
     )
 
 
-def get_job_descriptions_values(job_row, job_post):
+def get_job_descriptions_values(job, job_post):
 
     na_value = config["NA_value"]
 
-    job_description: Job_values = {
+    job_description: Job_elements = {
         "Company_Name": {
             "value": na_value,
             "element": './/div[@data-test="employerName"]',
@@ -278,6 +277,6 @@ def get_job_descriptions_values(job_row, job_post):
     }
 
     add_columns_to_row_from_source(
-        job_row,
+        job,
         job_post, job_description
     )

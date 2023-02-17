@@ -16,7 +16,7 @@ from bs4 import BeautifulSoup
 from scraper.get_df_jobs import get_driver, get_webpage
 from scraper.config.get import get_config, get_url
 from scraper.config._types import Config, JobNumber, JobSimilar, Url
-from scraper._types import DriverChrome
+from scraper._types import Driver
 
 
 class TestConfigData(unittest.TestCase):
@@ -116,13 +116,13 @@ class TestJobDescription(unittest.TestCase):
         return bool(BeautifulSoup(page_source, "html.parser").find())
 
     def test_is_browser(self):
-        driver: DriverChrome = get_driver(self.url)
+        driver: Driver = get_driver(self.url)
 
         self.assertIsInstance(
-            driver, DriverChrome)
+            driver, Driver)
 
     def test_is_webpage_loaded(self):
-        driver: DriverChrome = get_webpage(
+        driver: Driver = get_webpage(
             self.url, False)
         page_source: str = driver.page_source
 
