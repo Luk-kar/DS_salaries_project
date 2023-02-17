@@ -1,3 +1,5 @@
+# Python
+from datetime import datetime
 
 # External
 from selenium.webdriver.common.by import By
@@ -15,7 +17,10 @@ def get_jobs(jobs_number: JobNumber, debug_mode: DebugMode, driver: WebDriver):
     '''Getting pandas dataframe populated with jobs from glassdoor.com'''
 
     jobs = []
-    print("")  # \n
+
+    if debug_mode:
+        now = datetime.now().isoformat(sep=" ", timespec="seconds")
+        print(f"\n{now}\n")
 
     while len(jobs) < jobs_number:
         jobs_list_buttons: WebDriver = await_element(
