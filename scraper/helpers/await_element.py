@@ -22,7 +22,7 @@ def await_element(
     by: str, element:
     Element_XPATH
 ) -> MyWebElement:
-    '''Use when the element loads in a run time after the initial loading of the webpage'''
+    '''Use when the element is loading in a run time after the initial loading of the webpage'''
 
     return WebDriverWait(driver, timeout).until(
         lambda x: x.find_element(by, element))

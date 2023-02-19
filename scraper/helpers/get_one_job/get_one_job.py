@@ -4,13 +4,12 @@ The Module is responsible for getting all values from a single job posting
 # External
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.webdriver import WebDriver
 
 # Internal
 from scraper._types import MyWebElement, Job_elements, Job_values, MyWebDriver
-from scraper.helpers.add_columns_to_job_from_dict import add_columns_to_job_from_dict
-from scraper.helpers.add_columns_to_job_from_source import add_columns_to_job_from_source
-from scraper.helpers.print_key_value_pairs import print_key_value_pairs
+from scraper.helpers.get_one_job.add_columns_to_job_from_dict import add_columns_to_job_from_dict
+from scraper.helpers.get_one_job.add_columns_to_job_from_source import add_columns_to_job_from_source
+from scraper.helpers.get_one_job.print_key_value_pairs import print_key_value_pairs
 from scraper.helpers.await_element import await_element
 from scraper.helpers.pause import pause
 from scraper.config.get import get_config

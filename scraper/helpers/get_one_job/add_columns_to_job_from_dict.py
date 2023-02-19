@@ -1,5 +1,5 @@
 '''
-The module adds values from a dictionary to a job dictionary.
+The module adds values from a selected dictionary to a job dictionary.
 '''
 # Internal
 from scraper._types import Job_values, Job_elements
@@ -10,7 +10,7 @@ def add_columns_to_job_from_dict(
     values_to_add: Job_elements
 ):
     """
-    Adds the values in the `values_to_add` dictionary to the `job` dictionary.
+    Adds the values from the `values_to_add` dictionary to the `job` dictionary.
 
     Parameters:
         - job (Job): A dictionary containing job data to which the values will be added.

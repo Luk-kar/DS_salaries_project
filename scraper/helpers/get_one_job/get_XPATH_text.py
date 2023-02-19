@@ -16,7 +16,7 @@ Elements = list[MyWebElement]
 
 
 def get_XPATH_text(source_html: MyWebElement, element: str, return_list=False) -> Field_value:
-    '''return text or texts of selected element'''
+    '''return text or texts of selected web element'''
 
     if return_list:
 

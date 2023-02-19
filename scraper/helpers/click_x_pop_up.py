@@ -1,6 +1,6 @@
 '''
 This module contains a function that tries to locate a pop-up close button on a web page 
-and clicks it, thus preventing the pop-up from blocking the drivers's access.
+and clicks it, thus preventing the pop-up from blocking the  web drivers's access.
 '''
 # External
 from selenium.common.exceptions import (
@@ -11,7 +11,7 @@ from selenium.webdriver.common.by import By
 
 # Internal
 from scraper._types import MyWebElement, MyWebDriver
-from scraper.helpers.await_element import await_element
+from scraper.helpers.get_one_job.await_element import await_element
 
 
 def click_x_pop_up(driver: MyWebElement | MyWebDriver):
