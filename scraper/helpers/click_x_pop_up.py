@@ -8,14 +8,13 @@ from selenium.common.exceptions import (
     NoSuchElementException
 )
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.webdriver import WebDriver
 
 # Internal
-from scraper._types import WebElem
+from scraper._types import MyWebElement, MyWebDriver
 from scraper.helpers.await_element import await_element
 
 
-def click_x_pop_up(driver: WebElem | WebDriver):
+def click_x_pop_up(driver: MyWebElement | MyWebDriver):
     """Riding off pop-up blocking web page elements"""
 
     try:

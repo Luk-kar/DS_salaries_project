@@ -7,14 +7,14 @@ from selenium.webdriver.chrome.webdriver import WebDriver
 
 # Internal
 from scraper.config._types import JobNumber, DebugMode
-from scraper._types import WebElem, Jobs
+from scraper._types import MyWebElement, Jobs, MyWebDriver
 from scraper.helpers.await_element import await_element
 from scraper.helpers.click_x_pop_up import click_x_pop_up
 from scraper.helpers.get_one_job import get_one_job
 from scraper.helpers.pause import pause
 
 
-def get_jobs(jobs_number: JobNumber, debug_mode: DebugMode, driver: WebDriver):
+def get_jobs(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWebDriver):
     '''Getting pandas dataframe populated with jobs from glassdoor.com'''
 
     jobs: Jobs = []
@@ -24,10 +24,10 @@ def get_jobs(jobs_number: JobNumber, debug_mode: DebugMode, driver: WebDriver):
         print(f"\n{now}\n")
 
     while len(jobs) < jobs_number:
-        jobs_list_buttons: WebElem = await_element(
+        jobs_list_buttons: MyWebElement = await_element(
             driver, 20, By.XPATH, '//ul[@data-test="jlGrid"]')
 
-        jobs_buttons: list[WebElem] = jobs_list_buttons.find_elements(
+        jobs_buttons: list[MyWebElement] = jobs_list_buttons.find_elements(
             By.TAG_NAME, "li")
 
         click_x_pop_up(driver)

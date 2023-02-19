@@ -12,8 +12,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.common.exceptions import WebDriverException
 from webdriver_manager.chrome import ChromeDriverManager
-
-# Internal
 from scraper.config.get import get_config
 
 config = get_config()
@@ -42,7 +40,6 @@ def get_driver(
                 f'Make sure your path or driver version is correct:\n{error}'
             )
 
-    driver = webdriver.Chrome(
+    driver = webdriver.Chrome(  # type: ignore [call-arg]
         service=service_obj, options=options)
-    # driver.set_window_rect(width=1120, height=1000)
     return driver

@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.webdriver import WebDriver
 
 # Internal
-from scraper._types import WebElem, Job_elements, Job_values
+from scraper._types import MyWebElement, Job_elements, Job_values, MyWebDriver
 from scraper.helpers.add_columns_to_job_from_dict import add_columns_to_job_from_dict
 from scraper.helpers.add_columns_to_job_from_source import add_columns_to_job_from_source
 from scraper.helpers.print_key_value_pairs import print_key_value_pairs
@@ -19,16 +19,16 @@ from scraper.config.get import get_config
 config = get_config()
 
 
-def get_one_job(debug_mode: bool, driver: WebDriver, job_button: WebElem):
+def get_one_job(debug_mode: bool, driver: MyWebDriver, job_button: MyWebElement):
     '''
     Get columns values from the current selected job posting.
 
     Parameters:
     - debug_mode (bool):
         Whether or not to print debugging output
-    - driver (WebDriver):
+    - driver (MyWebDriver):
         The browser driver
-    - job_button (WebDriver):
+    - job_button (MyWebDriver):
         The job button
 
     Returns:
@@ -59,7 +59,7 @@ def get_one_job(debug_mode: bool, driver: WebDriver, job_button: WebElem):
     return job
 
 
-def get_company_benefits_review(job: Job_values, job_post: WebElem):
+def get_company_benefits_review(job: Job_values, job_post: MyWebElement):
     '''
     Updates the passed job dictionary dictionary with reviews
     company's benefits and their overall score.
@@ -70,7 +70,7 @@ def get_company_benefits_review(job: Job_values, job_post: WebElem):
 
     Parameters:
     - job (dict): A dictionary containing job details.
-    - job_post (Webdriver): The web page source for a job.
+    - job_post (MyWebDriver): The web page source for a job.
 
     Returns:
     - None
@@ -101,7 +101,7 @@ def get_company_benefits_review(job: Job_values, job_post: WebElem):
         add_columns_to_job_from_dict(job, benefits_review)
 
 
-def get_company_reviews_by_job_title(job: Job_values, job_post: WebElem):
+def get_company_reviews_by_job_title(job: Job_values, job_post: MyWebElement):
     '''
     Updates the passed job dictionary dictionary with reviews
     (Pros and Cons) of the company based on the job title. 
@@ -112,7 +112,7 @@ def get_company_reviews_by_job_title(job: Job_values, job_post: WebElem):
 
     Parameters:
     - job (dict): A dictionary containing job details.
-    - job_post (Webdriver): The web page source for a job.
+    - job_post (MyWebDriver): The web page source for a job.
 
     Returns:
     - None.
@@ -134,7 +134,7 @@ def get_company_reviews_by_job_title(job: Job_values, job_post: WebElem):
     }
 
     try:
-        reviews_info: WebElem = job_post.find_element(
+        reviews_info: MyWebElement = job_post.find_element(
             By.ID, "Reviews"
         )
 
@@ -150,7 +150,7 @@ def get_company_reviews_by_job_title(job: Job_values, job_post: WebElem):
         )
 
 
-def get_company_ratings(job: Job_values, job_post: WebElem):
+def get_company_ratings(job: Job_values, job_post: MyWebElement):
     '''
     Updates the passed job dictionary with the company rating values
     scraped from the job posting element.
@@ -161,7 +161,7 @@ def get_company_ratings(job: Job_values, job_post: WebElem):
 
     Parameters:
     - job (dict): A dictionary containing job details.
-    - job_post (Webdriver): The web page source for a job.
+    - job_post (MyWebDriver): The web page source for a job.
 
     Returns:
         - None.
@@ -208,7 +208,7 @@ def get_company_ratings(job: Job_values, job_post: WebElem):
     }
 
     try:
-        rating_info: WebElem = job_post.find_element(
+        rating_info: MyWebElement = job_post.find_element(
             By.XPATH, '//div[@data-test="company-ratings"]'
         )
 
@@ -224,7 +224,7 @@ def get_company_ratings(job: Job_values, job_post: WebElem):
         )
 
 
-def get_company_description(job: Job_values, job_post: WebElem):
+def get_company_description(job: Job_values, job_post: MyWebElement):
     '''
     Updates the passed job dictionary with the company description values
     scraped from the job posting element.
@@ -235,7 +235,7 @@ def get_company_description(job: Job_values, job_post: WebElem):
 
     Parameters:
     - job (dict): A dictionary containing job details.
-    - job_post (Webdriver): The web page source for a job.
+    - job_post (MyWebDriver): The web page source for a job.
 
     Returns:
         - None.
@@ -277,7 +277,8 @@ def get_company_description(job: Job_values, job_post: WebElem):
     }
 
     try:
-        company_info: WebElem = job_post.find_element(By.ID, "EmpBasicInfo")
+        company_info: MyWebElement = job_post.find_element(
+            By.ID, "EmpBasicInfo")
 
         add_columns_to_job_from_source(
             job,
@@ -291,7 +292,7 @@ def get_company_description(job: Job_values, job_post: WebElem):
         )
 
 
-def get_job_button_values(job: Job_values, job_button: WebElem):
+def get_job_button_values(job: Job_values, job_button: MyWebElement):
     '''
     Updates the passed job dictionary with the job post age and Easy apply values
     scraped from the job posting button.
@@ -302,7 +303,7 @@ def get_job_button_values(job: Job_values, job_button: WebElem):
 
     Parameters:
     - job (dict): A dictionary containing job details.
-    - job_post (Webdriver): The web page source for a job.
+    - job_post (MyWebDriver): The web page source for a job.
 
     Returns:
     - None
@@ -329,7 +330,7 @@ def get_job_button_values(job: Job_values, job_button: WebElem):
     )
 
 
-def get_job_descriptions_values(job: Job_values, job_post: WebElem):
+def get_job_descriptions_values(job: Job_values, job_post: MyWebElement):
     '''
     Updates the passed job dictionary with the job description values
     scraped from the job posting.
@@ -340,7 +341,7 @@ def get_job_descriptions_values(job: Job_values, job_post: WebElem):
 
     Parameters:
     - job (dict): A dictionary containing job details.
-    - job_post (Webdriver): The web page source for a job.
+    - job_post (MyWebDriver): The web page source for a job.
 
     Returns:
     - None

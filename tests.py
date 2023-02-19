@@ -11,14 +11,13 @@ import unittest
 # External
 from bs4 import BeautifulSoup
 import requests
-from selenium.webdriver.chrome.webdriver import WebDriver
 
 # Internal
 from scraper.helpers.get_driver import get_driver
 from scraper.helpers.get_webpage import get_webpage
 from scraper.config.get import get_config, get_url
 from scraper.config._types import Config, JobNumber, JobSimilar, Url
-from scraper._types import WebElem
+from scraper._types import MyWebDriver
 
 
 class TestConfigData(unittest.TestCase):
@@ -78,8 +77,12 @@ class TestConfigData(unittest.TestCase):
     def test_web_exists(self):
         """check if url exists"""
 
-        status_code = requests.get(self.url, timeout=10).status_code
-        self.assertEqual(status_code, 200)  # Response OK, server connected
+        response = requests.get(self.url, timeout=10)
+        OK_status_code = 200
+        status_code = response.status_code
+
+        self.assertEqual(status_code, OK_status_code,
+                         f"\nError - {status_code} : {response.reason}")
 
     def test_driver_path(self):
         """check if the driver exists on the local machine"""
@@ -118,13 +121,13 @@ class TestJobDescription(unittest.TestCase):
         return bool(BeautifulSoup(page_source, "html.parser").find())
 
     def test_is_browser(self):
-        driver: WebDriver = get_driver(self.url)
+        driver: MyWebDriver = get_driver(self.url)
 
         self.assertIsInstance(
-            driver, WebDriver)
+            driver, MyWebDriver)
 
     def test_is_webpage_loaded(self):
-        driver: WebDriver = get_webpage(
+        driver: MyWebDriver = get_webpage(
             self.url, False)
         page_source: str = driver.page_source
 
