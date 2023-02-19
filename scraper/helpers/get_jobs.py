@@ -3,14 +3,13 @@ from datetime import datetime
 
 # External
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.webdriver import WebDriver
 
 # Internal
 from scraper.config._types import JobNumber, DebugMode
 from scraper._types import MyWebElement, Jobs, MyWebDriver
-from scraper.helpers.get_one_job.await_element import await_element
+from scraper.helpers.await_element import await_element
 from scraper.helpers.click_x_pop_up import click_x_pop_up
-from scraper.helpers.get_one_job import get_one_job
+from scraper.helpers.get_one_job.get_one_job import get_one_job
 from scraper.helpers.pause import pause
 
 

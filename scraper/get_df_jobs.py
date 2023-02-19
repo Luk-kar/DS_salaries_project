@@ -14,7 +14,7 @@ from annotated_types import Gt
 
 # Internal
 from scraper.config.get import get_config, get_url
-from scraper.helpers.get_webpage import get_webpage
+from scraper.helpers.get_webpage.get_webpage import get_webpage
 from scraper.helpers.get_jobs import get_jobs
 
 config = get_config()
