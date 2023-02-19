@@ -14,8 +14,8 @@ import requests
 
 # Internal
 from scraper.helpers.get_webpage.get_driver import get_driver
-from scraper.helpers.get_webpage import get_webpage
-from scraper.config.get import get_config, get_url
+from scraper.helpers.get_webpage.get_webpage import get_webpage
+from scraper.config.get import get_config, get_url, get_path_csv_raw, get_path_csv_clean, is_possible_path
 from scraper.config._types import Config, JobNumber, JobSimilar, Url
 from scraper._types import MyWebDriver
 
@@ -107,6 +107,17 @@ class TestConfigData(unittest.TestCase):
         """check if NA is a single valid value everywhere"""
 
         self.assertEqual(self.config["NA_value"], -1)
+
+    def test_output_paths(self):
+        """check correctness of path"""
+
+        csv_raw_path = get_path_csv_raw()
+
+        self.assertTrue(is_possible_path(csv_raw_path))
+
+        csv_clean_path = get_path_csv_clean()
+
+        self.assertTrue(is_possible_path(csv_clean_path))
 
 
 class TestJobDescription(unittest.TestCase):

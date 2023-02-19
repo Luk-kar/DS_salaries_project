@@ -27,5 +27,9 @@ url:
 # Update this path for your driver app, or write "auto-install", if you want to auto-install for you Chrome browser
 # driver_path: "auto-install"
 driver_path: "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe"
+output_path:
+    main: "data"
+    raw: "RAW"
+    clean: "clean"
 debug_mode: true
 NA_value: -1

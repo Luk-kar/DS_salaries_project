@@ -7,14 +7,14 @@ from selenium.webdriver.common.by import By
 # Internal
 from scraper.config._types import JobNumber, DebugMode
 from scraper._types import MyWebElement, Jobs, MyWebDriver
-from scraper.helpers.await_element import await_element
-from scraper.helpers.click_x_pop_up import click_x_pop_up
+from scraper.helpers.actions.await_element import await_element
+from scraper.helpers.actions.click_x_pop_up import click_x_pop_up
 from scraper.helpers.get_one_job.get_one_job import get_one_job
-from scraper.helpers.pause import pause
+from scraper.helpers.actions.pause import pause
 
 
 def get_jobs(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWebDriver):
-    '''Getting pandas dataframe populated with jobs from glassdoor.com'''
+    '''Getting list of job postings values populated with glassdoor.com'''
 
     jobs: Jobs = []
 
