@@ -72,15 +72,53 @@ def clean_job_data(job: dict):
     Args:
         job (dict): The job dictionary to be cleaned.
     """
+
+    na_value = get_config()['NA_value']  # todo
+    for key, value in job.items():
+
+        if is_NA_value(value):
+            job[key] = na_value
+            print(f"{key}: {job[key]}")
+
     parse_easy_apply(job)
     parse_numerical_values(job)
     parse_salary(job)
+    parse_employees(job)
+    parse_revenue(job)
 
-    # parse categorical data
-    job['Employees'] = job['Employees'].replace("Employees", "").strip()
-    # 51 to 200 Employees
 
-    # Revenue:
+def is_NA_value(value):
+    """
+    Checks whether the given value is an NA value.
+
+    Args:
+        value (any): The value to check.
+
+    Returns:
+        bool: True if the value is NA, False otherwise.
+    """
+    NA_VALUES = [[], "N/A", "Unknown / Non-Applicable"]
+
+    if is_emptish_string(value) or value in NA_VALUES:
+        return True
+    else:
+        return False
+
+
+def is_emptish_string(value):
+    return isinstance(value, str) and len(value.strip()) == 0
+
+
+def parse_revenue(job):
+    na_value = get_config()['NA_value']
+    if job['Revenue_USD'] != na_value:
+        job['Revenue_USD'] = job['Revenue_USD'].replace("(USD)", "").strip()
+
+
+def parse_employees(job):
+    na_value = get_config()['NA_value']
+    if job['Employees'] != na_value:
+        job['Employees'] = job['Employees'].replace("Employees", "").strip()
 
 
 def parse_numerical_values(job: dict):

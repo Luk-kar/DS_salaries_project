@@ -264,7 +264,7 @@ def get_company_description(job: Job_values, job_post: MyWebElement):
             "element": './/div//*[text() = "Industry"]//following-sibling::*',
             "is_list": False
         },
-        "Revenue": {
+        "Revenue_USD": {
             'value': na_value,
             "element": './/div//*[text() = "Revenue"]//following-sibling::*',
             "is_list": False
