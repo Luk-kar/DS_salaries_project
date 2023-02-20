@@ -15,7 +15,7 @@ config = get_config()
 Elements = list[MyWebElement]
 
 
-def get_XPATH_text(source_html: MyWebElement, element: str, return_list=False) -> Field_value:
+def get_XPATH_values(source_html: MyWebElement, element: str, return_list=False) -> Field_value:
     '''return text or texts of selected web element'''
 
     if return_list:
@@ -33,11 +33,18 @@ def get_XPATH_text(source_html: MyWebElement, element: str, return_list=False) -
         else:
             return texts
 
-    text = source_html.find_element(
+    text: str = source_html.find_element(
         By.XPATH, element
     ).text
 
-    text = config["NA_value"] if text == "N/A" or len(
-        text.strip()) == 0 else text
+    # todo below move to cleaning
+    if \
+       text == "N/A" \
+       or len(text.strip()) == 0:
+
+        text = config["NA_value"]
+
+    else:
+        text
 
     return text

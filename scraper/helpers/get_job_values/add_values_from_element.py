@@ -6,13 +6,13 @@ using XPATH expressions to extract the values.
 
 # Internal
 from scraper._types import Job_elements, Job_values, MyWebElement
-from scraper.helpers.get_one_job.add_columns_to_job_from_dict import add_columns_to_job_from_dict
-from scraper.helpers.get_one_job.get_values_from_source import get_values_from_source
+from scraper.helpers.get_job_values.add_values_from_dict import add_values_from_dict
+from scraper.helpers.get_job_values.get_values_from_element import get_values_from_element
 
 
-def add_columns_to_job_from_source(
+def add_values_from_element(
     job: Job_values,
-    values_source: MyWebElement,
+    values_source_element: MyWebElement,
     values_to_add: Job_elements
 ):
     '''
@@ -30,7 +30,7 @@ def add_columns_to_job_from_source(
     the associated job property in the job dictionary. 
     '''
 
-    values_to_add = get_values_from_source(
-        values_source, values_to_add)
+    values_to_add = get_values_from_element(
+        values_source_element, values_to_add)
 
-    add_columns_to_job_from_dict(job, values_to_add)
+    add_values_from_dict(job, values_to_add)

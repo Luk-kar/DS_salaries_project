@@ -7,10 +7,9 @@ from selenium.webdriver.common.by import By
 
 # Internal
 from scraper._types import MyWebElement, Job_elements, Job_values, MyWebDriver
-from scraper.helpers.get_one_job.add_columns_to_job_from_dict import add_columns_to_job_from_dict
-from scraper.helpers.get_one_job.add_columns_to_job_from_source import add_columns_to_job_from_source
-from scraper.helpers.get_one_job.print_key_value_pairs import print_key_value_pairs
-from scraper.helpers.actions.await_element import await_element
+from scraper.helpers.get_job_values.add_values_from_dict import add_values_from_dict
+from scraper.helpers.get_job_values.add_values_from_element import add_values_from_element
+from scraper.helpers.elements_query.await_element import await_element
 from scraper.helpers.actions.pause import pause
 from scraper.config.get import get_config
 
@@ -18,7 +17,7 @@ from scraper.config.get import get_config
 config = get_config()
 
 
-def get_one_job(debug_mode: bool, driver: MyWebDriver, job_button: MyWebElement):
+def get_job_values(driver: MyWebDriver, job_button: MyWebElement) -> dict:
     '''
     Get columns values from the current selected job posting.
 
@@ -51,9 +50,6 @@ def get_one_job(debug_mode: bool, driver: MyWebDriver, job_button: MyWebElement)
     get_company_ratings(job, job_post)
     get_company_reviews_by_job_title(job, job_post)
     get_company_benefits_review(job, job_post)
-
-    if debug_mode:
-        print_key_value_pairs(job)
 
     return job
 
@@ -91,13 +87,13 @@ def get_company_benefits_review(job: Job_values, job_post: MyWebElement):
     }
 
     try:
-        add_columns_to_job_from_source(
+        add_values_from_element(
             job,
             job_post, benefits_review
         )
 
     except NoSuchElementException:
-        add_columns_to_job_from_dict(job, benefits_review)
+        add_values_from_dict(job, benefits_review)
 
 
 def get_company_reviews_by_job_title(job: Job_values, job_post: MyWebElement):
@@ -137,13 +133,13 @@ def get_company_reviews_by_job_title(job: Job_values, job_post: MyWebElement):
             By.ID, "Reviews"
         )
 
-        add_columns_to_job_from_source(
+        add_values_from_element(
             job,
             reviews_info, reviews_by_job_title
         )
 
     except NoSuchElementException:
-        add_columns_to_job_from_dict(
+        add_values_from_dict(
             job,
             reviews_by_job_title
         )
@@ -211,13 +207,13 @@ def get_company_ratings(job: Job_values, job_post: MyWebElement):
             By.XPATH, '//div[@data-test="company-ratings"]'
         )
 
-        add_columns_to_job_from_source(
+        add_values_from_element(
             job,
             rating_info, rating_description
         )
 
     except NoSuchElementException:
-        add_columns_to_job_from_dict(
+        add_values_from_dict(
             job,
             rating_description
         )
@@ -279,13 +275,13 @@ def get_company_description(job: Job_values, job_post: MyWebElement):
         company_info: MyWebElement = job_post.find_element(
             By.ID, "EmpBasicInfo")
 
-        add_columns_to_job_from_source(
+        add_values_from_element(
             job,
             company_info, company_description
         )
 
     except NoSuchElementException:
-        add_columns_to_job_from_dict(
+        add_values_from_dict(
             job,
             company_description
         )
@@ -323,7 +319,7 @@ def get_job_button_values(job: Job_values, job_button: MyWebElement):
         },
     }
 
-    add_columns_to_job_from_source(
+    add_values_from_element(
         job,
         job_button, job_button_info
     )
@@ -381,7 +377,7 @@ def get_job_descriptions_values(job: Job_values, job_post: MyWebElement):
         },
     }
 
-    add_columns_to_job_from_source(
+    add_values_from_element(
         job,
         job_post, job_description
     )

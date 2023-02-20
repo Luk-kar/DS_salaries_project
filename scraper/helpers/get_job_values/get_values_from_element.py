@@ -8,15 +8,15 @@ from selenium.common.exceptions import NoSuchElementException
 
 # Internal
 from scraper._types import MyWebElement, Job_elements
-from scraper.helpers.get_one_job.get_XPATH_text import get_XPATH_text
+from scraper.helpers.elements_query.get_XPATH_text import get_XPATH_values
 
 
-def get_values_from_source(source_html: MyWebElement, job_values: Job_elements):
+def get_values_from_element(source_html: MyWebElement, job_values: Job_elements):
     '''get values from a source web element for an each web element in the job values'''
 
     for values in job_values.values():
         try:
-            values['value'] = get_XPATH_text(
+            values['value'] = get_XPATH_values(
                 source_html, values['element'], values["is_list"])
         except NoSuchElementException:
             pass
