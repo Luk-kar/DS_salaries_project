@@ -1,13 +1,15 @@
 # Python
 from datetime import datetime
 import sys
+import re
 
 # External
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
 # Internal
-from scraper.config._types import JobNumber, DebugMode
+from scraper.config.get import get_config
+from scraper.config._types import JobNumber, DebugMode, NA_value
 from scraper._types import MyWebElement, Jobs, MyWebDriver
 from scraper.helpers.elements_query.await_element import await_element
 from scraper.helpers.actions.click_x_pop_up import click_x_pop_up
@@ -70,11 +72,18 @@ def clean_job_data(job: dict):
     Args:
         job (dict): The job dictionary to be cleaned.
     """
-    clean_easy_apply(job)
-    clean_numeric_values(job)
+    parse_easy_apply(job)
+    parse_numerical_values(job)
+    parse_salary(job)
+
+    # parse categorical data
+    job['Employees'] = job['Employees'].replace("Employees", "").strip()
+    # 51 to 200 Employees
+
+    # Revenue:
 
 
-def clean_numeric_values(job: dict):
+def parse_numerical_values(job: dict):
     """
     Converts numeric and percentage values in the input job dictionary to floats and integers.
 
@@ -91,16 +100,8 @@ def clean_numeric_values(job: dict):
             elif is_percent_value(value):
                 job[key] = percent_string_to_float(value)
 
-            # $51K - $81K (Glassdoor est.)
 
-            # look at notepad
-
-            # 51 to 200 Employees
-
-            # Revenue:
-
-
-def clean_easy_apply(job: dict):
+def parse_easy_apply(job: dict):
     """
     Cleans the 'Easy_apply' field in the input job dictionary.
 
@@ -108,7 +109,7 @@ def clean_easy_apply(job: dict):
         job (dict): The job dictionary to be cleaned.
     """
     if 'Easy_apply' in job:
-        job['Easy_apply'] = bool(job['easy apply'])
+        job['Easy_apply'] = bool(job['Easy_apply'])
 
 
 def is_number(string: str):
@@ -163,3 +164,156 @@ def percent_string_to_float(string: str) -> float:
             raise ValueError("Invalid percent value")
     except ValueError as e:
         raise ValueError(f"Invalid input string: {string}") from e
+
+
+def parse_salary(job: dict) -> dict:
+    """Parses the salary data in the given dictionary and adds new keys for salary low, salary high, salary estimate,
+    and currency. Deletes the 'Salary' key from the dictionary.
+
+    Args:
+        salary_dict (dict): A dictionary containing the salary data in the format "$51K - $81K (Glassdoor est.)".
+
+    Returns:
+        None: This function does not return a value; 
+        it updates the `job` dictionary in place.
+    """
+
+    salary = job['Salary']
+
+    na_value = get_config()['NA_value']
+    salary_values = {
+        'Salary_low': na_value,
+        'Salary_high': na_value,
+        'Currency': na_value,
+        'Salary_provided': na_value
+    }
+
+    if salary:
+
+        # Employer Provided Salary:$200K - $300K
+        salary_range = get_pay_scale_ranges(salary)
+        low, high = salary_range.split(' - ')
+
+        salary_values['Salary_low'] = _parse_to_int(low)
+        salary_values['Salary_high'] = _parse_to_int(high)
+        salary_values['Currency'] = _get_currency(salary_range)
+        salary_values['Salary_provided'] = get_estimate(salary)
+
+    # insert into dictionary
+    index = get_key_index(job, 'Salary')
+    insert_keys_values(job, salary_values, index)
+
+    del job['Salary']
+
+
+def dict_to_tuples(dictionary: dict) -> list:
+    """
+    Converts a dictionary into a list of tuples where each tuple contains a key-value pair from the dictionary.
+
+    Args:
+        d (dict): A dictionary to convert.
+
+    Returns:
+        list: A list of tuples where each tuple contains a key-value pair from the dictionary.
+    """
+    return list(dictionary.items())
+
+
+def get_key_index(dict_receiver: dict, key) -> int:
+
+    return list(dict_receiver.keys()).index(key)
+
+
+def insert_keys_values(dict_receiver: dict, dict_add: dict, pos: int) -> dict:
+
+    tuples_add = dict_to_tuples(dict_add)
+
+    items = list(dict_receiver.items())
+
+    for key_value in tuples_add:
+        items.insert(pos, key_value)
+        pos += 1
+
+    dict_receiver.clear()  # to be sure that order of keys will be right
+    dict_receiver.update(dict(items))
+
+
+def get_pay_scale_ranges(salary: str) -> str:
+    """
+    Extracts pay-scale ranges from the given input string using regular expressions.
+
+    Args:
+        salary (str): Input string containing pay-scale ranges.
+
+    Returns:
+        str: Pay-scale range extracted from the input string. If multiple ranges are present, returns the first one.
+    """
+
+    # https://regex101.com/r/AY8ag3/1 read "$200K - $300K"
+    pattern_pay_scale = r'\$\d+[Kk]? - \$\d+[Kk]?'
+    pay_scale = re.search(pattern_pay_scale, salary)[0]
+
+    return pay_scale
+
+
+def get_estimate(salary: str) -> bool | NA_value:
+
+    if "Employer Provided Salary" in salary:
+        return True
+    elif "Glassdoor est" in salary:
+        return False
+    else:
+        return get_config()['NA_value']
+
+
+def _get_currency(salary_range: str) -> str:
+    """Returns the currency from the salary range string.
+
+    Args:
+        salary_range (str): The salary range string.
+
+    Returns:
+        str: The currency string.
+    """
+
+    # https://regex101.com/r/FEKvy6/387
+    currency = re.search(r"^.+?(?=\d)", salary_range)[0]
+    currency_no_spaces = currency.strip()
+
+    return currency_no_spaces
+
+
+def _change_to_integer(salary: str) -> int:
+    """Converts the given string to an integer.
+
+    Args:
+        salary (str): The salary string.
+
+    Returns:
+        int: The integer value of the salary string.
+    """
+
+    numeric_filter = filter(str.isdigit, salary)
+    numeric_string = "".join(numeric_filter)
+    integer = int(numeric_string)
+
+    return integer
+
+
+def _parse_to_int(salary: str) -> int:
+    """Parses the salary string to an integer.
+
+    Args:
+        salary (str): The salary string.
+
+    Returns:
+        int: The integer value of the salary string.
+    """
+
+    if salary.endswith('K'):
+        value = _change_to_integer(salary)
+        value_K_ed = value * 1000
+        return value_K_ed
+    else:
+        value = _change_to_integer(salary)
+        return value

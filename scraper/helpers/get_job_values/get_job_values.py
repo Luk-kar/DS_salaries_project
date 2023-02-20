@@ -239,7 +239,7 @@ def get_company_description(job: Job_values, job_post: MyWebElement):
     na_value = config["NA_value"]
 
     company_description: Job_elements = {
-        "Size": {
+        "Employees": {
             'value': na_value,
             "element": './/div//*[text() = "Size"]//following-sibling::*',
             "is_list": False
