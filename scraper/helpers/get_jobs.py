@@ -317,11 +317,9 @@ def get_pay_scale_ranges(salary: str) -> str:
     pattern_pay_scale = r'\$\d+[Kk]? - \$\d+[Kk]?'
     pay_scale_match = re.search(pattern_pay_scale, salary)
 
-    if pay_scale_match is None:
-        raise IndexError(
-            f"There is no return from the match:\n{pay_scale_match}")
+    assert_is_match(pay_scale_match)  # checking ↓
 
-    pay_scale = pay_scale_match[0]
+    pay_scale = pay_scale_match[0]  # type: ignore [index]
 
     return pay_scale
 
@@ -347,10 +345,22 @@ def _get_currency(salary_range: str) -> str:
     """
 
     # https://regex101.com/r/FEKvy6/387
-    currency = re.search(r"^.+?(?=\d)", salary_range)[0]
+    currency_match = re.search(r"^.+?(?=\d)", salary_range)
+
+    assert_is_match(currency_match)  # checking ↓
+
+    currency = currency_match[0]  # type: ignore [index]
     currency_no_spaces = currency.strip()
 
     return currency_no_spaces
+
+
+def assert_is_match(match):
+
+    if match is None:
+        raise IndexError(
+            f"There is no return from the match:\n{match}"
+        )
 
 
 def _change_to_integer(salary: str) -> int:
