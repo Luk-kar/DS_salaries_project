@@ -16,6 +16,12 @@ from scraper.config.get import get_config
 
 config = get_config()
 
+class JobElement:
+    def __init__(self,  element, value = config["NA_value"], is_list=False):
+        self.value = value
+        self.element = element
+        self.is_list = is_list
+
 
 def get_job_values(driver: MyWebDriver, job_button: MyWebElement) -> dict:
     '''
@@ -74,16 +80,8 @@ def get_company_benefits_review(job: Job_values, job_post: MyWebElement):
     na_value = config["NA_value"]
 
     benefits_review: Job_elements = {
-        "Benefits_rating": {
-            "value": na_value,
-            "element": '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]//div//div[@class="ratingNum mr-sm"]',
-            "is_list": False
-        },
-        "Benefits_reviews": {
-            "value": na_value,
-            "element": '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsHighlights")]/div',
-            "is_list": True
-        },
+        "Benefits_rating": JobElement( '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]//div//div[@class="ratingNum mr-sm"]'),
+        "Benefits_rating": JobElement('//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsHighlights")]/div', is_list=True),
     }
 
     try:
