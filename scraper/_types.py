@@ -12,7 +12,7 @@ from scraper.config._types import NA_value
 
 MyWebDriver = WebDriver
 MyWebElement = WebElement
-Field_value = str | NA_value | bool | list[str]
+Field_value = str | int | float | NA_value | bool | list[str]
 Element_XPATH = str
 Job_values = dict[str, Field_value]
 Job_element = TypedDict(

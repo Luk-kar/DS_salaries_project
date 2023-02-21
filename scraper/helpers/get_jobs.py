@@ -1,6 +1,7 @@
 # Python
 from datetime import datetime
 import sys
+from typing import Any
 import re
 
 # External
@@ -10,7 +11,7 @@ from selenium.webdriver.common.by import By
 # Internal
 from scraper.config.get import get_NA_value
 from scraper.config._types import JobNumber, DebugMode, NA_value
-from scraper._types import MyWebElement, Jobs, MyWebDriver
+from scraper._types import MyWebElement, Jobs, MyWebDriver, Field_value
 from scraper.helpers.elements_query.await_element import await_element
 from scraper.helpers.actions.click_x_pop_up import click_x_pop_up
 from scraper.helpers.get_job_values.get_job_values import get_job_values
@@ -82,7 +83,7 @@ def clean_job_data(job: dict):
     parse_revenue(job)
 
 
-def parse_NA_values(job):
+def parse_NA_values(job: dict):
 
     na_value = get_NA_value()
     for key, value in job.items():
@@ -108,11 +109,11 @@ def is_NA_value(value):
         return False
 
 
-def is_emptish_string(value):
+def is_emptish_string(value: str) -> bool:
     return isinstance(value, str) and len(value.strip()) == 0
 
 
-def parse_revenue(job):
+def parse_revenue(job: dict):
 
     na_value = get_NA_value()
 
@@ -121,7 +122,7 @@ def parse_revenue(job):
         job['Revenue_USD'] = job['Revenue_USD'].replace("(USD)", "").strip()
 
 
-def parse_employees(job):
+def parse_employees(job: dict):
 
     na_value = get_NA_value()
 
@@ -237,10 +238,10 @@ def parse_salary(job: dict):
         it updates the `job` dictionary in place.
     """
 
-    salary = job['Salary']
+    salary: str | NA_value = job['Salary']
 
     na_value = get_NA_value()
-    salary_values = {
+    salary_values: dict[str, Field_value] = {
         'Salary_low': na_value,
         'Salary_high': na_value,
         'Currency': na_value,
@@ -256,7 +257,7 @@ def parse_salary(job: dict):
         salary_values['Salary_low'] = _parse_to_int(low)
         salary_values['Salary_high'] = _parse_to_int(high)
         salary_values['Currency'] = _get_currency(salary_range)
-        salary_values['Salary_provided'] = get_estimate(salary)
+        salary_values['Salary_provided'] = get_is_provided(salary)
 
     # insert into dictionary
     insert_dict_to_dictionary(job, salary_values)
@@ -264,13 +265,13 @@ def parse_salary(job: dict):
     del job['Salary']
 
 
-def insert_dict_to_dictionary(job, salary_values):
+def insert_dict_to_dictionary(job: dict, salary_values: dict):
 
     index = get_key_index(job, 'Salary')
     insert_keys_values(job, salary_values, index)
 
 
-def dict_to_tuples(dictionary: dict) -> list:
+def dict_to_tuples(dictionary: dict) -> list[tuple[Any, Any]]:
     """
     Converts a dictionary into a list of tuples where each tuple contains a key-value pair from the dictionary.
 
@@ -324,7 +325,7 @@ def get_pay_scale_ranges(salary: str) -> str:
     return pay_scale
 
 
-def get_estimate(salary: str) -> bool | NA_value:
+def get_is_provided(salary: str) -> bool | NA_value:
 
     if "Employer Provided Salary" in salary:
         return True
@@ -355,7 +356,7 @@ def _get_currency(salary_range: str) -> str:
     return currency_no_spaces
 
 
-def assert_is_match(match):
+def assert_is_match(match: re.Match[str] | None):
 
     if match is None:
         raise IndexError(

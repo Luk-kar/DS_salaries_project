@@ -17,7 +17,7 @@ from pathvalidate import sanitize_filepath
 from pathvalidate._common import PathType
 
 # Internal
-from scraper.config._types import Config, Url, JobDefault
+from scraper.config._types import Config, Url, JobDefault, NA_value
 
 
 def get_config(path: str = 'scraper\\config\\data.yaml') -> Config:
@@ -62,19 +62,19 @@ def get_path_csv(directory_type: str,
         raise OSError(f"Wrong file path:\n{csv_file_target}")
 
 
-def get_path_csv_raw():
+def get_path_csv_raw() -> str:
     return get_path_csv(config["output_path"]["raw"])
 
 
-def get_path_csv_clean():
+def get_path_csv_clean() -> str:
     return get_path_csv(config["output_path"]["clean"])
 
 
-def get_NA_value():
+def get_NA_value() -> NA_value:
     return get_config()['NA_value']
 
 
-def is_possible_path(file_path: str):
+def is_possible_path(file_path: str) -> bool:
 
     # https://stackoverflow.com/a/67119769/12490791
     is_possible = file_path == _my_sanitize_filepath(file_path)
