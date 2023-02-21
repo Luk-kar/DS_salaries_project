@@ -3,7 +3,7 @@
 from scraper.config.get import get_NA_value
 
 
-def parse_NA_values(job: dict):
+def parse_na_values(job: dict):
     """
     Replaces all NA values in the input job dictionary with the NA value specified
     in the configuration.

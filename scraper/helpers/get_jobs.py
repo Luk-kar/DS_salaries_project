@@ -13,7 +13,7 @@ from scraper.helpers.elements_query.await_element import await_element
 from scraper.helpers.actions.click_x_pop_up import click_x_pop_up
 from scraper.helpers.get_job_values.get_job_values import get_job_values
 from scraper.helpers.actions.pause import pause
-from scraper.helpers.parse_job_data.parse_job_data import parse_job_data
+from scraper.helpers.job_parser.job_parser import parse_data
 from scraper.helpers.print_key_value_pairs import print_key_value_pairs
 
 
@@ -56,7 +56,7 @@ def get_jobs(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWebDriver)
 
             job = get_job_values(driver, job_button)
 
-            parse_job_data(job)
+            parse_data(job)
 
             if debug_mode:
                 print_key_value_pairs(job)
