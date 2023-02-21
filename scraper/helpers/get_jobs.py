@@ -316,7 +316,11 @@ def get_pay_scale_ranges(salary: str) -> str:
     # https://regex101.com/r/AY8ag3/1 read "$200K - $300K"
     pattern_pay_scale = r'\$\d+[Kk]? - \$\d+[Kk]?'
     pay_scale_match = re.search(pattern_pay_scale, salary)
-    assert pay_scale_match is not None
+
+    if pay_scale_match is None:
+        raise IndexError(
+            f"There is no return from the match:\n{pay_scale_match}")
+
     pay_scale = pay_scale_match[0]
 
     return pay_scale
