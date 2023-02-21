@@ -1,10 +1,10 @@
 # Internal
-from scraper.helpers.parse_job_data.parse_NA_values import parse_NA_values
-from scraper.helpers.parse_job_data.parse_numerical_values import parse_numerical_values
-from scraper.helpers.parse_job_data.parse_salary import parse_salary
-from scraper.helpers.parse_job_data.parse_easy_apply import parse_easy_apply
-from scraper.helpers.parse_job_data.parse_revenue import parse_revenue
-from scraper.helpers.parse_job_data.parse_employees import parse_employees
+from .parse.parse_NA_values import parse_NA_values
+from .parse.parse_numerical_values import parse_numerical_values
+from .parse.parse_salary import parse_salary
+from .parse.parse_easy_apply import parse_easy_apply
+from .parse.parse_revenue import parse_revenue
+from .parse.parse_employees import parse_employees
 
 
 def parse_job_data(job: dict):
