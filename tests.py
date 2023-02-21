@@ -32,7 +32,7 @@ class TestConfigData(unittest.TestCase):
         self.url = get_url(self.config['url'],
                            self.config["jobs_titles"]["default"])
 
-    def is_empty_string(self, string: str) -> None:
+    def is_empty_string(self, string: str):
         """assert if is it not an empty string"""
 
         self.assertIsInstance(string, str)
@@ -82,7 +82,7 @@ class TestConfigData(unittest.TestCase):
         status_code = response.status_code
 
         self.assertEqual(status_code, OK_status_code,
-                         f"\nError - {status_code} : {response.reason}")
+                         f"OK\nError - {status_code} : {response.reason}")
 
     def test_driver_path(self):
         """check if the driver exists on the local machine"""
