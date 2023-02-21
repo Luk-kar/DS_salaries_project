@@ -47,7 +47,7 @@ def get_path_csv(directory_type: str,
     directory_main = config['output_path']['main']
     directory_target = os.path.join(directory_main, directory_type)
     jobs_title = job_title.replace(" ", "_")
-    jobs_title = my_sanitize_filepath(jobs_title)
+    jobs_title = _my_sanitize_filepath(jobs_title)
     date = datetime.now().strftime("%d-%m-%Y_%H-%M")
 
     database_file = f"{jobs_title}_{date}.{extension}"
@@ -69,10 +69,14 @@ def get_path_csv_clean():
     return get_path_csv(config["output_path"]["clean"])
 
 
+def get_NA_value():
+    return get_config()['NA_value']
+
+
 def is_possible_path(file_path: str):
 
     # https://stackoverflow.com/a/67119769/12490791
-    is_possible = file_path == my_sanitize_filepath(file_path)
+    is_possible = file_path == _my_sanitize_filepath(file_path)
 
     if os.path.exists(file_path) or is_possible:
         return True
@@ -80,6 +84,6 @@ def is_possible_path(file_path: str):
         return False
 
 
-def my_sanitize_filepath(path: str) -> str:
+def _my_sanitize_filepath(path: str) -> str:
     return sanitize_filepath(
         path, platform=platform.system())

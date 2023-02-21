@@ -8,7 +8,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
 # Internal
-from scraper.config.get import get_config
+from scraper.config.get import get_NA_value
 from scraper.config._types import JobNumber, DebugMode, NA_value
 from scraper._types import MyWebElement, Jobs, MyWebDriver
 from scraper.helpers.elements_query.await_element import await_element
@@ -73,18 +73,22 @@ def clean_job_data(job: dict):
         job (dict): The job dictionary to be cleaned.
     """
 
-    na_value = get_config()['NA_value']  # todo
-    for key, value in job.items():
-
-        if is_NA_value(value):
-            job[key] = na_value
-            print(f"{key}: {job[key]}")
-
+    # The order of operations is important!
+    parse_NA_values(job)
     parse_easy_apply(job)
     parse_numerical_values(job)
     parse_salary(job)
     parse_employees(job)
     parse_revenue(job)
+
+
+def parse_NA_values(job):
+
+    na_value = get_NA_value()
+    for key, value in job.items():
+        if is_NA_value(value):
+            job[key] = na_value
+            print(f"{key}: {job[key]}")
 
 
 def is_NA_value(value):
@@ -110,13 +114,13 @@ def is_emptish_string(value):
 
 
 def parse_revenue(job):
-    na_value = get_config()['NA_value']
+    na_value = get_NA_value()
     if job['Revenue_USD'] != na_value:
         job['Revenue_USD'] = job['Revenue_USD'].replace("(USD)", "").strip()
 
 
 def parse_employees(job):
-    na_value = get_config()['NA_value']
+    na_value = get_NA_value()
     if job['Employees'] != na_value:
         job['Employees'] = job['Employees'].replace("Employees", "").strip()
 
@@ -146,8 +150,8 @@ def parse_easy_apply(job: dict):
     Args:
         job (dict): The job dictionary to be cleaned.
     """
-    if 'Easy_apply' in job:
-        job['Easy_apply'] = bool(job['Easy_apply'])
+
+    job['Easy_apply'] = bool(job['Easy_apply'])
 
 
 def is_number(string: str):
@@ -158,7 +162,7 @@ def is_number(string: str):
         return False
 
 
-def is_positive_int(string):
+def is_positive_int(string: str) -> bool:
     return string.isdigit()
 
 
@@ -218,7 +222,7 @@ def parse_salary(job: dict) -> dict:
 
     salary = job['Salary']
 
-    na_value = get_config()['NA_value']
+    na_value = get_NA_value()
     salary_values = {
         'Salary_low': na_value,
         'Salary_high': na_value,
@@ -226,7 +230,7 @@ def parse_salary(job: dict) -> dict:
         'Salary_provided': na_value
     }
 
-    if salary:
+    if salary != na_value:
 
         # Employer Provided Salary:$200K - $300K
         salary_range = get_pay_scale_ranges(salary)
@@ -301,7 +305,7 @@ def get_estimate(salary: str) -> bool | NA_value:
     elif "Glassdoor est" in salary:
         return False
     else:
-        return get_config()['NA_value']
+        return get_NA_value()
 
 
 def _get_currency(salary_range: str) -> str:
