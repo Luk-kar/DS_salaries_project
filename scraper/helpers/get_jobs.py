@@ -114,44 +114,62 @@ def is_emptish_string(value):
 
 
 def parse_revenue(job):
+
     na_value = get_NA_value()
+
     if job['Revenue_USD'] != na_value:
+
         job['Revenue_USD'] = job['Revenue_USD'].replace("(USD)", "").strip()
 
 
 def parse_employees(job):
+
     na_value = get_NA_value()
+
     if job['Employees'] != na_value:
         job['Employees'] = job['Employees'].replace("Employees", "").strip()
 
 
 def parse_numerical_values(job: dict):
     """
-    Converts numeric and percentage values in the input job dictionary to floats and integers.
+    Converts positive numeric and percentage values in the input job dictionary to floats and integers.
 
     Args:
         job (dict): The job dictionary to be cleaned.
     """
     for key, value in job.items():
+
         if isinstance(value, str):
-            if is_number(value):
-                if is_positive_int(value):
+
+            if is_positive_number(value):
+
+                if is_int(value):
                     job[key] = int(value)
                 else:
                     job[key] = float(value)
+
             elif is_percent_value(value):
                 job[key] = percent_string_to_float(value)
 
 
 def parse_easy_apply(job: dict):
     """
-    Cleans the 'Easy_apply' field in the input job dictionary.
+    Parse the 'Easy_apply' field in the input job dictionary.
 
     Args:
         job (dict): The job dictionary to be cleaned.
     """
 
     job['Easy_apply'] = bool(job['Easy_apply'])
+
+
+def is_positive_number(string: str) -> bool:
+
+    if is_number(string):
+
+        return float(string) >= 0
+
+    return False
 
 
 def is_number(string: str):
@@ -162,7 +180,7 @@ def is_number(string: str):
         return False
 
 
-def is_positive_int(string: str) -> bool:
+def is_int(string: str) -> bool:
     return string.isdigit()
 
 
@@ -242,10 +260,15 @@ def parse_salary(job: dict) -> dict:
         salary_values['Salary_provided'] = get_estimate(salary)
 
     # insert into dictionary
-    index = get_key_index(job, 'Salary')
-    insert_keys_values(job, salary_values, index)
+    insert_dict_to_dictionary(job, salary_values)
 
     del job['Salary']
+
+
+def insert_dict_to_dictionary(job, salary_values):
+
+    index = get_key_index(job, 'Salary')
+    insert_keys_values(job, salary_values, index)
 
 
 def dict_to_tuples(dictionary: dict) -> list:
