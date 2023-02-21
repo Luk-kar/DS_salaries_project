@@ -14,6 +14,7 @@ import platform
 
 # External
 from pathvalidate import sanitize_filepath
+from pathvalidate._common import PathType
 
 # Internal
 from scraper.config._types import Config, Url, JobDefault
@@ -47,10 +48,10 @@ def get_path_csv(directory_type: str,
     directory_main = config['output_path']['main']
     directory_target = os.path.join(directory_main, directory_type)
     jobs_title = job_title.replace(" ", "_")
-    jobs_title = _my_sanitize_filepath(jobs_title)
+    jobs_title_sanitized = _my_sanitize_filepath(jobs_title)
     date = datetime.now().strftime("%d-%m-%Y_%H-%M")
 
-    database_file = f"{jobs_title}_{date}.{extension}"
+    database_file = f"{jobs_title_sanitized}_{date}.{extension}"
 
     csv_file_target = os.path.abspath(
         os.path.join(directory_target, database_file))
@@ -84,6 +85,6 @@ def is_possible_path(file_path: str):
         return False
 
 
-def _my_sanitize_filepath(path: str) -> str:
+def _my_sanitize_filepath(path: str) -> PathType:
     return sanitize_filepath(
         path, platform=platform.system())

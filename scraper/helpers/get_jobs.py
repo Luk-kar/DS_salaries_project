@@ -88,7 +88,6 @@ def parse_NA_values(job):
     for key, value in job.items():
         if is_NA_value(value):
             job[key] = na_value
-            print(f"{key}: {job[key]}")
 
 
 def is_NA_value(value):
@@ -226,7 +225,7 @@ def percent_string_to_float(string: str) -> float:
         raise ValueError(f"Invalid input string: {string}") from e
 
 
-def parse_salary(job: dict) -> dict:
+def parse_salary(job: dict):
     """Parses the salary data in the given dictionary and adds new keys for salary low, salary high, salary estimate,
     and currency. Deletes the 'Salary' key from the dictionary.
 
@@ -289,7 +288,7 @@ def get_key_index(dict_receiver: dict, key) -> int:
     return list(dict_receiver.keys()).index(key)
 
 
-def insert_keys_values(dict_receiver: dict, dict_add: dict, pos: int) -> dict:
+def insert_keys_values(dict_receiver: dict, dict_add: dict, pos: int):
 
     tuples_add = dict_to_tuples(dict_add)
 
@@ -316,7 +315,9 @@ def get_pay_scale_ranges(salary: str) -> str:
 
     # https://regex101.com/r/AY8ag3/1 read "$200K - $300K"
     pattern_pay_scale = r'\$\d+[Kk]? - \$\d+[Kk]?'
-    pay_scale = re.search(pattern_pay_scale, salary)[0]
+    pay_scale_match = re.search(pattern_pay_scale, salary)
+    assert pay_scale_match is not None
+    pay_scale = pay_scale_match[0]
 
     return pay_scale
 
