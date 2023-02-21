@@ -12,7 +12,7 @@ def add_values_from_dict(
     """
     Adds the values from the `values_to_add` dictionary to the `job` dictionary.
 
-    Parameters:
+    Args:
         - job (Job): A dictionary containing job data to which the values will be added.
         - values_to_add (Job_elements): A dictionary containing the keys 
         and values to be added to the `job` dictionary.

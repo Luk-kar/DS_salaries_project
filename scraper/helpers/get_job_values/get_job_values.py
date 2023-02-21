@@ -21,7 +21,7 @@ def get_job_values(driver: MyWebDriver, job_button: MyWebElement) -> dict:
     '''
     Get columns values from the current selected job posting.
 
-    Parameters:
+    Args:
     - debug_mode (bool):
         Whether or not to print debugging output
     - driver (MyWebDriver):
@@ -63,7 +63,7 @@ def get_company_benefits_review(job: Job_values, job_post: MyWebElement):
     If some values don't exist,
     they will be updated with the `NA_value` from the `config` file.
 
-    Parameters:
+    Args:
     - job (dict): A dictionary containing job details.
     - job_post (MyWebDriver): The web page source for a job.
 
@@ -105,7 +105,7 @@ def get_company_reviews_by_job_title(job: Job_values, job_post: MyWebElement):
     If some values don't exist,
     they will be updated with the `NA_value` from the `config` file.
 
-    Parameters:
+    Args:
     - job (dict): A dictionary containing job details.
     - job_post (MyWebDriver): The web page source for a job.
 
@@ -154,7 +154,7 @@ def get_company_ratings(job: Job_values, job_post: MyWebElement):
     If some values don't exist,
     they will be updated with the `NA_value` from the `config` file.
 
-    Parameters:
+    Args:
     - job (dict): A dictionary containing job details.
     - job_post (MyWebDriver): The web page source for a job.
 
@@ -228,7 +228,7 @@ def get_company_description(job: Job_values, job_post: MyWebElement):
     If some values don't exist,
     they will be updated with the `NA_value` from the `config` file.
 
-    Parameters:
+    Args:
     - job (dict): A dictionary containing job details.
     - job_post (MyWebDriver): The web page source for a job.
 
@@ -296,7 +296,7 @@ def get_job_button_values(job: Job_values, job_button: MyWebElement):
     If some values don't exist,
     they will be updated with the `NA_value` from the `config` file.
 
-    Parameters:
+    Args:
     - job (dict): A dictionary containing job details.
     - job_post (MyWebDriver): The web page source for a job.
 
@@ -334,7 +334,7 @@ def get_job_descriptions_values(job: Job_values, job_post: MyWebElement):
     If some values don't exist,
     they will be updated with the `NA_value` from the `config` file.
 
-    Parameters:
+    Args:
     - job (dict): A dictionary containing job details.
     - job_post (MyWebDriver): The web page source for a job.
 

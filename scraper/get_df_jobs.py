@@ -3,7 +3,7 @@ The module responsible for creating RAW data format,
 from queries from defined:
     - job title
     - number of offers
-Additional parameters are:
+Additional args are:
     - driver's path for selected web browser
     - debug mode for development and debugging
 Arguments could be passed from the global config data file or directly into the function.

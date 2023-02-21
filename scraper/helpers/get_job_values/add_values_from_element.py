@@ -18,7 +18,7 @@ def add_values_from_element(
     '''
     Update job dictionary using values from an external source (web page).
 
-    Parameters:
+    Args:
     - job (dict): a dictionary representing a job and its properties.
     - values_source (webdriver): representing the source of the job properties.
     - values_to_add (dict): a dictionary representing the properties of a job and their associated XPATH expressions.
