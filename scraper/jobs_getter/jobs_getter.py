@@ -9,14 +9,13 @@ from selenium.webdriver.common.by import By
 # Internal
 from scraper.config._types import JobNumber, DebugMode
 from scraper._types import MyWebElement, Jobs, MyWebDriver
-from scraper.helpers.elements_query.await_element import await_element
-from scraper.helpers.actions.click_x_pop_up import click_x_pop_up
-from scraper.helpers.get_job_values.job_value_getter import get_values_for_job
-from scraper.helpers.actions.pause import pause
-from scraper.helpers.job_parser.job_parser import parse_data
-from scraper.helpers.print_key_value_pairs import print_key_value_pairs
-
-from scraper.helpers.get_job_values.job_value_getter import get_values_for_job
+from .elements_query.await_element import await_element
+from .actions.click_x_pop_up import click_x_pop_up
+from .job_value_getter.job_value_getter import get_values_for_job
+from .actions.pause import pause
+from .job_parser.job_parser import parse_data
+from .print_key_value_pairs import print_key_value_pairs
+from .job_value_getter.job_value_getter import get_values_for_job
 
 
 def get_jobs(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWebDriver):

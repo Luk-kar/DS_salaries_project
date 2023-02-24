@@ -8,7 +8,7 @@ from selenium.common.exceptions import NoSuchElementException
 
 # Internal
 from scraper._types import MyWebElement, Job_elements
-from scraper.helpers.elements_query.get_XPATH_text import get_XPATH_values
+from scraper.jobs_getter.elements_query.get_XPATH_text import get_XPATH_values
 
 
 def get_values_from_element(source_html: MyWebElement, job_values: Job_elements):

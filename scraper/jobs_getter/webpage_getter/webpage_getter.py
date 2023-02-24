@@ -11,7 +11,7 @@ import requests
 from scraper._types import MyWebDriver
 from scraper.config.get import get_config
 from scraper.config._types import DebugMode
-from .get_driver import get_driver
+from ._driver_getter import get_driver
 
 config = get_config()
 

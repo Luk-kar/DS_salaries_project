@@ -11,7 +11,7 @@ from selenium.webdriver.common.by import By
 
 # Internal
 from scraper._types import MyWebElement, MyWebDriver
-from scraper.helpers.elements_query.await_element import await_element
+from scraper.jobs_getter.elements_query.await_element import await_element
 
 
 def click_x_pop_up(driver: MyWebElement | MyWebDriver):
