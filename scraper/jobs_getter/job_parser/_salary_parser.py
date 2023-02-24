@@ -154,13 +154,19 @@ def get_pay_scale_ranges(salary: str) -> str:
     Returns:
         str: Pay-scale range extracted from the input string. 
         If multiple ranges are present, returns the first one.
+
+    Raises:
+        IndexError: If the match is a None type.
     """
 
     # https://regex101.com/r/AY8ag3/1 read "$200K - $300K"
     pattern_pay_scale = r'\$\d+[Kk]? - \$\d+[Kk]?'
     pay_scale_match = re.search(pattern_pay_scale, salary)
 
-    assert_is_match(pay_scale_match)  # checking ↓
+    if pay_scale_match is None:
+        raise IndexError(
+            f"There is no return from the match:\n{pay_scale_match}"
+        )
 
     pay_scale = pay_scale_match[0]  # type: ignore [index]
 
@@ -197,14 +203,20 @@ def _get_currency(salary_range: str) -> str:
 
     Returns:
         str: The currency string.
+
+    Raises:
+        IndexError: If the match is a None type.
     """
 
     # https://regex101.com/r/FEKvy6/387
     currency_match = re.search(r"^.+?(?=\d)", salary_range)
 
-    assert_is_match(currency_match)  # checking ↓
+    if currency_match is None:
+        raise IndexError(
+            f"There is no return from the match:\n{currency_match}"
+        )
 
-    currency = currency_match[0]  # type: ignore [index]
+    currency = currency_match[0]
     currency_no_spaces = currency.strip()
 
     return currency_no_spaces
@@ -223,11 +235,6 @@ def assert_is_match(match: re.Match[str] | None):
     Raises:
         IndexError: If the match is a None type.
     """
-
-    if match is None:
-        raise IndexError(
-            f"There is no return from the match:\n{match}"
-        )
 
 
 def _parse_to_int(salary: str) -> int:
