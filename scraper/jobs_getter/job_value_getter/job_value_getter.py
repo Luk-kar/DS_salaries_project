@@ -10,7 +10,7 @@ from scraper._types import MyWebElement, Job_elements, Job_values, MyWebDriver
 from ._dict_value_adder import add_values_to_job_from_dict
 from ._element_value_getter_and_adder import get_and_add_element_value
 from ..elements_query.await_element import await_element
-from ..elements_query.get_XPATH_text import XpathListSearch, XpathSearch
+from ..elements_query.XPATH_text_getter import XpathListSearch, XpathSearch
 from ..actions.pause import pause
 
 
