@@ -10,6 +10,7 @@ from selenium.webdriver.common.by import By
 # Internal
 from scraper._types import MyWebElement
 from scraper.config.get import get_config
+from scraper.config._types import NA_value
 
 config = get_config()
 na_value = config["NA_value"]
@@ -25,7 +26,7 @@ class XpathSearch:
     """
 
     def __init__(self, element: str):
-        self.value = na_value
+        self.value: NA_value | str | list[str] = na_value
         self.element = element
 
 
