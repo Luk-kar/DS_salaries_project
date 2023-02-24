@@ -21,7 +21,8 @@ def get_and_add_element_value(
     Args:
     - job (dict): a dictionary representing a job and its properties.
     - values_source (webdriver): representing the source of the job properties.
-    - values_to_add (dict): a dictionary representing the properties of a job and their associated XPATH expressions.
+    - values_to_add (dict): a dictionary representing the properties of a job 
+    and their associated XPATH expressions.
 
     Returns:
     - None

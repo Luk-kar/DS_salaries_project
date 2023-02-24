@@ -8,6 +8,15 @@ from scraper.config.get import get_NA_value
 from scraper.config._types import NA_value
 from scraper._types import Field_value
 
+"""
+This module contains functions for parsing salary information in job postings. 
+The parse_salary() function takes in a dictionary containing salary information 
+and modifies the dictionary to include additional keys for
+ salary low, salary high, salary estimate, and currency. 
+ The insert_dict_to_dictionary() function inserts the salary key-value pairs 
+ into the original job posting dictionary while maintaining the order of other keys.
+"""
+
 
 def parse_salary(job: dict):
     """

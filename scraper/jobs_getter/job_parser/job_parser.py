@@ -1,3 +1,8 @@
+"""
+This module provides a function for cleaning a job dictionary by parsing 
+and converting numeric and percentage values to floats and integers, bools,
+providing NA values, and expanding data by feature engineering
+"""
 # Internal
 from ._na_values_parser import parse_na_values
 from ._numerical_values_parser import parse_numerical_values

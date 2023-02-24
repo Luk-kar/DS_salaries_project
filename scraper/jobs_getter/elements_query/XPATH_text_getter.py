@@ -17,13 +17,14 @@ Elements = list[MyWebElement]
 
 
 class XpathSearch:
-    def __init__(self, element: str):
-        """
-        A class representing an XPath search.
+    """
+    A class representing an XPath search.
 
-        Args:
-        - element (str): an XPath query string for the desired element.
-        """
+    Args:
+    - element (str): an XPath query string for the desired element.
+    """
+
+    def __init__(self, element: str):
         self.value = na_value
         self.element = element
 
@@ -35,13 +36,17 @@ class XpathListSearch(XpathSearch):
     pass
 
 
-def get_XPATH_values(source_html: MyWebElement, search: XpathSearch | XpathListSearch) -> list | str:
+def get_XPATH_values(
+        source_html: MyWebElement,
+        search: XpathSearch | XpathListSearch
+) -> list | str:
     """
     Extracts the text or texts of selected web element.
 
     Args:
     - source_html (MyWebElement): the web page element to search.
-    - search (XpathSearch or XpathListSearch): a class representing an XPath query for the desired element(s).
+    - search (XpathSearch or XpathListSearch): a class representing 
+    an XPath query for the desired element(s).
 
     Returns:
     - str or list[str]: the text or texts of the selected web element(s).
@@ -80,7 +85,10 @@ def _get_all_texts(elements: Elements) -> list[str]:
     return texts
 
 
-def _get_text(source_html: MyWebElement, search: XpathSearch) -> str:
+def _get_text(
+        source_html: MyWebElement,
+        search: XpathSearch
+) -> str:
     """
     Extracts the text of a single web element.
 

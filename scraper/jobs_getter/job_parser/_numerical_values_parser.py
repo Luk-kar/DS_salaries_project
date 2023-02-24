@@ -1,3 +1,8 @@
+"""
+This module provides functions to parse numerical values in a given job dictionary. 
+The main function parse_numerical_values() converts positive numeric 
+and percentage values in the input job dictionary to floats and integers.
+"""
 
 
 def parse_numerical_values(job: dict):

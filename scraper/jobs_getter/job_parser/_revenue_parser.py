@@ -1,4 +1,8 @@
-
+"""
+The module parse_revenue takes a job dictionary as input 
+and modifies the 'Revenue_USD' field of the dictionary by removing "(USD)" 
+and any leading/trailing whitespaces if it is not a NA value.
+"""
 # Internal
 from scraper.config.get import get_NA_value
 
