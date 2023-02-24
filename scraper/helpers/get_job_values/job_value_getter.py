@@ -7,14 +7,14 @@ from selenium.webdriver.common.by import By
 
 # Internal
 from scraper._types import MyWebElement, Job_elements, Job_values, MyWebDriver
-from scraper.helpers.get_job_values.add_values_from_dict import add_values_from_dict
-from scraper.helpers.get_job_values.add_values_from_element import add_values_from_element
-from scraper.helpers.elements_query.await_element import await_element
-from scraper.helpers.actions.pause import pause
-from scraper.helpers.elements_query.get_XPATH_text import XpathListSearch, XpathSearch
+from ._dict_value_adder import add_values_to_job_from_dict
+from ._element_value_getter_and_adder import get_and_add_element_value
+from ..elements_query.await_element import await_element
+from ..elements_query.get_XPATH_text import XpathListSearch, XpathSearch
+from ..actions.pause import pause
 
 
-def get_job_values(driver: MyWebDriver, job_button: MyWebElement) -> dict:
+def get_values_for_job(driver: MyWebDriver, job_button: MyWebElement) -> dict:
     '''
     Get columns values from the current selected job posting.
 
@@ -39,19 +39,19 @@ def get_job_values(driver: MyWebDriver, job_button: MyWebElement) -> dict:
     pause()
 
     # Those HTML components should be on job the post
-    get_job_descriptions_values(job, job_post)
-    get_job_button_values(job, job_button)
+    _get_job_descriptions_values(job, job_post)
+    _get_job_button_values(job, job_button)
 
     # Those HTML components are optional on job the post
-    get_company_description(job, job_post)
-    get_company_ratings(job, job_post)
-    get_company_reviews_by_job_title(job, job_post)
-    get_company_benefits_review(job, job_post)
+    _get_company_description(job, job_post)
+    _get_company_ratings(job, job_post)
+    _get_company_reviews_by_job_title(job, job_post)
+    _get_company_benefits_review(job, job_post)
 
     return job
 
 
-def get_company_benefits_review(job: Job_values, job_post: MyWebElement):
+def _get_company_benefits_review(job: Job_values, job_post: MyWebElement):
     '''
     Updates the passed job dictionary dictionary with reviews
     company's benefits and their overall score.
@@ -79,16 +79,16 @@ def get_company_benefits_review(job: Job_values, job_post: MyWebElement):
     }
 
     try:
-        add_values_from_element(
+        get_and_add_element_value(
             job,
             job_post, benefits_review
         )
 
     except NoSuchElementException:
-        add_values_from_dict(job, benefits_review)
+        add_values_to_job_from_dict(job, benefits_review)
 
 
-def get_company_reviews_by_job_title(job: Job_values, job_post: MyWebElement):
+def _get_company_reviews_by_job_title(job: Job_values, job_post: MyWebElement):
     '''
     Updates the passed job dictionary dictionary with reviews
     (Pros and Cons) of the company based on the job title. 
@@ -119,19 +119,19 @@ def get_company_reviews_by_job_title(job: Job_values, job_post: MyWebElement):
             By.ID, "Reviews"
         )
 
-        add_values_from_element(
+        get_and_add_element_value(
             job,
             reviews_info, reviews_by_job_title
         )
 
     except NoSuchElementException:
-        add_values_from_dict(
+        add_values_to_job_from_dict(
             job,
             reviews_by_job_title
         )
 
 
-def get_company_ratings(job: Job_values, job_post: MyWebElement):
+def _get_company_ratings(job: Job_values, job_post: MyWebElement):
     '''
     Updates the passed job dictionary with the company rating values
     scraped from the job posting element.
@@ -178,19 +178,19 @@ def get_company_ratings(job: Job_values, job_post: MyWebElement):
             By.XPATH, '//div[@data-test="company-ratings"]'
         )
 
-        add_values_from_element(
+        get_and_add_element_value(
             job,
             rating_info, rating_description
         )
 
     except NoSuchElementException:
-        add_values_from_dict(
+        add_values_to_job_from_dict(
             job,
             rating_description
         )
 
 
-def get_company_description(job: Job_values, job_post: MyWebElement):
+def _get_company_description(job: Job_values, job_post: MyWebElement):
     '''
     Updates the passed job dictionary with the company description values
     scraped from the job posting element.
@@ -233,19 +233,19 @@ def get_company_description(job: Job_values, job_post: MyWebElement):
         company_info: MyWebElement = job_post.find_element(
             By.ID, "EmpBasicInfo")
 
-        add_values_from_element(
+        get_and_add_element_value(
             job,
             company_info, company_description
         )
 
     except NoSuchElementException:
-        add_values_from_dict(
+        add_values_to_job_from_dict(
             job,
             company_description
         )
 
 
-def get_job_button_values(job: Job_values, job_button: MyWebElement):
+def _get_job_button_values(job: Job_values, job_button: MyWebElement):
     '''
     Updates the passed job dictionary with the job post age and Easy apply values
     scraped from the job posting button.
@@ -272,13 +272,13 @@ def get_job_button_values(job: Job_values, job_button: MyWebElement):
         ),
     }
 
-    add_values_from_element(
+    get_and_add_element_value(
         job,
         job_button, job_button_info
     )
 
 
-def get_job_descriptions_values(job: Job_values, job_post: MyWebElement):
+def _get_job_descriptions_values(job: Job_values, job_post: MyWebElement):
     '''
     Updates the passed job dictionary with the job description values
     scraped from the job posting.
@@ -317,7 +317,7 @@ def get_job_descriptions_values(job: Job_values, job_post: MyWebElement):
         ),
     }
 
-    add_values_from_element(
+    get_and_add_element_value(
         job,
         job_post, job_description
     )
