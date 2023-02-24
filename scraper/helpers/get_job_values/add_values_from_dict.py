@@ -23,4 +23,4 @@ def add_values_from_dict(
     """
 
     for column, field in values_to_add.items():
-        job[column] = field["value"]
+        job[column] = field.value

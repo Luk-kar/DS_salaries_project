@@ -12,28 +12,49 @@ from scraper._types import MyWebElement
 from scraper.config.get import get_config
 
 config = get_config()
+na_value = config["NA_value"]
 Elements = list[MyWebElement]
 
 
-def get_XPATH_values(source_html: MyWebElement, search: XpathSearch) -> list | str:
+class XpathSearch:
+    def __init__(self, element: str):
+        self.value = na_value
+        self.element = element
+
+
+class XpathListSearch(XpathSearch):
+    pass
+
+
+def get_XPATH_values(source_html: MyWebElement, search: XpathSearch | XpathListSearch) -> list | str:
     '''return text or texts of selected web element'''
 
     if isinstance(search, XpathListSearch):
 
         elements: Elements = source_html.find_elements(
-            By.XPATH, element
+            By.XPATH, search.element
         )
 
-        texts: list[str] = []
-        for elem in elements:
-            texts.append(elem.text)
+        texts = _get_all_texts(elements)
 
         return texts
 
     else:
 
-        text: str = source_html.find_element(
-            By.XPATH, element
-        ).text
+        text: str = _get_text(source_html, search)
 
         return text
+
+
+def _get_all_texts(elements):
+
+    texts: list[str] = []
+    for elem in elements:
+        texts.append(elem.text)
+    return texts
+
+
+def _get_text(source_html, search):
+    return source_html.find_element(
+        By.XPATH, search.element
+    ).text

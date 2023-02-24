@@ -11,19 +11,7 @@ from scraper.helpers.get_job_values.add_values_from_dict import add_values_from_
 from scraper.helpers.get_job_values.add_values_from_element import add_values_from_element
 from scraper.helpers.elements_query.await_element import await_element
 from scraper.helpers.actions.pause import pause
-from scraper.config.get import get_config
-
-config = get_config()
-
-
-class XpathSearch:
-    def __init__(self, element):
-        self.value = config["NA_value"]
-        self.element = element
-
-
-class XpathListSearch(XpathSearch):
-    pass;
+from scraper.helpers.elements_query.get_XPATH_text import XpathListSearch, XpathSearch
 
 
 def get_job_values(driver: MyWebDriver, job_button: MyWebElement) -> dict:
@@ -80,12 +68,14 @@ def get_company_benefits_review(job: Job_values, job_post: MyWebElement):
     - None
     '''
 
-    na_value = config["NA_value"]
-
     benefits_review: Job_elements = {
+
         "Benefits_rating": XpathSearch(
-            '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]//div//div[@class="ratingNum mr-sm"]'),
-        "Benefits_rating": XpathListSearch('//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsHighlights")]/div'),
+            '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]//div//div[@class="ratingNum mr-sm"]'
+        ),
+        "Benefits_rating": XpathListSearch(
+            '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsHighlights")]/div'
+        ),
     }
 
     try:
@@ -115,19 +105,13 @@ def get_company_reviews_by_job_title(job: Job_values, job_post: MyWebElement):
     - None.
     '''
 
-    na_value = config["NA_value"]
-
     reviews_by_job_title: Job_elements = {
-        "Pros": {
-            "value": na_value,
-            "element": './/*[text() = "Pros"]//parent::div//*[contains(name(), "p")]',
-            "is_list": True
-        },
-        "Cons": {
-            "value": na_value,
-            "element": './/*[text() = "Cons"]//parent::div//*[contains(name(), "p")]',
-            "is_list": True
-        },
+        "Pros": XpathListSearch(
+            './/*[text() = "Pros"]//parent::div//*[contains(name(), "p")]'
+        ),
+        "Cons": XpathListSearch(
+            './/*[text() = "Cons"]//parent::div//*[contains(name(), "p")]'
+        ),
     }
 
     try:
@@ -164,44 +148,29 @@ def get_company_ratings(job: Job_values, job_post: MyWebElement):
         - None.
     '''
 
-    na_value = config["NA_value"]
-
     rating_description: Job_elements = {
-        "Friend_recommend": {
-            "value": na_value,
-            "element": './/div[@class="css-ztsow4"]',
-            "is_list": False
-        },
-        "CEO_approval": {
-            "value": na_value,
-            "element": './/div[@class="css-ztsow4 ceoApprove"]',
-            "is_list": False
-        },
-        "Career_Opportunities": {
-            "value": na_value,
-            "element": './/*[text() = "Career Opportunities"]/following-sibling::span[2]',
-            "is_list": False
-        },
-        "Comp_&_Benefits": {
-            "value": na_value,
-            "element": './/*[text() = "Comp & Benefits"]/following-sibling::span[2]',
-            "is_list": False
-        },
-        "Culture_&_Values": {
-            "value": na_value,
-            "element": './/*[text() = "Culture & Values"]/following-sibling::span[2]',
-            "is_list": False
-        },
-        "Senior_Management": {
-            "value": na_value,
-            "element": './/*[text() = "Senior Management"]/following-sibling::span[2]',
-            "is_list": False
-        },
-        "Work/Life_Balance": {
-            "value": na_value,
-            "element": './/*[text() = "Work/Life_Balance"]/following-sibling::span[2]',
-            "is_list": False
-        },
+
+        "Friend_recommend": XpathSearch(
+            './/div[@class="css-ztsow4"]'
+        ),
+        "CEO_approval": XpathSearch(
+            './/div[@class="css-ztsow4 ceoApprove"]'
+        ),
+        "Career_Opportunities": XpathSearch(
+            './/*[text() = "Career Opportunities"]/following-sibling::span[2]'
+        ),
+        "Comp_&_Benefits": XpathSearch(
+            './/*[text() = "Comp & Benefits"]/following-sibling::span[2]'
+        ),
+        "Culture_&_Values": XpathSearch(
+            './/*[text() = "Culture & Values"]/following-sibling::span[2]'
+        ),
+        "Senior_Management": XpathSearch(
+            './/*[text() = "Senior Management"]/following-sibling::span[2]'
+        ),
+        "Work/Life_Balance": XpathSearch(
+            './/*[text() = "Work/Life_Balance"]/following-sibling::span[2]'
+        ),
     }
 
     try:
@@ -238,39 +207,26 @@ def get_company_description(job: Job_values, job_post: MyWebElement):
         - None.
     '''
 
-    na_value = config["NA_value"]
-
     company_description: Job_elements = {
-        "Employees": {
-            'value': na_value,
-            "element": './/div//*[text() = "Size"]//following-sibling::*',
-            "is_list": False
-        },
-        "Type_of_ownership": {
-            'value': na_value,
-            "element": './/div//*[text() = "Type"]//following-sibling::*',
-            "is_list": False
-        },
-        "Sector": {
-            'value': na_value,
-            "element": './/div//*[text() = "Sector"]//following-sibling::*',
-            "is_list": False
-        },
-        "Founded": {
-            'value': na_value,
-            "element": './/div//*[text() = "Founded"]//following-sibling::*',
-            "is_list": False
-        },
-        "Industry": {
-            'value': na_value,
-            "element": './/div//*[text() = "Industry"]//following-sibling::*',
-            "is_list": False
-        },
-        "Revenue_USD": {
-            'value': na_value,
-            "element": './/div//*[text() = "Revenue"]//following-sibling::*',
-            "is_list": False
-        },
+
+        "Employees": XpathSearch(
+            './/div//*[text() = "Size"]//following-sibling::*'
+        ),
+        "Type_of_ownership": XpathSearch(
+            './/div//*[text() = "Type"]//following-sibling::*'
+        ),
+        "Sector": XpathSearch(
+            './/div//*[text() = "Sector"]//following-sibling::*'
+        ),
+        "Founded": XpathSearch(
+            './/div//*[text() = "Founded"]//following-sibling::*'
+        ),
+        "Industry": XpathSearch(
+            './/div//*[text() = "Industry"]//following-sibling::*'
+        ),
+        "Revenue_USD": XpathSearch(
+            './/div//*[text() = "Revenue"]//following-sibling::*'
+        ),
     }
 
     try:
@@ -306,19 +262,14 @@ def get_job_button_values(job: Job_values, job_button: MyWebElement):
     - None
     '''
 
-    na_value = config["NA_value"]
-
     job_button_info: Job_elements = {
-        "Job_age": {
-            "value": na_value,
-            "element": './/div[@data-test="job-age"]',
-            "is_list": False
-        },
-        "Easy_apply": {
-            "value": na_value,
-            "element": './/div[@class="css-pxdlb2"]/div[1]',
-            "is_list": False
-        },
+
+        "Job_age": XpathSearch(
+            './/div[@data-test="job-age"]'
+        ),
+        "Easy_apply": XpathSearch(
+            './/div[@class="css-pxdlb2"]/div[1]'
+        ),
     }
 
     add_values_from_element(
@@ -344,39 +295,26 @@ def get_job_descriptions_values(job: Job_values, job_post: MyWebElement):
     - None
     '''
 
-    na_value = config["NA_value"]
-
     job_description: Job_elements = {
-        "Company_Name": {
-            "value": na_value,
-            "element": './/div[@data-test="employerName"]',
-            "is_list": False
-        },
-        "Rating": {
-            "value": na_value,
-            "element": './/span[@data-test="detailRating"]',
-            "is_list": False
-        },
-        "Location": {
-            "value": na_value,
-            "element": './/div[@data-test="location"]',
-            "is_list": False
-        },
-        "Job_Title": {
-            "value": na_value,
-            "element": './/div[@data-test="jobTitle"]',
-            "is_list": False
-        },
-        "Description": {
-            "value": na_value,
-            "element": './/div[@class="jobDescriptionContent desc"]',
-            "is_list": False
-        },
-        "Salary": {
-            "value": na_value,
-            "element": './/span[@data-test="detailSalary"]',
-            "is_list": False
-        },
+
+        "Company_Name": XpathSearch(
+            './/div[@data-test="employerName"]'
+        ),
+        "Rating": XpathSearch(
+            './/span[@data-test="detailRating"]'
+        ),
+        "Location": XpathSearch(
+            './/div[@data-test="location"]'
+        ),
+        "Job_Title": XpathSearch(
+            './/div[@data-test="jobTitle"]'
+        ),
+        "Description": XpathSearch(
+            './/div[@class="jobDescriptionContent desc"]'
+        ),
+        "Salary": XpathSearch(
+            './/span[@data-test="detailSalary"]'
+        ),
     }
 
     add_values_from_element(
