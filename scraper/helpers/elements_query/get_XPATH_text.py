@@ -15,10 +15,10 @@ config = get_config()
 Elements = list[MyWebElement]
 
 
-def get_XPATH_values(source_html: MyWebElement, element: str, return_list=False) -> list | str:
+def get_XPATH_values(source_html: MyWebElement, search: XpathSearch) -> list | str:
     '''return text or texts of selected web element'''
 
-    if return_list:
+    if isinstance(search, XpathListSearch):
 
         elements: Elements = source_html.find_elements(
             By.XPATH, element

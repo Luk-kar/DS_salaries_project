@@ -13,8 +13,17 @@ from scraper.helpers.elements_query.await_element import await_element
 from scraper.helpers.actions.pause import pause
 from scraper.config.get import get_config
 
-
 config = get_config()
+
+
+class XpathSearch:
+    def __init__(self, element):
+        self.value = config["NA_value"]
+        self.element = element
+
+
+class XpathListSearch(XpathSearch):
+    pass;
 
 
 def get_job_values(driver: MyWebDriver, job_button: MyWebElement) -> dict:
@@ -74,16 +83,9 @@ def get_company_benefits_review(job: Job_values, job_post: MyWebElement):
     na_value = config["NA_value"]
 
     benefits_review: Job_elements = {
-        "Benefits_rating": {
-            "value": na_value,
-            "element": '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]//div//div[@class="ratingNum mr-sm"]',
-            "is_list": False
-        },
-        "Benefits_reviews": {
-            "value": na_value,
-            "element": '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsHighlights")]/div',
-            "is_list": True
-        },
+        "Benefits_rating": XpathSearch(
+            '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]//div//div[@class="ratingNum mr-sm"]'),
+        "Benefits_rating": XpathListSearch('//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsHighlights")]/div'),
     }
 
     try:
@@ -109,7 +111,7 @@ def get_company_reviews_by_job_title(job: Job_values, job_post: MyWebElement):
     - job (dict): A dictionary containing job details.
     - job_post (MyWebDriver): The web page source for a job.
 
-    Returns:
+    Returns:https://github.com/Luk-kar/DS_salaries_project/pull/1/files
     - None.
     '''
 
@@ -355,22 +357,22 @@ def get_job_descriptions_values(job: Job_values, job_post: MyWebElement):
             "element": './/span[@data-test="detailRating"]',
             "is_list": False
         },
-        "Location":  {
+        "Location": {
             "value": na_value,
             "element": './/div[@data-test="location"]',
             "is_list": False
         },
-        "Job_Title":  {
+        "Job_Title": {
             "value": na_value,
             "element": './/div[@data-test="jobTitle"]',
             "is_list": False
         },
-        "Description":  {
+        "Description": {
             "value": na_value,
             "element": './/div[@class="jobDescriptionContent desc"]',
             "is_list": False
         },
-        "Salary":  {
+        "Salary": {
             "value": na_value,
             "element": './/span[@data-test="detailSalary"]',
             "is_list": False
