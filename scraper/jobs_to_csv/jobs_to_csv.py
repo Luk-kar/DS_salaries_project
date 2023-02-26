@@ -23,13 +23,14 @@ WebElements = list[WebElement]
 def get_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWebDriver):
     '''Getting list of job postings values populated with glassdoor.com'''
 
-    jobs: Jobs = []
-
     if debug_mode:
         now = datetime.now().isoformat(sep=" ", timespec="seconds")
         print(f"\n{now}\n")
 
-    while len(jobs) < jobs_number:
+    jobs_counter = 1
+
+    while jobs_counter <= jobs_number:
+
         jobs_list_buttons: WebElement = await_element(
             driver, 20, By.XPATH, '//ul[@data-test="jlGrid"]')
 
@@ -47,9 +48,9 @@ def get_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWeb
 
         for job_button in jobs_buttons:
 
-            print(f"Progress: {len(jobs) + 1}/{jobs_number}")
+            print(f"Progress: {jobs_counter}/{jobs_number}")
 
-            if len(jobs) >= jobs_number:
+            if jobs_counter >= jobs_number + 1:
                 break
 
             try:
@@ -70,12 +71,13 @@ def get_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWeb
             if debug_mode:
                 print_key_value_pairs(job)
 
-            jobs.append(job)
+            # write job to csv
 
-        click_next_page(jobs_number, driver, jobs)
+        click_next_page(driver, jobs_counter, jobs_number)
 
 
-def click_next_page(jobs_number: int, driver: MyWebDriver, jobs):
+def click_next_page(driver: MyWebDriver, jobs_counter: int, , jobs_number: int):
+
     try:
         next_page = driver.find_element(
             By.XPATH, "//button[@data-test='pagination-next']")
@@ -83,18 +85,18 @@ def click_next_page(jobs_number: int, driver: MyWebDriver, jobs):
         if next_page.is_enabled():
             next_page.click()
         else:
-            exit_scraping_when_no_more_jobs(jobs_number, jobs)
+            exit_scraping_when_no_more_jobs(jobs_counter, jobs_number)
 
     except ElementClickInterceptedException:
         execute_via_javascript(driver, next_page)
 
     except NoSuchElementException:
-        exit_scraping_when_no_more_jobs(jobs_number, jobs)
+        exit_scraping_when_no_more_jobs(jobs_counter, jobs_number)
 
 
-def exit_scraping_when_no_more_jobs(jobs_number, jobs):
+def exit_scraping_when_no_more_jobs(jobs_counter: int, jobs_number: int):
     sys.exit(
-        f"Scraping terminated before reaching target number of jobs. Needed {jobs_number}, got {len(jobs)}."
+        f"Scraping terminated before reaching target number of jobs. Needed {jobs_counter}, got {len(jobs_number)}."
     )
 
 

@@ -9,6 +9,7 @@ Additional args are:
 Arguments could be passed from the global config data file or directly into the function.
 """
 # Python
+import sys
 from typing import Annotated
 from annotated_types import Gt
 
@@ -22,7 +23,7 @@ config = get_config()
 
 def scrape_data(
         job_title: str = config["jobs_titles"]["default"],
-        jobs_cap: Annotated[int, Gt(0)] = config["jobs_number"],
+        jobs_number: Annotated[int, Gt(0)] = config["jobs_number"],
         driver_path: str = config["driver_path"],
         debug_mode: bool = config["debug_mode"]
 ):
@@ -31,4 +32,7 @@ def scrape_data(
     url = get_url(config['url'], job_title)
     driver = get_webpage(url, debug_mode, driver_path)
 
-    get_jobs_to_csv(jobs_cap, debug_mode, driver)
+    get_jobs_to_csv(jobs_number, debug_mode, driver)
+
+    sys.exit(
+        f"You successfully scraped {jobs_number} postings for the job position:\n{job_title}")
