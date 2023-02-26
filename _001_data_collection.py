@@ -1,6 +1,6 @@
-from scraper.get_df_jobs import get_df_jobs
+from scraper.scraper import scrape_data
 
 if __name__ == "__main__":
 
-    get_df_jobs(
+    scrape_data(
         debug_mode=True, job_title="back end engineer")

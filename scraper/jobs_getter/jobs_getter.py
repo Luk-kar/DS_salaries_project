@@ -3,7 +3,7 @@ from datetime import datetime
 import sys
 
 # External
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, ElementNotInteractableException
 from selenium.webdriver.common.by import By
 
 # Internal
@@ -17,7 +17,7 @@ from .job_parser.job_parser import parse_data
 from .debugger.print_key_value_pairs import print_key_value_pairs
 
 
-def get_jobs(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWebDriver):
+def get_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWebDriver):
     '''Getting list of job postings values populated with glassdoor.com'''
 
     jobs: Jobs = []
@@ -42,13 +42,38 @@ def get_jobs(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWebDriver)
 
         click_x_pop_up(driver)
 
-        for job_button in jobs_buttons:
+        for index, job_button in enumerate(jobs_buttons):
+
             print(f"Progress: {len(jobs) + 1}/{jobs_number}")
 
             if len(jobs) >= jobs_number:
                 break
 
-            job_button.click()
+            try:
+                job_button.click()
+
+            except ElementNotInteractableException:
+
+                try:
+                    temp_jobs_list_buttons = driver.find_elements(
+                        By.XPATH, '//ul[@data-test="jlGrid"]'
+                    )
+
+                    temp_jobs_buttons: list[MyWebElement] = temp_jobs_list_buttons.find_elements(
+                        By.TAG_NAME, "li"
+                    )
+
+                    temp_job_button = temp_jobs_buttons[index]
+
+                    temp_job_button.click()
+
+                    job_button = temp_job_button
+
+                except NoSuchElementException as error:
+                    sys.exit(
+                        f"You did not upload buttons properly. \
+                        Check your exception implementation.\
+                        \nError: {error}")
 
             pause()
 

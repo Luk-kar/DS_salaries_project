@@ -12,6 +12,7 @@ from scraper.jobs_getter.elements_query.XPATH_text_getter import XpathListSearch
 
 MyWebDriver = WebDriver
 MyWebElement = WebElement
+MyWebElements = list[MyWebElement]
 Field_value = str | int | float | NA_value | bool | list[str]
 Element_XPATH = str
 Job_values = dict[str, Field_value]
