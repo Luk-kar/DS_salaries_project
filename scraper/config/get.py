@@ -57,10 +57,10 @@ def get_url(url: Url, job_title: JobDefault) -> str:
 config = get_config()
 
 
-def get_path_csv(directory: str,
-                 job_title: str = config["jobs_titles"]["default"],
-                 extension: str = "csv"
-                 ) -> str:
+def _get_path_csv(directory: str,
+                  job_title: str = config["jobs_titles"]["default"],
+                  extension: str = "csv"
+                  ) -> str:
     """
     Returns a string representing the file path for a CSV file to be written. 
 
@@ -103,7 +103,7 @@ def get_path_csv_raw() -> str:
         str: The absolute path to the directory where "the raw" CSV files are saved.
     """
 
-    return get_path_csv(config["output_path"]["raw"])
+    return _get_path_csv(config["output_path"]["raw"])
 
 
 def get_path_csv_clean() -> str:
@@ -115,7 +115,7 @@ def get_path_csv_clean() -> str:
         str: The absolute path to the directory where "the clean" CSV files are saved.
     """
 
-    return get_path_csv(config["output_path"]["clean"])
+    return _get_path_csv(config["output_path"]["clean"])
 
 
 def get_NA_value() -> NA_value:

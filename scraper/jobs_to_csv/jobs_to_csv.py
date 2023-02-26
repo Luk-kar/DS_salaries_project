@@ -1,5 +1,7 @@
 # Python
+import csv
 from datetime import datetime
+import os
 import sys
 
 # External
@@ -9,8 +11,11 @@ from selenium.webdriver.remote.webelement import WebElement
 
 # Internal
 from scraper.config._types import JobNumber, DebugMode
+from scraper.config.get import get_path_csv_raw
 from scraper._types import MyWebDriver
 from .elements_query.await_element import await_element
+from .actions.click_javascript import click_via_javascript
+from .actions.click_next_page import click_next_page
 from .actions.click_x_pop_up import click_x_pop_up
 from .job_value_getter.job_value_getter import get_values_for_job
 from .actions.pause import pause
@@ -28,6 +33,8 @@ def get_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWeb
         print(f"\n{now}\n")
 
     jobs_counter = 1
+
+    csv_writer = CSV_Writer_RAW()
 
     while jobs_counter <= jobs_number:
 
@@ -58,7 +65,7 @@ def get_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWeb
 
             except ElementClickInterceptedException:
 
-                execute_via_javascript(driver, job_button)
+                click_via_javascript(driver, job_button)
 
             pause()
 
@@ -72,75 +79,79 @@ def get_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWeb
                 print_key_value_pairs(job)
 
             # write job to csv
-            # todo
+            csv_writer.write_row(job)
+
+            jobs_counter += 1
 
         click_next_page(driver, jobs_counter, jobs_number)
 
 
-def click_next_page(driver: MyWebDriver, jobs_counter: int, jobs_number: int):
-    """
-    Clicks on the 'Next' button to navigate to the next page of job listings on Glassdoor.
+class CSV_Writer():
 
-    Args:
-    - driver (MyWebDriver): The webdriver instance used to interact with the Glassdoor website.
-    - jobs_counter (int): The number of jobs that have been scraped so far.
-    - jobs_number (int): The total number of jobs to scrape.
+    def __init__(self, csv_path) -> None:
+        self.csv_path = csv_path
+        self.directory_path = os.path.dirname(csv_path)
 
-    Raises:
-    - ElementClickInterceptedException: If the 'Next' button is present 
-    but is not clickable due to an overlay element blocking it.
+    def write_row(self, row):
+        '''
+        appends list of tuples in specified output csv file
+        a tuple is written as a single row in csv file
+        '''
+        file_path = self.csv_path
 
-    - NoSuchElementException: If the 'Next' button is not found on the page, 
-    which indicates that there are no more job listings to scrape.
+        if not os.path.exists(self.directory_path):
+            os.makedirs(self.directory_path)
 
-    Note:
-    - If the 'Next' button is not clickable due to a driver's error blocking it, 
-    the function will attempt to click the button using JavaScript 
-    instead of the standard WebDriver click method.
-    """
+        if not os.path.isfile(self.csv_path):
+            pass
 
-    try:
-        next_page = driver.find_element(
-            By.XPATH, "//button[@data-test='pagination-next']")
+        row = self.convert_dict_values_to_tuple(row)
 
-        if next_page.is_enabled():
-            next_page.click()
-        else:
-            exit_scraping_when_no_more_jobs(jobs_counter, jobs_number)
+        print(f"Row_to_save:\n{row}")
 
-    except ElementClickInterceptedException:
-        execute_via_javascript(driver, next_page)
+        with open(file_path, 'a', newline='', encoding="utf-8") as csv_file:
 
-    except NoSuchElementException:
-        exit_scraping_when_no_more_jobs(jobs_counter, jobs_number)
+            csv_writer = csv.writer(csv_file)
+
+            try:
+                csv_writer.writerow(row)
+
+            except csv.Error as error:
+                sys.exit(
+                    f'File:\n\
+                    {file_path}\n\
+                    Line:\
+                    \n{csv_writer.line_num}\
+                    \n Error:\
+                    \n{error}'
+                )
+
+    def convert_dict_values_to_tuple(self, dictionary: dict) -> tuple:
+        return tuple(dictionary.values())
+
+    def write_header(self, header):  # todo
+                with open(file_path, 'a', newline='', encoding="utf-8") as csv_file:
+
+            csv_writer = csv.writer(csv_file)
+
+            try:
+                csv_writer.writerow(row)
+
+            except csv.Error as error:
+                sys.exit(
+                    f'File:\n\
+                    {file_path}\n\
+                    Line:\
+                    \n{csv_writer.line_num}\
+                    \n Error:\
+                    \n{error}'
+                )
 
 
-def exit_scraping_when_no_more_jobs(jobs_counter: int, jobs_number: int):
-    """
-    Exits the program when there is no more jobs to scrape from the website.
 
-    Args:
-    - jobs_counter (int): The number of jobs that have been scraped so far.
-    - jobs_number (int): The total number of jobs to scrape.
-    """
+class CSV_Writer_RAW(CSV_Writer):
 
-    sys.exit(
-        f"Scraping terminated before reaching target number of jobs.\n\
-            Needed {jobs_counter}, got {jobs_number}."
-    )
-
-
-def execute_via_javascript(driver: MyWebDriver, job_button: WebElement):
-    '''
-    Executes a click on a WebElement using JavaScript instead of using the 
-    standard WebDriver click method.
-
-    :param driver: A webdriver instance to use for executing the script.
-    :type driver: MyWebDriver
-
-    :param job_button: The WebElement to click on.
-    :type job_button: WebElement
-    '''
-
-    # https://stackoverflow.com/a/48667924/12490791
-    driver.execute_script("arguments[0].click();", job_button)
+    def __init__(self) -> None:
+        super().__init__(
+            get_path_csv_raw()
+        )
