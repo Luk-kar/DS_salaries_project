@@ -14,7 +14,7 @@ from .actions.click_x_pop_up import click_x_pop_up
 from .job_value_getter.job_value_getter import get_values_for_job
 from .actions.pause import pause
 from .job_parser.job_parser import parse_data
-from .print_key_value_pairs import print_key_value_pairs
+from .debugger.print_key_value_pairs import print_key_value_pairs
 
 
 def get_jobs(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWebDriver):
