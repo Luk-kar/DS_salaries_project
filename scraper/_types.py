@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.webdriver import WebDriver
 
 # Internal
 from scraper.config._types import NA_value
-from scraper.jobs_getter.elements_query.XPATH_text_getter import XpathListSearch, XpathSearch
+from scraper.jobs_to_csv.elements_query.XPATH_text_getter import XpathListSearch, XpathSearch
 
 MyWebDriver = WebDriver
 Field_value = str | int | float | NA_value | bool | list[str]

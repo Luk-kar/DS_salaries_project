@@ -12,7 +12,7 @@ from selenium.webdriver.remote.webelement import WebElement
 
 # Internal
 from scraper._types import MyWebDriver
-from scraper.jobs_getter.elements_query.await_element import await_element
+from scraper.jobs_to_csv.elements_query.await_element import await_element
 
 
 def click_x_pop_up(driver: WebElement | MyWebDriver):

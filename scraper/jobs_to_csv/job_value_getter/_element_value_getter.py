@@ -9,7 +9,7 @@ from selenium.webdriver.remote.webelement import WebElement
 
 # Internal
 from scraper._types import Job_elements
-from scraper.jobs_getter.elements_query.XPATH_text_getter import get_XPATH_values
+from scraper.jobs_to_csv.elements_query.XPATH_text_getter import get_XPATH_values
 
 
 def get_values_from_element(source_html: WebElement, job_values: Job_elements):

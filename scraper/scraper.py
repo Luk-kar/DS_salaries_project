@@ -14,8 +14,8 @@ from annotated_types import Gt
 
 # Internal
 from scraper.config.get import get_config, get_url
-from scraper.jobs_getter.webpage_getter.webpage_getter import get_webpage
-from scraper.jobs_getter.jobs_getter import get_jobs_to_csv
+from scraper.jobs_to_csv.webpage_getter.webpage_getter import get_webpage
+from scraper.jobs_to_csv.jobs_to_csv import get_jobs_to_csv
 
 config = get_config()
 

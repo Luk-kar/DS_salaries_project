@@ -45,7 +45,7 @@ def get_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWeb
 
         click_x_pop_up(driver)
 
-        for index, job_button in enumerate(jobs_buttons):
+        for job_button in jobs_buttons:
 
             print(f"Progress: {len(jobs) + 1}/{jobs_number}")
 
@@ -57,26 +57,7 @@ def get_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWeb
 
             except ElementClickInterceptedException:
 
-                try:
-                    temp_jobs_list_buttons = driver.find_elements(
-                        By.XPATH, '//ul[@data-test="jlGrid"]'
-                    )
-
-                    temp_jobs_buttons: WebElements = temp_jobs_list_buttons.find_elements(
-                        By.TAG_NAME, "li"
-                    )
-
-                    temp_job_button = temp_jobs_buttons[index]
-
-                    temp_job_button.click()
-
-                    job_button = temp_job_button
-
-                except NoSuchElementException as error:
-                    sys.exit(
-                        f"You did not upload buttons properly. \
-                        Check your exception implementation.\
-                        \nError: {error}")
+                execute_via_javascript(driver, job_button)
 
             pause()
 
@@ -90,3 +71,19 @@ def get_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWeb
                 print_key_value_pairs(job)
 
             jobs.append(job)
+
+
+def execute_via_javascript(driver: MyWebDriver, job_button: WebElement):
+    '''
+    Executes a click on a WebElement using JavaScript instead of using the 
+    standard WebDriver click method.
+
+    :param driver: A webdriver instance to use for executing the script.
+    :type driver: MyWebDriver
+
+    :param job_button: The WebElement to click on.
+    :type job_button: WebElement
+    '''
+
+    # https://stackoverflow.com/a/48667924/12490791
+    driver.execute_script("arguments[0].click();", job_button)

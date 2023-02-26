@@ -13,8 +13,8 @@ from bs4 import BeautifulSoup
 import requests
 
 # Internal
-from scraper.jobs_getter.webpage_getter._driver_getter import get_driver
-from scraper.jobs_getter.webpage_getter.webpage_getter import get_webpage
+from scraper.jobs_to_csv.webpage_getter._driver_getter import get_driver
+from scraper.jobs_to_csv.webpage_getter.webpage_getter import get_webpage
 from scraper.config.get import get_config, get_url, get_path_csv_raw, get_path_csv_clean, is_possible_path
 from scraper.config._types import Config, JobNumber, JobSimilar, Url
 from scraper._types import MyWebDriver
