@@ -3,7 +3,7 @@ from datetime import datetime
 import sys
 
 # External
-from selenium.common.exceptions import NoSuchElementException, ElementNotInteractableException
+from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
@@ -55,7 +55,7 @@ def get_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWeb
             try:
                 job_button.click()
 
-            except ElementNotInteractableException:
+            except ElementClickInterceptedException:
 
                 try:
                     temp_jobs_list_buttons = driver.find_elements(
