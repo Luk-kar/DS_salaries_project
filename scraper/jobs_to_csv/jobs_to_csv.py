@@ -49,28 +49,43 @@ def get_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWeb
 
             print(f"Progress: {len(jobs) + 1}/{jobs_number}")
 
-            if len(jobs) >= jobs_number:
-                break
+            # if len(jobs) >= jobs_number:
+            #     break
 
-            try:
-                job_button.click()
+            # try:
+            #     job_button.click()
 
-            except ElementClickInterceptedException:
+            # except ElementClickInterceptedException:
 
-                execute_via_javascript(driver, job_button)
+            #     execute_via_javascript(driver, job_button)
 
-            pause()
+            # pause()
 
-            click_x_pop_up(driver)
+            # click_x_pop_up(driver)
 
-            job = get_values_for_job(driver, job_button)
+            # job = get_values_for_job(driver, job_button)
 
-            parse_data(job)
+            # parse_data(job)
 
-            if debug_mode:
-                print_key_value_pairs(job)
+            # if debug_mode:
+            #     print_key_value_pairs(job)
 
-            jobs.append(job)
+            # jobs.append(job)
+
+        try:
+            next_page = driver.find_element(
+                By.XPATH, "//button[@data-test='pagination-next']")
+
+            next_page.click()
+
+        except ElementClickInterceptedException:
+
+            execute_via_javascript(driver, next_page)
+
+        except NoSuchElementException:
+
+            sys.exit(
+                f"Scraping terminated before reaching target number of jobs. Needed {jobs_number}, got {len(jobs)}.", 0)
 
 
 def execute_via_javascript(driver: MyWebDriver, job_button: WebElement):
