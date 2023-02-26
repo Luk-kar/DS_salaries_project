@@ -72,7 +72,8 @@ def _get_company_benefits_review(job: Job_values, job_post: WebElement):
     benefits_review: Job_elements = {
 
         "Benefits_rating": XpathSearch(
-            '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]//div//div[@class="ratingNum mr-sm"]'
+            '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]//div\
+                //div[@class="ratingNum mr-sm"]'
         ),
         "Benefits_reviews": XpathListSearch(
             '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsHighlights")]/div'

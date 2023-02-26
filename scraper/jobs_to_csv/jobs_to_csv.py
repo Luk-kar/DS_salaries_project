@@ -126,7 +126,7 @@ def exit_scraping_when_no_more_jobs(jobs_counter: int, jobs_number: int):
 
     sys.exit(
         f"Scraping terminated before reaching target number of jobs.\n\
-            Needed {jobs_counter}, got {len(jobs_number)}."
+            Needed {jobs_counter}, got {jobs_number}."
     )
 
 
