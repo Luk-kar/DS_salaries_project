@@ -9,7 +9,7 @@ from selenium.webdriver.remote.webelement import WebElement
 
 # Internal
 from scraper.config._types import JobNumber, DebugMode
-from scraper._types import Jobs, MyWebDriver
+from scraper._types import MyWebDriver
 from .elements_query.await_element import await_element
 from .actions.click_x_pop_up import click_x_pop_up
 from .job_value_getter.job_value_getter import get_values_for_job
@@ -72,11 +72,32 @@ def get_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWeb
                 print_key_value_pairs(job)
 
             # write job to csv
+            # todo
 
         click_next_page(driver, jobs_counter, jobs_number)
 
 
-def click_next_page(driver: MyWebDriver, jobs_counter: int, , jobs_number: int):
+def click_next_page(driver: MyWebDriver, jobs_counter: int, jobs_number: int):
+    """
+    Clicks on the 'Next' button to navigate to the next page of job listings on Glassdoor.
+
+    Args:
+    - driver (MyWebDriver): The webdriver instance used to interact with the Glassdoor website.
+    - jobs_counter (int): The number of jobs that have been scraped so far.
+    - jobs_number (int): The total number of jobs to scrape.
+
+    Raises:
+    - ElementClickInterceptedException: If the 'Next' button is present 
+    but is not clickable due to an overlay element blocking it.
+
+    - NoSuchElementException: If the 'Next' button is not found on the page, 
+    which indicates that there are no more job listings to scrape.
+
+    Note:
+    - If the 'Next' button is not clickable due to a driver's error blocking it, 
+    the function will attempt to click the button using JavaScript 
+    instead of the standard WebDriver click method.
+    """
 
     try:
         next_page = driver.find_element(
@@ -95,8 +116,17 @@ def click_next_page(driver: MyWebDriver, jobs_counter: int, , jobs_number: int):
 
 
 def exit_scraping_when_no_more_jobs(jobs_counter: int, jobs_number: int):
+    """
+    Exits the program when there is no more jobs to scrape from the website.
+
+    Args:
+    - jobs_counter (int): The number of jobs that have been scraped so far.
+    - jobs_number (int): The total number of jobs to scrape.
+    """
+
     sys.exit(
-        f"Scraping terminated before reaching target number of jobs. Needed {jobs_counter}, got {len(jobs_number)}."
+        f"Scraping terminated before reaching target number of jobs.\n\
+            Needed {jobs_counter}, got {len(jobs_number)}."
     )
 
 

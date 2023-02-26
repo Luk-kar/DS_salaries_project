@@ -15,4 +15,3 @@ Element_XPATH = str
 Job_values = dict[str, Field_value]
 Job_elements = dict[str, XpathListSearch | XpathSearch]
 Job = dict[str, Job_values] | dict
-Jobs = list[Job]
