@@ -3,16 +3,18 @@ This module provides a function to update a job dictionary
 with values obtained from an external web page source,
 using XPATH expressions to extract the values.
 '''
+# External
+from selenium.webdriver.remote.webelement import WebElement
 
 # Internal
-from scraper._types import Job_elements, Job_values, MyWebElement
+from scraper._types import Job_elements, Job_values
 from ._dict_value_adder import add_values_to_job_from_dict
 from ._element_value_getter import get_values_from_element
 
 
 def get_and_add_element_value(
     job: Job_values,
-    values_source_element: MyWebElement,
+    values_source_element: WebElement,
     job_values_to_add: Job_elements
 ):
     '''

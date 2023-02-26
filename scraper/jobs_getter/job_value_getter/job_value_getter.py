@@ -4,9 +4,10 @@ The Module is responsible for getting all values from a single job posting
 # External
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webelement import WebElement
 
 # Internal
-from scraper._types import MyWebElement, Job_elements, Job_values, MyWebDriver
+from scraper._types import WebElement, Job_elements, Job_values, MyWebDriver
 from ._dict_value_adder import add_values_to_job_from_dict
 from ._element_value_getter_and_adder import get_and_add_element_value
 from ..elements_query.await_element import await_element
@@ -14,7 +15,7 @@ from ..elements_query.XPATH_text_getter import XpathListSearch, XpathSearch
 from ..actions.pause import pause
 
 
-def get_values_for_job(driver: MyWebDriver, job_button: MyWebElement) -> dict:
+def get_values_for_job(driver: MyWebDriver, job_button: WebElement) -> dict:
     '''
     Get columns values from the current selected job posting.
 
@@ -51,7 +52,7 @@ def get_values_for_job(driver: MyWebDriver, job_button: MyWebElement) -> dict:
     return job
 
 
-def _get_company_benefits_review(job: Job_values, job_post: MyWebElement):
+def _get_company_benefits_review(job: Job_values, job_post: WebElement):
     '''
     Updates the passed job dictionary dictionary with reviews
     company's benefits and their overall score.
@@ -88,7 +89,7 @@ def _get_company_benefits_review(job: Job_values, job_post: MyWebElement):
         add_values_to_job_from_dict(job, benefits_review)
 
 
-def _get_company_reviews_by_job_title(job: Job_values, job_post: MyWebElement):
+def _get_company_reviews_by_job_title(job: Job_values, job_post: WebElement):
     '''
     Updates the passed job dictionary dictionary with reviews
     (Pros and Cons) of the company based on the job title. 
@@ -115,7 +116,7 @@ def _get_company_reviews_by_job_title(job: Job_values, job_post: MyWebElement):
     }
 
     try:
-        reviews_info: MyWebElement = job_post.find_element(
+        reviews_info: WebElement = job_post.find_element(
             By.ID, "Reviews"
         )
 
@@ -131,7 +132,7 @@ def _get_company_reviews_by_job_title(job: Job_values, job_post: MyWebElement):
         )
 
 
-def _get_company_ratings(job: Job_values, job_post: MyWebElement):
+def _get_company_ratings(job: Job_values, job_post: WebElement):
     '''
     Updates the passed job dictionary with the company rating values
     scraped from the job posting element.
@@ -174,7 +175,7 @@ def _get_company_ratings(job: Job_values, job_post: MyWebElement):
     }
 
     try:
-        rating_info: MyWebElement = job_post.find_element(
+        rating_info: WebElement = job_post.find_element(
             By.XPATH, '//div[@data-test="company-ratings"]'
         )
 
@@ -190,7 +191,7 @@ def _get_company_ratings(job: Job_values, job_post: MyWebElement):
         )
 
 
-def _get_company_description(job: Job_values, job_post: MyWebElement):
+def _get_company_description(job: Job_values, job_post: WebElement):
     '''
     Updates the passed job dictionary with the company description values
     scraped from the job posting element.
@@ -230,7 +231,7 @@ def _get_company_description(job: Job_values, job_post: MyWebElement):
     }
 
     try:
-        company_info: MyWebElement = job_post.find_element(
+        company_info: WebElement = job_post.find_element(
             By.ID, "EmpBasicInfo")
 
         get_and_add_element_value(
@@ -245,7 +246,7 @@ def _get_company_description(job: Job_values, job_post: MyWebElement):
         )
 
 
-def _get_job_button_values(job: Job_values, job_button: MyWebElement):
+def _get_job_button_values(job: Job_values, job_button: WebElement):
     '''
     Updates the passed job dictionary with the job post age and Easy apply values
     scraped from the job posting button.
@@ -278,7 +279,7 @@ def _get_job_button_values(job: Job_values, job_button: MyWebElement):
     )
 
 
-def _get_job_descriptions_values(job: Job_values, job_post: MyWebElement):
+def _get_job_descriptions_values(job: Job_values, job_post: WebElement):
     '''
     Updates the passed job dictionary with the job description values
     scraped from the job posting.

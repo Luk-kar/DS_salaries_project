@@ -4,14 +4,15 @@ for a given dictionary of job values.
 '''
 # External
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.remote.webelement import WebElement
 
 
 # Internal
-from scraper._types import MyWebElement, Job_elements
+from scraper._types import WebElement, Job_elements
 from scraper.jobs_getter.elements_query.XPATH_text_getter import get_XPATH_values
 
 
-def get_values_from_element(source_html: MyWebElement, job_values: Job_elements):
+def get_values_from_element(source_html: WebElement, job_values: Job_elements):
     '''get values from a source web element for an each web element in the job values'''
 
     for values in job_values.values():

@@ -6,15 +6,16 @@ a fallback "NA_value" from the configuration file.
 
 # External
 from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webelement import WebElement
 
 # Internal
-from scraper._types import MyWebElement
 from scraper.config.get import get_config
 from scraper.config._types import NA_value
 
 config = get_config()
 na_value = config["NA_value"]
-Elements = list[MyWebElement]
+
+WebElements = list[WebElement]
 
 
 class XpathSearch:
@@ -38,14 +39,14 @@ class XpathListSearch(XpathSearch):
 
 
 def get_XPATH_values(
-        source_html: MyWebElement,
+        source_html: WebElement,
         search: XpathSearch | XpathListSearch
 ) -> list | str:
     """
     Extracts the text or texts of selected web element.
 
     Args:
-    - source_html (MyWebElement): the web page element to search.
+    - source_html (WebElement): the web page element to search.
     - search (XpathSearch or XpathListSearch): a class representing 
     an XPath query for the desired element(s).
 
@@ -55,7 +56,7 @@ def get_XPATH_values(
 
     if isinstance(search, XpathListSearch):
 
-        elements: Elements = source_html.find_elements(
+        elements: WebElements = source_html.find_elements(
             By.XPATH, search.element
         )
 
@@ -70,7 +71,7 @@ def get_XPATH_values(
         return text
 
 
-def _get_all_texts(elements: Elements) -> list[str]:
+def _get_all_texts(elements: WebElements) -> list[str]:
     """
     Extracts the text of a list of web elements.
 
@@ -87,14 +88,14 @@ def _get_all_texts(elements: Elements) -> list[str]:
 
 
 def _get_text(
-        source_html: MyWebElement,
+        source_html: WebElement,
         search: XpathSearch
 ) -> str:
     """
     Extracts the text of a single web element.
 
     Args:
-    - source_html (MyWebElement): the web page element to search.
+    - source_html (WebElement): the web page element to search.
     - search (XpathSearch): a class representing an XPath query for the desired element.
 
     Returns:

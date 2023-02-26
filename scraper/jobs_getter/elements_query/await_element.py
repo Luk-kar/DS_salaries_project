@@ -11,17 +11,18 @@ from typing import Annotated
 # External
 from annotated_types import Gt
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.remote.webelement import WebElement
 
 # Internal
-from scraper._types import Element_XPATH, MyWebElement, MyWebDriver
+from scraper._types import Element_XPATH, MyWebDriver
 
 
 def await_element(
-    driver: MyWebDriver | MyWebElement,
+    driver: MyWebDriver | WebElement,
     timeout: Annotated[int, Gt(0)],
     by: str, element:
     Element_XPATH
-) -> MyWebElement:
+) -> WebElement:
     '''Use when the element is loading in a run time after the initial loading of the webpage'''
 
     return WebDriverWait(driver, timeout).until(
