@@ -79,6 +79,9 @@ def get_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWeb
                 print_key_value_pairs(job)
 
             # write job to csv
+            if jobs_counter == 1:
+                csv_writer.write_header(job)
+
             csv_writer.write_row(job)
 
             jobs_counter += 1
@@ -91,6 +94,7 @@ class CSV_Writer():
     def __init__(self, csv_path) -> None:
         self.csv_path = csv_path
         self.directory_path = os.path.dirname(csv_path)
+        self.encoding = "utf-8"
 
     def write_row(self, row):
         '''
@@ -98,18 +102,33 @@ class CSV_Writer():
         a tuple is written as a single row in csv file
         '''
         file_path = self.csv_path
+        encoding = self.encoding
+
+        if not os.path.isfile(file_path):
+            raise FileNotFoundError(
+                f"To add row to the csv, you need a initialized file first.\
+                    \nNon existing file:\
+                    \n{file_path}")
+
+        row = self._convert_dict_values_to_tuple(row)
+
+        print(f"Row_to_save:\n{row}")
+
+        self._my_write_row(row, file_path, "a", encoding)
+
+    def write_header(self, header):
+
+        file_path = self.csv_path
+        encoding = self.encoding
 
         if not os.path.exists(self.directory_path):
             os.makedirs(self.directory_path)
 
-        if not os.path.isfile(self.csv_path):
-            pass
+        self._my_write_row(header, file_path, "w", encoding)
 
-        row = self.convert_dict_values_to_tuple(row)
+    def _my_write_row(self, row, file_path, mode, encoding):
 
-        print(f"Row_to_save:\n{row}")
-
-        with open(file_path, 'a', newline='', encoding="utf-8") as csv_file:
+        with open(file_path, mode, newline='', encoding=encoding) as csv_file:
 
             csv_writer = csv.writer(csv_file)
 
@@ -117,36 +136,20 @@ class CSV_Writer():
                 csv_writer.writerow(row)
 
             except csv.Error as error:
-                sys.exit(
-                    f'File:\n\
+                self._print_write_error(file_path, csv_writer, error)
+
+    def _print_write_error(self, file_path, csv_writer, error):
+        sys.exit(
+            f'File:\n\
                     {file_path}\n\
                     Line:\
                     \n{csv_writer.line_num}\
                     \n Error:\
                     \n{error}'
-                )
+        )
 
-    def convert_dict_values_to_tuple(self, dictionary: dict) -> tuple:
+    def _convert_dict_values_to_tuple(self, dictionary: dict) -> tuple:
         return tuple(dictionary.values())
-
-    def write_header(self, header):  # todo
-                with open(file_path, 'a', newline='', encoding="utf-8") as csv_file:
-
-            csv_writer = csv.writer(csv_file)
-
-            try:
-                csv_writer.writerow(row)
-
-            except csv.Error as error:
-                sys.exit(
-                    f'File:\n\
-                    {file_path}\n\
-                    Line:\
-                    \n{csv_writer.line_num}\
-                    \n Error:\
-                    \n{error}'
-                )
-
 
 
 class CSV_Writer_RAW(CSV_Writer):
