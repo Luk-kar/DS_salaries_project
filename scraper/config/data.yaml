@@ -32,4 +32,4 @@ output_path:
     raw: "RAW"
     clean: "clean"
 debug_mode: true
-NA_value: -1
+NA_value: null

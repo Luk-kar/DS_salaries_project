@@ -106,7 +106,7 @@ class TestConfigData(unittest.TestCase):
     def test_NA_value(self):
         """check if NA is a single valid value everywhere"""
 
-        self.assertEqual(self.config["NA_value"], -1)
+        self.assertIsInstance(self.config["NA_value"], None)
 
     def test_output_paths(self):
         """check correctness of path"""
