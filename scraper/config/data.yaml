@@ -17,8 +17,8 @@ jobs_titles:
         - "Database Engineer"
         - "Database Developer"
         - "Analytics Consultant"
-# it is strongly advised to not go above 1000, otherwise you could be blocked
-jobs_number: 1000
+# it is strongly advised to not go above 2000, otherwise you could be blocked
+jobs_number: 2000
 url:
     # base + job + keyword + job + location + ?
     001_base: "https://www.glassdoor.com/Job/jobs.htm?suggestCount=0&suggestChosen=false&clickSource=searchBtn&typedKeyword="

@@ -24,7 +24,7 @@ from .CSV_Writer import CSV_Writer_RAW
 WebElements = list[WebElement]
 
 
-def get_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWebDriver):
+def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWebDriver):
     '''Getting list of job postings values populated with glassdoor.com'''
 
     if debug_mode:
