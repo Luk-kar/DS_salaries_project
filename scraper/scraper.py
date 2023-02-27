@@ -28,7 +28,7 @@ def scrape_data(
         debug_mode: bool = config['debug_mode']
 ):
     """
-    Scrapes job postings from a webpage based on the given job title and number of jobs. 
+    Scrapes job postings from the glassdoor.com based on the given job title and number of jobs. 
 
     Args:
         - job_title (str, optional): The job title to search for. 

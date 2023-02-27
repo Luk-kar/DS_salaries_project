@@ -34,6 +34,6 @@ output_path:
 # In Python None value is not equivalent to null in Typescript.
 # Empty string complies with mypy better.
 NA_value: ""
-debug_mode: true
+debug_mode: false
 # glassdoor charset
 encoding: "utf-8"
