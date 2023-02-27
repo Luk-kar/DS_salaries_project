@@ -3,7 +3,6 @@ import csv
 import os
 import sys
 from typing import Literal
-import _csv
 
 
 # Internal
@@ -59,7 +58,7 @@ class CSV_Writer():
 
         self._my_write_row(header, file_path, "w", encoding)
 
-    def _my_write_row(self, row: tuple, file_path: str, mode: Mode, encoding: str):
+    def _my_write_row(self, row: tuple | Job, file_path: str, mode: Mode, encoding: str):
 
         with open(file_path, mode, newline='', encoding=encoding) as csv_file:
 
@@ -69,15 +68,17 @@ class CSV_Writer():
                 csv_writer.writerow(row)
 
             except csv.Error as error:
-                self._print_write_error(file_path, csv_writer, error)
+                self._print_write_error(file_path, error)
 
-    def _print_write_error(self, file_path: str, csv_writer: _csv.writer, error: csv.Error):
+    def _print_write_error(self, file_path: str, error: csv.Error):
+
+        line_number = self.counter + 1  # + 1 (header)
 
         sys.exit(
             f'File:\n\
                     {file_path}\n\
                     Line:\
-                    \n{csv_writer.line_num}\
+                    \n{line_number}\
                     \n Error:\
                     \n{error}'
         )
