@@ -130,7 +130,12 @@ def get_NA_value() -> NA_value:
 
 
 def get_encoding() -> str:
+    """
+    Returns the encoding type to use for reading and writing csv as specified in the config file.
 
+    Returns:
+    - str: The encoding type to use for reading and writing files.
+    """
     return get_config()['encoding']
 
 

@@ -31,8 +31,8 @@ output_path:
     main: "data"
     raw: "RAW"
     clean: "clean"
-# In Python None value is not equivalent of null in C.
-# Empty string complies with mypy better
+# In Python None value is not equivalent to null in Typescript.
+# Empty string complies with mypy better.
 NA_value: ""
 debug_mode: true
 # glassdoor charset
