@@ -22,10 +22,10 @@ config = get_config()
 
 
 def scrape_data(
-        job_title: str = config["jobs_titles"]["default"],
-        jobs_number: Annotated[int, Gt(0)] = config["jobs_number"],
-        driver_path: str = config["driver_path"],
-        debug_mode: bool = config["debug_mode"]
+        job_title: str = config['jobs_titles']['default'],
+        jobs_number: Annotated[int, Gt(0)] = config['jobs_number'],
+        driver_path: str = config['driver_path'],
+        debug_mode: bool = config['debug_mode']
 ):
     '''returns uncleaned DataFrame object from searched job title on glassdoor.com'''
 

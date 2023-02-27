@@ -13,7 +13,7 @@ from scraper.config.get import get_config
 from scraper.config._types import NA_value
 
 config = get_config()
-na_value = config["NA_value"]
+na_value = config['NA_value']
 
 WebElements = list[WebElement]
 

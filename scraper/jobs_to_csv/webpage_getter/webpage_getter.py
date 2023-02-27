@@ -19,7 +19,7 @@ config = get_config()
 def get_webpage(
     url: str,
     debug_mode: DebugMode,
-    driver_path: str = config["driver_path"]
+    driver_path: str = config['driver_path']
 ) -> MyWebDriver:
     '''returns browser driver'''
 

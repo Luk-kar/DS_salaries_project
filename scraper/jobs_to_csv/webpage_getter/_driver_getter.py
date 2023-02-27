@@ -18,8 +18,8 @@ config = get_config()
 
 
 def get_driver(
-        debug_mode: bool = config["debug_mode"],
-        path: str = config["driver_path"]):
+        debug_mode: bool = config['debug_mode'],
+        path: str = config['driver_path']):
     '''Returns website's driver with custom options'''
 
     options = webdriver.ChromeOptions()
