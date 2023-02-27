@@ -11,7 +11,7 @@ from selenium.webdriver.remote.webelement import WebElement
 
 # Internal
 from scraper.config._types import JobNumber, DebugMode
-from scraper.config.get import get_path_csv_raw
+from scraper.config.get import get_path_csv_raw, get_encoding
 from scraper._types import MyWebDriver
 from .elements_query.await_element import await_element
 from .actions.click_javascript import click_via_javascript
@@ -86,7 +86,7 @@ class CSV_Writer():
     def __init__(self, csv_path) -> None:
         self.csv_path = csv_path
         self.directory_path = os.path.dirname(csv_path)
-        self.encoding = "utf-8"
+        self.encoding = get_encoding()
         self.counter = 1
 
     def write_observation(self, observation):

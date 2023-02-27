@@ -31,5 +31,7 @@ output_path:
     main: "data"
     raw: "RAW"
     clean: "clean"
-debug_mode: true
 NA_value: null
+debug_mode: true
+# glassdoor charset
+encoding: "utf-8"

@@ -129,6 +129,11 @@ def get_NA_value() -> NA_value:
     return get_config()['NA_value']
 
 
+def get_encoding() -> str:
+
+    return get_config()['encoding']
+
+
 def is_possible_path(file_path: str) -> bool:
     """
     Checks if the file path is valid and does not contain any illegal characters.
