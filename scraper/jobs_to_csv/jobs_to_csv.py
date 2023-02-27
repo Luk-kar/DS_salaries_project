@@ -32,11 +32,9 @@ def get_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWeb
         now = datetime.now().isoformat(sep=" ", timespec="seconds")
         print(f"\n{now}\n")
 
-    jobs_counter = 1
-
     csv_writer = CSV_Writer_RAW()
 
-    while jobs_counter <= jobs_number:
+    while csv_writer.counter <= jobs_number:
 
         jobs_list_buttons: WebElement = await_element(
             driver, 20, By.XPATH, '//ul[@data-test="jlGrid"]')
@@ -55,9 +53,9 @@ def get_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWeb
 
         for job_button in jobs_buttons:
 
-            print(f"Progress: {jobs_counter}/{jobs_number}")
+            print(f"Progress: {csv_writer.counter}/{jobs_number}")
 
-            if jobs_counter >= jobs_number + 1:
+            if csv_writer.counter >= jobs_number + 1:
                 break
 
             try:
@@ -78,15 +76,13 @@ def get_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWeb
             if debug_mode:
                 print_key_value_pairs(job)
 
-            # write job to csv
-            if jobs_counter == 1:
-                csv_writer.write_header(job)
+            csv_writer.write_observation(job)
 
             csv_writer.write_row(job)
 
-            jobs_counter += 1
+            csv_writer.counter += 1
 
-        click_next_page(driver, jobs_counter, jobs_number)
+        click_next_page(driver, csv_writer.counter, jobs_number)
 
 
 class CSV_Writer():
@@ -95,6 +91,16 @@ class CSV_Writer():
         self.csv_path = csv_path
         self.directory_path = os.path.dirname(csv_path)
         self.encoding = "utf-8"
+        self.counter = 1
+
+    def write_observation(self, observation):
+
+        if self.counter == 1:
+            self.write_header(observation)
+
+        self.write_row(observation)
+
+        self.counter += 1
 
     def write_row(self, row):
         '''
@@ -111,8 +117,6 @@ class CSV_Writer():
                     \n{file_path}")
 
         row = self._convert_dict_values_to_tuple(row)
-
-        print(f"Row_to_save:\n{row}")
 
         self._my_write_row(row, file_path, "a", encoding)
 
@@ -139,6 +143,7 @@ class CSV_Writer():
                 self._print_write_error(file_path, csv_writer, error)
 
     def _print_write_error(self, file_path, csv_writer, error):
+
         sys.exit(
             f'File:\n\
                     {file_path}\n\
