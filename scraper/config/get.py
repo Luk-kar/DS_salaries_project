@@ -20,12 +20,12 @@ from pathvalidate._common import PathType
 from scraper.config._types import Config, Url, JobDefault, NA_value
 
 
-def get_config(path: str = 'scraper\\config\\data.yaml') -> Config:
+def get_config(path: str = "scraper\\config\\data.yaml") -> Config:
     '''
     Loads configuration data from a YAML file and returns it as a Config object.
 
     Args:
-        path (str): Path to the YAML file to be loaded. Default is 'scraper\\config\\data.yaml'.
+        path (str): Path to the YAML file to be loaded. Default is "scraper\\config\\data.yaml".
 
     Returns:
         Config: A Config object representing the configuration data loaded from the file.

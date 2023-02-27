@@ -18,7 +18,7 @@ Encoding = str
 OutputPath = TypedDict('OutputPath', {'main': str, 'raw': str, 'clean': str})
 Config = TypedDict('Config', {'jobs_titles': JobTitles, 'jobs_number': JobNumber,
                               'url': Url, 'driver_path': DriverPath,
-                              'debug_mode': DebugMode, "NA_value": NA_value,
+                              'debug_mode': DebugMode, 'NA_value': NA_value,
                               'output_path': OutputPath,
                               'encoding': Encoding
                               },

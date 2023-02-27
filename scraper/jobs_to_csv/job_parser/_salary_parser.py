@@ -177,7 +177,7 @@ def get_pay_scale_ranges(salary: str) -> str:
 
 def get_is_provided(salary: str) -> bool | NA_value:
     '''
-    Checks if the salary string contains 'Employer Provided Salary' or 'Glassdoor est'.
+    Checks if the salary string contains "Employer Provided Salary" or "Glassdoor est".
 
     Args:
         salary: A string representing the salary.

@@ -12,7 +12,7 @@ from .click_javascript import click_via_javascript
 
 def click_next_page(driver: MyWebDriver, jobs_counter: int, jobs_number: int):
     '''
-    Clicks on the 'Next' button to navigate to the next page of job listings on Glassdoor.
+    Clicks on the "Next" button to navigate to the next page of job listings on Glassdoor.
 
     Args:
     - driver (MyWebDriver): The webdriver instance used to interact with the Glassdoor website.
@@ -20,14 +20,14 @@ def click_next_page(driver: MyWebDriver, jobs_counter: int, jobs_number: int):
     - jobs_number (int): The total number of jobs to scrape.
 
     Raises:
-    - ElementClickInterceptedException: If the 'Next' button is present 
+    - ElementClickInterceptedException: If the "Next" button is present 
     but is not clickable due to an overlay element blocking it.
 
-    - NoSuchElementException: If the 'Next' button is not found on the page, 
+    - NoSuchElementException: If the "Next" button is not found on the page, 
     which indicates that there are no more job listings to scrape.
 
     Note:
-    - If the 'Next' button is not clickable due to a driver's error blocking it, 
+    - If the "Next" button is not clickable due to a driver's error blocking it, 
     the function will attempt to click the button using JavaScript 
     instead of the standard WebDriver click method.
     '''

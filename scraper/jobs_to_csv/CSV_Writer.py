@@ -119,12 +119,12 @@ class CSV_Writer():
         - row (tuple | Job): A tuple or dictionary containing the job observation data
           to write to the CSV file.
         - file_path (str): Path to the CSV file.
-        - mode (Mode): Write mode ('w' for overwrite or 'a' for append).
+        - mode (Mode): Write mode ("w" for overwrite or "a" for append).
         - encoding (str): The encoding of the CSV file.
 
         '''
 
-        with open(file_path, mode, newline='', encoding=encoding) as csv_file:
+        with open(file_path, mode, newline="", encoding=encoding) as csv_file:
 
             csv_writer = csv.writer(csv_file)
 
