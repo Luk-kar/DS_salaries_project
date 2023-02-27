@@ -20,6 +20,7 @@ from .job_parser.job_parser import parse_data
 from .debugger.print_key_value_pairs import print_key_value_pairs
 from .CSV_Writer import CSV_Writer_RAW
 
+# todo one source of truth, avoid circular import
 WebElements = list[WebElement]
 
 

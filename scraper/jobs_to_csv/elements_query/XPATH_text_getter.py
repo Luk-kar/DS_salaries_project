@@ -15,6 +15,7 @@ from scraper.config._types import NA_value
 config = get_config()
 na_value = config['NA_value']
 
+# todo one source of truth, avoid circular import
 WebElements = list[WebElement]
 
 
