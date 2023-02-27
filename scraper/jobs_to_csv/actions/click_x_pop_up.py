@@ -16,7 +16,7 @@ from scraper.jobs_to_csv.elements_query.await_element import await_element
 
 
 def click_x_pop_up(driver: WebElement | MyWebDriver):
-    """Riding off pop-up blocking web page elements"""
+    '''Riding off pop-up blocking web page elements'''
 
     try:
         x_button = await_element(

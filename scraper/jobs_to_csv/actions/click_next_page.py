@@ -11,7 +11,7 @@ from .click_javascript import click_via_javascript
 
 
 def click_next_page(driver: MyWebDriver, jobs_counter: int, jobs_number: int):
-    """
+    '''
     Clicks on the 'Next' button to navigate to the next page of job listings on Glassdoor.
 
     Args:
@@ -30,7 +30,7 @@ def click_next_page(driver: MyWebDriver, jobs_counter: int, jobs_number: int):
     - If the 'Next' button is not clickable due to a driver's error blocking it, 
     the function will attempt to click the button using JavaScript 
     instead of the standard WebDriver click method.
-    """
+    '''
 
     try:
         next_page = driver.find_element(
@@ -49,13 +49,13 @@ def click_next_page(driver: MyWebDriver, jobs_counter: int, jobs_number: int):
 
 
 def _exit_scraping_when_no_more_jobs(jobs_counter: int, jobs_number: int):
-    """
+    '''
     Exits the program when there is no more jobs to scrape from the website.
 
     Args:
     - jobs_counter (int): The number of jobs that have been scraped so far.
     - jobs_number (int): The total number of jobs to scrape.
-    """
+    '''
 
     sys.exit(
         f"Scraping terminated before reaching target number of jobs.\n\

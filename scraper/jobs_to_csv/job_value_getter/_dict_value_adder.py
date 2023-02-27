@@ -9,7 +9,7 @@ def add_values_to_job_from_dict(
     job: Job_values,
     values_to_add: Job_elements
 ):
-    """
+    '''
     Adds the values from the `values_to_add` dictionary to the `job` dictionary.
 
     Args:
@@ -20,7 +20,7 @@ def add_values_to_job_from_dict(
     Returns:
         - None: This function does not return a value; 
         it updates the `job` dictionary in place.
-    """
+    '''
 
     for column, field in values_to_add.items():
         job[column] = field.value

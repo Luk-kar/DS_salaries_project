@@ -1,10 +1,10 @@
-"""
+'''
 This module provides functions for loading configuration and URL data 
 from a YAML file and returning it in a structured format, 
 including the get_config() function which returns a Config object 
 and the get_url() function which returns a HTTP string. 
 It imports the yaml library and uses the SafeLoader to safely load the YAML data.
-"""
+'''
 # Python
 import os
 import platform
@@ -21,7 +21,7 @@ from scraper.config._types import Config, Url, JobDefault, NA_value
 
 
 def get_config(path: str = 'scraper\\config\\data.yaml') -> Config:
-    """
+    '''
     Loads configuration data from a YAML file and returns it as a Config object.
 
     Args:
@@ -29,14 +29,14 @@ def get_config(path: str = 'scraper\\config\\data.yaml') -> Config:
 
     Returns:
         Config: A Config object representing the configuration data loaded from the file.
-    """
+    '''
 
     with open(path, encoding="utf-8") as file:
         return yaml.load(file, Loader=SafeLoader)
 
 
 def get_url(url: Url, job_title: JobDefault) -> str:
-    """
+    '''
     Constructs a HTTP URL string using the given `url` dictionary and `job_title`.
 
     Args:
@@ -45,7 +45,7 @@ def get_url(url: Url, job_title: JobDefault) -> str:
 
     Returns:
         str: The constructed HTTP URL string.
-    """
+    '''
 
     http = url["001_base"] + job_title + \
         url["002_keyword"] + job_title + \
@@ -61,7 +61,7 @@ def _get_path_csv(directory: str,
                   job_title: str = config["jobs_titles"]["default"],
                   extension: str = "csv"
                   ) -> str:
-    """
+    '''
     Returns a string representing the file path for a CSV file to be written. 
 
     Args:
@@ -75,7 +75,7 @@ def _get_path_csv(directory: str,
 
     Raises:
         OSError: If the generated file path is not a valid file path.
-    """
+    '''
 
     directory_main = config['output_path']['main']
     directory_target = os.path.join(directory_main, directory)
@@ -95,52 +95,52 @@ def _get_path_csv(directory: str,
 
 
 def get_path_csv_raw() -> str:
-    """
+    '''
     Returns the absolute path to the directory where "the raw" 
     CSV files are saved based on the configuration.
 
     Returns:
         str: The absolute path to the directory where "the raw" CSV files are saved.
-    """
+    '''
 
     return _get_path_csv(config["output_path"]["raw"])
 
 
 def get_path_csv_clean() -> str:
-    """
+    '''
     Returns the absolute path to the directory where "the clean" 
     CSV files are saved based on the configuration.
 
     Returns:
         str: The absolute path to the directory where "the clean" CSV files are saved.
-    """
+    '''
 
     return _get_path_csv(config["output_path"]["clean"])
 
 
 def get_NA_value() -> NA_value:
-    """
+    '''
     Returns the 'NA_value' from the configuration file.
 
     Returns:
         NA_value: A value representing the 'NA_value' defined in the configuration file.
-    """
+    '''
 
     return get_config()['NA_value']
 
 
 def get_encoding() -> str:
-    """
+    '''
     Returns the encoding type to use for reading and writing csv as specified in the config file.
 
     Returns:
     - str: The encoding type to use for reading and writing files.
-    """
+    '''
     return get_config()['encoding']
 
 
 def is_possible_path(file_path: str) -> bool:
-    """
+    '''
     Checks if the file path is valid and does not contain any illegal characters.
 
     Args:
@@ -149,7 +149,7 @@ def is_possible_path(file_path: str) -> bool:
     Returns:
         bool: True if the file path is valid 
         and does not contain any illegal characters, False otherwise.
-    """
+    '''
 
     # https://stackoverflow.com/a/67119769/12490791
     is_possible = file_path == _my_sanitize_filepath(file_path)
@@ -160,7 +160,7 @@ def is_possible_path(file_path: str) -> bool:
 
 
 def _my_sanitize_filepath(path: str) -> PathType:
-    """
+    '''
     Sanitize a file path for the current operating system.
 
     Args:
@@ -172,6 +172,6 @@ def _my_sanitize_filepath(path: str) -> PathType:
 
     Raises:
         TypeError: If the input path is not a string.
-    """
+    '''
     return sanitize_filepath(
         path, platform=platform.system())

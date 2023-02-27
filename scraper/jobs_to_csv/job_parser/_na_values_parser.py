@@ -1,14 +1,14 @@
-"""
+'''
 This module provides functions to parse and clean job data by replacing 
 NA values with a configured value, checking whether a value is an NA value, 
 and checking whether a string is empty or contains only whitespace characters.
-"""
+'''
 # Internal
 from scraper.config.get import get_NA_value
 
 
 def parse_na_values(job: dict):
-    """
+    '''
     Replaces all NA values in the input job dictionary with the NA value specified
     in the configuration.
 
@@ -18,7 +18,7 @@ def parse_na_values(job: dict):
     Returns:
         None: This function does not return anything. 
         The job dictionary is modified in place.
-    """
+    '''
 
     na_value = get_NA_value()
     for key, value in job.items():
@@ -27,7 +27,7 @@ def parse_na_values(job: dict):
 
 
 def _is_NA_value(value):
-    """
+    '''
     Checks whether the given value is an NA value.
 
     Args:
@@ -35,7 +35,7 @@ def _is_NA_value(value):
 
     Returns:
         bool: True if the value is NA, False otherwise.
-    """
+    '''
     NA_VALUES = [[], "N/A", "Unknown / Non-Applicable"]
 
     return bool(
@@ -44,7 +44,7 @@ def _is_NA_value(value):
 
 
 def _is_emptish_string(value: str) -> bool:
-    """
+    '''
     Check if a string is empty or contains only whitespace characters.
 
     Args:
@@ -52,5 +52,5 @@ def _is_emptish_string(value: str) -> bool:
 
     Returns:
         bool: True if the string is empty or contains only whitespace characters, False otherwise.
-    """
+    '''
     return isinstance(value, str) and len(value.strip()) == 0

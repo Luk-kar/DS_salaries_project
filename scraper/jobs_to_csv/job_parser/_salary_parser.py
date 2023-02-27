@@ -1,12 +1,12 @@
 
-"""
+'''
 This module contains functions for parsing salary information in job postings. 
 The parse_salary() function takes in a dictionary containing salary information 
 and modifies the dictionary to include additional keys for
  salary low, salary high, salary estimate, and currency. 
  The insert_dict_to_dictionary() function inserts the salary key-value pairs 
  into the original job posting dictionary while maintaining the order of other keys.
-"""
+'''
 
 # Python
 from typing import Any
@@ -20,7 +20,7 @@ from scraper._types import Field_value
 
 
 def parse_salary(job: dict):
-    """
+    '''
     Parses the salary data in the given dictionary and 
     adds new keys for salary low, salary high, salary estimate, and currency. 
     Deletes the 'Salary' key from the dictionary.
@@ -34,7 +34,7 @@ def parse_salary(job: dict):
     Returns:
         None: This function does not return anything. 
         The job dictionary is modified in place.
-    """
+    '''
 
     salary: str | NA_value = job['Salary']
 
@@ -64,7 +64,7 @@ def parse_salary(job: dict):
 
 
 def insert_dict_to_dictionary(job: dict, salary_values: dict):
-    """
+    '''
     Inserts the keys and values from the given `salary_values` dictionary 
     into the `job` dictionary at the appropriate
     position relative to the 'Salary' key, preserving the order of the other keys.
@@ -76,14 +76,14 @@ def insert_dict_to_dictionary(job: dict, salary_values: dict):
     Returns:
         None: This function does not return anything. 
         The job dictionary is modified in place.
-    """
+    '''
 
     index = get_key_index(job, 'Salary')
     insert_keys_values(job, salary_values, index)
 
 
 def dict_to_tuples(dictionary: dict) -> list[tuple[Any, Any]]:
-    """
+    '''
     Converts a dictionary into a list of tuples 
     where each tuple contains a key-value pair from the dictionary.
 
@@ -92,12 +92,12 @@ def dict_to_tuples(dictionary: dict) -> list[tuple[Any, Any]]:
 
     Returns:
         list: A list of tuples where each tuple contains a key-value pair from the dictionary.
-    """
+    '''
     return list(dictionary.items())
 
 
 def get_key_index(dict_receiver: dict, key) -> int:
-    """
+    '''
     Return the index of a given key in a dictionary.
 
     Args:
@@ -113,13 +113,13 @@ def get_key_index(dict_receiver: dict, key) -> int:
     Example:
         >>> get_key_index({'a': 1, 'b': 2, 'c': 3}, 'b')
         1
-    """
+    '''
 
     return list(dict_receiver.keys()).index(key)
 
 
 def insert_keys_values(dict_receiver: dict, dict_add: dict, position: int):
-    """
+    '''
     Inserts key-value pairs from a dictionary into another dictionary at a specified position.
 
     Args:
@@ -131,7 +131,7 @@ def insert_keys_values(dict_receiver: dict, dict_add: dict, position: int):
     Returns:
         None: This function does not return anything. 
         The job dictionary is modified in place.
-    """
+    '''
 
     tuples_add = dict_to_tuples(dict_add)
 
@@ -146,7 +146,7 @@ def insert_keys_values(dict_receiver: dict, dict_add: dict, position: int):
 
 
 def get_pay_scale_ranges(salary: str) -> str:
-    """
+    '''
     Extracts pay-scale ranges from the given input string 
     using regular expressions.
 
@@ -159,7 +159,7 @@ def get_pay_scale_ranges(salary: str) -> str:
 
     Raises:
         IndexError: If the match is a None type.
-    """
+    '''
 
     # https://regex101.com/r/AY8ag3/1 read "$200K - $300K"
     pattern_pay_scale = r'\$\d+[Kk]? - \$\d+[Kk]?'
@@ -176,7 +176,7 @@ def get_pay_scale_ranges(salary: str) -> str:
 
 
 def get_is_provided(salary: str) -> bool | NA_value:
-    """
+    '''
     Checks if the salary string contains 'Employer Provided Salary' or 'Glassdoor est'.
 
     Args:
@@ -186,7 +186,7 @@ def get_is_provided(salary: str) -> bool | NA_value:
         A boolean value of True if the salary is employer provided, 
         False if it's estimated by Glassdoor, 
         or a NA_value if the salary is not provided.
-    """
+    '''
 
     if "Employer Provided Salary" in salary:
         return True
@@ -197,7 +197,7 @@ def get_is_provided(salary: str) -> bool | NA_value:
 
 
 def _get_currency(salary_range: str) -> str:
-    """
+    '''
     Returns the currency from the salary range string.
 
     Args:
@@ -208,7 +208,7 @@ def _get_currency(salary_range: str) -> str:
 
     Raises:
         IndexError: If the match is a None type.
-    """
+    '''
 
     # https://regex101.com/r/FEKvy6/387
     currency_match = re.search(r"^.+?(?=\d)", salary_range)
@@ -225,7 +225,7 @@ def _get_currency(salary_range: str) -> str:
 
 
 def assert_is_match(match: re.Match[str] | None):
-    """
+    '''
     Check if a given regex match exists.
 
     Args:
@@ -236,11 +236,11 @@ def assert_is_match(match: re.Match[str] | None):
 
     Raises:
         IndexError: If the match is a None type.
-    """
+    '''
 
 
 def _parse_to_int(salary: str) -> int:
-    """
+    '''
     Parses the salary string to an integer.
 
     Args:
@@ -248,7 +248,7 @@ def _parse_to_int(salary: str) -> int:
 
     Returns:
         int: The integer value of the salary string.
-    """
+    '''
 
     if salary.endswith('K'):
         value = _change_to_integer(salary)
@@ -260,7 +260,7 @@ def _parse_to_int(salary: str) -> int:
 
 
 def _change_to_integer(salary: str) -> int:
-    """
+    '''
     Converts the given string to an integer.
 
     Args:
@@ -268,7 +268,7 @@ def _change_to_integer(salary: str) -> int:
 
     Returns:
         int: The integer value of the salary string.
-    """
+    '''
 
     numeric_filter = filter(str.isdigit, salary)
     numeric_string = "".join(numeric_filter)

@@ -21,7 +21,7 @@ def get_webpage(
     debug_mode: DebugMode,
     driver_path: str = config["driver_path"]
 ) -> MyWebDriver:
-    """returns browser driver"""
+    '''returns browser driver'''
 
     driver: MyWebDriver = get_driver(debug_mode, driver_path)
     try:

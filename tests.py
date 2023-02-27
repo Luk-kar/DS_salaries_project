@@ -1,7 +1,7 @@
-"""
+'''
 This is a module for testing the configuration data of a web scraping project.
 The module consists of two test classes: TestConfigData and TestJobDescription.
-"""
+'''
 
 # Python
 import os
@@ -21,35 +21,35 @@ from scraper._types import MyWebDriver
 
 
 class TestConfigData(unittest.TestCase):
-    """
+    '''
     It tests the configuration data stored in Config 
     object which is obtained from get_args method of scraper.config.get_config
-    """
+    '''
 
     def setUp(self):
-        """init all config values"""
+        '''init all config values'''
         self.config: Config = get_config()
         self.url = get_url(self.config['url'],
                            self.config["jobs_titles"]["default"])
 
     def is_empty_string(self, string: str):
-        """assert if is it not an empty string"""
+        '''assert if is it not an empty string'''
 
         self.assertIsInstance(string, str)
         self.assertNotEqual(string, "")
 
     def test_config_is_dict(self):
-        """assert if instance of a dict"""
+        '''assert if instance of a dict'''
 
         self.assertIsInstance(self.config, dict)
 
     def test_job_default(self):
-        """assert if is it not an empty string"""
+        '''assert if is it not an empty string'''
 
         self.is_empty_string(self.config["jobs_titles"]["default"])
 
     def test_jobs_similar(self):
-        """assert if is any of the jobs, not an empty string"""
+        '''assert if is any of the jobs, not an empty string'''
 
         jobs: JobSimilar = self.config["jobs_titles"]["similar"]
 
@@ -59,14 +59,14 @@ class TestConfigData(unittest.TestCase):
             self.is_empty_string(job)
 
     def test_jobs_number(self):
-        """test if is it greater than 0"""
+        '''test if is it greater than 0'''
 
         jobs_number: JobNumber = self.config["jobs_number"]
         self.assertIsInstance(jobs_number, int)
         self.assertGreater(jobs_number, 0)
 
     def test_url(self):
-        """test if are there url's types"""
+        '''test if are there url's types'''
 
         url: Url = self.config["url"]
         self.assertIsInstance(url, dict)
@@ -75,7 +75,7 @@ class TestConfigData(unittest.TestCase):
             self.assertIsInstance(part, str)
 
     def test_web_exists(self):
-        """check if url exists"""
+        '''check if url exists'''
 
         response = requests.get(self.url, timeout=10)
         OK_status_code = 200
@@ -85,7 +85,7 @@ class TestConfigData(unittest.TestCase):
                          f"OK\nError - {status_code} : {response.reason}")
 
     def test_driver_path(self):
-        """check if the driver exists on the local machine"""
+        '''check if the driver exists on the local machine'''
 
         path_file: str = self.config["driver_path"]
         self.is_empty_string(path_file)
@@ -99,17 +99,17 @@ class TestConfigData(unittest.TestCase):
         self.assertTrue(is_Mac_Win_Linux_app)
 
     def test_debug_mode(self):
-        """check an arg for verbose mode"""
+        '''check an arg for verbose mode'''
 
         self.assertIsInstance(self.config["debug_mode"], bool)
 
     def test_NA_value(self):
-        """check if NA is a single valid value everywhere"""
+        '''check if NA is a single valid value everywhere'''
 
         self.assertEqual(self.config["NA_value"],  "")
 
     def test_output_paths(self):
-        """check correctness of path"""
+        '''check correctness of path'''
 
         csv_raw_path = get_path_csv_raw()
 
@@ -121,7 +121,7 @@ class TestConfigData(unittest.TestCase):
 
 
 class TestJobDescription(unittest.TestCase):
-    """It tests single-job page scraping"""
+    '''It tests single-job page scraping'''
 
     def setUp(self):
         self.config: Config = get_config()

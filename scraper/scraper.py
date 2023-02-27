@@ -1,4 +1,4 @@
-"""
+'''
 The module responsible for creating RAW data format,
 from queries from defined:
     - job title
@@ -7,7 +7,7 @@ Additional args are:
     - driver's path for selected web browser
     - debug mode for development and debugging
 Arguments could be passed from the global config data file or directly into the function.
-"""
+'''
 # Python
 import sys
 from typing import Annotated
@@ -27,7 +27,7 @@ def scrape_data(
         driver_path: str = config["driver_path"],
         debug_mode: bool = config["debug_mode"]
 ):
-    """returns uncleaned DataFrame object from searched job title on glassdoor.com"""
+    '''returns uncleaned DataFrame object from searched job title on glassdoor.com'''
 
     url = get_url(config['url'], job_title)
     driver = get_webpage(url, debug_mode, driver_path)

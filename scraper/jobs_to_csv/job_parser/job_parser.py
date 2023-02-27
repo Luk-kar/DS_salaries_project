@@ -1,8 +1,8 @@
-"""
+'''
 This module provides a function for cleaning a job dictionary by parsing 
 and converting numeric and percentage values to floats and integers, bools,
 providing NA values, and expanding data by feature engineering
-"""
+'''
 # Internal
 from ._na_values_parser import parse_na_values
 from ._numerical_values_parser import parse_numerical_values
@@ -13,13 +13,13 @@ from ._employees_parser import parse_employees
 
 
 def parse_data(job: dict):
-    """
+    '''
     Cleans the input job dictionary by converting numeric 
     and percentage values to floats and integers.
 
     Args:
         job (dict): The job dictionary to be cleaned.
-    """
+    '''
 
     # The order of the operations is important!
     # parse_NA_values should be first!

@@ -1,13 +1,13 @@
-"""
+'''
 This module provides a function that parses the 'Employees' 
 field of a job dictionary if it is not a NA value.
-"""
+'''
 # Internal
 from scraper.config.get import get_NA_value
 
 
 def parse_employees(job: dict):
-    """
+    '''
     Parses the 'Employees' field of a job dictionary if it is not a NA value.
 
     Args:
@@ -16,7 +16,7 @@ def parse_employees(job: dict):
     Returns:
         None. This function does not return anything. 
         The job dictionary is modified in place
-    """
+    '''
 
     na_value = get_NA_value()
 

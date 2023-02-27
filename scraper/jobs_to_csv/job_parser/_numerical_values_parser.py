@@ -1,19 +1,19 @@
-"""
+'''
 This module provides functions to parse numerical values in a given job dictionary. 
 The main function parse_numerical_values() converts positive numeric 
 and percentage values in the input job dictionary to floats and integers.
-"""
+'''
 
 
 def parse_numerical_values(job: dict):
-    """
+    '''
     Converts positive numeric and percentage values 
     in the input job dictionary 
     to floats and integers.
 
     Args:
         job (dict): The job dictionary to be cleaned.
-    """
+    '''
     for key, value in job.items():
 
         if isinstance(value, str):
@@ -30,7 +30,7 @@ def parse_numerical_values(job: dict):
 
 
 def _is_positive_number(string: str) -> bool:
-    """
+    '''
     Determines whether a string represents a positive number.
 
     Args:
@@ -48,7 +48,7 @@ def _is_positive_number(string: str) -> bool:
         False
         >>> is_positive_number('abc')
         False
-    """
+    '''
 
     if _is_number(string):
 
@@ -58,7 +58,7 @@ def _is_positive_number(string: str) -> bool:
 
 
 def _is_number(string: str):
-    """
+    '''
 
     Returns True if the input string can be converted to a floating point number, 
     and False otherwise.
@@ -76,7 +76,7 @@ def _is_number(string: str):
         True
         >>> is_number('abc')
         False
-    """
+    '''
     try:
         float(string)
         return True
@@ -85,7 +85,7 @@ def _is_number(string: str):
 
 
 def _is_int(string: str) -> bool:
-    """
+    '''
     Returns True if the given string represents a positive integer, 
     and False otherwise.
 
@@ -94,12 +94,12 @@ def _is_int(string: str) -> bool:
 
     Returns:
     bool: True if the string represents an integer, and False otherwise.
-    """
+    '''
     return string.isdigit()
 
 
 def _is_percent_value(string: str) -> bool:
-    """
+    '''
     Check whether the input string represents a valid percentage value.
 
     Args:
@@ -107,7 +107,7 @@ def _is_percent_value(string: str) -> bool:
 
     Returns:
         bool: True if the input string represents a valid percentage value, False otherwise.
-    """
+    '''
     try:
         value = _get_percent_value(string)
         return _is_percent_valid(value)
@@ -116,7 +116,7 @@ def _is_percent_value(string: str) -> bool:
 
 
 def _is_percent_valid(value: float) -> bool:
-    """
+    '''
     Determines if the input value is a valid percent value.
 
     Args:
@@ -125,12 +125,12 @@ def _is_percent_valid(value: float) -> bool:
     Returns:
         bool: True if the input value is a valid percent value (i.e., between 0 and 100, inclusive),
               False otherwise.
-    """
+    '''
     return 0 <= value <= 100
 
 
 def _percent_string_to_float(string: str) -> float:
-    """
+    '''
     Converts a string representing a percent value to a float between 0.0 and 1.0.
 
     Args:
@@ -143,7 +143,7 @@ def _percent_string_to_float(string: str) -> float:
     Raises:
         ValueError: If the input string is not in the correct format or represents an
             invalid percent value.
-    """
+    '''
     try:
         value = _get_percent_value(string)
     except ValueError as exception:
@@ -156,7 +156,7 @@ def _percent_string_to_float(string: str) -> float:
 
 
 def _get_percent_value(string: str) -> float:
-    """
+    '''
     Returns the percent value represented by the input string.
 
     Args:
@@ -180,7 +180,7 @@ def _get_percent_value(string: str) -> float:
 
         >>> _get_percent_value("100.00%")
         1.0
-    """
+    '''
     string = string.strip()
     if string.endswith('%'):
         string = string[:-1]
