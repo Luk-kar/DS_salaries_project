@@ -31,7 +31,9 @@ output_path:
     main: "data"
     raw: "RAW"
     clean: "clean"
-NA_value: null
+# In Python None value is not equivalent of null in C.
+# Empty string complies with mypy better
+NA_value: ""
 debug_mode: true
 # glassdoor charset
 encoding: "utf-8"
