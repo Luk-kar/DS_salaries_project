@@ -78,10 +78,6 @@ def get_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWeb
 
             csv_writer.write_observation(job)
 
-            csv_writer.write_row(job)
-
-            csv_writer.counter += 1
-
         click_next_page(driver, csv_writer.counter, jobs_number)
 
 
