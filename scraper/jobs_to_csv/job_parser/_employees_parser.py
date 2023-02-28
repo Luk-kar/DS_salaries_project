@@ -6,7 +6,7 @@ field of a job dictionary if it is not a NA value.
 from scraper.config.get import get_NA_value
 
 
-def parse_employees(job: dict):
+def parse_employees(job: dict[str, str]):
     '''
     Parses the 'Employees' field of a job dictionary if it is not a NA value.
 

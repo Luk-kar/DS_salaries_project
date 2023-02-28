@@ -7,7 +7,7 @@ and any leading/trailing whitespaces if it is not a NA value.
 from scraper.config.get import get_NA_value
 
 
-def parse_revenue(job: dict):
+def parse_revenue(job: dict[str, str]):
     '''
     Parses the 'Revenue_USD' field of a job dictionary if it is not a NA value.
 

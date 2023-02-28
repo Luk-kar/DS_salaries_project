@@ -23,9 +23,11 @@ def parse_data(job: dict):
 
     # The order of the operations is important!
     # parse_NA_values should be first!
+    # parse_salary next
+    # parse_revenue next
     parse_na_values(job)
+    # parse_salary(job)
+    parse_revenue(job)
     parse_numerical_values(job)
-    parse_salary(job)
     parse_easy_apply(job)
     parse_employees(job)
-    parse_revenue(job)

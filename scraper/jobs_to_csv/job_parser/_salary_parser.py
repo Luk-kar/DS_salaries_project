@@ -30,6 +30,9 @@ def parse_salary(job: dict):
         in the format:
         - "$51K - $81K (Glassdoor est.)" 
         - "Employer Provided Salary: $51K - $81K"
+        - "base: $51K - $81K Employer Provided;
+        extra: $80K - $200K Glassdoor est."
+        probably AB test (ultra rare case)
 
     Returns:
         None: This function does not return anything. 
@@ -48,7 +51,6 @@ def parse_salary(job: dict):
 
     if salary != na_value:
 
-        # Employer Provided Salary:$200K - $300K
         salary_range = get_pay_scale_ranges(salary)
         low, high = salary_range.split(' - ')
 
@@ -56,6 +58,7 @@ def parse_salary(job: dict):
         salary_values['Salary_high'] = _parse_to_int(high)
         salary_values['Currency'] = _get_currency(salary_range)
         salary_values['Salary_provided'] = get_is_provided(salary)
+        # per hour
 
     # insert into dictionary
     insert_dict_to_dictionary(job, salary_values)
@@ -162,15 +165,29 @@ def get_pay_scale_ranges(salary: str) -> str:
     '''
 
     # https://regex101.com/r/AY8ag3/1 read "$200K - $300K"
+    # todo fix $ PLN, (euro), (rupee)
+
     pattern_pay_scale = r'\$\d+[Kk]? - \$\d+[Kk]?'
     pay_scale_match = re.search(pattern_pay_scale, salary)
+
+    if pay_scale_match is None:
+        # "$100K"
+        pattern_pay_scale = r'\$\d+[Kk]'
+        pay_scale_match = re.search(pattern_pay_scale, salary)
+
+    if pay_scale_match is None:
+        # "$75.50 - $100.00"
+        pattern_pay_scale = r'\$\d+[Kk]'
+        pay_scale_match = re.search(pattern_pay_scale, salary)
+
+    # "$60.00"
 
     if pay_scale_match is None:
         raise IndexError(
             f"There is no return from the match:\n{pay_scale_match}"
         )
-
-    pay_scale = pay_scale_match[0]  # type: ignore [index]
+    #
+    pay_scale = pay_scale_match[0]
 
     return pay_scale
 
