@@ -30,7 +30,7 @@ def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWe
 
     if debug_mode:
         now = datetime.now().isoformat(sep=" ", timespec="seconds")
-        print(f"\n{now}\n")
+        print(f"\nDate: {now}")
 
     csv_writer = CSV_Writer_RAW()
 
