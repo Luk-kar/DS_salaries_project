@@ -1,7 +1,6 @@
 '''
-This module provides a function
-that prints key-value pairs for a Job object,
-which is used for debugging when parsing HTML.
+This module provides a functions
+for printing info needed for debugging
 '''
 # Python
 from datetime import datetime
