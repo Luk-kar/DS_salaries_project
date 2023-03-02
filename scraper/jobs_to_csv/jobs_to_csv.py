@@ -14,11 +14,12 @@ from .elements_query.await_element import await_element
 from .actions.click_javascript import click_via_javascript
 from .actions.click_next_page import click_next_page
 from .actions.click_x_pop_up import click_x_pop_up
-from .job_value_getter.job_value_getter import get_values_for_job
 from .actions.pause import pause
-from .job_parser.job_parser import parse_data
-from .debugger.print_key_value_pairs import print_key_value_pairs
 from .CSV_Writer import CSV_Writer_RAW
+from .job_value_getter.job_value_getter import get_values_for_job
+from .job_parser.job_parser import parse_data
+from .debugger.key_value_printer import print_key_value_pairs
+
 
 # todo one source of truth, avoid circular import
 WebElements = list[WebElement]
@@ -78,3 +79,8 @@ def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWe
             csv_writer.write_observation(job)
 
         click_next_page(driver, csv_writer.counter, jobs_number)
+
+        # todo There has to be more elegant and efficient way to do it
+        # Await element to upload all buttons
+        # https://stackoverflow.com/questions/27003423/staleelementreferenceexception-on-python-selenium
+        pause()

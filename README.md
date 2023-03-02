@@ -26,6 +26,13 @@ This project web scrapes the popular job listing site "Glassdoor" for informatio
 
 ## Prerequisites
 
+### Set Chrome browser
+
+To avoid the bugs like:
+[9292:9976:0302/114352.788:ERROR:gpu_init.cc(523)] Passthrough is not supported, GL is disabled, ANGLE is
+[51120:18300:0302/120010.546:ERROR:gpu_init.cc(523)] Passthrough is not supported, GL is disabled, ANGLE is
+https://stackoverflow.com/a/67575891/12490791
+
 ## Usage
 
 1.

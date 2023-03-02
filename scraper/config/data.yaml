@@ -17,7 +17,7 @@ jobs_titles:
         - "Database Engineer"
         - "Database Developer"
         - "Analytics Consultant"
-# it is strongly advised to not go above 2000, otherwise you could be blocked
+# The cap in glassdoor is probably 900 (30 x 30)
 jobs_number: 2000
 url:
     # base + job + keyword + job + location + ?
