@@ -45,7 +45,7 @@ def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWe
             )
         except NoSuchElementException as error:
             sys.exit(
-                f"Check if you did not any misspell in the job title or \
+                f"Check if you did not have any misspell in the job title or \
                 if you were silently blocked by glassdoor.\
                 \nError: {error}")
 
