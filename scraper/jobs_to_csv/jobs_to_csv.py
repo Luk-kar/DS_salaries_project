@@ -18,7 +18,7 @@ from .actions.pause import pause
 from .CSV_Writer import CSV_Writer_RAW
 from .job_value_getter.job_value_getter import get_values_for_job
 from .job_parser.job_parser import parse_data
-from .debugger.key_value_printer import print_key_value_pairs
+from .debugger.printer import print_key_value_pairs, print_current_page
 
 
 # todo one source of truth, avoid circular import
@@ -35,6 +35,9 @@ def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWe
     csv_writer = CSV_Writer_RAW()
 
     while csv_writer.counter <= jobs_number:
+
+        if debug_mode:
+            print_current_page(driver)
 
         jobs_list_buttons: WebElement = await_element(
             driver, 20, By.XPATH, '//ul[@data-test="jlGrid"]')
