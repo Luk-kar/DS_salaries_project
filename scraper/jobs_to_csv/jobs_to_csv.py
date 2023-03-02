@@ -52,12 +52,11 @@ def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWe
 
         click_x_pop_up(driver)
 
-        for job_button in jobs_buttons:
+        emergency_button_index = csv_writer.counter - 1 % 30
+
+        for job_button in range(emergency_button_index, len(jobs_buttons)):
 
             print(f"Progress: {csv_writer.counter}/{jobs_number}")
-
-            if csv_writer.counter >= jobs_number + 1:
-                break
 
             try:
                 job_button.click()
@@ -72,6 +71,15 @@ def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWe
 
             job = get_values_for_job(driver, job_button)
 
+            if job['Company_name'] == "":
+
+                html = driver.execute_script("return document.body.innerHTML;")
+                with open("error.html", "w") as f:
+                    f.write(html)
+
+                driver.refresh()
+                break
+
             parse_data(job)
 
             if debug_mode:
@@ -79,9 +87,11 @@ def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWe
 
             csv_writer.write_observation(job)
 
-        click_next_page(driver, csv_writer.counter, jobs_number)
+        else:
 
-        # todo There has to be more elegant and efficient way to do it
-        # Await element to upload all buttons
-        # https://stackoverflow.com/questions/27003423/staleelementreferenceexception-on-python-selenium
-        pause()
+            click_next_page(driver, csv_writer.counter, jobs_number)
+
+            # todo There has to be more elegant and efficient way to do it
+            # Await element to upload all buttons
+            # https://stackoverflow.com/questions/27003423/staleelementreferenceexception-on-python-selenium
+            pause()
