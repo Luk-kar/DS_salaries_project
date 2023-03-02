@@ -4,7 +4,7 @@ that prints key-value pairs for a Job object,
 which is used for debugging when parsing HTML.
 '''
 # Python
-import math
+from datetime import datetime
 from os import get_terminal_size
 
 # External
@@ -74,3 +74,18 @@ def _get_pagination_footer(driver: MyWebDriver):
     return driver.find_element(
         By.XPATH, './/div[@data-test="pagination-footer-text"]'
     ).text
+
+
+def print_current_date_time():
+    '''
+    Prints the current date and time in ISO format with second precision.
+
+    Parameters:
+        None
+
+    Returns:
+        None
+    '''
+
+    now = datetime.now().isoformat(sep=" ", timespec="seconds")
+    print(f"\nDate: {now}")

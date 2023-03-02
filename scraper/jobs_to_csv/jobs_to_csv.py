@@ -1,5 +1,4 @@
 # Python
-from datetime import datetime
 import sys
 
 # External
@@ -18,7 +17,7 @@ from .actions.pause import pause
 from .CSV_Writer import CSV_Writer_RAW
 from .job_value_getter.job_value_getter import get_values_for_job
 from .job_parser.job_parser import parse_data
-from .debugger.printer import print_key_value_pairs, print_current_page
+from .debugger.printer import print_key_value_pairs, print_current_page, print_current_date_time
 
 
 # todo one source of truth, avoid circular import
@@ -29,8 +28,7 @@ def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWe
     '''Getting list of job postings values populated with glassdoor.com'''
 
     if debug_mode:
-        now = datetime.now().isoformat(sep=" ", timespec="seconds")
-        print(f"\nDate: {now}")
+        print_current_date_time()
 
     csv_writer = CSV_Writer_RAW()
 
