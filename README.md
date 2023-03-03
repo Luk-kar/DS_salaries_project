@@ -45,9 +45,20 @@ https://stackoverflow.com/a/67575891/12490791
 3. Searching job offers by Country/State
 4. Refactor the code to more of the paradigm Object Oriented Programming (OOP) approach than Functional Programming (FP).
    It's just easier to maintain.
+5. Add logging to error handling.
 
-## Wish-not-list
+## Wish-not-list and troubleshoots
 
-1. The scraping links of job offers will make things more delicate and breakable.
-   The main goal of this soft is Exploratory Data Analysis (EDA).
-   When looking for a job there is a much more efferent approach than using Selenium. For example by using BeautifulSoup and scraping directly on the job postings than on the jobs aggregator.
+1. No links to a job offer:
+   Scraping links for job offers can make things more delicate and breakable.
+   The links are displayed in a separate pop-up on the page, and you cannot be sure that they will load properly.
+   The main goal of this script is exploratory data analysis (EDA).
+   If you are looking for a job, there is a much more efficient approach than using Selenium.
+   For example, you can use BeautifulSoup to scrape job postings directly, rather than using a job aggregator on the page.
+2. The cap is set at 900 jobs (note that this number may be outdated when you read this):
+   One of the reasons why I use implementation through the main aggregation page is that it provides information on how old the job posting is, which is not directly available on the job posting itself.
+3. Not sure if the job postings are picked at random, by the glassdoor search engine.
+   Even when the population sample is sizeable, there still can be a bias.
+4. There seem to be repeating job postings (multiplicities). There are two possibilities:
+   - The job postings are picked with replacement.
+   - The same job postings are posted more than once by a company.

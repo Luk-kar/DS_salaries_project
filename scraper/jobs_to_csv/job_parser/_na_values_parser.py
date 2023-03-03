@@ -36,7 +36,8 @@ def _is_NA_value(value):
     Returns:
         bool: True if the value is NA, False otherwise.
     '''
-    NA_VALUES = [[], "N/A", "Unknown / Non-Applicable"]
+    NA_VALUES = [[], "", "N/A", "Unknown / Non-Applicable",
+                 "Unknown", "Non-Applicable"]
 
     return bool(
         _is_emptish_string(value) or value in NA_VALUES

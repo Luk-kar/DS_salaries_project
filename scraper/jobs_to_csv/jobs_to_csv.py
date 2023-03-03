@@ -1,6 +1,7 @@
 # Python
 import logging
 import sys
+from typing import Literal
 
 # External
 from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException, StaleElementReferenceException, TimeoutException
@@ -24,6 +25,7 @@ from .debugger.printer import print_key_value_pairs, print_current_page, print_c
 
 # todo one source of truth, avoid circular import
 WebElements = list[WebElement]
+Pages_Number = Literal["Unknown"] | int
 
 
 def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWebDriver):
@@ -33,6 +35,8 @@ def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWe
         print_current_date_time()
 
     csv_writer = CSV_Writer_RAW()
+
+    number_of_pages = get_total_web_pages(driver)
 
     while csv_writer.counter <= jobs_number:
 
@@ -50,11 +54,12 @@ def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWe
                 \nError: {error}")
 
         if debug_mode:
-            print_current_page(csv_writer.counter, len(jobs_buttons))
+            print_current_page(csv_writer.counter, len(
+                jobs_buttons), number_of_pages)
 
         click_x_pop_up(driver)
 
-        saved_button_index = (csv_writer.counter - 1) % len(jobs_buttons)
+        saved_button_index = calculate_index(csv_writer, jobs_buttons)
 
         for job_button in jobs_buttons[saved_button_index:]:
 
@@ -107,6 +112,44 @@ def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWe
             # Awaits element to upload all buttons. Traditional awaits elements didn't work out.
             # https://stackoverflow.com/questions/27003423/staleelementreferenceexception-on-python-selenium
             pause()
+
+
+def get_total_web_pages(driver: MyWebDriver) -> Pages_Number:
+
+    total_pages = "Unknown"
+    target_element = '//div[@data-test="pagination-footer-text"]'
+    error_introduction = "WARNING: The element responsible for recognizing the total number of pages"
+
+    try:
+        total_pages = await_element(
+            driver, 10, By.XPATH, target_element).text.strip().split(" ")[-1]
+
+    except (TimeoutException, NoSuchElementException, StaleElementReferenceException) as error:
+        print(
+            f"{error_introduction} has been not loaded!:\n{error}"
+        )
+    except IndexError as error:
+        print(
+            f"{error_introduction} is empty!:\n{error}"
+        )
+
+    if not total_pages.isdigit():
+        print(
+            f"{error_introduction} is not a positive integer!"
+        )
+
+    try:
+        total_pages = int(total_pages)
+    except ValueError as error:
+        print(
+            f"{error_introduction} is not integer!:\n{error}"
+        )
+
+    return total_pages
+
+
+def calculate_index(csv_writer: CSV_Writer_RAW, jobs_buttons: WebElement):
+    return (csv_writer.counter - 1) % len(jobs_buttons)
 
 
 def _save_errored_page(driver: MyWebDriver):

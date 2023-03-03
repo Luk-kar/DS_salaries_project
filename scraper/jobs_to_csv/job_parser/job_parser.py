@@ -10,6 +10,7 @@ from ._salary_parser import parse_salary
 from ._easy_apply_parser import parse_easy_apply
 from ._revenue_parser import parse_revenue
 from ._employees_parser import parse_employees
+from ._company_name_parser import parse_company_name
 
 
 def parse_data(job: dict):
@@ -29,6 +30,7 @@ def parse_data(job: dict):
     parse_na_values(job)
     # parse_salary(job)
     parse_revenue(job)
+    parse_company_name(job)
     parse_numerical_values(job)
     parse_easy_apply(job)
     parse_employees(job)

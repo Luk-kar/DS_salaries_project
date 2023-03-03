@@ -38,7 +38,11 @@ def click_next_page(driver: MyWebDriver, jobs_counter: int, jobs_number: int):
 
         if next_page.is_enabled():
             next_page.click()
+
         else:
+            _exit_scraping_when_no_more_jobs(jobs_counter, jobs_number)
+
+        if next_page.get_attribute("disabled") == "":
             _exit_scraping_when_no_more_jobs(jobs_counter, jobs_number)
 
     except ElementClickInterceptedException:

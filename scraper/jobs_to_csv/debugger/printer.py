@@ -6,12 +6,10 @@ for printing info needed for debugging
 from datetime import datetime
 import math
 from os import get_terminal_size
-
-# External
-from selenium.webdriver.common.by import By
+from typing import Literal
 
 # Internal
-from scraper._types import Job, MyWebDriver
+from scraper._types import Job
 
 
 def print_key_value_pairs(job: Job):
@@ -39,7 +37,7 @@ def _print_separator(char_separator: str):
     print(separator)
 
 
-def print_current_page(jobs_so_far: int, jobs_per_page: int):
+def print_current_page(jobs_so_far: int, jobs_per_page: int, number_of_pages: int | Literal["Unknown"]):
     '''
     Prints the current page number, calculated based on the number
     of jobs already scraped and the number of jobs displayed 
@@ -52,13 +50,13 @@ def print_current_page(jobs_so_far: int, jobs_per_page: int):
     Returns: None
 
     Note:
-    It is strongly not advised to use extracted page footer element's text.
+    It is strongly not advised to use extracted page footer element's text each time.
     Keep things less dependent on elements loaded from the site.
     The fewer interactions, the higher is chance that something will not break up.
     '''
     page_count = math.ceil(jobs_so_far / jobs_per_page)
 
-    pagination_footer = f"Page: {page_count}"
+    pagination_footer = f"Page {page_count} of {number_of_pages}"
 
     separator = "-"
 
