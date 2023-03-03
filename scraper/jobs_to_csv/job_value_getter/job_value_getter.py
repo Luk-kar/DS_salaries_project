@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
 # Internal
-from scraper._types import Job_elements, Job_values, MyWebDriver
+from scraper._types import Job_elements, Job_values, MyWebDriver, Job
 from ._dict_value_adder import add_values_to_job_from_dict
 from ._element_value_getter_and_adder import get_and_add_element_value
 from ..elements_query.await_element import await_element
@@ -15,7 +15,7 @@ from ..elements_query.XPATH_text_getter import XpathListSearch, XpathSearch
 from ..actions.pause import pause
 
 
-def get_values_for_job(driver: MyWebDriver, job_button: WebElement) -> dict:
+def get_values_for_job(driver: MyWebDriver, job_button: WebElement) -> Job_values:
     '''
     Get columns values from the current selected job posting.
 

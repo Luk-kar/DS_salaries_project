@@ -5,3 +5,5 @@ data/RAW
 
 .coverage
 htmlcov
+
+error.html

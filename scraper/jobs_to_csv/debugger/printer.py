@@ -4,6 +4,7 @@ for printing info needed for debugging
 '''
 # Python
 from datetime import datetime
+import math
 from os import get_terminal_size
 
 # External
@@ -38,17 +39,26 @@ def _print_separator(char_separator: str):
     print(separator)
 
 
-def print_current_page(driver: MyWebDriver):
+def print_current_page(jobs_so_far: int, jobs_per_page: int):
     '''
-    Prints the current page number using web's the pagination footer text.
+    Prints the current page number, calculated based on the number
+    of jobs already scraped and the number of jobs displayed 
+    per page on the website.
 
     Args:
-    - driver: an instance of MyWebDriver class representing a web browser.
+    - jobs_so_far: an integer representing the total number of jobs already scraped.
+    - jobs_per_page: an integer representing the number of jobs displayed per page on the website.
 
     Returns: None
-    '''
 
-    pagination_footer = _get_pagination_footer(driver)
+    Note:
+    It is strongly not advised to use extracted page footer element's text.
+    Keep things less dependent on elements loaded from the site.
+    The fewer interactions, the higher is chance that something will not break up.
+    '''
+    page_count = math.ceil(jobs_so_far / jobs_per_page)
+
+    pagination_footer = f"Page: {page_count}"
 
     separator = "-"
 
@@ -57,22 +67,6 @@ def print_current_page(driver: MyWebDriver):
     print(pagination_footer)
 
     _print_separator(separator)
-
-
-def _get_pagination_footer(driver: MyWebDriver):
-    '''
-    Get the pagination footer text from a job search result page using the driver object.
-
-    Args:
-    - driver: an instance of MyWebDriver class representing a web browser.
-
-    Returns:
-    - str: the pagination footer text
-    '''
-
-    return driver.find_element(
-        By.XPATH, './/div[@data-test="pagination-footer-text"]'
-    ).text
 
 
 def print_current_date_time():

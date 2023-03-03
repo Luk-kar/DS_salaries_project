@@ -1,14 +1,16 @@
 # Python
+import logging
 import sys
 
 # External
-from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException
+from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException, StaleElementReferenceException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
 # Internal
 from scraper.config._types import JobNumber, DebugMode
-from scraper._types import MyWebDriver
+from scraper.config.get import get_encoding
+from scraper._types import MyWebDriver, Job_values
 from .elements_query.await_element import await_element
 from .actions.click_javascript import click_via_javascript
 from .actions.click_next_page import click_next_page
@@ -34,9 +36,6 @@ def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWe
 
     while csv_writer.counter <= jobs_number:
 
-        if debug_mode:
-            print_current_page(driver)
-
         jobs_list_buttons: WebElement = await_element(
             driver, 20, By.XPATH, '//ul[@data-test="jlGrid"]')
 
@@ -50,11 +49,14 @@ def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWe
                 if you were silently blocked by glassdoor.\
                 \nError: {error}")
 
+        if debug_mode:
+            print_current_page(csv_writer.counter, len(jobs_buttons))
+
         click_x_pop_up(driver)
 
-        emergency_button_index = csv_writer.counter - 1 % 30
+        saved_button_index = (csv_writer.counter - 1) % len(jobs_buttons)
 
-        for job_button in range(emergency_button_index, len(jobs_buttons)):
+        for job_button in jobs_buttons[saved_button_index:]:
 
             print(f"Progress: {csv_writer.counter}/{jobs_number}")
 
@@ -65,17 +67,20 @@ def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWe
 
                 click_via_javascript(driver, job_button)
 
+            except StaleElementReferenceException:
+
+                driver.refresh()
+                break
+
             pause()
 
             click_x_pop_up(driver)
 
             job = get_values_for_job(driver, job_button)
 
-            if job['Company_name'] == "":
+            if not job_posting_exists(job):
 
-                html = driver.execute_script("return document.body.innerHTML;")
-                with open("error.html", "w") as f:
-                    f.write(html)
+                _save_errored_page(driver)
 
                 driver.refresh()
                 break
@@ -95,3 +100,49 @@ def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWe
             # Await element to upload all buttons
             # https://stackoverflow.com/questions/27003423/staleelementreferenceexception-on-python-selenium
             pause()
+
+
+def _save_errored_page(driver: MyWebDriver):
+    '''
+    his function saves the HTML content of the current page in a file named "error.html" 
+    in the current working directory. In case there is an encoding error 
+    while writing the file, it logs the error message in a file named "logs.log" 
+    in the current working directory.
+
+    Args:
+
+        driver: an instance of MyWebDriver class representing a web browser.
+
+    Returns: None.
+    '''
+
+    try:
+        html = driver.execute_script(
+            "return document.body.innerHTML;")
+        with open("error.html", "w", encoding=get_encoding()) as f:
+            f.write(html)
+    except UnicodeEncodeError as e:
+        logger = logging.getLogger()
+        logger.setLevel(logging.INFO)
+        formatter = logging.Formatter(
+            '%(asctime)s | %(levelname)s | %(message)s')
+
+        file_handler = logging.FileHandler('logs.log')
+        file_handler.setLevel(logging.DEBUG)
+        file_handler.setFormatter(formatter)
+
+        logger.addHandler(file_handler)
+        logger.error(f'This is an error message:{e}')
+
+
+def job_posting_exists(job: Job_values) -> bool:
+    '''
+    Checks whether the given job posting has a non-empty 'Company_name' field.
+
+    Args:
+    - job: a dictionary containing job posting values.
+
+    Returns:
+    - A boolean indicating whether the job posting has a company name.
+    '''
+    return job['Company_name'] != ""
