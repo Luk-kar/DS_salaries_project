@@ -29,14 +29,14 @@ Pages_Number = Literal["Unknown"] | int
 
 
 def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWebDriver):
-    '''Getting list of job postings values populated with glassdoor.com'''
+    '''Getting list of job postings values populated with glassdoor.com'''  # todo
 
     if debug_mode:
         print_current_date_time()
 
     csv_writer = CSV_Writer_RAW()
 
-    number_of_pages = get_total_web_pages(driver)
+    number_of_pages = _get_total_web_pages(driver)
 
     while csv_writer.counter <= jobs_number:
 
@@ -59,7 +59,7 @@ def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWe
 
         click_x_pop_up(driver)
 
-        saved_button_index = calculate_index(csv_writer, jobs_buttons)
+        saved_button_index = _calculate_index(csv_writer, jobs_buttons)
 
         for job_button in jobs_buttons[saved_button_index:]:
 
@@ -114,7 +114,16 @@ def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWe
             pause()
 
 
-def get_total_web_pages(driver: MyWebDriver) -> Pages_Number:
+def _get_total_web_pages(driver: MyWebDriver) -> Pages_Number:
+    '''
+    Extracts the total number of pages from the job search results.
+
+    Args:
+        - driver (MyWebDriver): The webdriver instance for the current job search.
+
+    Returns:
+        - The total number of pages as an integer.
+    '''
 
     total_pages = "Unknown"
     target_element = '//div[@data-test="pagination-footer-text"]'
@@ -125,30 +134,44 @@ def get_total_web_pages(driver: MyWebDriver) -> Pages_Number:
             driver, 10, By.XPATH, target_element).text.strip().split(" ")[-1]
 
     except (TimeoutException, NoSuchElementException, StaleElementReferenceException) as error:
-        print(
+        error
+        logging.error(
             f"{error_introduction} has been not loaded!:\n{error}"
         )
     except IndexError as error:
-        print(
+        logging.error(
             f"{error_introduction} is empty!:\n{error}"
         )
 
     if not total_pages.isdigit():
-        print(
+        logging.error(
             f"{error_introduction} is not a positive integer!"
         )
 
     try:
         total_pages = int(total_pages)
     except ValueError as error:
-        print(
+        logging.error(
             f"{error_introduction} is not integer!:\n{error}"
         )
 
     return total_pages
 
 
-def calculate_index(csv_writer: CSV_Writer_RAW, jobs_buttons: WebElement):
+def _calculate_index(csv_writer: CSV_Writer_RAW, jobs_buttons: WebElement):
+    '''
+    Calculates the index of the next job button to click, 
+    based on the current count and the number of job buttons available.
+
+    Args:
+        - csv_writer (CSV_Writer_RAW): An instance of the CSV_Writer_RAW class, 
+        which keeps track of the number of jobs processed so far.
+        - jobs_buttons (WebElement): The list of job buttons available on the current page.
+
+    Returns:
+        - An integer representing the index of the next job button to click.
+    '''
+
     return (csv_writer.counter - 1) % len(jobs_buttons)
 
 
