@@ -25,6 +25,7 @@ from .debugger.printer import print_key_value_pairs, print_current_page, print_c
 
 # todo one source of truth, avoid circular import
 WebElements = list[WebElement]
+# todo Unsupported left operand type for | ("object")  [operator]
 Pages_Number = Literal["Unknown"] | int
 
 
@@ -149,16 +150,16 @@ def _get_total_web_pages(driver: MyWebDriver) -> Pages_Number:
         )
 
     try:
-        total_pages = int(total_pages)
+        total_pages_sanitized = int(total_pages)
     except ValueError as error:
         logging.error(
             f"{error_introduction} is not integer!:\n{error}"
         )
 
-    return total_pages
+    return total_pages_sanitized
 
 
-def _calculate_index(csv_writer: CSV_Writer_RAW, jobs_buttons: WebElement):
+def _calculate_index(csv_writer: CSV_Writer_RAW, jobs_buttons: WebElements):
     '''
     Calculates the index of the next job button to click, 
     based on the current count and the number of job buttons available.
