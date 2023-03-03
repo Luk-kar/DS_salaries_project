@@ -38,4 +38,16 @@ https://stackoverflow.com/a/67575891/12490791
 1.
 2.
 
-## Future work
+## Wishlist
+
+1. Optimizing the speed of the script. Get rid of all artificial pause scripts.
+2. Making the driver more stealth
+3. Searching job offers by Country/State
+4. Refactor the code to more of the paradigm Object Oriented Programming (OOP) approach than Functional Programming (FP).
+   It's just easier to maintain.
+
+## Wish-not-list
+
+1. The scraping links of job offers will make things more delicate and breakable.
+   The main goal of this soft is Exploratory Data Analysis (EDA).
+   When looking for a job there is a much more efferent approach than using Selenium. For example by using BeautifulSoup and scraping directly on the job postings than on the jobs aggregator.

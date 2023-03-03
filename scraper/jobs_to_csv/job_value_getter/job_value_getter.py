@@ -35,7 +35,7 @@ def get_values_for_job(driver: MyWebDriver, job_button: WebElement) -> Job_value
     job: Job_values = {}
 
     job_post = await_element(
-        driver, 10, By.ID, "JDCol")
+        driver, 20, By.ID, "JDCol")
 
     pause()
 

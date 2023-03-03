@@ -3,7 +3,7 @@ import logging
 import sys
 
 # External
-from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException, StaleElementReferenceException
+from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException, StaleElementReferenceException, TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
@@ -76,7 +76,14 @@ def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWe
 
             click_x_pop_up(driver)
 
-            job = get_values_for_job(driver, job_button)
+            try:
+
+                job = get_values_for_job(driver, job_button)
+
+            except TimeoutException:
+
+                driver.refresh()
+                break
 
             if not job_posting_exists(job):
 
@@ -97,7 +104,7 @@ def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWe
             click_next_page(driver, csv_writer.counter, jobs_number)
 
             # todo There has to be more elegant and efficient way to do it
-            # Await element to upload all buttons
+            # Awaits element to upload all buttons. Traditional awaits elements didn't work out.
             # https://stackoverflow.com/questions/27003423/staleelementreferenceexception-on-python-selenium
             pause()
 
@@ -111,7 +118,7 @@ def _save_errored_page(driver: MyWebDriver):
 
     Args:
 
-        driver: an instance of MyWebDriver class representing a web browser.
+        - driver: an instance of MyWebDriver class representing a web browser.
 
     Returns: None.
     '''
