@@ -30,8 +30,9 @@ from .debugger.printer import print_key_value_pairs, print_current_page, print_c
 
 # todo one source of truth, avoid circular import
 WebElements = list[WebElement]
-# todo Unsupported left operand type for | ("object")  [operator]
-Pages_Number = Literal["Unknown"] | int
+
+# mypy bug https://github.com/python/mypy/issues/11426
+Pages_Number = Literal["Unknown"] | int  # type: ignore[operator]
 
 
 def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWebDriver):
