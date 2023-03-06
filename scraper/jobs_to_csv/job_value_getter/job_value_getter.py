@@ -171,7 +171,7 @@ def _get_company_ratings(job: Job_values, job_post: WebElement):
             './/*[text() = "Senior Management"]/following-sibling::span[2]'
         ),
         "Work/Life_balance": XpathSearch(
-            './/*[text() = "Work/Life_Balance"]/following-sibling::span[2]'
+            './/*[text() = "Work/Life Balance"]/following-sibling::span[2]'
         ),
     }
 
