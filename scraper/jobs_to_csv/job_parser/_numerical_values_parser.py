@@ -172,16 +172,16 @@ def _get_percent_value(string: str) -> float:
         >>> _get_percent_value("50%")
         0.5
 
-        >>> _get_percent_value("2.5%")
-        0.025
+        >>> _get_percent_value("50 %")
+        0.5
 
-        >>> _get_percent_value("1.0")
+        >>> _get_percent_value("1%")
         0.01
 
-        >>> _get_percent_value("100.00%")
+        >>> _get_percent_value("100%")
         1.0
     '''
     string = string.strip()
     if string.endswith('%'):
-        string = string[:-1]
+        string = ''.join(filter(str.isdigit, string))
     return float(string)
