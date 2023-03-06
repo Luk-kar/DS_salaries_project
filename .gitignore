@@ -7,3 +7,4 @@ data/RAW
 htmlcov
 
 error.html
+errors.log

@@ -202,7 +202,7 @@ def _save_errored_page(driver: MyWebDriver):
         formatter = logging.Formatter(
             '%(asctime)s | %(levelname)s | %(message)s')
 
-        file_handler = logging.FileHandler('error-logs.log')
+        file_handler = logging.FileHandler('errors.log')
         file_handler.setLevel(logging.DEBUG)
         file_handler.setFormatter(formatter)
 
