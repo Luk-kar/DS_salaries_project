@@ -1,3 +1,7 @@
+'''
+This module provides a function for clicking the "Next" button 
+to navigate to the next page of job listings on Glassdoor website.
+'''
 # Python
 import sys
 

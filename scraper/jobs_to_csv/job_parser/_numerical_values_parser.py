@@ -123,8 +123,8 @@ def _is_percent_valid(value: float) -> bool:
         value (float): A numeric value representing a percent.
 
     Returns:
-        bool: True if the input value is a valid percent value (i.e., between 0.0 and 1.0, inclusive),
-              False otherwise.
+        bool: True if the input value is a valid percent value 
+        (i.e., between 0.0 and 1.0, inclusive), False otherwise.
     '''
     return 0.0 <= value <= 1.0
 

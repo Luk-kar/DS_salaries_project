@@ -6,7 +6,6 @@ providing NA values, and expanding data by feature engineering
 # Internal
 from ._na_values_parser import parse_na_values
 from ._numerical_values_parser import parse_numerical_values
-from ._salary_parser import parse_salary
 from ._easy_apply_parser import parse_easy_apply
 from ._revenue_parser import parse_revenue
 from ._employees_parser import parse_employees

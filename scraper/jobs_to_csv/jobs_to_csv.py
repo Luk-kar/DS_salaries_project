@@ -1,3 +1,8 @@
+'''
+This module contains functions for web scraping of job listings from Glassdoor. 
+It uses Selenium for web automation.
+It also contains functions for writing job data to CSV files in its RAW version.
+'''
 # Python
 import logging
 import sys
@@ -32,6 +37,16 @@ Pages_Number = Literal["Unknown"] | int  # type: ignore[operator]
 
 
 def save_jobs_to_csv_raw(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWebDriver):
+    '''
+    This function saves job listings to a CSV file in RAW format. 
+
+    Args:
+        - jobs_number (JobNumber): The total number of jobs to save.
+        - debug_mode (DebugMode): A boolean variable indicating whether to run in debug mode.
+        - driver (MyWebDriver): An instance of the MyWebDriver class representing a web browser.
+
+    Returns: None
+    '''
 
     if debug_mode:
         print_current_date_time()

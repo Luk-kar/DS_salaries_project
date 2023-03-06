@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
 # Internal
-from scraper._types import Job_elements, Job_values, MyWebDriver, Job
+from scraper._types import Job_elements, Job_values, MyWebDriver
 from ._dict_value_adder import add_values_to_job_from_dict
 from ._element_value_getter_and_adder import get_and_add_element_value
 from ..elements_query.await_element import await_element

@@ -1,3 +1,7 @@
+'''
+This module provides a function for executing a click on a WebElement 
+using JavaScript instead of the standard WebDriver click method.
+'''
 # External
 from selenium.webdriver.remote.webelement import WebElement
 
