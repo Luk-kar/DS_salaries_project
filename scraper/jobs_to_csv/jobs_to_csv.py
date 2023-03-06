@@ -4,7 +4,12 @@ import sys
 from typing import Literal
 
 # External
-from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException, StaleElementReferenceException, TimeoutException
+from selenium.common.exceptions import (
+    NoSuchElementException,
+    ElementClickInterceptedException,
+    StaleElementReferenceException,
+    TimeoutException
+)
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
@@ -128,32 +133,31 @@ def _get_total_web_pages(driver: MyWebDriver) -> Pages_Number:
 
     total_pages = "Unknown"
     target_element = '//div[@data-test="pagination-footer-text"]'
-    error_introduction = "WARNING: The element responsible for recognizing the total number of pages"
+    error_intro = "WARNING: The element responsible for recognizing the total number of pages"
 
     try:
         total_pages = await_element(
             driver, 10, By.XPATH, target_element).text.strip().split(" ")[-1]
 
     except (TimeoutException, NoSuchElementException, StaleElementReferenceException) as error:
-        error
         logging.error(
-            f"{error_introduction} has been not loaded!:\n{error}"
+            "%s has been not loaded!:\n%s", error_intro, error
         )
     except IndexError as error:
         logging.error(
-            f"{error_introduction} is empty!:\n{error}"
+            "%s is empty!:\n%s", error_intro, error
         )
 
     if not total_pages.isdigit():
         logging.error(
-            f"{error_introduction} is not a positive integer!"
+            "%s is not a positive integer!", error_intro
         )
 
     try:
         total_pages_sanitized = int(total_pages)
     except ValueError as error:
         logging.error(
-            f"{error_introduction} is not integer!:\n{error}"
+            "%s is not integer!:\n%s", error_intro, error
         )
 
     return total_pages_sanitized
@@ -193,9 +197,9 @@ def _save_errored_page(driver: MyWebDriver):
     try:
         html = driver.execute_script(
             "return document.body.innerHTML;")
-        with open("error.html", "w", encoding=get_encoding()) as f:
-            f.write(html)
-    except UnicodeEncodeError as e:
+        with open("error.html", "w", encoding=get_encoding()) as file:
+            file.write(html)
+    except UnicodeEncodeError as error:
         logger = logging.getLogger()
         logger.setLevel(logging.INFO)
         formatter = logging.Formatter(
@@ -206,7 +210,7 @@ def _save_errored_page(driver: MyWebDriver):
         file_handler.setFormatter(formatter)
 
         logger.addHandler(file_handler)
-        logger.error(f'This is an error message:{e}')
+        logger.error('This is an error message:%s', error)
 
 
 def job_posting_exists(job: Job_values) -> bool:
