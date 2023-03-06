@@ -31,8 +31,7 @@ from .debugger.printer import print_key_value_pairs, print_current_page, print_c
 Pages_Number = Literal["Unknown"] | int  # type: ignore[operator]
 
 
-def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWebDriver):
-    '''Getting list of job postings values populated with glassdoor.com'''  # todo
+def save_jobs_to_csv_raw(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWebDriver):
 
     if debug_mode:
         print_current_date_time()
@@ -93,9 +92,10 @@ def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWe
                 driver.refresh()
                 break
 
-            if not job_posting_exists(job):
+            if not _job_posting_exists(job):
 
-                _save_errored_page(driver)
+                if debug_mode:
+                    _save_errored_page(driver)
 
                 driver.refresh()
                 break
@@ -111,7 +111,6 @@ def save_jobs_to_csv(jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWe
 
             click_next_page(driver, csv_writer.counter, jobs_number)
 
-            # todo There has to be more elegant and efficient way to do it
             # Awaits element to upload all buttons. Traditional awaits elements didn't work out.
             # https://stackoverflow.com/questions/27003423/staleelementreferenceexception-on-python-selenium
             pause()
@@ -128,46 +127,30 @@ def _get_total_web_pages(driver: MyWebDriver) -> Pages_Number:
         - The total number of pages as an integer.
     '''
 
-    total_pages = "Unknown"
     target_element = '//div[@data-test="pagination-footer-text"]'
-    error_intro = "WARNING: The element responsible for recognizing the total number of pages"
 
     try:
         total_pages = await_element(
             driver, 10, By.XPATH, target_element).text.strip().split(" ")[-1]
-
-    except (TimeoutException, NoSuchElementException, StaleElementReferenceException) as error:
-        logging.error(
-            "%s has been not loaded!:\n%s", error_intro, error
-        )
-    except IndexError as error:
-        logging.error(
-            "%s is empty!:\n%s", error_intro, error
-        )
-
-    if not total_pages.isdigit():
-        logging.error(
-            "%s is not a positive integer!", error_intro
-        )
-
-    try:
-        total_pages_sanitized = int(total_pages)
-    except ValueError as error:
-        logging.error(
-            "%s is not integer!:\n%s", error_intro, error
-        )
-
-    return total_pages_sanitized
+        return int(total_pages)
+    except (
+        TimeoutException,
+        NoSuchElementException,
+        StaleElementReferenceException,
+        IndexError,
+        ValueError
+    ):
+        return "Unknown"
 
 
 def _calculate_index(csv_writer: CSV_Writer_RAW, jobs_buttons: WebElements):
     '''
     Calculates the index of the next job button to click, 
-    based on the current count and the number of job buttons available.
+    based on the current saved rows count and the number of job buttons available.
 
     Args:
         - csv_writer (CSV_Writer_RAW): An instance of the CSV_Writer_RAW class, 
-        which keeps track of the number of jobs processed so far.
+        which keeps track of the number of jobs saved so far.
         - jobs_buttons (WebElement): The list of job buttons available on the current page.
 
     Returns:
@@ -196,13 +179,15 @@ def _save_errored_page(driver: MyWebDriver):
             "return document.body.innerHTML;")
         with open("error.html", "w", encoding=get_encoding()) as file:
             file.write(html)
+
     except UnicodeEncodeError as error:
+
         logger = logging.getLogger()
         logger.setLevel(logging.INFO)
         formatter = logging.Formatter(
             '%(asctime)s | %(levelname)s | %(message)s')
 
-        file_handler = logging.FileHandler('logs.log')
+        file_handler = logging.FileHandler('error-logs.log')
         file_handler.setLevel(logging.DEBUG)
         file_handler.setFormatter(formatter)
 
@@ -210,7 +195,7 @@ def _save_errored_page(driver: MyWebDriver):
         logger.error('This is an error message:%s', error)
 
 
-def job_posting_exists(job: Job_values) -> bool:
+def _job_posting_exists(job: Job_values) -> bool:
     '''
     Checks whether the given job posting has a non-empty 'Company_name' field.
 
