@@ -16,7 +16,7 @@ from selenium.webdriver.remote.webelement import WebElement
 # Internal
 from scraper.config._types import JobNumber, DebugMode
 from scraper.config.get import get_encoding
-from scraper._types import MyWebDriver, Job_values
+from scraper._types import MyWebDriver, Job_values, WebElements
 from .elements_query.await_element import await_element
 from .actions.click_javascript import click_via_javascript
 from .actions.click_next_page import click_next_page
@@ -26,10 +26,6 @@ from .CSV_Writer import CSV_Writer_RAW
 from .job_value_getter.job_value_getter import get_values_for_job
 from .job_parser.job_parser import parse_data
 from .debugger.printer import print_key_value_pairs, print_current_page, print_current_date_time
-
-
-# todo one source of truth, avoid circular import
-WebElements = list[WebElement]
 
 # mypy bug https://github.com/python/mypy/issues/11426
 Pages_Number = Literal["Unknown"] | int  # type: ignore[operator]

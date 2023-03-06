@@ -15,9 +15,6 @@ from scraper.config._types import NA_value
 config = get_config()
 na_value = config['NA_value']
 
-# todo one source of truth, avoid circular import
-WebElements = list[WebElement]
-
 
 class XpathSearch:
     '''
@@ -57,7 +54,7 @@ def get_XPATH_values(
 
     if isinstance(search, XpathListSearch):
 
-        elements: WebElements = source_html.find_elements(
+        elements: list[WebElement] = source_html.find_elements(
             By.XPATH, search.element
         )
 
@@ -72,7 +69,7 @@ def get_XPATH_values(
         return text
 
 
-def _get_all_texts(elements: WebElements) -> list[str]:
+def _get_all_texts(elements: list[WebElement]) -> list[str]:
     '''
     Extracts the text of a list of web elements.
 
