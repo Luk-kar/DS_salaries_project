@@ -14,11 +14,9 @@ def click_via_javascript(driver: MyWebDriver, job_button: WebElement):
     Executes a click on a WebElement using JavaScript instead of using the 
     standard WebDriver click method.
 
-    :param driver: A webdriver instance to use for executing the script.
-    :type driver: MyWebDriver
+    - driver (MyWebDriver): A webdriver instance to use for executing the script.
 
-    :param job_button: The WebElement to click on.
-    :type job_button: WebElement
+    - job_button (WebElement): The WebElement to click on.
     '''
 
     # https://stackoverflow.com/a/48667924/12490791

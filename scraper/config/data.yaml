@@ -18,7 +18,7 @@ jobs_titles:
         - "Database Developer"
         - "Analytics Consultant"
 # The cap in glassdoor is probably 900 (30 x 30)
-jobs_number: 2000
+jobs_number: 900
 url:
     # base + job + keyword + job + location + ?
     001_base: "https://www.glassdoor.com/Job/jobs.htm?suggestCount=0&suggestChosen=false&clickSource=searchBtn&typedKeyword="
