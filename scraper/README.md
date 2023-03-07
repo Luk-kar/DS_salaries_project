@@ -104,7 +104,9 @@ Look at:
    One of the reasons why I use implementation through the main aggregation page is that it provides information on how old the job posting is, which is not directly available on the job posting itself.
 3. Not sure if the job postings are picked at random, by the glassdoor search engine.
    Even when the population sample is sizeable, there is still room for bias.
-4. There seem to be repeating job postings (multiplicities). But maybe the same job postings are posted more than once by the same company.
+4. There seem to be repeating job postings (multiplicities). But maybe the same job postings are posted more than once by the same company. Sometimes you got the error:
+   `Failed to upload the url: Message: unknown error: cannot determine loading status`
+   Long story short it means that you should reload the script.
 
 ## License 📜
 
