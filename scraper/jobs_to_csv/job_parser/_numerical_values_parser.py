@@ -3,6 +3,10 @@ This module provides functions to parse numerical values in a given job dictiona
 The main function parse_numerical_values() converts positive numeric 
 and percentage values in the input job dictionary to floats and integers.
 '''
+# Python
+import re
+
+Match = re.Match[str]
 
 
 def parse_numerical_values(job: dict):
@@ -18,170 +22,111 @@ def parse_numerical_values(job: dict):
 
         if isinstance(value, str):
 
-            if _is_positive_number(value):
+            if _is_positive_float(value):
 
-                if _is_int(value):
-                    job[key] = int(value)
-                else:
-                    job[key] = float(value)
+                # Replace commas with decimal points for consistency
+                job[key] = value.replace(",", ".")
 
-            elif _is_percent_value(value):
-                job[key] = _percent_string_to_float(value)
+            else:
+                percent_value = _get_percent_value(value)
+
+                if percent_value:
+                    job[key] = _convert__percent_to_float(percent_value)
 
 
-def _is_positive_number(string: str) -> bool:
+def _convert__percent_to_float(percent_value: Match) -> float:
     '''
-    Determines whether a string represents a positive number.
+    Converts a percentage string to a float between 0.0 and 1.0.
 
     Args:
-        string: A string to check.
+        percent_value (Match): A match object containing a percentage string in the format
+            "n%", "n %" where n is a positive float or integer.
 
     Returns:
-        True if the string represents a positive number, False otherwise.
-
-    Examples:
-        >>> is_positive_number('1.23')
-        True
-        >>> is_positive_number('0')
-        True
-        >>> is_positive_number('-1')
-        False
-        >>> is_positive_number('abc')
-        False
-    '''
-
-    if _is_number(string):
-
-        return float(string) >= 0
-
-    return False
-
-
-def _is_number(string: str):
-    '''
-
-    Returns True if the input string can be converted to a floating point number, 
-    and False otherwise.
-
-    Args:
-        string (str): The input string to be checked.
-
-    Returns:
-        bool: True if the input string is a number, False otherwise.
-
-    Examples:
-        >>> is_number('123')
-        True
-        >>> is_number('0.123')
-        True
-        >>> is_number('abc')
-        False
-    '''
-    try:
-        float(string)
-        return True
-    except ValueError:
-        return False
-
-
-def _is_int(string: str) -> bool:
-    '''
-    Returns True if the given string represents a positive integer, 
-    and False otherwise.
-
-    Args:
-    string (str): The string to check.
-
-    Returns:
-    bool: True if the string represents an integer, and False otherwise.
-    '''
-    return string.isdigit()
-
-
-def _is_percent_value(string: str) -> bool:
-    '''
-    Check whether the input string represents a valid percentage value.
-
-    Args:
-        string (str): The string to check.
-
-    Returns:
-        bool: True if the input string represents a valid percentage value, False otherwise.
-    '''
-    try:
-        value = _get_percent_value(string)
-        return _is_percent_valid(value)
-    except ValueError:
-        return False
-
-
-def _is_percent_valid(value: float) -> bool:
-    '''
-    Determines if the input value is a valid percent value.
-
-    Args:
-        value (float): A numeric value representing a percent.
-
-    Returns:
-        bool: True if the input value is a valid percent value 
-        (i.e., between 0.0 and 1.0, inclusive), False otherwise.
-    '''
-    return 0.0 <= value <= 1.0
-
-
-def _percent_string_to_float(string: str) -> float:
-    '''
-    Converts a string representing a percent value to a float between 0.0 and 1.0.
-
-    Args:
-        string: A string representing a percent value. The string should be in the
-            format "<number>%" where <number> is a positive float or integer.
-
-    Returns:
-        A float value between 0.0 and 1.0 representing the percent value.
+        float: The decimal fraction equivalent of the percentage value.
 
     Raises:
-        ValueError: If the input string is not in the correct format or represents an
-            invalid percent value.
+        TypeError: If percent_value is not a valid string.
+        AttributeError: If percent_value is not a match object.
+        ValueError: If the numeric part of percent_value is not a valid float or integer,
+            or if the resulting decimal fraction is not between 0.0 and 1.0.
     '''
+
     try:
-        value = _get_percent_value(string)
-    except ValueError as exception:
-        raise ValueError(f"Invalid input string: {string}") from exception
+        # Replace commas with decimal points for consistency
+        numeric_part = percent_value.group(1).replace(',', '.')
+        decimal_fraction = float(numeric_part) / 100
 
-    if not _is_percent_valid(value):
-        raise ValueError("Invalid percent value")
+        if 0.0 <= decimal_fraction <= 1.0:
+            return decimal_fraction
+        else:
+            raise ValueError(
+                f"The value is not between 0.0 and 1.0.\nError value:{decimal_fraction}"
+            )
 
-    return value / 100
+    except (TypeError, AttributeError) as error:
+        raise f"Input value must be a string:{percent_value}\n{error}" from error
+
+    except ValueError as error:
+        raise f"Invalid numeric part:{percent_value}\n{error}" from error
 
 
-def _get_percent_value(string: str) -> float:
-    '''
-    Returns the percent value represented by the input string.
+def _get_percent_value(value: str) -> Match | None:
+    """
+    Gets a string representing a percentage value.
 
     Args:
-        string (str): The input string that represents a percent value.
+        - value (str): The string to be checked.
 
     Returns:
-        float: The float value of the input percent string, without the "%" symbol.
+        - match (re.Match | None): A Match object if the input string 
+        is a valid percentage value, or None otherwise.
+    Examples:
+        >>> get_percent_value("25%")
+        <re.Match object; span=(0, 3), match='25%'>
 
-    Raises:
-        ValueError: If the input string cannot be converted to a float.
+        >>> get_percent_value("12.5%")
+        <re.Match object; span=(0, 5), match='12.5%'>
+
+        >>> get_percent_value(" 123,5 %")
+        <re.Match object; span=(0, 9), match=' 123,5 % '>
+
+        >>> get_percent_value("25.0")
+        None
+    """
+
+    # https://regex101.com/r/YhKtm0/1
+    pattern = r"^\s*([\,\.]*\d+|\d+[\,\.]*\d*)\s*%\s*$"
+    match = re.match(pattern, value)
+    return match
+
+
+def _is_positive_float(value: str) -> bool:
+    """
+    Check if the given string is a positive float.
+
+    Args:
+        value: A string to check if it's a positive float.
+
+    Returns:
+        A boolean value indicating whether the string is a positive float or not.
 
     Examples:
-        >>> _get_percent_value("50%")
-        0.5
-
-        >>> _get_percent_value("50 %")
-        0.5
-
-        >>> _get_percent_value("1%")
-        0.01
-
-        >>> _get_percent_value("100%")
-        1.0
-    '''
-    string = string.strip()
-    if string.endswith('%'):
-        string = ''.join(filter(str.isdigit, string))
-    return float(string)
+        >>> is_positive_float("3.14")
+        True
+        >>> is_positive_float("0.00")
+        True
+        >>> is_positive_float("0,00")
+        True
+        >>> is_positive_float("10")
+        False
+        >>> is_positive_float("-2.5")
+        False
+        >>> is_positive_float("abc")
+        False
+    """
+    try:
+        float_value = float(value.replace(",", "."))
+        return float_value >= 0.0
+    except ValueError:
+        return False
