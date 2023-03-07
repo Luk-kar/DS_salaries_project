@@ -63,4 +63,4 @@ def scrape_data(
     save_jobs_to_csv_raw(jobs_number, debug_mode, driver)
 
     sys.exit(
-        f"You successfully scraped {jobs_number} postings for the job position:\n{job_title}\n")
+        f"You successfully scraped {jobs_number} postings for the job position!:\n{job_title}\n")
