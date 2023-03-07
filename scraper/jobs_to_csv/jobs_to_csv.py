@@ -80,7 +80,7 @@ def save_jobs_to_csv_raw(jobs_number: JobNumber, debug_mode: DebugMode, driver: 
 
         for job_button in jobs_buttons[saved_button_index:]:
 
-            if csv_writer.counter <= jobs_number:
+            if csv_writer.counter > jobs_number:
                 break
 
             print(f"Progress: {csv_writer.counter}/{jobs_number}")
