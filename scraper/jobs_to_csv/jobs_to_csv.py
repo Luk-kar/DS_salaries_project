@@ -50,6 +50,7 @@ def save_jobs_to_csv_raw(jobs_number: JobNumber, debug_mode: DebugMode, driver: 
 
     if debug_mode:
         print_current_date_time()
+    # else enlighten todo
 
     csv_writer = CSV_Writer_RAW()
 
