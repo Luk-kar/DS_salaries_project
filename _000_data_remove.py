@@ -1,5 +1,5 @@
 '''
-Mostly used during debugging
+Mostly used during debugging to remove unnecessary data
 '''
 # Python
 import os
