@@ -91,6 +91,7 @@ Look at:
 4. Refactor the code to more of the paradigm Object Oriented Programming (OOP) approach than Functional Programming (FP).
    It's just easier to maintain in the long term.
 5. Add log errors to a file `errors.log`.
+6. Add not crushing `"headless"` mode for the Chrome driver for daily usage (`debug_mode=false`)
 
 ## Non-wish-list and troubleshoots 🔥
 

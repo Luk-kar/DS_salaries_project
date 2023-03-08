@@ -27,9 +27,6 @@ def get_driver(
     # to simulate human behavior for bot detection
     options.add_argument("USER AGENT")
 
-    if not debug_mode:
-        options.add_argument('headless')
-
     if path == "auto-install":
         service_obj = Service(ChromeDriverManager().install())
     else:

@@ -67,16 +67,21 @@ def print_current_page(jobs_so_far: int, jobs_per_page: int, number_of_pages: in
     _print_separator(separator)
 
 
-def print_current_date_time():
+def print_current_date_time(intro_word: Literal["Start", "End"]):
     '''
     Prints the current date and time in ISO format with second precision.
 
-    Parameters:
-        None
+    Args:
+    - intro_word: Literal["Start", "End"]
+        A string literal that indicates whether the current date and time
+        are being printed at the start or end of an operation.
 
     Returns:
-        None
-    '''
+    - None
 
+    Note:
+    - This function does not return anything; it just prints the current
+    date and time.
+    '''
     now = datetime.now().isoformat(sep=" ", timespec="seconds")
-    print(f"\nDate: {now}")
+    print(f"{intro_word}: {now}")

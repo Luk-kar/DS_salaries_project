@@ -9,6 +9,7 @@ import sys
 from typing import Literal
 
 # External
+import enlighten
 from selenium.common.exceptions import (
     NoSuchElementException,
     ElementClickInterceptedException,
@@ -48,11 +49,15 @@ def save_jobs_to_csv_raw(jobs_number: JobNumber, debug_mode: DebugMode, driver: 
     Returns: None
     '''
 
-    if debug_mode:
-        print_current_date_time()
-    # else enlighten todo
+    print("\r")
+    print_current_date_time("Start")
 
     csv_writer = CSV_Writer_RAW()
+
+    progress_bar = None
+    if not debug_mode:
+        progress_bar = enlighten.Counter(desc="Total progress",  unit="jobs",
+                                         color="green", total=jobs_number)
 
     number_of_pages = _get_total_web_pages(driver)
 
@@ -84,7 +89,8 @@ def save_jobs_to_csv_raw(jobs_number: JobNumber, debug_mode: DebugMode, driver: 
             if csv_writer.counter > jobs_number:
                 break
 
-            print(f"Progress: {csv_writer.counter}/{jobs_number}")
+            if debug_mode:
+                print(f"Progress: {csv_writer.counter}/{jobs_number}")
 
             try:
                 job_button.click()
@@ -126,6 +132,9 @@ def save_jobs_to_csv_raw(jobs_number: JobNumber, debug_mode: DebugMode, driver: 
 
             csv_writer.write_observation(job)
 
+            if progress_bar:
+                progress_bar.update()
+
         else:
 
             click_next_page(driver, csv_writer.counter, jobs_number)
@@ -133,6 +142,12 @@ def save_jobs_to_csv_raw(jobs_number: JobNumber, debug_mode: DebugMode, driver: 
             # Awaits element to upload all buttons. Traditional awaits elements didn't work out.
             # https://stackoverflow.com/questions/27003423/staleelementreferenceexception-on-python-selenium
             pause()
+
+    if progress_bar:
+        progress_bar.close()
+
+    print_current_date_time("End")
+    print("\r")
 
 
 def _get_total_web_pages(driver: MyWebDriver) -> Pages_Number:
