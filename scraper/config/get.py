@@ -96,7 +96,7 @@ def _get_path_csv(directory: str,
 
 def get_path_csv_raw() -> str:
     '''
-    Returns the absolute path to the directory where "the raw" 
+    Returns the absolute path to the file where "the raw" 
     CSV files are saved based on the configuration.
 
     Returns:
@@ -108,7 +108,7 @@ def get_path_csv_raw() -> str:
 
 def get_path_csv_clean() -> str:
     '''
-    Returns the absolute path to the directory where "the clean" 
+    Returns the absolute path to the file where "the clean" 
     CSV files are saved based on the configuration.
 
     Returns:
