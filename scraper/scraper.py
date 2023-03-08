@@ -16,7 +16,7 @@ from annotated_types import Gt
 # Internal
 from scraper.config.get import get_config, get_url
 from scraper.jobs_to_csv.webpage_getter.webpage_getter import get_webpage
-from scraper.jobs_to_csv.jobs_to_csv import save_jobs_to_csv_raw
+from scraper.jobs_to_csv.jobs_to_csv import GlassdoorJobScraper
 
 config = get_config()
 
@@ -60,7 +60,10 @@ def scrape_data(
     url = get_url(config['url'], job_title)
     driver = get_webpage(url, debug_mode, driver_path)
 
-    save_jobs_to_csv_raw(jobs_number, debug_mode, driver)
+    glassdoor_job_scraper = GlassdoorJobScraper(
+        jobs_number, debug_mode, driver)
+
+    glassdoor_job_scraper.save_jobs_to_csv_raw()
 
     sys.exit(
         f"You successfully scraped {jobs_number} postings for the job position!\n- {job_title}\n")
