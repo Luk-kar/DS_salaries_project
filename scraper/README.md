@@ -108,6 +108,7 @@ Look at:
 4. There seem to be repeating job postings (multiplicities). But maybe the same job postings are posted more than once by the same company. Sometimes you got the error:
    `Failed to upload the url: Message: unknown error: cannot determine loading status`
    Long story short it means that you should reload the script.
+5. Due to A/B tests and many possible format varieties/changes of salary data, it is not advised to do parsing it in the runtime.
 
 ## License 📜
 

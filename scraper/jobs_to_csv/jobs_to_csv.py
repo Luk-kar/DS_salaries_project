@@ -63,91 +63,104 @@ def save_jobs_to_csv_raw(jobs_number: JobNumber, debug_mode: DebugMode, driver: 
 
     while csv_writer.counter <= jobs_number:
 
-        jobs_list_buttons: WebElement = await_element(
-            driver, 20, By.XPATH, '//ul[@data-test="jlGrid"]')
-
-        try:
-            jobs_buttons: WebElements = jobs_list_buttons.find_elements(
-                By.TAG_NAME, "li"
-            )
-        except NoSuchElementException as error:
-            sys.exit(
-                f"Check if you did not have any misspell in the job title or \
-                if you were silently blocked by glassdoor.\
-                \nError: {error}")
-
-        if debug_mode:
-            print_current_page(csv_writer.counter, len(
-                jobs_buttons), number_of_pages)
-
-        click_x_pop_up(driver)
-
-        saved_button_index = _calculate_index(csv_writer, jobs_buttons)
-
-        for job_button in jobs_buttons[saved_button_index:]:
-
-            if csv_writer.counter > jobs_number:
-                break
-
-            if debug_mode:
-                print(f"Progress: {csv_writer.counter}/{jobs_number}")
-
-            try:
-                job_button.click()
-
-            except ElementClickInterceptedException:
-
-                click_via_javascript(driver, job_button)
-
-            except StaleElementReferenceException:
-
-                driver.refresh()
-                break
-
-            pause()
-
-            click_x_pop_up(driver)
-
-            try:
-
-                job = get_values_for_job(driver, job_button)
-
-            except TimeoutException:
-
-                driver.refresh()
-                break
-
-            if not _job_posting_exists(job):
-
-                if debug_mode:
-                    _save_errored_page(driver)
-
-                driver.refresh()
-                break
-
-            parse_data(job)
-
-            if debug_mode:
-                print_key_value_pairs(job)
-
-            csv_writer.write_observation(job)
-
-            if progress_bar:
-                progress_bar.update()
-
-        else:
-
-            click_next_page(driver, csv_writer.counter, jobs_number)
-
-            # Awaits element to upload all buttons. Traditional awaits elements didn't work out.
-            # https://stackoverflow.com/questions/27003423/staleelementreferenceexception-on-python-selenium
-            pause()
+        parse_job_listings(
+            jobs_number,
+            debug_mode,
+            driver,
+            csv_writer,
+            progress_bar,
+            number_of_pages
+        )
 
     if progress_bar:
         progress_bar.close()
 
     print_current_date_time("End")
     print("\r")
+
+
+def parse_job_listings(
+        jobs_number,
+        debug_mode,
+        driver,
+        csv_writer,
+        progress_bar,
+        number_of_pages
+):
+
+    jobs_list_buttons: WebElement = await_element(
+        driver, 20, By.XPATH, '//ul[@data-test="jlGrid"]')
+
+    try:
+        jobs_buttons: WebElements = jobs_list_buttons.find_elements(
+            By.TAG_NAME, "li"
+        )
+    except NoSuchElementException as error:
+        sys.exit(
+            f"Check if you did not have any misspell in the job title or \
+                if you were silently blocked by glassdoor.\
+                \nError: {error}")
+
+    if debug_mode:
+        print_current_page(csv_writer.counter, len(
+            jobs_buttons), number_of_pages)
+
+    click_x_pop_up(driver)
+
+    saved_button_index = _calculate_index(csv_writer, jobs_buttons)
+
+    for job_button in jobs_buttons[saved_button_index:]:  # todo to function
+
+        if csv_writer.counter > jobs_number:
+            break
+
+        if debug_mode:
+            print(f"Progress: {csv_writer.counter}/{jobs_number}")
+
+        try:
+            job_button.click()
+
+        except ElementClickInterceptedException:
+            click_via_javascript(driver, job_button)
+
+        except StaleElementReferenceException:
+            driver.refresh()
+            break
+
+        pause()
+
+        click_x_pop_up(driver)
+
+        try:
+            job = get_values_for_job(driver, job_button)
+
+        except TimeoutException:
+            driver.refresh()
+            break
+
+        if not _job_posting_exists(job):
+            if debug_mode:
+                _save_errored_page(driver)
+
+            driver.refresh()
+            break
+
+        parse_data(job)
+
+        if debug_mode:
+            print_key_value_pairs(job)
+
+        csv_writer.write_observation(job)
+
+        if progress_bar:
+            progress_bar.update()
+
+    else:
+        click_next_page(driver, csv_writer.counter, jobs_number)
+
+        # Awaits element to upload all buttons. Traditional awaits elements didn't work out.
+        # https://stackoverflow.com/questions/27003423/staleelementreferenceexception-on-python-selenium
+        pause()
 
 
 def _get_total_web_pages(driver: MyWebDriver) -> Pages_Number:
