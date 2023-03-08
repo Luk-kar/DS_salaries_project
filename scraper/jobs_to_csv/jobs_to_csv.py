@@ -11,8 +11,8 @@ from typing import Literal
 # External
 import enlighten
 from selenium.common.exceptions import (
-    NoSuchElementException,
     ElementClickInterceptedException,
+    NoSuchElementException,
     StaleElementReferenceException,
     TimeoutException
 )
@@ -20,18 +20,23 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
 # Internal
-from scraper.config._types import JobNumber, DebugMode
+from scraper._types import Job_values, MyWebDriver, WebElements
+from scraper.config._types import DebugMode, JobNumber
 from scraper.config.get import get_encoding
-from scraper._types import MyWebDriver, Job_values, WebElements
-from .elements_query.await_element import await_element
+
 from .actions.click_javascript import click_via_javascript
 from .actions.click_next_page import click_next_page
 from .actions.click_x_pop_up import click_x_pop_up
 from .actions.pause import pause
 from .CSV_Writer import CSV_Writer_RAW
-from .job_value_getter.job_value_getter import get_values_for_job
+from .debugger.printer import (
+    print_current_date_time,
+    print_current_page,
+    print_key_value_pairs
+)
+from .elements_query.await_element import await_element
 from .job_parser.job_parser import parse_data
-from .debugger.printer import print_key_value_pairs, print_current_page, print_current_date_time
+from .job_value_getter.job_value_getter import get_values_for_job
 
 # mypy bug https://github.com/python/mypy/issues/11426
 Pages_Number = Literal["Unknown"] | int  # type: ignore[operator]
@@ -54,9 +59,6 @@ class GlassdoorJobScraper:
 
     Methods:
         save_jobs_to_csv_raw(): Retrieves and writes job data to CSV files.
-        _write_job_listings(): Parses job listings and writes data for each job.
-        _get_total_web_pages(): Extracts the total number of pages from the job search results.
-        _calculate_index(): Calculates the index of the next job listing to retrieve.
 
     The class uses a number of helper functions and external packages including:
     - enlighten: A package for creating progress bars.
