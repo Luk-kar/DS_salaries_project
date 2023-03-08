@@ -63,13 +63,13 @@ def save_jobs_to_csv_raw(jobs_number: JobNumber, debug_mode: DebugMode, driver: 
 
     while csv_writer.counter <= jobs_number:
 
-        parse_job_listings(
-            jobs_number,
-            debug_mode,
+        _parse_job_listings(
             driver,
             csv_writer,
+            jobs_number,
+            number_of_pages,
             progress_bar,
-            number_of_pages
+            debug_mode,
         )
 
     if progress_bar:
@@ -79,14 +79,41 @@ def save_jobs_to_csv_raw(jobs_number: JobNumber, debug_mode: DebugMode, driver: 
     print("\r")
 
 
-def parse_job_listings(
-        jobs_number,
-        debug_mode,
-        driver,
-        csv_writer,
-        progress_bar,
-        number_of_pages
+def _parse_job_listings(
+    driver: MyWebDriver,
+    csv_writer: CSV_Writer_RAW,
+    jobs_number: JobNumber,
+    number_of_pages: Pages_Number,
+    progress_bar: enlighten.Counter,
+    debug_mode: DebugMode,
 ):
+    '''
+    Parse job listings on Glassdoor and extract data for each job.
+
+    Args:
+        driver (MyWebDriver): The Selenium webdriver object to control the browser.
+        csv_writer (CSV_Writer_RAW): The CSV_Writer_RAW object 
+        used to write scraped data to a CSV file.
+        jobs_number (JobNumber): The maximum number of jobs to scrape.
+        number_of_pages (Pages_Number): The number of available pages to scrape.
+        progress_bar (enlighten.Counter): The progress bar object used to track scraping progress.
+        debug_mode (DebugMode): A boolean indicating whether to print debug information.
+
+    Returns:
+        None
+
+    Raises:
+        NoSuchElementException: If the specified jobs buttons are not found.
+        ElementClickInterceptedException: If a button is found, but is not clickable at the moment.
+        StaleElementReferenceException: If a button is no longer present on the page.
+        TimeoutException: If a job posting is not found within a specified timeout.
+
+    Notes:
+        This function loops through each job listing on the page and extracts data.
+        The extracted data is written to a CSV file using the CSV_Writer_RAW object provided.
+        This function also handles any errors that may occur during scraping,
+        and prints debug information if debug_mode is True.
+    '''
 
     jobs_list_buttons: WebElement = await_element(
         driver, 20, By.XPATH, '//ul[@data-test="jlGrid"]')
@@ -109,7 +136,7 @@ def parse_job_listings(
 
     saved_button_index = _calculate_index(csv_writer, jobs_buttons)
 
-    for job_button in jobs_buttons[saved_button_index:]:  # todo to function
+    for job_button in jobs_buttons[saved_button_index:]:
 
         if csv_writer.counter > jobs_number:
             break
@@ -138,9 +165,8 @@ def parse_job_listings(
             driver.refresh()
             break
 
-        if not _job_posting_exists(job):
-            if debug_mode:
-                _save_errored_page(driver)
+        if not _job_posting_exists(job) and debug_mode:
+            _save_errored_page(driver)
 
             driver.refresh()
             break
