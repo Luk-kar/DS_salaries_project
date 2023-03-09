@@ -22,5 +22,5 @@ def add_values_to_job_from_dict(
         it updates the `job` dictionary in place.
     '''
 
-    for column, field in values_to_add.items():
-        job[column] = field.value
+    for key, value in values_to_add.items():
+        job[key] = value.value

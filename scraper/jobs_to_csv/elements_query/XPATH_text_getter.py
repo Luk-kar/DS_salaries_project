@@ -54,11 +54,7 @@ def get_XPATH_values(
 
     if isinstance(search, XpathListSearch):
 
-        elements: list[WebElement] = source_html.find_elements(
-            By.XPATH, search.element
-        )
-
-        texts = _get_all_texts(elements)
+        texts = _get_all_texts(source_html, search)
 
         return texts
 
@@ -69,7 +65,10 @@ def get_XPATH_values(
         return text
 
 
-def _get_all_texts(elements: list[WebElement]) -> list[str]:
+def _get_all_texts(
+        source_html: WebElement,
+        search: XpathListSearch
+) -> list[str]:
     '''
     Extracts the text of a list of web elements.
 
@@ -79,6 +78,11 @@ def _get_all_texts(elements: list[WebElement]) -> list[str]:
     Returns:
     - list[str]: a list of the text of the input web elements.
     '''
+
+    elements: list[WebElement] = source_html.find_elements(
+        By.XPATH, search.element
+    )
+
     texts: list[str] = []
     for elem in elements:
         texts.append(elem.text)

@@ -20,18 +20,24 @@ config = get_config()
 def get_driver(
         debug_mode: bool = config['debug_mode'],
         path: str = config['driver_path']):
-    '''Returns website's driver with custom options'''
+    '''Returns driver with custom options'''
 
     options = webdriver.ChromeOptions()
 
     # to simulate human behavior for bot detection
     options.add_argument("USER AGENT")
 
+    # todo debug_mode=True add headless mode
+
     if path == "auto-install":
+        print("Installing driver automatically...")
         service_obj = Service(ChromeDriverManager().install())
     else:
+        if debug_mode:
+            print(f"Using the driver:\n{path}")
         try:
             service_obj = Service(path)
+
         except WebDriverException as error:
             sys.exit(
                 f'Make sure your path or driver version is correct:\n{error}'
