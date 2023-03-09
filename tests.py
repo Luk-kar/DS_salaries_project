@@ -10,12 +10,13 @@ import unittest
 
 # External
 from bs4 import BeautifulSoup
+from pathvalidate import sanitize_filepath, sanitize_filename
 import requests
 
 # Internal
 from scraper.jobs_to_csv.webpage_getter._driver_getter import get_driver
 from scraper.jobs_to_csv.webpage_getter.webpage_getter import get_webpage
-from scraper.config.get import get_config, get_url, get_path_csv_raw, get_path_csv_clean, is_possible_path
+from scraper.config.get import get_config, get_url, get_path_csv_raw, get_path_csv_clean
 from scraper.config._types import Config, JobNumber, JobSimilar, Url
 from scraper._types import MyWebDriver
 
@@ -32,11 +33,31 @@ class TestConfigData(unittest.TestCase):
         self.url = get_url(self.config['url'],
                            self.config['jobs_titles']['default'])
 
-    def is_empty_string(self, string: str):
+    def _is_empty_string(self, string: str):
         '''assert if is it not an empty string'''
 
         self.assertIsInstance(string, str)
         self.assertNotEqual(string, "")
+
+    def _is_valid_file_path(self, file_path: str) -> bool:
+        '''
+        Checks if the file path is valid and does not contain any illegal characters.
+        '''
+
+        # https://stackoverflow.com/a/67119769/12490791
+        is_valid = file_path == sanitize_filepath(
+            file_path, platform="auto")
+
+        return is_valid
+
+    def _is_valid_file_name(self, file_name: str) -> bool:
+        '''
+        Checks if the file path is valid and does not contain any illegal characters.
+        '''
+        is_valid = file_name == sanitize_filepath(
+            file_name, platform="universal")
+
+        return is_valid
 
     def test_config_is_dict(self):
         '''assert if instance of a dict'''
@@ -46,7 +67,12 @@ class TestConfigData(unittest.TestCase):
     def test_job_default(self):
         '''assert if is it not an empty string'''
 
-        self.is_empty_string(self.config['jobs_titles']['default'])
+        job_title = self.config['jobs_titles']['default']
+
+        self._is_empty_string(job_title)
+        self.assertTrue(
+            self._is_valid_file_name(job_title)
+        )
 
     def test_jobs_similar(self):
         '''assert if is any of the jobs, not an empty string'''
@@ -56,7 +82,10 @@ class TestConfigData(unittest.TestCase):
         self.assertIsInstance(jobs, list)
 
         for job in jobs:
-            self.is_empty_string(job)
+            self._is_empty_string(job)
+            self.assertTrue(
+                self._is_valid_file_name(job)
+            )
 
     def test_jobs_number(self):
         '''test if is it greater than 0'''
@@ -88,7 +117,7 @@ class TestConfigData(unittest.TestCase):
         '''check if the driver exists on the local machine'''
 
         path_file: str = self.config['driver_path']
-        self.is_empty_string(path_file)
+        self._is_empty_string(path_file)
         self.assertTrue(os.path.exists(path_file))
         self.assertTrue(os.path.isfile(path_file))
 
@@ -108,16 +137,19 @@ class TestConfigData(unittest.TestCase):
 
         self.assertEqual(self.config['NA_value'],  "")
 
-    def test_output_paths(self):
+    def test_output_path_raw(self):
         '''check correctness of path'''
 
         csv_raw_path = get_path_csv_raw()
 
-        self.assertTrue(is_possible_path(csv_raw_path))
+        self.assertTrue(self._is_valid_file_path(csv_raw_path))
+
+    def test_output_path_clean(self):
+        '''check correctness of path'''
 
         csv_clean_path = get_path_csv_clean()
 
-        self.assertTrue(is_possible_path(csv_clean_path))
+        self.assertTrue(self._is_valid_file_path(csv_clean_path))
 
 
 class TestJobDescription(unittest.TestCase):

@@ -13,8 +13,7 @@ from datetime import datetime
 # External
 import yaml
 from yaml.loader import SafeLoader
-from pathvalidate import sanitize_filepath
-from pathvalidate._common import PathType
+from pathvalidate import sanitize_filepath, sanitize_filename
 
 # Internal
 from scraper.config._types import Config, Url, JobDefault, NA_value
@@ -80,7 +79,7 @@ def _get_path_csv(directory: str,
     directory_main = config['output_path']['main']
     directory_target = os.path.join(directory_main, directory)
     jobs_title = job_title.replace(" ", "_")
-    jobs_title_sanitized = _my_sanitize_filepath(jobs_title)
+    jobs_title_sanitized = sanitize_filename(jobs_title, platform="universal")
     date_time = datetime.now().strftime("%d-%m-%Y_%H-%M")
 
     database_file = f"{jobs_title_sanitized}_{date_time}.{extension}"
@@ -88,10 +87,12 @@ def _get_path_csv(directory: str,
     csv_file_target = os.path.abspath(
         os.path.join(directory_target, database_file))
 
-    if is_possible_path(csv_file_target):
-        return csv_file_target
-    else:
-        raise OSError(f"Wrong file path:\n{csv_file_target}")
+    csv_file_target_sanitized = sanitize_filepath(
+        csv_file_target,
+        platform="auto"
+    )
+
+    return csv_file_target_sanitized
 
 
 def get_path_csv_raw() -> str:
@@ -137,41 +138,3 @@ def get_encoding() -> str:
     - str: The encoding type to use for reading and writing files.
     '''
     return get_config()['encoding']
-
-
-def is_possible_path(file_path: str) -> bool:
-    '''
-    Checks if the file path is valid and does not contain any illegal characters.
-
-    Args:
-        file_path (str): The file path to check.
-
-    Returns:
-        bool: True if the file path is valid 
-        and does not contain any illegal characters, False otherwise.
-    '''
-
-    # https://stackoverflow.com/a/67119769/12490791
-    is_possible = file_path == _my_sanitize_filepath(file_path)
-
-    return bool(
-        os.path.exists(file_path) or is_possible
-    )
-
-
-def _my_sanitize_filepath(path: str) -> PathType:
-    '''
-    Sanitize a file path for the current operating system.
-
-    Args:
-        path (str): A file path to sanitize.
-
-    Returns:
-        str: A sanitized version of the file path, 
-        which is compatible with the current operating system.
-
-    Raises:
-        TypeError: If the input path is not a string.
-    '''
-    return sanitize_filepath(
-        path, platform=platform.system())
