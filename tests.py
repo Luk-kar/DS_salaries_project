@@ -54,7 +54,7 @@ class TestConfigData(unittest.TestCase):
         '''
         Checks if the file path is valid and does not contain any illegal characters.
         '''
-        is_valid = file_name == sanitize_filepath(
+        is_valid = file_name == sanitize_filename(
             file_name, platform="universal")
 
         return is_valid
