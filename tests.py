@@ -15,6 +15,12 @@ from pathvalidate import sanitize_filepath, sanitize_filename
 import requests
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import (
+    ElementClickInterceptedException,
+    NoSuchElementException,
+    StaleElementReferenceException,
+    TimeoutException
+)
 
 # Internal
 from scraper.jobs_to_csv.elements_query.XPATH_text_getter import get_XPATH_values
@@ -187,6 +193,7 @@ class TestWebDriver(unittest.TestCase):
                 //div[@class="ratingNum mr-sm"]',
             'list': '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsHighlights")]/div'
         }
+        self.html = MagicMock()
 
     def _is_HTML(self, page_source):
         return bool(BeautifulSoup(page_source, "html.parser").find())
@@ -316,21 +323,49 @@ class TestWebDriver(unittest.TestCase):
         result = get_XPATH_values(web_element, search)
         self.assertEqual(result, ['Hello', 'Mom!'])
 
-    def test_get_XPATH_values_with_missing_element(self):
+    # def test_get_XPATH_values_with_missing_element(self):
 
-        mock_element = MagicMock(spec=WebElement)
-        mock_element.find_element.return_value = None  # todo raise exception
-        search = XpathSearch('//div/p')
-        result = get_XPATH_values(mock_element, search)
+    #     mock_element = MagicMock(spec=WebElement)
+    #     mock_element.find_element.side_effects = NoSuchElementException()
+    #     search = XpathSearch('//div/p')
 
-        self.assertEqual(result, 'NA_value')
+    #     self.assertRaises(NoSuchElementException,
+    #                       get_XPATH_values, mock_element, search)
 
-    def test_get_XPATH_values_with_missing_elements(self):
-        mock_element = Mock()
-        mock_element.find_elements.return_value = []  # todo raise exception
-        search = XpathListSearch('//div/p')
-        result = get_XPATH_values(mock_element, search)
-        self.assertEqual(result, [])
+    # def test_get_XPATH_values_with_missing_elements(self):
+    #     mock_element = Mock()
+    #     mock_element.find_elements.return_value = []  # todo raise exception
+    #     search = XpathListSearch('//div/p')
+    #     result = get_XPATH_values(mock_element, search)
+    #     self.assertEqual(result, [])
+
+    def test_raises_exception_with_invalid_html(self):
+        invalid_html = None
+        search = XpathSearch("//div")
+        with self.assertRaises(AttributeError):
+            get_XPATH_values(invalid_html, search)
+
+    def test_raises_exception_with_invalid_search(self):
+
+        mock_web_element = MagicMock()
+        mock_web_element.find_element.side_effect = NoSuchElementException(
+            "Element not found")
+
+        search = XpathSearch("//nonexistent_element")
+
+        with self.assertRaises(NoSuchElementException):
+            get_XPATH_values(mock_web_element, search)
+
+    def test_raises_exception_with_invalid_list_search(self):
+
+        mock_web_element = MagicMock()
+        mock_web_element.find_elements.side_effect = NoSuchElementException(
+            "Element not found")
+
+        search = XpathListSearch("//nonexistent_element")
+
+        with self.assertRaises(NoSuchElementException):
+            get_XPATH_values(mock_web_element, search)
 
 
 if __name__ == '__main__':
