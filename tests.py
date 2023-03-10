@@ -377,6 +377,7 @@ class TestWebDriver(unittest.TestCase):
         def my_side_effect(*args):
 
             mock_element_return = MagicMock(spec=WebElement)
+            mock_return_elems = MagicMock(spec=list[WebElement])
 
             arg = args[1]
 
@@ -396,7 +397,9 @@ class TestWebDriver(unittest.TestCase):
                 return mock_element_return
 
             elif arg == job_values["Pros"].element:
-                mock_element_return.text = values[3]
+                mock_element_return = mock_return_elems
+                mock_element_return[0].find_element.return_value.text = values[3][0]
+                mock_element_return[1].find_element.return_value.text = values[3][1]
 
                 return mock_element_return
             else:
