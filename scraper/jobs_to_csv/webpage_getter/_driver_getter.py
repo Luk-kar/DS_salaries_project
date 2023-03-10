@@ -34,7 +34,7 @@ def get_driver(
         service_obj = Service(ChromeDriverManager().install())
     else:
         if debug_mode:
-            print(f"Using the driver:\n{path}")
+            print(f"\nUsing the driver:\n{path}")
         try:
             service_obj = Service(path)
 

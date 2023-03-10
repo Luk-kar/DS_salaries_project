@@ -15,14 +15,10 @@ from pathvalidate import sanitize_filepath, sanitize_filename
 import requests
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import (
-    ElementClickInterceptedException,
-    NoSuchElementException,
-    StaleElementReferenceException,
-    TimeoutException
-)
+from selenium.common.exceptions import NoSuchElementException
 
 # Internal
+from scraper.jobs_to_csv.job_value_getter._element_value_getter import get_values_from_element
 from scraper.jobs_to_csv.elements_query.XPATH_text_getter import get_XPATH_values
 from scraper.jobs_to_csv.actions.pause import pause
 from scraper.jobs_to_csv.elements_query.await_element import await_element
@@ -31,7 +27,7 @@ from scraper.jobs_to_csv.webpage_getter.webpage_getter import get_webpage
 from scraper.config.get import get_config, get_url, get_path_csv_raw, get_path_csv_clean, get_NA_value, get_encoding
 from scraper.jobs_to_csv.job_value_getter._dict_value_adder import add_values_to_job_from_dict
 from scraper.config._types import Config, JobNumber, JobSimilar, Url
-from scraper._types import MyWebDriver
+from scraper._types import MyWebDriver, Job_elements
 from scraper.jobs_to_csv.job_value_getter.job_value_getter import XpathSearch, XpathListSearch
 
 
@@ -263,7 +259,7 @@ class TestWebDriver(unittest.TestCase):
 
     def test_add_values(self):
 
-        job_title = "L9001 Software Engineer"
+        job_title = "Software Engineer - L9001"
         company_name = "Initech Bros."
         location = "Austin, Texas"
         description = "We are looking for a young, passionate software engineer \
@@ -323,22 +319,6 @@ class TestWebDriver(unittest.TestCase):
         result = get_XPATH_values(web_element, search)
         self.assertEqual(result, ['Hello', 'Mom!'])
 
-    # def test_get_XPATH_values_with_missing_element(self):
-
-    #     mock_element = MagicMock(spec=WebElement)
-    #     mock_element.find_element.side_effects = NoSuchElementException()
-    #     search = XpathSearch('//div/p')
-
-    #     self.assertRaises(NoSuchElementException,
-    #                       get_XPATH_values, mock_element, search)
-
-    # def test_get_XPATH_values_with_missing_elements(self):
-    #     mock_element = Mock()
-    #     mock_element.find_elements.return_value = []  # todo raise exception
-    #     search = XpathListSearch('//div/p')
-    #     result = get_XPATH_values(mock_element, search)
-    #     self.assertEqual(result, [])
-
     def test_raises_exception_with_invalid_html(self):
         invalid_html = None
         search = XpathSearch("//div")
@@ -366,6 +346,85 @@ class TestWebDriver(unittest.TestCase):
 
         with self.assertRaises(NoSuchElementException):
             get_XPATH_values(mock_web_element, search)
+
+    def test_get_values_from_element_with_valid_values(self):
+
+        mock_element = MagicMock(spec=WebElement)
+
+        job_values: Job_elements = {
+            "Job_title": XpathSearch('.//div[@data-test="jobTitle"]'),
+            "Company_name": XpathSearch('.//div[@data-test="employerName"]'),
+            "Description": XpathSearch('.//div[@class="jobDescriptionContent desc"]'),
+            "Pros": XpathListSearch('.//*[text() = "Pros"]//parent::div//*[contains(name(), "p")]'),
+        }
+
+        values = [
+            "Assistant to the Regional Manager",
+            "Dunder Mifflin Paper Co.",
+            "The Yin to my Yang, the Bert to my Ernie, " +
+            "the Jim to my Dwight - are you ready to join the team at Dunder Mifflin Paper Co.?,",
+            ["Dunder Mifflin Paper Co. is not just a company, " +
+             "it's a way of life - from the quality of the paper " +
+             "we produce to the community we build within the office," +
+             "there's nowhere else I'd rather be.",
+             "While working at Dunder Mifflin Paper Co." +
+             "can be a bit of a drag at times, " +
+             "it's the people, like Dwight, that make it all worth it" +
+             "- that, and the endless supply of pranks I can pull on them."
+             ]
+        ]
+
+        def my_side_effect(*args):
+
+            mock_element_return = MagicMock(spec=WebElement)
+
+            arg = args[1]
+
+            if arg == job_values["Job_title"].element:
+                mock_element_return.text = values[0]
+
+                return mock_element_return
+
+            elif arg == job_values["Company_name"].element:
+                mock_element_return.text = values[1]
+
+                return mock_element_return
+
+            elif arg == job_values["Description"].element:
+                mock_element_return.text = values[2]
+
+                return mock_element_return
+
+            elif arg == job_values["Pros"].element:
+                mock_element_return.text = values[3]
+
+                return mock_element_return
+            else:
+                raise KeyError
+
+        mock_element.find_element.side_effect = my_side_effect
+        mock_element.find_elements.side_effect = my_side_effect
+
+        # Set up mock get_XPATH_values function to return expected values
+        get_XPATH_values_mock = MagicMock(
+            side_effect=values)
+
+        # Call get_values_from_element with mock element and job values
+        result = get_values_from_element(mock_element, job_values)
+
+        # Check that values were correctly retrieved and stored in job values dictionary
+        self.assertEqual(result["Job_title"].value, values[0])
+        self.assertEqual(result["Company_name"].value, values[1])
+        self.assertEqual(result["Description"].value, values[2])
+        self.assertEqual(result["Pros"].value, values[3])
+
+        # Check that get_XPATH_values was called with the expected arguments
+        get_XPATH_values_mock.assert_has_calls([
+            call(mock_element, job_values["Job_title"]),
+            call(mock_element, job_values["Company_name"]),
+            call(mock_element, job_values["Description"]),
+            call(mock_element, job_values["Pros"]),
+        ])
 
 
 if __name__ == '__main__':

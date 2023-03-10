@@ -17,7 +17,9 @@ def get_values_from_element(source_html: WebElement, job_values: Job_elements):
 
     for values in job_values.values():
         try:
+
             values.value = get_XPATH_values(source_html, values)
+
         except NoSuchElementException:
             pass
 
