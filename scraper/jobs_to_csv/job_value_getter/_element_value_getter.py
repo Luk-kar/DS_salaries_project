@@ -15,10 +15,10 @@ from scraper.jobs_to_csv.elements_query.XPATH_text_getter import get_XPATH_value
 def get_values_from_element(source_html: WebElement, job_values: Job_elements):
     '''get values from a source web element for an each web element in the job values'''
 
-    for values in job_values.values():
+    for things in job_values.values():
         try:
 
-            values.value = get_XPATH_values(source_html, values)
+            things.value = get_XPATH_values(source_html, things)
 
         except NoSuchElementException:
             pass

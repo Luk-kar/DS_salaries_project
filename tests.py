@@ -153,7 +153,6 @@ class TestConfigData(unittest.TestCase):
 
         self.config['NA_value']
         self.assertIsNotNone(get_NA_value())
-        # Checks also KeyError:
 
     def test_encoding_value(self):
         """check if not an empty string"""
@@ -429,15 +428,32 @@ class TestWebDriver(unittest.TestCase):
         self.assertEqual(result['Description'].value, values['Description'])
         self.assertEqual(result['Pros'].value, values['Pros'])
 
-    # def test_get_values_from_element_not_found(self):
+        self.assertEqual(
+            mock_element.find_element.call_count +
+            mock_element.find_elements.call_count,
+            len(job_values)
+        )
 
-    #     mock_element = MagicMock(spec=WebElement)
-    #     mock_element_return = MagicMock(spec=WebElement)
+    def test_get_values_from_element_not_found(self):
 
-    #     mock_element.find_element.side_effect = my_side_effect_element
-    #     mock_element.find_elements.side_effect = my_side_effect_list
+        mock_element = MagicMock(spec=WebElement)
 
-    #     result = get_values_from_element(mock_element, job_values)
+        mock_element.find_element.side_effect = NoSuchElementException(
+            "Element not found")
+        mock_element.find_elements.side_effect = NoSuchElementException(
+            "Element not found")
+
+        job_element_single = {'Salary': XpathSearch("//nonexistent_element")}
+        job_element_many = {'Cons': XpathListSearch("//nonexistent_element")}
+
+        self.assertEqual(
+            self.config['NA_value'],
+            get_values_from_element(mock_element, job_element_single)
+        )
+        self.assertEqual(
+            self.config['NA_value'],
+            get_values_from_element(mock_element, job_element_many)
+        )
 
 
 if __name__ == '__main__':
