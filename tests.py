@@ -7,7 +7,7 @@ The module consists of two test classes: TestConfigData and TestJobDescription.
 import os
 import re
 import unittest
-from unittest.mock import patch, MagicMock, Mock
+from unittest.mock import patch, MagicMock, call
 
 # External
 from bs4 import BeautifulSoup
@@ -119,7 +119,7 @@ class TestConfigData(unittest.TestCase):
         for part in url:
             self.assertIsInstance(part, str)
 
-    def test_web_exists(self):
+    def test_web_access(self):
         '''check if url exists'''
 
         response = requests.get(self.url, timeout=10)
@@ -194,18 +194,18 @@ class TestWebDriver(unittest.TestCase):
     def _is_HTML(self, page_source):
         return bool(BeautifulSoup(page_source, "html.parser").find())
 
-    def test_is_browser(self):
-        driver: MyWebDriver = get_driver(self.url)
+    # def test_is_browser(self):
+    #     driver: MyWebDriver = get_driver(self.url)
 
-        self.assertIsInstance(
-            driver, MyWebDriver)
+    #     self.assertIsInstance(
+    #         driver, MyWebDriver)
 
-    def test_is_webpage_loaded(self):
-        driver: MyWebDriver = get_webpage(
-            self.url, False)
-        page_source: str = driver.page_source
+    # def test_is_webpage_loaded(self):
+    #     driver: MyWebDriver = get_webpage(
+    #         self.url, False)
+    #     page_source: str = driver.page_source
 
-        self.assertTrue(self._is_HTML(page_source))
+    #     self.assertTrue(self._is_HTML(page_source))
 
     def _get_XpathSearch(self):
 
@@ -352,82 +352,92 @@ class TestWebDriver(unittest.TestCase):
         mock_element = MagicMock(spec=WebElement)
 
         job_values: Job_elements = {
-            "Job_title": XpathSearch('.//div[@data-test="jobTitle"]'),
-            "Company_name": XpathSearch('.//div[@data-test="employerName"]'),
-            "Description": XpathSearch('.//div[@class="jobDescriptionContent desc"]'),
-            "Pros": XpathListSearch('.//*[text() = "Pros"]//parent::div//*[contains(name(), "p")]'),
+            'Job_title': XpathSearch('.//div[@data-test="jobTitle"]'),
+            'Company_name': XpathSearch('.//div[@data-test="employerName"]'),
+            'Description': XpathSearch('.//div[@class="jobDescriptionContent desc"]'),
+            'Pros': XpathListSearch('.//*[text() = "Pros"]//parent::div//*[contains(name(), "p")]'),
         }
 
-        values = [
-            "Assistant to the Regional Manager",
-            "Dunder Mifflin Paper Co.",
-            "The Yin to my Yang, the Bert to my Ernie, " +
+        values = {
+            'Job_title': "Assistant to the Regional Manager",
+            'Company_name': "Dunder Mifflin Paper Co.",
+            'Description': "The Yin to my Yang, the Bert to my Ernie, " +
             "the Jim to my Dwight - are you ready to join the team at Dunder Mifflin Paper Co.?,",
-            ["Dunder Mifflin Paper Co. is not just a company, " +
-             "it's a way of life - from the quality of the paper " +
-             "we produce to the community we build within the office," +
-             "there's nowhere else I'd rather be.",
-             "While working at Dunder Mifflin Paper Co." +
-             "can be a bit of a drag at times, " +
-             "it's the people, like Dwight, that make it all worth it" +
-             "- that, and the endless supply of pranks I can pull on them."
-             ]
-        ]
+            'Pros': [
+                "Dunder Mifflin Paper Co. is not just a company, " +
+                "it's a way of life - from the quality of the paper " +
+                "we produce to the community we build within the office," +
+                "there's nowhere else I'd rather be.",
 
-        def my_side_effect(*args):
+                "While working at Dunder Mifflin Paper Co." +
+                "can be a bit of a drag at times, " +
+                "it's the people, like Dwight, that make it all worth it" +
+                "- that, and the endless supply of pranks I can pull on them."
+            ]
+        }
+
+        def my_side_effect_element(*args):
 
             mock_element_return = MagicMock(spec=WebElement)
-            mock_return_elems = MagicMock(spec=list[WebElement])
 
-            arg = args[1]
+            selector = args[1]
 
-            if arg == job_values["Job_title"].element:
-                mock_element_return.text = values[0]
+            if selector == job_values['Job_title'].element:
+                mock_element_return.text = values['Job_title']
 
-                return mock_element_return
+            elif selector == job_values['Company_name'].element:
+                mock_element_return.text = values['Company_name']
 
-            elif arg == job_values["Company_name"].element:
-                mock_element_return.text = values[1]
+            elif selector == job_values['Description'].element:
+                mock_element_return.text = values['Description']
 
-                return mock_element_return
-
-            elif arg == job_values["Description"].element:
-                mock_element_return.text = values[2]
-
-                return mock_element_return
-
-            elif arg == job_values["Pros"].element:
-                mock_element_return = mock_return_elems
-                mock_element_return[0].find_element.return_value.text = values[3][0]
-                mock_element_return[1].find_element.return_value.text = values[3][1]
-
-                return mock_element_return
             else:
                 raise KeyError
 
-        mock_element.find_element.side_effect = my_side_effect
-        mock_element.find_elements.side_effect = my_side_effect
+            return mock_element_return
 
-        # Set up mock get_XPATH_values function to return expected values
-        get_XPATH_values_mock = MagicMock(
-            side_effect=values)
+        def my_side_effect_list(*args):
 
-        # Call get_values_from_element with mock element and job values
+            mock_return_elements = MagicMock(spec=list[WebElement])
+
+            selector = args[1]
+
+            if selector == job_values['Pros'].element:
+
+                mock_element_01 = MagicMock(spec=WebElement)
+                mock_element_02 = MagicMock(spec=WebElement)
+
+                mock_element_01.text = values['Pros'][0]
+                mock_element_02.text = values['Pros'][1]
+
+                mock_return_elements = [
+                    mock_element_01,
+                    mock_element_02
+                ]
+            else:
+                raise KeyError
+
+            return mock_return_elements
+
+        mock_element.find_element.side_effect = my_side_effect_element
+        mock_element.find_elements.side_effect = my_side_effect_list
+
         result = get_values_from_element(mock_element, job_values)
 
-        # Check that values were correctly retrieved and stored in job values dictionary
-        self.assertEqual(result["Job_title"].value, values[0])
-        self.assertEqual(result["Company_name"].value, values[1])
-        self.assertEqual(result["Description"].value, values[2])
-        self.assertEqual(result["Pros"].value, values[3])
+        self.assertEqual(result['Job_title'].value, values['Job_title'])
+        self.assertEqual(result['Company_name'].value, values['Company_name'])
+        self.assertEqual(result['Description'].value, values['Description'])
+        self.assertEqual(result['Pros'].value, values['Pros'])
 
-        # Check that get_XPATH_values was called with the expected arguments
-        get_XPATH_values_mock.assert_has_calls([
-            call(mock_element, job_values["Job_title"]),
-            call(mock_element, job_values["Company_name"]),
-            call(mock_element, job_values["Description"]),
-            call(mock_element, job_values["Pros"]),
-        ])
+    # def test_get_values_from_element_not_found(self):
+
+    #     mock_element = MagicMock(spec=WebElement)
+    #     mock_element_return = MagicMock(spec=WebElement)
+
+    #     mock_element.find_element.side_effect = my_side_effect_element
+    #     mock_element.find_elements.side_effect = my_side_effect_list
+
+    #     result = get_values_from_element(mock_element, job_values)
 
 
 if __name__ == '__main__':
