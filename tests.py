@@ -131,7 +131,9 @@ class TestConfigData(unittest.TestCase):
             status_code = response.status_code
             return f" - {status_code} : {response.reason}"
 
+        # Todo sometimes false positive result
         response = requests.get(self.url, timeout=10)
+
         OK_status_code = 200
         NOT_EXISTS_code = 404
         status_code = response.status_code
@@ -226,7 +228,7 @@ class TestWebDriver(unittest.TestCase):
     @patch('os.path.exists', return_value=True)
     def test_get_driver_with_invalid_file(self, mock_exists):
 
-        filepath = "C:\\valid_path\\chlometdrifer.exede"
+        filepath = "C:\\valid_path\\chlomedrifer.exede"
 
         with self.assertRaises(InvalidDriverPathError) as cm:
             MyService(filepath)
@@ -252,8 +254,8 @@ class TestWebDriver(unittest.TestCase):
 
     def test_get_webpage_failure(self):
 
-        with self.assertRaises((ConnectionError, WebDriverException)):
-            get_webpage(debug_mode=False, url="http://glosduuuurxD.fi")
+        with self.assertRaises((ConnectionError, WebDriverException, SystemExit)):
+            get_webpage(debug_mode=False, url="http://glosduuuur.fi")
 
     def _get_XpathSearch(self):
 
@@ -599,6 +601,19 @@ class TestWebDriver(unittest.TestCase):
             job_dict_to_update['Description'], job_values_to_add['Description'])
         self.assertEqual(
             job_dict_to_update['Cons'], job_values_to_add['Cons'])
+
+
+class TestIntegration(unittest.TestCase):  # todo
+
+    def test_in_debug_mode():
+        # run the script
+        # check the output
+        pass
+
+    def test_in_production():
+        # run the script
+        # check the output
+        pass
 
 
 if __name__ == '__main__':

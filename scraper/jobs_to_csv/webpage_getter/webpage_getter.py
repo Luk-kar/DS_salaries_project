@@ -24,11 +24,7 @@ def get_webpage(
     '''returns browser driver'''
 
     driver: MyWebDriver = get_driver(debug_mode, driver_path)
-    try:
-        driver.get(url)
-    except WebDriverException as error:
-        status_code = requests.get(url, timeout=3).status_code
-        sys.exit(
-            f"Failed to upload the url: {error}\n Status code: {status_code}")
+
+    driver.get(url)
 
     return driver

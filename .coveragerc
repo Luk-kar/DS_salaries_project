@@ -1,0 +1,8 @@
+[run]
+branch = True
+omit =
+    # It's too dynamic to test it. Also mocks for job_value_getter will not really test anything.
+    # It's better to use one integration test
+    scraper\jobs_to_csv\job_value_getter\job_value_getter.py
+    tests.py
+    tests
