@@ -30,6 +30,7 @@ class MyService(Service):
         if not os.path.exists(executable_path):
             raise InvalidDriverPathError(f'Invalid path: {executable_path}')
 
+        # https://regex101.com/r/kYDr70/1
         if not re.search(r'^.*chrome(?:driver|)\.(exe|sh)?$|^.*chrome(?:driver|)$', executable_path, re.IGNORECASE):
             raise InvalidDriverPathError(f'Invalid file: {executable_path}')
 

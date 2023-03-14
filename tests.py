@@ -9,6 +9,7 @@ import re
 import unittest
 from unittest.mock import patch, MagicMock, Mock
 from requests.exceptions import ConnectionError
+from time import sleep
 
 # External
 from bs4 import BeautifulSoup
@@ -23,7 +24,7 @@ from scraper.jobs_to_csv.job_value_getter._element_value_getter import get_value
 from scraper.jobs_to_csv.elements_query.XPATH_text_getter import get_XPATH_values
 from scraper.jobs_to_csv.actions.pause import pause
 from scraper.jobs_to_csv.elements_query.await_element import await_element
-from scraper.jobs_to_csv.webpage_getter._driver_getter import get_driver
+from scraper.jobs_to_csv.webpage_getter._driver_getter import get_driver, InvalidDriverPathError, MyService
 from scraper.jobs_to_csv.webpage_getter.webpage_getter import get_webpage
 from scraper.jobs_to_csv.job_value_getter._element_value_getter_and_adder import get_and_add_element_value
 from scraper.jobs_to_csv.job_value_getter._dict_value_adder import add_values_to_job_from_dict
@@ -121,7 +122,7 @@ class TestConfigData(unittest.TestCase):
         for part in url:
             self.assertIsInstance(part, str)
 
-    def test_web_access(self):
+    def test_is_url_valid(self):
         '''check if url exists and if there is an access'''
 
         def _get_answer(response):
@@ -214,16 +215,36 @@ class TestWebDriver(unittest.TestCase):
         driver = get_driver(debug_mode=False, path="auto-install")
         self.assertIsInstance(driver, MyWebDriver)
 
-    def test_get_driver_with_debug_mode_true_and_invalid_path(self):
+    def test_get_driver_with_invalid_path(self):
         with self.assertRaises(SystemExit):
-            get_driver(debug_mode=True, path="invalid_path")
+            get_driver(debug_mode=True, path="C:\\invalid_path\\driver")
+
+    @patch('os.path.exists', return_value=True)
+    def test_get_driver_with_invalid_file(self, mock_exists):
+
+        filepath = "C:\\valid_path\\chlometdrifer.exede"
+
+        with self.assertRaises(InvalidDriverPathError) as cm:
+            MyService(filepath)
+
+        self.assertEqual(str(cm.exception), f"Invalid file: {filepath}")
+
+    def test_driver_version_mismatch(self):
+        with patch('os.path.exists', return_value=True):
+            with patch('scraper.jobs_to_csv.webpage_getter._driver_getter.MyService.__init__',
+                       side_effect=WebDriverException('Invalid version')):
+                with self.assertRaises(SystemExit):
+                    get_driver(path='/path/to/chromedriver')
 
     def test_get_webpage_success(self):
         driver: MyWebDriver = get_webpage(
             "http://glassdoor.com", False)
         page_source: str = driver.page_source
 
+        sleep(0.2)  # to load page
+
         self.assertTrue(self._is_HTML(page_source))
+        self.assertIsInstance(driver, MyWebDriver)
 
     def test_get_webpage_failure(self):
 
