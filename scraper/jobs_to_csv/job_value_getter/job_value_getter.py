@@ -71,11 +71,11 @@ def _get_company_benefits_review(job: Job_values, job_post: WebElement):
 
     benefits_review: Job_elements = {
 
-        "Benefits_rating": XpathSearch(
+        'Benefits_rating': XpathSearch(
             '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]//div\
                 //div[@class="ratingNum mr-sm"]'
         ),
-        "Benefits_reviews": XpathListSearch(
+        'Benefits_reviews': XpathListSearch(
             '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsHighlights")]/div'
         ),
     }
@@ -108,10 +108,10 @@ def _get_company_reviews_by_job_title(job: Job_values, job_post: WebElement):
     '''
 
     reviews_by_job_title: Job_elements = {
-        "Pros": XpathListSearch(
+        'Pros': XpathListSearch(
             './/*[text() = "Pros"]//parent::div//*[contains(name(), "p")]'
         ),
-        "Cons": XpathListSearch(
+        'Cons': XpathListSearch(
             './/*[text() = "Cons"]//parent::div//*[contains(name(), "p")]'
         ),
     }
@@ -152,25 +152,25 @@ def _get_company_ratings(job: Job_values, job_post: WebElement):
 
     rating_description: Job_elements = {
 
-        "Friend_recommend": XpathSearch(
+        'Friend_recommend': XpathSearch(
             './/div[@class="css-ztsow4"]'
         ),
-        "CEO_approval": XpathSearch(
+        'CEO_approval': XpathSearch(
             './/div[@class="css-ztsow4 ceoApprove"]'
         ),
-        "Career_opportunities": XpathSearch(
+        'Career_opportunities': XpathSearch(
             './/*[text() = "Career Opportunities"]/following-sibling::span[2]'
         ),
-        "Comp_&_benefits": XpathSearch(
+        'Comp_&_benefits': XpathSearch(
             './/*[text() = "Comp & Benefits"]/following-sibling::span[2]'
         ),
-        "Culture_&_values": XpathSearch(
+        'Culture_&_values': XpathSearch(
             './/*[text() = "Culture & Values"]/following-sibling::span[2]'
         ),
-        "Senior_management": XpathSearch(
+        'Senior_management': XpathSearch(
             './/*[text() = "Senior Management"]/following-sibling::span[2]'
         ),
-        "Work/Life_balance": XpathSearch(
+        'Work/Life_balance': XpathSearch(
             './/*[text() = "Work/Life Balance"]/following-sibling::span[2]'
         ),
     }
@@ -211,22 +211,22 @@ def _get_company_description(job: Job_values, job_post: WebElement):
 
     company_description: Job_elements = {
 
-        "Employees": XpathSearch(
+        'Employees': XpathSearch(
             './/div//*[text() = "Size"]//following-sibling::*'
         ),
-        "Type_of_ownership": XpathSearch(
+        'Type_of_ownership': XpathSearch(
             './/div//*[text() = "Type"]//following-sibling::*'
         ),
-        "Sector": XpathSearch(
+        'Sector': XpathSearch(
             './/div//*[text() = "Sector"]//following-sibling::*'
         ),
-        "Founded": XpathSearch(
+        'Founded': XpathSearch(
             './/div//*[text() = "Founded"]//following-sibling::*'
         ),
-        "Industry": XpathSearch(
+        'Industry': XpathSearch(
             './/div//*[text() = "Industry"]//following-sibling::*'
         ),
-        "Revenue_USD": XpathSearch(
+        'Revenue_USD': XpathSearch(
             './/div//*[text() = "Revenue"]//following-sibling::*'
         ),
     }
@@ -266,10 +266,10 @@ def _get_job_button_values(job: Job_values, job_button: WebElement):
 
     job_button_info: Job_elements = {
 
-        "Job_age": XpathSearch(
+        'Job_age': XpathSearch(
             './/div[@data-test="job-age"]'
         ),
-        "Easy_apply": XpathSearch(
+        'Easy_apply': XpathSearch(
             './/div[@class="css-pxdlb2"]/div[1]'
         ),
     }
@@ -299,22 +299,22 @@ def _get_job_descriptions_values(job: Job_values, job_post: WebElement):
 
     job_description: Job_elements = {
 
-        "Company_name": XpathSearch(
+        'Company_name': XpathSearch(
             './/div[@data-test="employerName"]'
         ),
-        "Rating": XpathSearch(
+        'Rating': XpathSearch(
             './/span[@data-test="detailRating"]'
         ),
-        "Location": XpathSearch(
+        'Location': XpathSearch(
             './/div[@data-test="location"]'
         ),
-        "Job_title": XpathSearch(
+        'Job_title': XpathSearch(
             './/div[@data-test="jobTitle"]'
         ),
-        "Description": XpathSearch(
+        'Description': XpathSearch(
             './/div[@class="jobDescriptionContent desc"]'
         ),
-        "Salary": XpathSearch(
+        'Salary': XpathSearch(
             './/span[@data-test="detailSalary"]'
         ),
     }

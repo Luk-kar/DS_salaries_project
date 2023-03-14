@@ -16,7 +16,7 @@ def print_key_value_pairs(job: Job):
     '''used for debugging, when parsing HTML'''
 
     for index, (key, value) in enumerate(job.items()):
-        print(f"{index + 1}. {key}:\n{value}")
+        print(f"\r{index + 1}. {key}:\n{value}")
 
     _print_separator("=")
 
@@ -84,4 +84,4 @@ def print_current_date_time(intro_word: Literal["Start", "End"]):
     date and time.
     '''
     now = datetime.now().isoformat(sep=" ", timespec="seconds")
-    print(f"{intro_word}: {now}")
+    print(f"\r{intro_word}: {now}")

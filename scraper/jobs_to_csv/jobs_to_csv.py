@@ -146,7 +146,7 @@ class GlassdoorJobScraper:
 
             if self.debug_mode:
                 print(
-                    f"Progress: {self.csv_writer.counter}/{self.jobs_number}")
+                    f"\rProgress: {self.csv_writer.counter}/{self.jobs_number}")
 
             try:
                 job_button.click()

@@ -6,6 +6,8 @@ and specify the path to the Chrome driver.
 '''
 # Python
 import sys
+import re
+import os
 
 # External
 from selenium import webdriver
@@ -15,6 +17,28 @@ from webdriver_manager.chrome import ChromeDriverManager
 from scraper.config.get import get_config
 
 config = get_config()
+
+
+class InvalidDriverPathError(Exception):
+    pass
+
+
+class MyService(Service):
+    ''''''
+
+    def __init__(self, executable_path, port=0, service_args=None, log_path=None):
+        if not os.path.exists(executable_path):
+            raise InvalidDriverPathError(f'Invalid path: {executable_path}')
+
+        if not re.search(r'^.*chrome(?:driver|)\.(exe|sh)?$|^.*chrome(?:driver|)$', executable_path, re.IGNORECASE):
+            raise InvalidDriverPathError(f'Invalid file: {executable_path}')
+
+        try:
+            super().__init__(executable_path, port=port,
+                             service_args=service_args, log_path=log_path)
+        except WebDriverException as error:
+            raise InvalidDriverPathError(
+                f'Make sure your driver version is correct:\n{error}')
 
 
 def get_driver(
@@ -30,15 +54,15 @@ def get_driver(
     # todo debug_mode=True add headless mode
 
     if path == "auto-install":
-        print("Installing driver automatically...")
-        service_obj = Service(ChromeDriverManager().install())
+        print("\rInstalling driver automatically...")
+        service_obj = MyService(ChromeDriverManager().install())
     else:
         if debug_mode:
             print(f"\nUsing the driver:\n{path}")
         try:
-            service_obj = Service(path)
+            service_obj = MyService(path)
 
-        except WebDriverException as error:
+        except Exception as error:  # todo no idea which custom exception I should to add here
             sys.exit(
                 f'Make sure your path or driver version is correct:\n{error}'
             )

@@ -26,10 +26,10 @@ for file in files:
     if file.endswith(".csv"):
         files_to_remove.append(os.path.join(raw_folder, file))
 
-print(f"In folder {raw_folder}:")
+print(f"\rIn folder {raw_folder}:")
 if files_to_remove:
     for file in files_to_remove:
         os.remove(file)
-        print(f"REMOVED FILE: {os.path.basename(file)}")
+        print(f"\rREMOVED FILE: {os.path.basename(file)}")
 else:
-    print("NO FILES TO DELETE!")
+    print("\rNO FILES TO DELETE!")

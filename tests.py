@@ -7,7 +7,8 @@ The module consists of two test classes: TestConfigData and TestJobDescription.
 import os
 import re
 import unittest
-from unittest.mock import patch, MagicMock, call
+from unittest.mock import patch, MagicMock, Mock
+from requests.exceptions import ConnectionError
 
 # External
 from bs4 import BeautifulSoup
@@ -15,7 +16,7 @@ from pathvalidate import sanitize_filepath, sanitize_filename
 import requests
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, WebDriverException
 
 # Internal
 from scraper.jobs_to_csv.job_value_getter._element_value_getter import get_values_from_element
@@ -24,11 +25,12 @@ from scraper.jobs_to_csv.actions.pause import pause
 from scraper.jobs_to_csv.elements_query.await_element import await_element
 from scraper.jobs_to_csv.webpage_getter._driver_getter import get_driver
 from scraper.jobs_to_csv.webpage_getter.webpage_getter import get_webpage
-from scraper.config.get import get_config, get_url, get_path_csv_raw, get_path_csv_clean, get_NA_value, get_encoding
+from scraper.jobs_to_csv.job_value_getter._element_value_getter_and_adder import get_and_add_element_value
 from scraper.jobs_to_csv.job_value_getter._dict_value_adder import add_values_to_job_from_dict
+from scraper.jobs_to_csv.job_value_getter.job_value_getter import XpathSearch, XpathListSearch
+from scraper.config.get import get_config, get_url, get_path_csv_raw, get_path_csv_clean, get_NA_value, get_encoding
 from scraper.config._types import Config, JobNumber, JobSimilar, Url
 from scraper._types import MyWebDriver, Job_elements
-from scraper.jobs_to_csv.job_value_getter.job_value_getter import XpathSearch, XpathListSearch
 
 
 def decorator(func):
@@ -120,14 +122,25 @@ class TestConfigData(unittest.TestCase):
             self.assertIsInstance(part, str)
 
     def test_web_access(self):
-        '''check if url exists'''
+        '''check if url exists and if there is an access'''
+
+        def _get_answer(response):
+            '''Clear up the meaning of the response HTTP'''
+
+            status_code = response.status_code
+            return f" - {status_code} : {response.reason}"
 
         response = requests.get(self.url, timeout=10)
         OK_status_code = 200
+        NOT_EXISTS_code = 404
         status_code = response.status_code
 
+        self.assertNotEqual(status_code, NOT_EXISTS_code,
+                            f"Not Found\nError{_get_answer(response)}"
+                            )
         self.assertEqual(status_code, OK_status_code,
-                         f"OK\nError - {status_code} : {response.reason}")
+                         f"OK\nError{_get_answer(response)}"
+                         )
 
     def test_driver_path(self):
         '''check if the driver exists on the local machine'''
@@ -193,18 +206,29 @@ class TestWebDriver(unittest.TestCase):
     def _is_HTML(self, page_source):
         return bool(BeautifulSoup(page_source, "html.parser").find())
 
-    # def test_is_browser(self):
-    #     driver: MyWebDriver = get_driver(self.url)
+    def test_get_driver_with_debug_mode_true_and_valid_path(self):
+        driver = get_driver(debug_mode=True, path=self.config['driver_path'])
+        self.assertIsInstance(driver, MyWebDriver)
 
-    #     self.assertIsInstance(
-    #         driver, MyWebDriver)
+    def test_get_driver_with_debug_mode_false_and_auto_install(self):
+        driver = get_driver(debug_mode=False, path="auto-install")
+        self.assertIsInstance(driver, MyWebDriver)
 
-    # def test_is_webpage_loaded(self):
-    #     driver: MyWebDriver = get_webpage(
-    #         self.url, False)
-    #     page_source: str = driver.page_source
+    def test_get_driver_with_debug_mode_true_and_invalid_path(self):
+        with self.assertRaises(SystemExit):
+            get_driver(debug_mode=True, path="invalid_path")
 
-    #     self.assertTrue(self._is_HTML(page_source))
+    def test_get_webpage_success(self):
+        driver: MyWebDriver = get_webpage(
+            "http://glassdoor.com", False)
+        page_source: str = driver.page_source
+
+        self.assertTrue(self._is_HTML(page_source))
+
+    def test_get_webpage_failure(self):
+
+        with self.assertRaises(ConnectionError):
+            get_webpage(debug_mode=False, url="http://glosduuuurxD.fi")
 
     def _get_XpathSearch(self):
 
@@ -438,22 +462,118 @@ class TestWebDriver(unittest.TestCase):
 
         mock_element = MagicMock(spec=WebElement)
 
+        job_elements = {
+            'Salary': XpathSearch("//nonexistent_element"),
+            'Cons': XpathListSearch("//nonexistent_element")
+        }
+
         mock_element.find_element.side_effect = NoSuchElementException(
             "Element not found")
+
         mock_element.find_elements.side_effect = NoSuchElementException(
             "Element not found")
 
-        job_element_single = {'Salary': XpathSearch("//nonexistent_element")}
-        job_element_many = {'Cons': XpathListSearch("//nonexistent_element")}
+        job_values = get_values_from_element(
+            mock_element,
+            job_elements
+        )
 
         self.assertEqual(
             self.config['NA_value'],
-            get_values_from_element(mock_element, job_element_single)
+            job_values['Salary'].value
         )
         self.assertEqual(
             self.config['NA_value'],
-            get_values_from_element(mock_element, job_element_many)
+            job_values['Cons'].value
         )
+
+    def test_get_and_add_element_value(self):
+
+        job_dict_to_update = {
+            'Job_title': '',
+            'Location': '',
+            'Salary': '',
+            'Description': '',
+        }
+
+        job_values_to_add = {
+            'Job_title': "Theoretical Physicist",
+            'Company_name': "California Institute of Technology",
+            'Description': "Bazinga!",
+            'Cons': [
+                "The cafeteria serves subpar food, which is a terrible insult" +
+                "to my delicate palate and refined tastes.",
+                "You'll have to suffer the indignity of occasionally being wrong, " +
+                "which is something I never have to deal with."
+            ],
+        }
+
+        values_source_element = MagicMock(spec=WebElement)
+
+        job_elements = {
+            'Job_title': XpathSearch('.//div[@data-test="jobTitle"]'),
+            'Company_name': XpathSearch('.//div[@data-test="employerName"]'),
+            'Description': XpathSearch('.//div[@class="jobDescriptionContent desc"]'),
+            'Cons': XpathListSearch('.//*[text() = "Cons"]//parent::div//*[contains(name(), "p")]'),
+        }
+
+        def my_side_effect_element(*args):
+
+            mock_element_return = MagicMock(spec=WebElement)
+
+            selector = args[1]
+
+            if selector == job_elements['Job_title'].element:
+                mock_element_return.text = job_values_to_add['Job_title']
+
+            elif selector == job_elements['Company_name'].element:
+                mock_element_return.text = job_values_to_add['Company_name']
+
+            elif selector == job_elements['Description'].element:
+                mock_element_return.text = job_values_to_add['Description']
+
+            else:
+                raise KeyError
+
+            return mock_element_return
+
+        def my_side_effect_list(*args):
+
+            mock_return_elements = MagicMock(spec=list[WebElement])
+
+            selector = args[1]
+
+            if selector == job_elements['Cons'].element:
+
+                mock_element_01 = MagicMock(spec=WebElement)
+                mock_element_02 = MagicMock(spec=WebElement)
+
+                mock_element_01.text = job_values_to_add['Cons'][0]
+                mock_element_02.text = job_values_to_add['Cons'][1]
+
+                mock_return_elements = [
+                    mock_element_01,
+                    mock_element_02
+                ]
+            else:
+                raise KeyError
+
+            return mock_return_elements
+
+        values_source_element.find_element.side_effect = my_side_effect_element
+        values_source_element.find_elements.side_effect = my_side_effect_list
+
+        get_and_add_element_value(
+            job_dict_to_update, values_source_element, job_elements)
+
+        self.assertEqual(
+            job_dict_to_update['Job_title'], job_values_to_add['Job_title'])
+        self.assertEqual(
+            job_dict_to_update['Company_name'], job_values_to_add['Company_name'])
+        self.assertEqual(
+            job_dict_to_update['Description'], job_values_to_add['Description'])
+        self.assertEqual(
+            job_dict_to_update['Cons'], job_values_to_add['Cons'])
 
 
 if __name__ == '__main__':

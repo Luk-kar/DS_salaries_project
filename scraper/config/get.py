@@ -7,7 +7,6 @@ It imports the yaml library and uses the SafeLoader to safely load the YAML data
 '''
 # Python
 import os
-import platform
 from datetime import datetime
 
 # External
