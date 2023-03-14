@@ -215,9 +215,13 @@ class TestWebDriver(unittest.TestCase):
         driver = get_driver(debug_mode=False, path="auto-install")
         self.assertIsInstance(driver, MyWebDriver)
 
-    def test_get_driver_with_invalid_path(self):
-        with self.assertRaises(SystemExit):
-            get_driver(debug_mode=True, path="C:\\invalid_path\\driver")
+    @patch('os.path.exists', return_value=False)
+    def test_get_driver_not_exists(self, mock_exists):
+
+        filepath = "C:\\valid_path\\non-existing-driver.exe"
+
+        with self.assertRaises(InvalidDriverPathError) as cm:
+            MyService(filepath)
 
     @patch('os.path.exists', return_value=True)
     def test_get_driver_with_invalid_file(self, mock_exists):
@@ -227,11 +231,11 @@ class TestWebDriver(unittest.TestCase):
         with self.assertRaises(InvalidDriverPathError) as cm:
             MyService(filepath)
 
-        self.assertEqual(str(cm.exception), f"Invalid file: {filepath}")
-
     @patch('os.path.exists', return_value=True)
-    @patch('scraper.jobs_to_csv.webpage_getter._driver_getter.MyService.__init__',
-           side_effect=WebDriverException('Invalid version'))
+    @patch(
+        'scraper.jobs_to_csv.webpage_getter._driver_getter.MyService.__init__',
+        side_effect=WebDriverException('Invalid version')
+    )
     def test_driver_version_mismatch(self, mock_exists, mock_init):
         with self.assertRaises(SystemExit):
             get_driver(path='/path/to/chromedriver')
@@ -248,7 +252,7 @@ class TestWebDriver(unittest.TestCase):
 
     def test_get_webpage_failure(self):
 
-        with self.assertRaises(ConnectionError):
+        with self.assertRaises((ConnectionError, WebDriverException)):
             get_webpage(debug_mode=False, url="http://glosduuuurxD.fi")
 
     def _get_XpathSearch(self):

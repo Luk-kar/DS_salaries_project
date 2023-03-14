@@ -34,12 +34,8 @@ class MyService(Service):
         if not re.search(r'^.*chrome(?:driver|)\.(exe|sh)?$|^.*chrome(?:driver|)$', executable_path, re.IGNORECASE):
             raise InvalidDriverPathError(f'Invalid file: {executable_path}')
 
-        try:
-            super().__init__(executable_path, port=port,
-                             service_args=service_args, log_path=log_path)
-        except WebDriverException as error:
-            raise InvalidDriverPathError(
-                f'Make sure your driver version is correct:\n{error}')
+        super().__init__(executable_path, port=port,
+                         service_args=service_args, log_path=log_path)
 
 
 def get_driver(
@@ -63,7 +59,7 @@ def get_driver(
         try:
             service_obj = MyService(path)
 
-        except Exception as error:  # todo no idea which custom exception I should to add here
+        except WebDriverException as error:
             sys.exit(
                 f'Make sure your path or driver version is correct:\n{error}'
             )
