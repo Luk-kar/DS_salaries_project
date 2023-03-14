@@ -229,12 +229,12 @@ class TestWebDriver(unittest.TestCase):
 
         self.assertEqual(str(cm.exception), f"Invalid file: {filepath}")
 
-    def test_driver_version_mismatch(self):
-        with patch('os.path.exists', return_value=True):
-            with patch('scraper.jobs_to_csv.webpage_getter._driver_getter.MyService.__init__',
-                       side_effect=WebDriverException('Invalid version')):
-                with self.assertRaises(SystemExit):
-                    get_driver(path='/path/to/chromedriver')
+    @patch('os.path.exists', return_value=True)
+    @patch('scraper.jobs_to_csv.webpage_getter._driver_getter.MyService.__init__',
+           side_effect=WebDriverException('Invalid version'))
+    def test_driver_version_mismatch(self, mock_exists, mock_init):
+        with self.assertRaises(SystemExit):
+            get_driver(path='/path/to/chromedriver')
 
     def test_get_webpage_success(self):
         driver: MyWebDriver = get_webpage(
