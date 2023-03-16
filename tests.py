@@ -604,8 +604,8 @@ def decorator(func):
 regex = {
     # https://regex101.com/r/9m7gaB/1
     'Non-empty-string': r"^(?!\s*$).+",
-    # https://regex101.com/r/E8131q/1
-    '0.0-5.0': r"^(?:0(?:\.[0-9])?|1(?:\.0)?|2(?:\.[0-9])?|3(?:\.[0-9])?|4(?:\.[0-9])?|5(?:\.0)?)$",
+    # https://regex101.com/r/XRho9L/1
+    '0.0-5.0': r"^(?:[0-4](?:\.[0-9])?|5(?:\.0)?|)$",
     # https://regex101.com/r/TpN5H3/1
     '24h-30d+': r"^(?:24h|[1-2]?[0-9]d?|30d\+?)$",
     # https://regex101.com/r/9bIQDf/1
@@ -618,9 +618,10 @@ regex = {
     '1-9999': r"^(?:[1-9]\d{0,3}|)$",
     # https://regex101.com/r/jVaJDa/1
     'Revenue_USD': r"^(?!.*\(USD\)).*$",
-    # https://regex101.com/r/jfXxdO/1
-    '0.00-5.00': r"^(?:0(\.[0-9]{1,2})?|([1-4](\.[0-9]{1,2})?)|5(\.0{1,2})?|)$"
-
+    # https://regex101.com/r/phTDbC/1
+    '0.00-5.00': r"^(?:0(\.[0-9]{1,2})?|([1-4](\.[0-9]{1,2})?)|5(\.0{1,2})?|)$",
+    # https://regex101.com/r/bGQCzp/1
+    'reviews': r"^(\[((\'|\").*(\'|\")(, )?)+\]|)$"
 }
 
 
@@ -649,6 +650,14 @@ class TestIntegration(unittest.TestCase):
                 'Revenue_USD': regex['Revenue_USD'],
                 'Friend_recommend': regex['0.00-5.00'],
                 'CEO_approval': regex['0.00-5.00'],
+                'Career_opportunities': regex['0.0-5.0'],
+                'Comp_&_benefits': regex['0.0-5.0'],
+                'Culture_&_values': regex['0.0-5.0'],
+                'Senior_management': regex['0.0-5.0'],
+                'Work/Life_balance': regex['0.0-5.0'],
+                'Pros': regex['reviews'],
+                'Cons': regex['reviews'],
+                'Benefits_rating': regex['0.0-5.0'],
             }
         }
 
@@ -679,7 +688,8 @@ class TestIntegration(unittest.TestCase):
 
             if expected_regex is not None:
                 assert re.match(
-                    expected_regex, field), f"Invalid value in row {i+2}, column {j+1}:\nHeader: {header}\nField:  {field}\nExpect: {expected_regex}"
+                    expected_regex, field), f"Invalid value in row {i+2}, column {j+1}:\
+                        \nHeader :{header}:\nField  :{field}:\nExpect :{expected_regex}:"
 
     def test_in_debug_mode(self):
 
