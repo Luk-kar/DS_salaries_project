@@ -614,12 +614,12 @@ regex = {
     'employees': r"^(?!.*employees).*$",
     # https://regex101.com/r/g076Ht/1
     'exists': r"^.*$",
-    # https://regex101.com/r/gZzGOt/1
-    '1-9999': r"^[1-9]\d{0,3}$",
+    # https://regex101.com/r/j32tP1/1
+    '1-9999': r"^(?:[1-9]\d{0,3}|)$",
     # https://regex101.com/r/jVaJDa/1
     'Revenue_USD': r"^(?!.*\(USD\)).*$",
     # https://regex101.com/r/jfXxdO/1
-    '0.00-5.00': r"^(0(\.[0-9]{1,2})?|([1-4](\.[0-9]{1,2})?)|5(\.0{1,2})?)$"
+    '0.00-5.00': r"^(?:0(\.[0-9]{1,2})?|([1-4](\.[0-9]{1,2})?)|5(\.0{1,2})?|)$"
 
 }
 
@@ -642,7 +642,7 @@ class TestIntegration(unittest.TestCase):
                 'Job_age': regex['24h-30d+'],
                 'Easy_apply': regex['bool'],
                 'Employees': regex['employees'],
-                'Type_of_ownership': regex['exists'],  # todo
+                'Type_of_ownership': regex['exists'],
                 'Sector': regex['exists'],
                 'Founded': regex['1-9999'],
                 'Industry': regex['exists'],
