@@ -103,7 +103,7 @@ class TestWebDriver(unittest.TestCase):
             "http://glassdoor.com", False)
         page_source: str = driver.page_source
 
-        sleep(0.2)  # to load page
+        sleep(0.4)  # to load page
 
         self.assertTrue(self._is_html(page_source))
         self.assertIsInstance(driver, MyWebDriver)
