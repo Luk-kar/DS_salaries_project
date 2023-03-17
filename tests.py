@@ -630,10 +630,10 @@ class TestIntegration(unittest.TestCase):
     def setUp(self):
         '''init all config values'''
         self.jobs_number = 3
-        # self.csv.path = get_path_csv_raw()
         self.csv = {
-            'path': "data\RAW\Data_Engineer_14-03-2023_18-24.csv",
+            'path': "data\RAW\Data_Engineer_06-03-2023_23-41.csv",
             'delimiter': ",",
+            'encoding': get_encoding(),
             'expected_values': {
                 'Company_name': regex["Non-empty-string"],
                 'Rating': regex['0.0-5.0'],
@@ -660,6 +660,9 @@ class TestIntegration(unittest.TestCase):
                 'Benefits_rating': regex['0.0-5.0'],
             }
         }
+        self.target_folder = os.path.dirname(get_path_csv_raw())
+        self.target_directory_files_before = self._get_csv_files(
+            self.target_folder)
 
     def _test_csv_file_structure(self):
 
@@ -667,7 +670,7 @@ class TestIntegration(unittest.TestCase):
         delimiter = self.csv['delimiter']
         expected_values = self.csv['expected_values']
 
-        with open(csv_file_path, newline="") as file:
+        with open(csv_file_path, newline="", encoding=self.csv['encoding']) as file:
 
             reader = csv.reader(file, delimiter=delimiter)
             headers = next(reader)
@@ -691,17 +694,52 @@ class TestIntegration(unittest.TestCase):
                     expected_regex, field), f"Invalid value in row {i+2}, column {j+1}:\
                         \nHeader :{header}:\nField  :{field}:\nExpect :{expected_regex}:"
 
+    def _get_csv_files(self, directory: str) -> list[str]:
+
+        csv_files = []
+
+        for filename in os.listdir(directory):
+            if filename.endswith('.csv'):
+                csv_files.append(filename)
+
+        return csv_files
+
     def test_in_debug_mode(self):
 
-        # with self.assertRaises(SystemExit):
-        #     scrape_data(jobs_number=self.jobs_number, debug_mode=True)
+        with self.assertRaises(SystemExit):
+            scrape_data(jobs_number=self.jobs_number, debug_mode=True)
 
-        self._test_csv_file_structure()
+        # self._test_csv_file_structure()
 
     def test_in_production(self):
         # scrape_data(jobs_number=self.jobs_number, debug_mode=False)
         # check the output
         pass
+
+    def tearDown(self) -> None:
+
+        target_folder = self.target_folder
+        before_files = self.target_directory_files_before
+
+        new_files = self._get_created_files()
+
+        for filename in new_files:
+            if filename not in before_files:
+                new_file_path = os.path.join(target_folder, filename)
+                os.remove(new_file_path)
+                break
+
+        return super().tearDown()
+
+    def _get_created_files(self):
+
+        target_folder = self.target_folder
+        before_files = self.target_directory_files_before
+        after_files = self._get_csv_files(target_folder)
+
+        difference = set(after_files) - set(before_files)
+
+        return difference
 
 
 if __name__ == '__main__':
