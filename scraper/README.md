@@ -83,6 +83,13 @@ Look at:
 - [requirements.txt](scraper/requirements.txt)
 - [Piffle](Piffle)
 
+## Running the tests 🧪
+
+To run tests, write down in the terminal, in the program folder:
+`python -m unittest`
+or
+`scripts\run_tests.bat`
+
 ## Wish-list ✨
 
 1. Optimizing the speed of the script. Get rid of all artificial pause scripts.
