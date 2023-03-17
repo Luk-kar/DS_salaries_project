@@ -706,10 +706,23 @@ class TestIntegration(unittest.TestCase):
 
     def test_in_debug_mode(self):
 
+        before_files = self._get_csv_files(
+            self.target_folder)
+
         with self.assertRaises(SystemExit):
             scrape_data(jobs_number=self.jobs_number, debug_mode=True)
 
-        # self._test_csv_file_structure()
+        after_files = self._get_csv_files(
+            self.target_folder)
+
+        difference = set(after_files) - set(before_files)
+
+        for filename in difference:
+            if filename not in before_files:
+
+                file_path = os.path.join(self.target_folder, filename)
+                self._test_csv_file_structure()
+                break
 
     def test_in_production(self):
         # scrape_data(jobs_number=self.jobs_number, debug_mode=False)
@@ -727,7 +740,6 @@ class TestIntegration(unittest.TestCase):
             if filename not in before_files:
                 new_file_path = os.path.join(target_folder, filename)
                 os.remove(new_file_path)
-                break
 
         return super().tearDown()
 
