@@ -664,9 +664,8 @@ class TestIntegration(unittest.TestCase):
         self.target_directory_files_before = self._get_csv_files(
             self.target_folder)
 
-    def _test_csv_file_structure(self):
+    def _test_csv_file_structure(self, csv_file_path):
 
-        csv_file_path = self.csv['path']
         delimiter = self.csv['delimiter']
         expected_values = self.csv['expected_values']
 
@@ -721,7 +720,7 @@ class TestIntegration(unittest.TestCase):
             if filename not in before_files:
 
                 file_path = os.path.join(self.target_folder, filename)
-                self._test_csv_file_structure()
+                self._test_csv_file_structure(file_path)
                 break
 
     def test_in_production(self):
