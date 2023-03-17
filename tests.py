@@ -705,11 +705,17 @@ class TestIntegration(unittest.TestCase):
 
     def test_in_debug_mode(self):
 
+        self.check_if_created_file_is_valid(
+            lambda: scrape_data(jobs_number=self.jobs_number, debug_mode=True)
+        )
+
+    def check_if_created_file_is_valid(self, scrape_data_function):
+
         before_files = self._get_csv_files(
             self.target_folder)
 
         with self.assertRaises(SystemExit):
-            scrape_data(jobs_number=self.jobs_number, debug_mode=True)
+            scrape_data_function()
 
         after_files = self._get_csv_files(
             self.target_folder)
@@ -718,7 +724,6 @@ class TestIntegration(unittest.TestCase):
 
         for filename in difference:
             if filename not in before_files:
-
                 file_path = os.path.join(self.target_folder, filename)
                 self._test_csv_file_structure(file_path)
                 break
