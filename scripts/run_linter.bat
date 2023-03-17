@@ -3,4 +3,4 @@ ECHO Running linter...
 pylint config
 pylint scraper
 pylint _001_data_collection.py
-pylint tests.py
+pylint test

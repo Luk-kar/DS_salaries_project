@@ -1,61 +1,74 @@
 '''
 This module provides a custom WebDriver for automated testing purposes. 
-The TestWebDriver class can be used to interact with web pages and perform various testing operations. 
-It extends the functionality of the Selenium WebDriver to include additional 
-features and options specific to our testing needs.
+The TestWebDriver class can be used to interact with web pages and 
+perform various testing operations. 
+It extends the functionality of the Selenium WebDriver to include 
+additional features and options specific to our testing needs.
 '''
 
 # Python
 import unittest
-from unittest.mock import patch, MagicMock
-from requests.exceptions import ConnectionError
 from time import sleep
+from unittest.mock import MagicMock, patch
+import requests
 
 # External
 from bs4 import BeautifulSoup
-from selenium.webdriver.remote.webelement import WebElement
+from selenium.common.exceptions import (NoSuchElementException,
+                                        WebDriverException)
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException, WebDriverException
+from selenium.webdriver.remote.webelement import WebElement
 
 # Internal
-from scraper.jobs_to_csv.job_value_getter._element_value_getter import get_values_from_element
-from scraper.jobs_to_csv.elements_query.XPATH_text_getter import get_XPATH_values
+from scraper._types import Job_elements, MyWebDriver
+from scraper.config._types import Config
+from scraper.config.get import get_config, get_NA_value, get_url
 from scraper.jobs_to_csv.actions.pause import pause
 from scraper.jobs_to_csv.elements_query.await_element import await_element
-from scraper.jobs_to_csv.webpage_getter._driver_getter import get_driver, InvalidDriverPathError, MyService
+from scraper.jobs_to_csv.elements_query.XPATH_text_getter import \
+    get_XPATH_values
+from scraper.jobs_to_csv.job_value_getter._dict_value_adder import \
+    add_values_to_job_from_dict
+from scraper.jobs_to_csv.job_value_getter._element_value_getter import \
+    get_values_from_element
+from scraper.jobs_to_csv.job_value_getter._element_value_getter_and_adder import \
+    get_and_add_element_value
+from scraper.jobs_to_csv.job_value_getter.job_value_getter import (
+    XpathListSearch,
+    XpathSearch
+)
+from scraper.jobs_to_csv.webpage_getter._driver_getter import (
+    InvalidDriverPathError,
+    MyService,
+    get_driver
+)
 from scraper.jobs_to_csv.webpage_getter.webpage_getter import get_webpage
-from scraper.jobs_to_csv.job_value_getter._element_value_getter_and_adder import get_and_add_element_value
-from scraper.jobs_to_csv.job_value_getter._dict_value_adder import add_values_to_job_from_dict
-from scraper.jobs_to_csv.job_value_getter.job_value_getter import XpathSearch, XpathListSearch
-from scraper.config.get import get_config, get_url, get_NA_value
-from scraper.config._types import Config
-from scraper._types import MyWebDriver, Job_elements
 
 
 class TestWebDriver(unittest.TestCase):
     '''It tests single-job page scraping'''
 
-    def setUp(self):
-        self.config: Config = get_config()
-        self.url = get_url(
-            self.config['url'],
-            self.config['jobs_titles']['default']
+    @classmethod
+    def setUpClass(cls):
+        cls.config: Config = get_config()
+        cls.url = get_url(
+            cls.config['url'],
+            cls.config['jobs_titles']['default']
         )
-        self.xpath_element = {
+        cls.xpath_element = {
             'search': '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]//div\
                 //div[@class="ratingNum mr-sm"]',
             'list': '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsHighlights")]/div'
         }
-        self.html = MagicMock()
-
-    def _is_HTML(self, page_source):
-        return bool(BeautifulSoup(page_source, "html.parser").find())
+        cls.html = MagicMock()
 
     def test_get_driver_with_debug_mode_true_and_valid_path(self):
+
         driver = get_driver(debug_mode=True, path=self.config['driver_path'])
         self.assertIsInstance(driver, MyWebDriver)
 
     def test_get_driver_with_debug_mode_false_and_auto_install(self):
+
         driver = get_driver(debug_mode=False, path="auto-install")
         self.assertIsInstance(driver, MyWebDriver)
 
@@ -64,7 +77,7 @@ class TestWebDriver(unittest.TestCase):
 
         filepath = "C:\\valid_path\\non-existing-driver.exe"
 
-        with self.assertRaises(InvalidDriverPathError) as cm:
+        with self.assertRaises(InvalidDriverPathError):
             MyService(filepath)
 
     @patch('os.path.exists', return_value=True)
@@ -72,7 +85,7 @@ class TestWebDriver(unittest.TestCase):
 
         filepath = "C:\\valid_path\\chlomedrifer.exede"
 
-        with self.assertRaises(InvalidDriverPathError) as cm:
+        with self.assertRaises(InvalidDriverPathError):
             MyService(filepath)
 
     @patch('os.path.exists', return_value=True)
@@ -81,6 +94,7 @@ class TestWebDriver(unittest.TestCase):
         side_effect=WebDriverException('Invalid version')
     )
     def test_driver_version_mismatch(self, mock_exists, mock_init):
+
         with self.assertRaises(SystemExit):
             get_driver(path='/path/to/chromedriver')
 
@@ -91,21 +105,17 @@ class TestWebDriver(unittest.TestCase):
 
         sleep(0.2)  # to load page
 
-        self.assertTrue(self._is_HTML(page_source))
+        self.assertTrue(self._is_html(page_source))
         self.assertIsInstance(driver, MyWebDriver)
 
     def test_get_webpage_failure(self):
 
-        with self.assertRaises((ConnectionError, WebDriverException, SystemExit)):
+        with self.assertRaises((
+            requests.exceptions.ConnectionError,
+            WebDriverException,
+            SystemExit
+        )):
             get_webpage(debug_mode=False, url="http://glosduuuur.fi")
-
-    def _get_XpathSearch(self):
-
-        return XpathSearch(self.xpath_element['search'])
-
-    def _get_XpathListSearch(self):
-
-        return XpathListSearch(self.xpath_element['list'])
 
     def test_XpathSearch(self):
 
@@ -130,23 +140,19 @@ class TestWebDriver(unittest.TestCase):
         mock_sleep.assert_called_once_with(0.1)
 
     def test_await_element(self):
-        # Set up the test inputs
+
         driver = MagicMock(spec=MyWebDriver)
         timeout = 5
         by = By.XPATH
         element = "//div[@class='my-class']"
 
-        # Set up the mock return value for the find_element method
         mock_element = MagicMock(spec=WebElement)
         driver.find_element.return_value = mock_element
 
-        # Call the function being tested
         result = await_element(driver, timeout, by, element)
 
-        # Make sure the find_element method was called with the correct arguments
         driver.find_element.assert_called_once_with(by, element)
 
-        # Make sure the result is the same as the mock element returned by find_element
         self.assertEqual(result, mock_element)
 
     def test_add_values(self):
@@ -169,6 +175,7 @@ class TestWebDriver(unittest.TestCase):
         }
 
         # simulating a lot of logic...
+
         values_to_add["Description"].value = description
         values_to_add["Company_name"].value = company_name
 
@@ -212,6 +219,7 @@ class TestWebDriver(unittest.TestCase):
         self.assertEqual(result, ['Hello', 'Mom!'])
 
     def test_raises_exception_with_invalid_html(self):
+
         invalid_html = None
         search = XpathSearch("//div")
         with self.assertRaises(AttributeError):
@@ -433,7 +441,8 @@ class TestWebDriver(unittest.TestCase):
         values_source_element.find_elements.side_effect = my_side_effect_list
 
         get_and_add_element_value(
-            job_dict_to_update, values_source_element, job_elements)
+            job_dict_to_update, values_source_element, job_elements
+        )
 
         self.assertEqual(
             job_dict_to_update['Job_title'], job_values_to_add['Job_title'])
@@ -443,3 +452,15 @@ class TestWebDriver(unittest.TestCase):
             job_dict_to_update['Description'], job_values_to_add['Description'])
         self.assertEqual(
             job_dict_to_update['Cons'], job_values_to_add['Cons'])
+
+    def _is_html(self, page_source):
+
+        return bool(BeautifulSoup(page_source, "html.parser").find())
+
+    def _get_XpathSearch(self):
+
+        return XpathSearch(self.xpath_element['search'])
+
+    def _get_XpathListSearch(self):
+
+        return XpathListSearch(self.xpath_element['list'])

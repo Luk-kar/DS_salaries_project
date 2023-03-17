@@ -19,7 +19,14 @@ from pathvalidate import sanitize_filepath, sanitize_filename
 import requests
 
 # Internal
-from scraper.config.get import get_config, get_url, get_path_csv_raw, get_path_csv_clean, get_NA_value, get_encoding
+from scraper.config.get import (
+    get_config,
+    get_url,
+    get_path_csv_raw,
+    get_path_csv_clean,
+    get_NA_value,
+    get_encoding
+)
 from scraper.config._types import Config, JobNumber, JobSimilar, Url
 
 
@@ -110,11 +117,11 @@ class TestConfigData(unittest.TestCase):
 
         response = requests.get(self.url, timeout=10)
 
-        NOT_EXISTS_code = 404
+        code_not_exists = 404
         status_code = response.status_code
 
         # For some reasons you get 403: Forbidden. But the whole app works anyway.
-        self.assertNotEqual(status_code, NOT_EXISTS_code,
+        self.assertNotEqual(status_code, code_not_exists,
                             f"Not Found\nError - {status_code} : {response.reason}"
                             )
 
@@ -137,10 +144,9 @@ class TestConfigData(unittest.TestCase):
 
         self.assertIsInstance(self.config['debug_mode'], bool)
 
-    def test_NA_value(self):
+    def test_na_value(self):
         '''check if NA is got'''
 
-        self.config['NA_value']
         self.assertIsNotNone(get_NA_value())
 
     def test_encoding_value(self):

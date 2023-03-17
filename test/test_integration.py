@@ -7,17 +7,17 @@ the other in production mode.
 '''
 
 # Python
-import os
 import csv
-import _csv
+import os
+import random
 import re
 import unittest
 from time import sleep
-import random
+import _csv
 
 # Internal
+from scraper.config.get import get_encoding, get_path_csv_raw
 from scraper.scraper import scrape_data
-from scraper.config.get import get_path_csv_raw, get_encoding
 
 
 class TestIntegration(unittest.TestCase):
@@ -51,7 +51,6 @@ class TestIntegration(unittest.TestCase):
 
         cls.jobs_number = 3
         cls.csv = {
-            'path': "data\RAW\Data_Engineer_06-03-2023_23-41.csv",
             'delimiter': ",",
             'encoding': get_encoding(),
             'expected_values': {
@@ -92,12 +91,26 @@ class TestIntegration(unittest.TestCase):
         return super().tearDown()
 
     def test_in_debug_mode(self):
+        """
+        Tests that data is scraped correctly in debug mode/development.
+
+        This method creates a file using the scrape_data function 
+        with debug_mode=True and checks that 
+        the file is valid using the _check_if_created_file_is_valid method.
+        """
 
         self._check_if_created_file_is_valid(
             lambda: scrape_data(jobs_number=self.jobs_number, debug_mode=True)
         )
 
     def test_in_production(self):
+        """
+        Tests that data is scraped correctly in normal usage.
+
+        This method creates a file using the scrape_data function 
+        with debug_mode=False and checks that 
+        the file is valid using the _check_if_created_file_is_valid method.
+        """
 
         self._check_if_created_file_is_valid(
             lambda: scrape_data(jobs_number=self.jobs_number, debug_mode=False)
@@ -150,13 +163,24 @@ class TestIntegration(unittest.TestCase):
 
             self._test_each_column(expected_values, reader, headers)
 
-    def _test_each_column(self, expected_values: dict[str, str], reader: _csv.reader, headers: list[str]):
+    def _test_each_column(
+        self,
+        expected_values: dict[str, str],
+        reader: _csv.reader,
+            headers: list[str]
+    ):
 
         for i, row in enumerate(reader):
 
             self._test_each_field(expected_values, headers, i, row)
 
-    def _test_each_field(self, expected_values: dict[str, str], headers: list[str], i: int, row: list[str]):
+    def _test_each_field(
+            self,
+            expected_values: dict[str, str],
+            headers: list[str],
+            i: int,
+            row: list[str]
+    ):
 
         for j, field in enumerate(row):
             header = headers[j]
