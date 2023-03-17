@@ -80,8 +80,8 @@ Scraping data for Exploratory data analysis (EDA) for conditions and requirement
 
 Look at:
 
-- requirements.txt
-- Piffle
+- [requirements.txt](scraper/requirements.txt)
+- [Piffle](Piffle)
 
 ## Wish-list ✨
 
@@ -105,16 +105,19 @@ Look at:
    One of the reasons why I use implementation through the main aggregation page is that it provides information on how old the job posting is, which is not directly available on the job posting itself.
 3. Not sure if the job postings are picked at random, by the glassdoor search engine.
    Even when the population sample is sizeable, there is still room for bias.
-4. There seem to be repeating job postings (multiplicities). But maybe the same job postings are posted more than once by the same company. Sometimes you got the error:
-   `Failed to upload the url: Message: unknown error: cannot determine loading status`
-   Long story short it means that you should reload the script.
-5. Due to A/B tests and many possible format varieties/changes of salary data, it is not advised to do parsing it in the runtime.
+4. There seem to be repeating job postings (multiplicities). But maybe the same job postings are posted more than once by the same company.
+5. Sometimes you got the error:
+   `Message: unknown error: cannot determine loading status`
+   Long story short it means that you should reload the script. Glassdoor likes to block IP which behaves "unhuman".
+6. Due to A/B tests and many possible format varieties/changes of salary data, it is not advised to do parsing it in the runtime.
+7. In CSV files empty `na_values` are values that were not found and they are optional.
+   If there are no values in the job description or button, then a corresponding error is raised.
 
 ## License 📜
 
 Look at:
 
-- LICENSE
+- [LICENSE](scraper/LICENSE)
 
 ## Authors 👍
 

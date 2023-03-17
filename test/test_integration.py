@@ -21,6 +21,9 @@ from scraper.scraper import scrape_data
 
 
 class TestIntegration(unittest.TestCase):
+    '''
+    Short test. If you want to test for longer periods run the scraper for several minutes.
+    '''
 
     @classmethod
     def setUpClass(cls):
@@ -170,6 +173,7 @@ class TestIntegration(unittest.TestCase):
             headers: list[str]
     ):
 
+        row: list[str]
         for i, row in enumerate(reader):
 
             self._test_each_field(expected_values, headers, i, row)
