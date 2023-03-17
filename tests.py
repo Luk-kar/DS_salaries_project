@@ -11,6 +11,7 @@ import unittest
 from unittest.mock import patch, MagicMock
 from requests.exceptions import ConnectionError
 from time import sleep
+import random
 
 # External
 from bs4 import BeautifulSoup
@@ -729,9 +730,9 @@ class TestIntegration(unittest.TestCase):
                 break
 
     def test_in_production(self):
-        # scrape_data(jobs_number=self.jobs_number, debug_mode=False)
-        # check the output
-        pass
+        self.check_if_created_file_is_valid(
+            lambda: scrape_data(jobs_number=self.jobs_number, debug_mode=False)
+        )
 
     def tearDown(self) -> None:
 
@@ -744,6 +745,9 @@ class TestIntegration(unittest.TestCase):
             if filename not in before_files:
                 new_file_path = os.path.join(target_folder, filename)
                 os.remove(new_file_path)
+
+        time_span = random.uniform(2.5, 3.4)
+        sleep(time_span)
 
         return super().tearDown()
 
