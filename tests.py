@@ -6,6 +6,7 @@ The module consists of two test classes: TestConfigData and TestJobDescription.
 # Python
 import os
 import csv
+import _csv
 import re
 import unittest
 from unittest.mock import patch, MagicMock
@@ -626,17 +627,6 @@ regex = {
 }
 
 
-def _get_csv_files(directory: str) -> list[str]:
-
-    csv_files = []
-
-    for filename in os.listdir(directory):
-        if filename.endswith('.csv'):
-            csv_files.append(filename)
-
-    return csv_files
-
-
 class TestIntegration(unittest.TestCase):
 
     @classmethod
@@ -674,24 +664,55 @@ class TestIntegration(unittest.TestCase):
             }
         }
         cls.target_folder = os.path.dirname(get_path_csv_raw())
-        cls.target_directory_files_before = _get_csv_files(
+        cls.target_directory_files_before = cls._get_csv_files(
             cls.target_folder)
 
-    # def test_in_debug_mode(self):
+    def test_in_debug_mode(self):
 
-    #     self.check_if_created_file_is_valid(
-    #         lambda: scrape_data(jobs_number=self.jobs_number, debug_mode=True)
-    #     )
+        self.check_if_created_file_is_valid(
+            lambda: scrape_data(jobs_number=self.jobs_number, debug_mode=True)
+        )
 
     def test_in_production(self):
+
         self.check_if_created_file_is_valid(
             lambda: scrape_data(jobs_number=self.jobs_number, debug_mode=False)
         )
 
-    def _test_csv_file_structure(self, csv_file_path):
+    def check_if_created_file_is_valid(self, scrape_data_function):
+
+        before_files = self._get_csv_files(
+            self.target_folder)
+
+        with self.assertRaises(SystemExit):
+            scrape_data_function()
+
+        after_files = self._get_csv_files(
+            self.target_folder)
+
+        difference = set(after_files) - set(before_files)
+
+        for filename in difference:
+            if filename not in before_files:
+                file_path = os.path.join(self.target_folder, filename)
+                self._test_csv_file_structure(file_path)
+                break
+
+    @staticmethod
+    def _get_csv_files(directory: str) -> list[str]:
+
+        csv_files = []
+
+        for filename in os.listdir(directory):
+            if filename.endswith('.csv'):
+                csv_files.append(filename)
+
+        return csv_files
+
+    def _test_csv_file_structure(self, csv_file_path: str):
 
         delimiter = self.csv['delimiter']
-        expected_values = self.csv['expected_values']
+        expected_values: dict[str, str] = self.csv['expected_values']
 
         with open(csv_file_path, newline="", encoding=self.csv['encoding']) as file:
 
@@ -700,13 +721,13 @@ class TestIntegration(unittest.TestCase):
 
             self._test_each_column(expected_values, reader, headers)
 
-    def _test_each_column(self, expected_values, reader, headers):
+    def _test_each_column(self, expected_values: dict[str, str], reader: _csv._reader, headers: list[str]):
 
         for i, row in enumerate(reader):
 
             self._test_each_field(expected_values, headers, i, row)
 
-    def _test_each_field(self, expected_values, headers, i, row):
+    def _test_each_field(self, expected_values: dict[str, str], headers: list[str], i: int, row: list[str]):
 
         for j, field in enumerate(row):
             header = headers[j]
@@ -717,24 +738,13 @@ class TestIntegration(unittest.TestCase):
                     expected_regex, field), f"Invalid value in row {i+2}, column {j+1}:\
                         \nHeader :{header}:\nField  :{field}:\nExpect :{expected_regex}:"
 
-    def check_if_created_file_is_valid(self, scrape_data_function):
+    def tearDown(self) -> None:
 
-        before_files = _get_csv_files(
-            self.target_folder)
+        # to avoid blockage from the glassdoor.com
+        time_span = random.uniform(2.5, 3.4)
+        sleep(time_span)
 
-        with self.assertRaises(SystemExit):
-            scrape_data_function()
-
-        after_files = _get_csv_files(
-            self.target_folder)
-
-        difference = set(after_files) - set(before_files)
-
-        for filename in difference:
-            if filename not in before_files:
-                file_path = os.path.join(self.target_folder, filename)
-                self._test_csv_file_structure(file_path)
-                break
+        return super().tearDown()
 
     @classmethod
     def tearDownClass(cls):
@@ -751,20 +761,12 @@ class TestIntegration(unittest.TestCase):
 
         super().tearDownClass()
 
-    def tearDown(self) -> None:
-
-        # to avoid blockage from the glassdoor.com
-        time_span = random.uniform(2.5, 3.4)
-        sleep(time_span)
-
-        return super().tearDown()
-
     @classmethod
     def _get_created_files(cls):
 
         target_folder = cls.target_folder
         before_files = cls.target_directory_files_before
-        after_files = _get_csv_files(target_folder)
+        after_files = cls._get_csv_files(target_folder)
 
         difference = set(after_files) - set(before_files)
 
