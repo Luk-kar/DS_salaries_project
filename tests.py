@@ -746,6 +746,7 @@ class TestIntegration(unittest.TestCase):
                 new_file_path = os.path.join(target_folder, filename)
                 os.remove(new_file_path)
 
+        # to avoid blockage from the glassdoor.com
         time_span = random.uniform(2.5, 3.4)
         sleep(time_span)
 
