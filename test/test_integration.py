@@ -1,6 +1,9 @@
 '''
-This is a module for testing the configuration data of a web scraping project.
-The module consists of two test classes: TestConfigData and TestJobDescription.
+This module contains a unit test for the scrape_data function in the scraper module. 
+The TestIntegration class tests whether the CSV file created by 
+the function follows a set of expected regex patterns. 
+Two test methods are defined, one for running the function in debug mode and 
+the other in production mode.
 '''
 
 # Python

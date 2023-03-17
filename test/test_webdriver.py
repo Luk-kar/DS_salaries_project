@@ -1,3 +1,10 @@
+'''
+This module provides a custom WebDriver for automated testing purposes. 
+The TestWebDriver class can be used to interact with web pages and perform various testing operations. 
+It extends the functionality of the Selenium WebDriver to include additional 
+features and options specific to our testing needs.
+'''
+
 # Python
 import unittest
 from unittest.mock import patch, MagicMock

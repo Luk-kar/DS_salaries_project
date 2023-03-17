@@ -1,6 +1,12 @@
 '''
-This is a module for testing the configuration data of a web scraping project.
-The module consists of two test classes: TestConfigData and TestJobDescription.
+This module contains unit tests for verifying the configuration data of 
+a web scraping project, including the validation of job titles, 
+the number of jobs, URLs, driver paths, debug mode, NA value, and 
+encoding values. 
+The tests use the Config object obtained from get_config() method of 
+scraper.config.get module. 
+The unit tests check whether the configuration values are of 
+the correct type and meet the required criteria.
 '''
 
 # Python
