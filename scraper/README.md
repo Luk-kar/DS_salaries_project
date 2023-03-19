@@ -89,8 +89,12 @@ To run tests, write down in the terminal, in the program folder:
 `python -m unittest`
 or
 `scripts\run_tests.bat`
-or if selected:
+or if selected file:
 `python -m unittest -s test -p "test_webdriver.py"`
+or selected class:
+`python -m unittest discover -s test -p "test_webdriver.py" -k TestJobValueGetterFunctions`
+or selected test:
+`python -m unittest test.test_webdriver.TestJobValueGetterFunctions.test_add_values`
 
 ## Wish-list ✨
 
