@@ -45,22 +45,12 @@ from scraper.jobs_to_csv.webpage_getter._driver_getter import (
 from scraper.jobs_to_csv.webpage_getter.webpage_getter import get_webpage
 
 
-class TestWebDriver(unittest.TestCase):
+class TestDriver(unittest.TestCase):
     '''It tests single-job page scraping'''
 
     @classmethod
     def setUpClass(cls):
         cls.config: Config = get_config()
-        cls.url = get_url(
-            cls.config['url'],
-            cls.config['jobs_titles']['default']
-        )
-        cls.xpath_element = {
-            'search': '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]//div\
-                //div[@class="ratingNum mr-sm"]',
-            'list': '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsHighlights")]/div'
-        }
-        cls.html = MagicMock()
 
     def test_get_driver_with_debug_mode_true_and_valid_path(self):
 
@@ -97,6 +87,24 @@ class TestWebDriver(unittest.TestCase):
 
         with self.assertRaises(SystemExit):
             get_driver(path='/path/to/chromedriver')
+
+
+class TestWebDriver(unittest.TestCase):
+    '''It tests single-job page scraping'''
+
+    @classmethod
+    def setUpClass(cls):
+        cls.config: Config = get_config()
+        cls.url = get_url(
+            cls.config['url'],
+            cls.config['jobs_titles']['default']
+        )
+        cls.xpath_element = {
+            'search': '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]//div\
+                //div[@class="ratingNum mr-sm"]',
+            'list': '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsHighlights")]/div'
+        }
+        cls.html = MagicMock()
 
     def test_get_webpage_success(self):
         driver: MyWebDriver = get_webpage(
