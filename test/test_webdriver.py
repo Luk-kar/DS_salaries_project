@@ -255,17 +255,27 @@ class TestJobValueGetterFunctions(unittest.TestCase):
 
         cls.config: Config = get_config()
         cls.job_values = {
-            'Job_title': "Software Engineer",
-            'Company_name': "Initech",
-            'Location': "Austin, Texas",
-            'Description': "We are looking for a young, passionate software engineer " +
-            "with 30+ years of experience in AppleScript and AI. We provide fresh fruits and unlimited PTO as benefits.",
+            'Job_title': "Theoretical Physicist",
+            'Company_name': "Caltech",
+            'Location': "Pasadena, California",
+            'Description': "Bazinga!",
             'Salary': cls.na_value,
-            'Cons': cls.na_value,
+            'Cons': [
+                "The cafeteria serves subpar food, which is a terrible insult" +
+                "to my delicate palate and refined tastes.",
+                "You'll have to suffer the indignity of occasionally being wrong, " +
+                "which is something I never have to deal with."
+            ],
             'Pros': [
-                "The company culture places a high value on loyalty, but not everyone agrees on what that means.",
-                "At this company, you'll experience an invigorating work environment that encourages you to instantly unleash your energy!"
+                "The Physics Bowl Quiz (in 4 reviews)",
+                "You can work with people with an IQ of 187, which puts it in the top 0.0001%% of the world's population (in 1 reviews)"
             ]
+        }
+        cls.selector = {
+            'Job_title': XpathSearch('.//div[@data-test="jobTitle"]'),
+            'Company_name': XpathSearch('.//div[@data-test="employerName"]'),
+            'Description': XpathSearch('.//div[@class="jobDescriptionContent desc"]'),
+            'Pros': XpathListSearch('.//*[text() = "Pros"]//parent::div//*[contains(name(), "p")]'),
         }
 
     def test_get_values_from_element_found(self):
@@ -362,24 +372,20 @@ class TestJobValueGetterFunctions(unittest.TestCase):
         )
 
         self.assertEqual(
-            self.config['NA_value'],
+            self.na_value,
             job_values['Salary'].value
         )
         self.assertEqual(
-            self.config['NA_value'],
+            self.na_value,
             job_values['Cons'].value
         )
 
     def test_add_values(self):
 
-        job_title = "Software Engineer - L9"
-        company_name = "Initech Bros."
-        location = "Austin, Texas"
-        description = "We are looking for a young, passionate software engineer \
-            with 30+ years of experience in AppleScript and AI. We provide fresh fruits and \
-                unlimited PTO as benefits."
-
-        job = {"Job_title": job_title, "Location": location}
+        job_values = {
+            "Job_title": self.job_values['Job_title'],
+            "Location": self.job_values['Location']
+        }
         values_to_add = {
             "Description": XpathSearch(
                 './/div[@class="jobDescriptionContent desc"]'
@@ -391,19 +397,19 @@ class TestJobValueGetterFunctions(unittest.TestCase):
 
         # simulating a lot of logic...
 
-        values_to_add["Description"].value = description
-        values_to_add["Company_name"].value = company_name
+        values_to_add["Description"].value = self.job_values['Description']
+        values_to_add["Company_name"].value = self.job_values['Company_name']
 
-        add_values_to_job_from_dict(job, values_to_add)
+        add_values_to_job_from_dict(job_values, values_to_add)
 
         expected_job = {
-            "Job_title": job_title,
-            "Location": location,
-            "Description": description,
-            "Company_name": company_name
+            "Job_title": self.job_values['Job_title'],
+            "Location": self.job_values['Location'],
+            "Description": self.job_values['Description'],
+            "Company_name": self.job_values['Company_name']
         }
 
-        self.assertDictEqual(job, expected_job)
+        self.assertDictEqual(job_values, expected_job)
 
     def test_get_and_add_element_value(self):
 
@@ -412,18 +418,6 @@ class TestJobValueGetterFunctions(unittest.TestCase):
             'Location': '',
             'Salary': '',
             'Description': '',
-        }
-
-        job_values_to_add = {
-            'Job_title': "Theoretical Physicist",
-            'Company_name': "California Institute of Technology",
-            'Description': "Bazinga!",
-            'Cons': [
-                "The cafeteria serves subpar food, which is a terrible insult" +
-                "to my delicate palate and refined tastes.",
-                "You'll have to suffer the indignity of occasionally being wrong, " +
-                "which is something I never have to deal with."
-            ],
         }
 
         values_source_element = MagicMock(spec=WebElement)
@@ -442,13 +436,13 @@ class TestJobValueGetterFunctions(unittest.TestCase):
             selector = args[1]
 
             if selector == job_elements['Job_title'].element:
-                mock_element_return.text = job_values_to_add['Job_title']
+                mock_element_return.text = self.job_values['Job_title']
 
             elif selector == job_elements['Company_name'].element:
-                mock_element_return.text = job_values_to_add['Company_name']
+                mock_element_return.text = self.job_values['Company_name']
 
             elif selector == job_elements['Description'].element:
-                mock_element_return.text = job_values_to_add['Description']
+                mock_element_return.text = self.job_values['Description']
 
             else:
                 raise KeyError
@@ -466,8 +460,8 @@ class TestJobValueGetterFunctions(unittest.TestCase):
                 mock_element_01 = MagicMock(spec=WebElement)
                 mock_element_02 = MagicMock(spec=WebElement)
 
-                mock_element_01.text = job_values_to_add['Cons'][0]
-                mock_element_02.text = job_values_to_add['Cons'][1]
+                mock_element_01.text = self.job_values['Cons'][0]
+                mock_element_02.text = self.job_values['Cons'][1]
 
                 mock_return_elements = [
                     mock_element_01,
@@ -486,10 +480,10 @@ class TestJobValueGetterFunctions(unittest.TestCase):
         )
 
         self.assertEqual(
-            job_dict_to_update['Job_title'], job_values_to_add['Job_title'])
+            job_dict_to_update['Job_title'], self.job_values['Job_title'])
         self.assertEqual(
-            job_dict_to_update['Company_name'], job_values_to_add['Company_name'])
+            job_dict_to_update['Company_name'], self.job_values['Company_name'])
         self.assertEqual(
-            job_dict_to_update['Description'], job_values_to_add['Description'])
+            job_dict_to_update['Description'], self.job_values['Description'])
         self.assertEqual(
-            job_dict_to_update['Cons'], job_values_to_add['Cons'])
+            job_dict_to_update['Cons'], self.job_values['Cons'])
