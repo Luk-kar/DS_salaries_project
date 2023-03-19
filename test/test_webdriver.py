@@ -389,12 +389,8 @@ class TestJobValueGetterFunctions(unittest.TestCase):
             "Location": self.job_values['Location']
         }
         values_to_add = {
-            "Description": XpathSearch(
-                './/div[@class="jobDescriptionContent desc"]'
-            ),
-            "Company_name": XpathSearch(
-                './/div[@data-test="employerName"]'
-            ),
+            "Description": self.selectors['Description'],
+            "Company_name": self.selectors['Company_name']
         }
 
         # simulating a lot of logic...
