@@ -408,31 +408,9 @@ class TestJobValueGetterFunctions(unittest.TestCase):
             'Cons': self.selectors['Cons']['exists'],
         }
 
-        def _mock_list_side_effect(*args):
-
-            mock_return_elements = MagicMock(spec=list[WebElement])
-
-            selector = args[1]
-
-            if selector == job_elements['Cons'].element:
-
-                mock_element_01 = MagicMock(spec=WebElement)
-                mock_element_02 = MagicMock(spec=WebElement)
-
-                mock_element_01.text = self.job_values['Cons'][0]
-                mock_element_02.text = self.job_values['Cons'][1]
-
-                mock_return_elements = [
-                    mock_element_01,
-                    mock_element_02
-                ]
-            else:
-                raise KeyError
-
-            return mock_return_elements
-
         values_source_element.find_element.side_effect = self._mock_element_side_effect
-        values_source_element.find_elements.side_effect = _mock_list_side_effect
+        values_source_element.find_elements.side_effect = self._list_side_effect_constructor(
+            'Cons', job_elements['Cons'])
 
         get_and_add_element_value(
             job_dict_to_update, values_source_element, job_elements
@@ -466,3 +444,30 @@ class TestJobValueGetterFunctions(unittest.TestCase):
             raise KeyError
 
         return mock_element_return
+
+    def _list_side_effect_constructor(self, kind, selector):
+
+        def _mock_list_side_effect(*args):
+
+            mock_return_elements = MagicMock(spec=list[WebElement])
+
+            _selector = args[1]
+
+            if _selector == selector.element:
+
+                mock_element_01 = MagicMock(spec=WebElement)
+                mock_element_02 = MagicMock(spec=WebElement)
+
+                mock_element_01.text = self.job_values[kind][0]
+                mock_element_02.text = self.job_values[kind][1]
+
+                mock_return_elements = [
+                    mock_element_01,
+                    mock_element_02
+                ]
+            else:
+                raise KeyError
+
+            return mock_return_elements
+
+        return _mock_list_side_effect
