@@ -45,8 +45,8 @@ from scraper.jobs_to_csv.webpage_getter._driver_getter import (
 from scraper.jobs_to_csv.webpage_getter.webpage_getter import get_webpage
 
 
-class TestDriver(unittest.TestCase):
-    '''It tests single-job page scraping'''
+class TestWebDriver(unittest.TestCase):
+    '''It tests webDriver class'''
 
     @classmethod
     def setUpClass(cls):
@@ -89,22 +89,8 @@ class TestDriver(unittest.TestCase):
             get_driver(path='/path/to/chromedriver')
 
 
-class TestWebDriver(unittest.TestCase):
-    '''It tests single-job page scraping'''
-
-    @classmethod
-    def setUpClass(cls):
-        cls.config: Config = get_config()
-        cls.url = get_url(
-            cls.config['url'],
-            cls.config['jobs_titles']['default']
-        )
-        cls.xpath_element = {
-            'search': '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]//div\
-                //div[@class="ratingNum mr-sm"]',
-            'list': '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsHighlights")]/div'
-        }
-        cls.html = MagicMock()
+class TestWebAccess(unittest.TestCase):
+    '''It tests web access behavior'''
 
     def test_get_webpage_success(self):
         driver: MyWebDriver = get_webpage(
@@ -125,6 +111,23 @@ class TestWebDriver(unittest.TestCase):
         )):
             get_webpage(debug_mode=False, url="http://glosduuuur.fi")
 
+    def _is_html(self, page_source):
+
+        return bool(BeautifulSoup(page_source, "html.parser").find())
+
+
+class TestElementQueries(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.config: Config = get_config()
+        cls.xpath_element = {
+            'search':
+            '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsRating")]//div//div[@class="ratingNum mr-sm"]',
+            'list':
+            '//div[starts-with(@data-brandviews,"MODULE:n=jobs-benefitsHighlights")]/div'
+        }
+
     def test_XpathSearch(self):
 
         xpath_search = self._get_XpathSearch()
@@ -138,14 +141,6 @@ class TestWebDriver(unittest.TestCase):
 
         self.assertEqual(xpath_search.element, self.xpath_element['list'])
         self.assertEqual(xpath_search.value, get_NA_value())
-
-    @patch('time.sleep', return_value=None)
-    @patch('random.uniform', return_value=0.1)
-    def test_pause(self, mock_uniform, mock_sleep):
-
-        pause()
-
-        mock_sleep.assert_called_once_with(0.1)
 
     def test_await_element(self):
 
@@ -162,6 +157,30 @@ class TestWebDriver(unittest.TestCase):
         driver.find_element.assert_called_once_with(by, element)
 
         self.assertEqual(result, mock_element)
+
+    def _get_XpathSearch(self):
+
+        return XpathSearch(self.xpath_element['search'])
+
+    def _get_XpathListSearch(self):
+
+        return XpathListSearch(self.xpath_element['list'])
+
+
+class TestToDo(unittest.TestCase):
+    '''It tests single-job page scraping'''
+
+    @classmethod
+    def setUpClass(cls):
+        cls.config: Config = get_config()
+
+    @patch('time.sleep', return_value=None)
+    @patch('random.uniform', return_value=0.1)
+    def test_pause(self, mock_uniform, mock_sleep):
+
+        pause()
+
+        mock_sleep.assert_called_once_with(0.1)
 
     def test_add_values(self):
 
@@ -460,15 +479,3 @@ class TestWebDriver(unittest.TestCase):
             job_dict_to_update['Description'], job_values_to_add['Description'])
         self.assertEqual(
             job_dict_to_update['Cons'], job_values_to_add['Cons'])
-
-    def _is_html(self, page_source):
-
-        return bool(BeautifulSoup(page_source, "html.parser").find())
-
-    def _get_XpathSearch(self):
-
-        return XpathSearch(self.xpath_element['search'])
-
-    def _get_XpathListSearch(self):
-
-        return XpathListSearch(self.xpath_element['list'])
