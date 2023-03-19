@@ -285,10 +285,10 @@ class TestJobValueGetterFunctions(unittest.TestCase):
         mock_element_found = MagicMock(spec=WebElement)
 
         xpath_selectors: Job_elements = {
-            'Job_title': XpathSearch('.//div[@data-test="jobTitle"]'),
-            'Company_name': XpathSearch('.//div[@data-test="employerName"]'),
-            'Description': XpathSearch('.//div[@class="jobDescriptionContent desc"]'),
-            'Pros': XpathListSearch('.//*[text() = "Pros"]//parent::div//*[contains(name(), "p")]'),
+            'Job_title': self.selectors['Job_title'],
+            'Company_name': self.selectors['Company_name'],
+            'Description': self.selectors['Description'],
+            'Pros': self.selectors['Pros'],
         }
 
         def mock_element_side_effect(*args):
@@ -297,13 +297,13 @@ class TestJobValueGetterFunctions(unittest.TestCase):
 
             selector = args[1]
 
-            if selector == self.selectors['Job_title'].element:
+            if selector == xpath_selectors['Job_title'].element:
                 mock_element_return.text = self.job_values['Job_title']
 
-            elif selector == self.selectors['Company_name'].element:
+            elif selector == xpath_selectors['Company_name'].element:
                 mock_element_return.text = self.job_values['Company_name']
 
-            elif selector == self.selectors['Description'].element:
+            elif selector == xpath_selectors['Description'].element:
                 mock_element_return.text = self.job_values['Description']
 
             else:
