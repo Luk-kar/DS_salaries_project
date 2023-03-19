@@ -358,8 +358,8 @@ class TestJobValueGetterFunctions(unittest.TestCase):
         mock_element_not_found = MagicMock(spec=WebElement)
 
         job_elements = {
-            'Salary': XpathSearch("//nonexistent_element"),
-            'Cons': XpathListSearch("//nonexistent_element")
+            'Salary': self.selectors['Salary'],
+            'Cons': self.selectors['Cons']
         }
 
         mock_element_not_found.find_element.side_effect = NoSuchElementException(
