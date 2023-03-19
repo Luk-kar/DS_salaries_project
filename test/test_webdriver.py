@@ -271,11 +271,13 @@ class TestJobValueGetterFunctions(unittest.TestCase):
                 "You can work with people with an IQ of 187, which puts it in the top 0.0001%% of the world's population (in 1 reviews)"
             ]
         }
-        cls.selector = {
+        cls.selectors = {
             'Job_title': XpathSearch('.//div[@data-test="jobTitle"]'),
             'Company_name': XpathSearch('.//div[@data-test="employerName"]'),
             'Description': XpathSearch('.//div[@class="jobDescriptionContent desc"]'),
             'Pros': XpathListSearch('.//*[text() = "Pros"]//parent::div//*[contains(name(), "p")]'),
+            'Salary': XpathSearch("//nonexistent_element"),
+            'Cons': XpathListSearch("//nonexistent_element"),
         }
 
     def test_get_values_from_element_found(self):
@@ -295,13 +297,13 @@ class TestJobValueGetterFunctions(unittest.TestCase):
 
             selector = args[1]
 
-            if selector == xpath_selectors['Job_title'].element:
+            if selector == self.selectors['Job_title'].element:
                 mock_element_return.text = self.job_values['Job_title']
 
-            elif selector == xpath_selectors['Company_name'].element:
+            elif selector == self.selectors['Company_name'].element:
                 mock_element_return.text = self.job_values['Company_name']
 
-            elif selector == xpath_selectors['Description'].element:
+            elif selector == self.selectors['Description'].element:
                 mock_element_return.text = self.job_values['Description']
 
             else:
