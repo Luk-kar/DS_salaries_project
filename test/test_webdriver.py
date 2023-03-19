@@ -292,26 +292,6 @@ class TestJobValueGetterFunctions(unittest.TestCase):
             'Pros': self.selectors['Pros'],
         }
 
-        def _mock_element_side_effect(*args):
-
-            mock_element_return = MagicMock(spec=WebElement)
-
-            selector = args[1]
-
-            if selector == xpath_selectors['Job_title'].element:
-                mock_element_return.text = self.job_values['Job_title']
-
-            elif selector == xpath_selectors['Company_name'].element:
-                mock_element_return.text = self.job_values['Company_name']
-
-            elif selector == xpath_selectors['Description'].element:
-                mock_element_return.text = self.job_values['Description']
-
-            else:
-                raise KeyError
-
-            return mock_element_return
-
         def _mock_list_side_effect(*args):
 
             mock_return_elements = MagicMock(spec=list[WebElement])
@@ -335,7 +315,7 @@ class TestJobValueGetterFunctions(unittest.TestCase):
 
             return mock_return_elements
 
-        mock_element_found.find_element.side_effect = _mock_element_side_effect
+        mock_element_found.find_element.side_effect = self._mock_element_side_effect
         mock_element_found.find_elements.side_effect = _mock_list_side_effect
 
         result = get_values_from_element(mock_element_found, xpath_selectors)
@@ -428,26 +408,6 @@ class TestJobValueGetterFunctions(unittest.TestCase):
             'Cons': self.selectors['Cons']['exists'],
         }
 
-        def _mock_element_side_effect(*args):
-
-            mock_element_return = MagicMock(spec=WebElement)
-
-            selector = args[1]
-
-            if selector == job_elements['Job_title'].element:
-                mock_element_return.text = self.job_values['Job_title']
-
-            elif selector == job_elements['Company_name'].element:
-                mock_element_return.text = self.job_values['Company_name']
-
-            elif selector == job_elements['Description'].element:
-                mock_element_return.text = self.job_values['Description']
-
-            else:
-                raise KeyError
-
-            return mock_element_return
-
         def _mock_list_side_effect(*args):
 
             mock_return_elements = MagicMock(spec=list[WebElement])
@@ -471,7 +431,7 @@ class TestJobValueGetterFunctions(unittest.TestCase):
 
             return mock_return_elements
 
-        values_source_element.find_element.side_effect = _mock_element_side_effect
+        values_source_element.find_element.side_effect = self._mock_element_side_effect
         values_source_element.find_elements.side_effect = _mock_list_side_effect
 
         get_and_add_element_value(
@@ -486,3 +446,23 @@ class TestJobValueGetterFunctions(unittest.TestCase):
             job_dict_to_update['Description'], self.job_values['Description'])
         self.assertEqual(
             job_dict_to_update['Cons'], self.job_values['Cons'])
+
+    def _mock_element_side_effect(self, *args):
+
+        mock_element_return = MagicMock(spec=WebElement)
+
+        selector = args[1]
+
+        if selector == self.selectors['Job_title'].element:
+            mock_element_return.text = self.job_values['Job_title']
+
+        elif selector == self.selectors['Company_name'].element:
+            mock_element_return.text = self.job_values['Company_name']
+
+        elif selector == self.selectors['Description'].element:
+            mock_element_return.text = self.job_values['Description']
+
+        else:
+            raise KeyError
+
+        return mock_element_return
