@@ -277,7 +277,10 @@ class TestJobValueGetterFunctions(unittest.TestCase):
             'Description': XpathSearch('.//div[@class="jobDescriptionContent desc"]'),
             'Pros': XpathListSearch('.//*[text() = "Pros"]//parent::div//*[contains(name(), "p")]'),
             'Salary': XpathSearch("//nonexistent_element"),
-            'Cons': XpathListSearch("//nonexistent_element"),
+            'Cons': {
+                'exists': XpathListSearch('.//*[text() = "Cons"]//parent::div//*[contains(name(), "p")]'),
+                'non-exists': XpathListSearch("//nonexistent_element"),
+            },
         }
 
     def test_get_values_from_element_found(self):
@@ -359,7 +362,7 @@ class TestJobValueGetterFunctions(unittest.TestCase):
 
         job_elements = {
             'Salary': self.selectors['Salary'],
-            'Cons': self.selectors['Cons']
+            'Cons': self.selectors['Cons']['non-exists']
         }
 
         mock_element_not_found.find_element.side_effect = NoSuchElementException(
@@ -421,10 +424,10 @@ class TestJobValueGetterFunctions(unittest.TestCase):
         values_source_element = MagicMock(spec=WebElement)
 
         job_elements = {
-            'Job_title': XpathSearch('.//div[@data-test="jobTitle"]'),
-            'Company_name': XpathSearch('.//div[@data-test="employerName"]'),
-            'Description': XpathSearch('.//div[@class="jobDescriptionContent desc"]'),
-            'Cons': XpathListSearch('.//*[text() = "Cons"]//parent::div//*[contains(name(), "p")]'),
+            'Job_title': self.selectors['Job_title'],
+            'Company_name': self.selectors['Company_name'],
+            'Description': self.selectors['Description'],
+            'Cons': self.selectors['Cons']['exists'],
         }
 
         def my_side_effect_element(*args):
