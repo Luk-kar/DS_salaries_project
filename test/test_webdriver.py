@@ -252,8 +252,6 @@ class TestJobValueGetterFunctions(unittest.TestCase):
     def setUpClass(cls):
 
         cls.na_value = get_NA_value()
-
-        cls.config: Config = get_config()
         cls.job_values = {
             'Job_title': "Theoretical Physicist",
             'Company_name': "Caltech",
@@ -430,7 +428,7 @@ class TestJobValueGetterFunctions(unittest.TestCase):
             'Cons': self.selectors['Cons']['exists'],
         }
 
-        def my_side_effect_element(*args):
+        def mock_element_side_effect(*args):
 
             mock_element_return = MagicMock(spec=WebElement)
 
@@ -450,7 +448,7 @@ class TestJobValueGetterFunctions(unittest.TestCase):
 
             return mock_element_return
 
-        def my_side_effect_list(*args):
+        def mock_list_side_effect(*args):
 
             mock_return_elements = MagicMock(spec=list[WebElement])
 
@@ -473,8 +471,8 @@ class TestJobValueGetterFunctions(unittest.TestCase):
 
             return mock_return_elements
 
-        values_source_element.find_element.side_effect = my_side_effect_element
-        values_source_element.find_elements.side_effect = my_side_effect_list
+        values_source_element.find_element.side_effect = mock_element_side_effect
+        values_source_element.find_elements.side_effect = mock_list_side_effect
 
         get_and_add_element_value(
             job_dict_to_update, values_source_element, job_elements
