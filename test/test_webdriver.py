@@ -292,31 +292,9 @@ class TestJobValueGetterFunctions(unittest.TestCase):
             'Pros': self.selectors['Pros'],
         }
 
-        def _mock_list_side_effect(*args):
-
-            mock_return_elements = MagicMock(spec=list[WebElement])
-
-            selector = args[1]
-
-            if selector == xpath_selectors['Pros'].element:
-
-                mock_element_01 = MagicMock(spec=WebElement)
-                mock_element_02 = MagicMock(spec=WebElement)
-
-                mock_element_01.text = self.job_values['Pros'][0]
-                mock_element_02.text = self.job_values['Pros'][1]
-
-                mock_return_elements = [
-                    mock_element_01,
-                    mock_element_02
-                ]
-            else:
-                raise KeyError
-
-            return mock_return_elements
-
         mock_element_found.find_element.side_effect = self._mock_element_side_effect
-        mock_element_found.find_elements.side_effect = _mock_list_side_effect
+        mock_element_found.find_elements.side_effect = self._make_list_side_effect(
+            'Pros', xpath_selectors['Pros'])
 
         result = get_values_from_element(mock_element_found, xpath_selectors)
 
@@ -401,7 +379,7 @@ class TestJobValueGetterFunctions(unittest.TestCase):
 
         values_source_element = MagicMock(spec=WebElement)
 
-        job_elements = {
+        xpath_selectors = {
             'Job_title': self.selectors['Job_title'],
             'Company_name': self.selectors['Company_name'],
             'Description': self.selectors['Description'],
@@ -409,11 +387,11 @@ class TestJobValueGetterFunctions(unittest.TestCase):
         }
 
         values_source_element.find_element.side_effect = self._mock_element_side_effect
-        values_source_element.find_elements.side_effect = self._list_side_effect_constructor(
-            'Cons', job_elements['Cons'])
+        values_source_element.find_elements.side_effect = self._make_list_side_effect(
+            'Cons', xpath_selectors['Cons'])
 
         get_and_add_element_value(
-            job_dict_to_update, values_source_element, job_elements
+            job_dict_to_update, values_source_element, xpath_selectors
         )
 
         self.assertEqual(
@@ -445,7 +423,7 @@ class TestJobValueGetterFunctions(unittest.TestCase):
 
         return mock_element_return
 
-    def _list_side_effect_constructor(self, kind, selector):
+    def _make_list_side_effect(self, kind, selector):
 
         def _mock_list_side_effect(*args):
 
