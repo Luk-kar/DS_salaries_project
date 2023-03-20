@@ -1,5 +1,5 @@
 '''
-Mostly used during debugging to remove unnecessary data
+Mostly used during debugging to remove unnecessary scraped data
 '''
 # Python
 import os
