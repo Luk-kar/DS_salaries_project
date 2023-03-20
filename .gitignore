@@ -1,7 +1,7 @@
+# data/RAW
+
 .vscode/
 *__pycache__
-
-data/RAW
 
 .coverage
 htmlcov

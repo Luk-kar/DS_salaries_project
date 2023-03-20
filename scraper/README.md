@@ -127,6 +127,8 @@ or selected test:
 6. Due to A/B tests and many possible format varieties/changes of salary data, it is not advised to do parsing it in the runtime.
 7. In CSV files empty `na_values` is a value that was not found and is optional.
 8. If there are no values in the job description or button, then a corresponding error is raised.
+9. Overall glassdoor has some issues with duplicates. Not sure how this issue could be solved. I'm not the only one having this problem:
+   [stackoverflow - scraping glassdoor returns duplicate entries](https://stackoverflow.com/questions/74193851/)scraping-glassdoor-returns-duplicate-entries
 
 ## License 📜
 
