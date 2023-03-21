@@ -260,9 +260,9 @@ class TestJobValueGetterFunctions(unittest.TestCase):
             'Salary': cls.na_value,
             'Cons': [
                 "The cafeteria serves subpar food, which is a terrible insult" +
-                "to my delicate palate and refined tastes.",
+                "to my delicate palate and refined tastes (in 1 reviews)",
                 "You'll have to suffer the indignity of occasionally being wrong, " +
-                "which is something I never have to deal with."
+                "which is something I never have to deal with (in 2 reviews)"
             ],
             'Pros': [
                 "The Physics Bowl Quiz (in 4 reviews)",
