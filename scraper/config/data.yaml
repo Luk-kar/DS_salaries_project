@@ -26,11 +26,50 @@ jobs_titles:
         - "Analytics Consultant"
 # The cap in glassdoor is 900 (30 postings x 30 pages) in this kind of implementation.
 # Empirically proofed cap is < 2000 (scraping directly through the job postings) until you will not be blocked.
+
+# US + Canada + Europe + Israel
+countries:
+    - "United States"
+    - "Canada"
+    - "Austria"
+    - "Belgium"
+    - "Bulgaria"
+    - "Croatia"
+    - "Cyprus"
+    - "Czech Republic"
+    - "Denmark"
+    - "Estonia"
+    - "Finland"
+    - "France"
+    - "Greece"
+    - "Spain"
+    - "Netherlands"
+    - "Ireland"
+    - "Iceland"
+    - "Liechtenstein"
+    - "Lithuania"
+    - "Luxembourg"
+    - "Latvia"
+    - "Malta"
+    - "Germany"
+    - "Norway"
+    - "Poland"
+    - "Portugal"
+    - "Romania"
+    - "Slovakia"
+    - "Slovenia"
+    - "Sweden"
+    - "Hungary"
+    - "Italy"
+    - "Israel"
+    - "Turkey"
+    - "United Kingdom"
 jobs_number: 900
 url:
     # base + job + keyword + job + location + ?
     001_base: "https://www.glassdoor.com/Job/jobs.htm?suggestCount=0&suggestChosen=false&clickSource=searchBtn&typedKeyword="
     002_keyword: "&sc.keyword="
+    # The default location is US
     003_location: "&locT=&locId=&jobType="
 # Update this path for your driver app... or write "auto-install", if you want to auto-install for you Chrome/any browser
 # driver_path: "auto-install"
