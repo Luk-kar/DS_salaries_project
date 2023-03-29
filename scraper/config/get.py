@@ -110,7 +110,7 @@ def get_path_csv_raw(location: Location) -> str:
         str: The absolute path to the directory where "the raw" CSV files are saved.
     '''
 
-    return _get_path_csv(config['output_path']['raw'], location)
+    return _get_path_csv(directory=config['output_path']['raw'], location=location)
 
 
 def get_NA_value() -> NA_value:
