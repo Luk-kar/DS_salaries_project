@@ -23,7 +23,6 @@ from scraper.config.get import (
     get_config,
     get_url,
     get_path_csv_raw,
-    get_path_csv_clean,
     get_NA_value,
     get_encoding
 )
@@ -160,13 +159,6 @@ class TestConfigData(unittest.TestCase):
         csv_raw_path = get_path_csv_raw()
 
         self.assertTrue(self._is_valid_file_path(csv_raw_path))
-
-    def test_output_path_clean(self):
-        '''check correctness of path'''
-
-        csv_clean_path = get_path_csv_clean()
-
-        self.assertTrue(self._is_valid_file_path(csv_clean_path))
 
 
 if __name__ == '__main__':

@@ -10,9 +10,10 @@ JobSimilar = list[str]
 JobTitles = TypedDict('JobTitles', {'default': JobDefault,
                                     'similar': JobSimilar})
 JobNumber = Annotated[int, Gt(0)]
-Countries = {
+Location = str
+Locations = {
     'default': Literal[""],
-    'others': list[str]
+    'others': list[Location]
 }
 Url = dict[str, str]
 DriverPath = str
@@ -22,7 +23,7 @@ Encoding = str
 OutputPath = TypedDict('OutputPath', {'main': str, 'raw': str, 'clean': str})
 Config = TypedDict('Config',
                    {
-                       'jobs_titles': JobTitles, 'countries': Countries,
+                       'jobs_titles': JobTitles, 'locations': Locations,
                        'jobs_number': JobNumber, 'url': Url, 'driver_path': DriverPath,
                        'debug_mode': DebugMode, 'NA_value': NA_value,
                        'output_path': OutputPath, 'encoding': Encoding

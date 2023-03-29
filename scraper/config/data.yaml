@@ -27,7 +27,8 @@ jobs_titles:
 # The cap in glassdoor is 900 (30 postings x 30 pages) in this kind of implementation.
 # Empirically proofed cap is < 2000 (scraping directly through the job postings) until you will not be blocked.
 
-countries:
+# In our case countries, but they could be cities as well
+locations:
     # Usually US based
     default: ""
     # US + Canada + Europe + Israel

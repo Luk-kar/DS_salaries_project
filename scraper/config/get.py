@@ -15,7 +15,7 @@ from yaml.loader import SafeLoader
 from pathvalidate import sanitize_filepath, sanitize_filename
 
 # Internal
-from scraper.config._types import Config, Url, JobDefault, NA_value
+from scraper.config._types import Config, Url, JobDefault, NA_value, Location
 
 
 def get_config(path: str = "scraper\\config\\data.yaml") -> Config:
@@ -54,9 +54,12 @@ def get_url(url: Url, job_title: JobDefault) -> str:
 
 config = get_config()
 
+# todo update docstring
+
 
 def _get_path_csv(directory: str,
                   job_title: str = config['jobs_titles']['default'],
+                  location: Location = "",
                   extension: str = "csv"
                   ) -> str:
     '''
@@ -79,9 +82,11 @@ def _get_path_csv(directory: str,
     directory_target = os.path.join(directory_main, directory)
     jobs_title = job_title.replace(" ", "_")
     jobs_title_sanitized = sanitize_filename(jobs_title, platform="universal")
+    location = location.replace(" ", "_")
+    location_sanitized = sanitize_filename(location, platform="universal")
     date_time = datetime.now().strftime("%d-%m-%Y_%H-%M")
 
-    database_file = f"{jobs_title_sanitized}_{date_time}.{extension}"
+    database_file = f"{jobs_title_sanitized}_{location_sanitized}_{date_time}.{extension}"
 
     csv_file_target = os.path.abspath(
         os.path.join(directory_target, database_file))
@@ -93,8 +98,10 @@ def _get_path_csv(directory: str,
 
     return csv_file_target_sanitized
 
+# todo update docstring
 
-def get_path_csv_raw() -> str:
+
+def get_path_csv_raw(location: Location) -> str:
     '''
     Returns the absolute path to the file where "the raw" 
     CSV files are saved based on the configuration.
@@ -103,19 +110,7 @@ def get_path_csv_raw() -> str:
         str: The absolute path to the directory where "the raw" CSV files are saved.
     '''
 
-    return _get_path_csv(config['output_path']['raw'])
-
-
-def get_path_csv_clean() -> str:
-    '''
-    Returns the absolute path to the file where "the clean" 
-    CSV files are saved based on the configuration.
-
-    Returns:
-        str: The absolute path to the directory where "the clean" CSV files are saved.
-    '''
-
-    return _get_path_csv(config['output_path']['clean'])
+    return _get_path_csv(config['output_path']['raw'], location)
 
 
 def get_NA_value() -> NA_value:

@@ -25,7 +25,7 @@ config = get_config()
 
 def scrape_data(
         job_title: str = config['jobs_titles']['default'],
-        location: str = config['countries']['default'],
+        location: str = config['locations']['default'],
         jobs_number: Annotated[int, Gt(0)] = config['jobs_number'],
         driver_path: str = config['driver_path'],
         debug_mode: bool = config['debug_mode']
@@ -64,7 +64,7 @@ def scrape_data(
     driver = get_webpage(url, location, debug_mode, driver_path)
 
     glassdoor_job_scraper = GlassdoorJobScraper(
-        jobs_number, debug_mode, driver)
+        location, jobs_number, debug_mode, driver)
 
     glassdoor_job_scraper.save_jobs_to_csv_raw()
 

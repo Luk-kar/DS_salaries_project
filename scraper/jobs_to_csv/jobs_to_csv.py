@@ -21,7 +21,7 @@ from selenium.webdriver.remote.webelement import WebElement
 
 # Internal
 from scraper._types import Job_values, MyWebDriver, WebElements
-from scraper.config._types import DebugMode, JobNumber
+from scraper.config._types import DebugMode, JobNumber, Location
 from scraper.config.get import get_encoding
 
 from .actions.click_javascript import click_via_javascript
@@ -40,6 +40,8 @@ from .job_value_getter.job_value_getter import get_values_for_job
 
 # mypy bug https://github.com/python/mypy/issues/11426
 Pages_Number = Literal["Unknown"] | int  # type: ignore[operator]
+
+# Update the docstring
 
 
 class GlassdoorJobScraper:
@@ -69,18 +71,19 @@ class GlassdoorJobScraper:
     and anyone else who needs to collect job data from Glassdoor in bulk. 
     '''
 
-    def __init__(self, jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWebDriver):
+    def __init__(self, location: Location, jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWebDriver):
         self.jobs_number = jobs_number
         self.debug_mode = debug_mode
         self.driver = driver
-        self.csv_writer = CSV_Writer_RAW()
+        self.csv_writer = CSV_Writer_RAW(location)
         self.progress_bar = None
         self.number_of_pages = None
 
     def save_jobs_to_csv_raw(self):
         '''
         It scrapes job listings from Glassdoor website 
-        and writes job data to CSV files in its raw version. 
+        and writes job data to CSV files in its raw version.
+        Each founded job is appended each time to the CSV file separately.
 
         Returns:
             None

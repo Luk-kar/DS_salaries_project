@@ -32,28 +32,15 @@ def get_webpage(
 
     driver.get(url)
 
-    # search country
-
     if country:
 
         search_bar = await_element(
             driver, 10, By.ID, "scBar"
         )
-        # select country test field
         country_input: WebElement = search_bar.find_element(
             By.ID, "sc.location"
         )
-
-        # submit_search = search_bar.find_element(
-        #     By.XPATH, './/button[@type="submit"]'
-        # )
-
-        # Write the value
         country_input.send_keys(country)
-
-        # Hit the enter
         country_input.send_keys(Keys.ENTER)
-
-        time.sleep(100)
 
     return driver

@@ -9,6 +9,7 @@ from typing import Literal
 
 
 # Internal
+from scraper.config._types import Location
 from scraper.config.get import get_path_csv_raw, get_encoding
 from scraper._types import Job
 
@@ -48,9 +49,10 @@ class CSV_Writer():
 
     '''
 
-    def __init__(self, csv_path: str) -> None:
+    def __init__(self, csv_path: str, location: Location) -> None:
 
         self.csv_path = csv_path
+        self.location = location
         self.directory_path = os.path.dirname(csv_path)
         self.encoding = get_encoding()
         self.counter = 1
@@ -144,7 +146,7 @@ class CSV_Writer():
         - error (csv.Error): The error that occurred while writing to the CSV file.
         '''
 
-        line_number = self.counter + 1  # + 1 (header)
+        line_number = self.counter + 1  # + 1 -> (+header)
 
         sys.exit(
             f'File:\n\
@@ -181,7 +183,8 @@ class CSV_Writer_RAW(CSV_Writer):
 
     '''
 
-    def __init__(self) -> None:
+    def __init__(self, location: Location) -> None:
         super().__init__(
-            get_path_csv_raw()
+            csv_path=get_path_csv_raw(location),
+            location=location
         )
