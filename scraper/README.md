@@ -26,6 +26,7 @@ scrape_data(
 Simply modify a config file to provide:
 
 - `['jobs_titles']['default']` a job to scrape
+- `['countries']['default']` a place to look in
 - `['jobs_number']` i.e. number of individual job listings to scrape from
 - `['driver_path']` is a path for your web driver used for your browser to scrape. You can set it to auto-download
 - `['NA_value']` is the type of placeholder value. Recommended using just an empty string ""

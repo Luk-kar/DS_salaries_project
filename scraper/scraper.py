@@ -20,9 +20,12 @@ from scraper.jobs_to_csv.jobs_to_csv import GlassdoorJobScraper
 
 config = get_config()
 
+# todo update the docstring
+
 
 def scrape_data(
         job_title: str = config['jobs_titles']['default'],
+        location: str = config['countries']['default'],
         jobs_number: Annotated[int, Gt(0)] = config['jobs_number'],
         driver_path: str = config['driver_path'],
         debug_mode: bool = config['debug_mode']
@@ -58,7 +61,7 @@ def scrape_data(
     """
 
     url = get_url(config['url'], job_title)
-    driver = get_webpage(url, debug_mode, driver_path)
+    driver = get_webpage(url, location, debug_mode, driver_path)
 
     glassdoor_job_scraper = GlassdoorJobScraper(
         jobs_number, debug_mode, driver)
