@@ -1,0 +1,153 @@
+Company_name,Rating,Location,Job_title,Description,Salary,Job_age,Easy_apply,Employees,Type_of_ownership,Sector,Founded,Industry,Revenue_USD,Friend_recommend,CEO_approval,Career_opportunities,Comp_&_benefits,Culture_&_values,Senior_management,Work/Life_balance,Pros,Cons,Benefits_rating,Benefits_reviews
+Riverty Services GmbH,3.9,Vienna,Process Manager (m/f/d) 80% Homeoffice,"Everything we do, starts with you.
+Together with you, we build the most human-centric fintech. We have the ambition to create the next. And - with Bertelsmann - a strong foundation to start from. Let’s make it new – for society and for yourself.
+
+We are looking for a
+Process Manager (Personal Finance) (m/f/d)
+(unlimited, full-time) Choose one of our locations globally, with 80% Mobile Office: Verl, Baden-Baden, Berlin, Amsterdam, Wien, Stockholm or Glasgow",,30d+,False,,,,,,,,,,,,,,,,,
+Infineon Technologies AG,4.2,Villach,Senior Staff Engineer Digital Verification (f/m/div)*,"You are looking for a new challenge to bring in your broad knowledge of digital verification? Then this is the right job for you: as our new Digital Verification Engineer you will define verification concepts and supervise measurement test cases. Have we sparked your interest? Then apply now!
+In your new job you will:
+Translate the product and design requirements to an executable verification plan and maintain it through the project
+Align, track and report the implementation of test-benches and stimuli according to the verification plan
+Run simulations, analyze results and conduct verification reviews to ensure that requirements are fully met",,23d,False,,,,,,,,,,,,,,,,,
+,,,,,,23d,False,,,,,,,,,,,,,,,,,
+Infineon Technologies AG,4.2,Villach,Senior Staff Engineer Product Development for GaN-based ICs (f/m/div)*,"Do you want to get to know the development of high-voltage GaN products (like GaN based HEMTs) and even drive it yourself? Can you further on imagine to extend your activities to multicomponent products consisting e.g. of a switch and a driver IC? As a new team member, you will contribute in our product development projects across different sites. At the same time, you will be responsible for technical work packages, like designing and verifying your own products. This role will bring you in contact with diverse colleagues from all over the world and will give you the chance to share and discuss your ideas with different people.
+In your new job you will:
+Design & verify analog/mixed-signal circuits to support all phases of product development including concept, testing, application; focus will be on GaN-based ICs for power applications",,15d,False,,,,,,,,,,,,,,,,,
+,,,,,,24d,False,,,,,,,,,,,,,,,,,
+,,,,,,30d+,False,,,,,,,,,,,,,,,,,
+,,,,,,30d+,False,,,,,,,,,,,,,,,,,
+,,,,,,30d+,False,,,,,,,,,,,,,,,,,
+"ESRI, Inc.",4.1,Vienna,Android Mobile Developer,"Overview:
+Join a team that pushes the boundaries of technology to achieve a shared mission: bringing the power of GIS indoors. Esri makes indoor location, indoor mapping, and indoor GIS accessible and powerful for both consumers and experts across all platforms and devices.
+The Esri R&D Center in Vienna, Austria leads the research and development of cutting-edge indoor positioning systems technologies used in ArcGIS IPS. By combining radio signal data from Bluetooth low energy beacons and Wi-Fi with trajectory information derived from motion sensors on everyday mobile devices, we aim to deliver the world’s best indoor blue dot experience for our users.
+Responsibilities:
+Shape the way users of the ArcGIS Runtime SDK for Android consume our cutting-edge Indoor Positioning Technology (IPS) and enable them to build unique experiences
+Requirements:
+Recommended Qualifications:
+The Company:",,30d+,False,,,,,,,,,,,,,,,,,
+Hirschmann Automotive,3.6,Rankweil,Global Head of SAP Business Integration (m/w/d),"Seit über 60 Jahren arbeiten wir erfolgreich als internationaler Automobilzulieferer. Mit intelligenten Verbindungen im Nervensystem von Fahrzeugen gestalten wir die mobile Zukunft.
+WIR SUCHEN:
+Business Intelligence Developer SAP BW / Qlik (m/w)
+PROFIL:
+Know-how und Erfahrung in der Planung, Konzeption und Durchführung von SAP-Projekten in einem internationalen, produzierenden Unternehmen
+Tiefes Verständnis von Geschäfts- sowie Produktionsprozessen",,30d+,False,,,,,,,,,,,,,,,,,
+Bikemap GmbH,4.0,Vienna,Data Engineer (m/f/d) - maternity cover 1yr.,"In this position, you would:
+Be part of a motivated Data & Growth Team working closely with data analysts
+Effectively use data to gather insights and improve the decision-making process
+Take responsibility to implement and complete ETL pipelines that centralizes 3rd party data & internal data (APIs, Firebase, Postgres RDS)
+Maintain and ensure data quality for the Data & Growth Team (via alerting, and regular checks)
+Stay abreast of changes to incoming data and adapt pipelines as necessary
+Automate data collection for ad-hoc requests
+Maintain documentation of pipelines and tables",,6d,False,,,,,,,,,,,,,,,,,
+,,,,,,30d+,True,,,,,,,,,,,,,,,,,
+BE-Terna GmbH,3.9,Heimarbeit,Data Engineer*,"Aufgaben
+
+\#yourmission
+
+Erstelle, implementiere und entwickle für unsere Kunden individuelle BI-Lösungen mit Microsoft Data Platform & Analytics mit Power BI, unter Verwendung der Azure-Plattform und On-Prem-Lösungen
+Entwickle Modelle, Plattformen und Architekturen zur Datenverarbeitung
+Baue Data Warehouses, Stagings, Layers auf und teste diese
+Zeichne dich gemeinsam mit deinen Kollegen für die Qualitätssicherung verantwortlich
+Beantworte und löse laufende Anfragen deiner Kunden
+Qualifikation
+
+\#yoursuperpowers
+
+Benefits
+
+\#beternasuperpowers
+
+Haben wir dein Interesse geweckt? Dann sei jetzt schnell und bewirb dich bei uns! : )",,24h,True,,,,,,,,,,,,,,,,,
+,,,,,,24h,True,,,,,,,,,,,,,,,,,
+REWE International IT,3.6,Vienna,"Data Engineer, Analytics (m/f/x)","Unternehmensbeschreibung
+
+As the IT of the REWE Group Austria, we work together with our more than 600 employees to develop innovative IT products and services for all our corporate divisions in Austria and abroad, setting the tone for modern trade.
+In our newly formed agile ""Data Platform"" team, you will work on the one-stop-shop for providing, searching, and consuming business relevant data. Your focus as an IT expert is on providing a curated, domain-agnostic tool-set into a simple-to-use environment to enable its customers to provide, search & consume data in a standardized, efficient and decentralized way. Within our dedicated data team, you work on a basis for our new data infrastructure and are responsible for the technical feasibility of projects",,5d,True,,,,,,,,,,,,,,,,,
+Pataky Software GmbH,,Heimarbeit,Data Engineer,"PASO SOLUTIONS ist ein aufstrebendes und schnell wachsendes Unternehmen mit Standorten in Hohenzell, Graz und Landau in der Pfalz. Wir sind ein agiles Team bestehend aus engagierten Solutions Consultants, Architects und Engineers. Gemeinsam entwickeln wir individuelle Business Analytics & Software Lösungen für unsere langjährigen nationalen und internationalen Kunden in den Bereichen Automotive und Anlagenbau und treiben innovative Technologien voran.
+
+Du bist stolz ein DATA ENGINEER zu sein? Wir auch! Entwickle mit uns gemeinsam Data Warehouses, Business Intelligence und Analytics Lösungen. Werde ab sofort in VZ ein Teil unseres engagierten Teams in Hohenzell oder Graz als
+
+Senior Data Engineer
+
+für Data Warehouses, Business Intelligence und Analytics (m,w,d)
+
+Aufgaben
+
+Qualifikation
+
+Benefits
+
+Arbeiten nach deinen Wünschen
+Abhängig von deiner Berufserfahrung beginnt das kollektiv-vertragliche Mindestgehalt
+(IT-Kollektivvertrag, ST1) bei € 2.589 für Berufseinsteiger bzw. bei € 3.190
+mit mehrjähriger Berufserfahrung. Selbstverständlich bieten wir dir eine
+attraktive Überzahlung entsprechend deiner Qualifikationen. Gerne erzählen wir
+dir bei einem persönlichen Gespräch mehr von uns. Sende uns deinen Lebenslauf
+und Kontaktdaten. Wir freuen uns auf deine Bewerbung!",,20d,True,,,,,,,,,,,,,,,,,
+,,,,,,30d+,False,,,,,,,,,,,,,,,,,
+Liebherr-Werk Nenzing GmbH,3.9,Nenzing,Data Scientist / Machine Learning Engineer (m/w/d),"Mit der Schalungskompetenz von Doka entstehen rund um den Globus beeindruckende Bauwerke. Das ist die gemeinsame Leistung unserer mehr als 6.800 Mitarbeiter*innen in über 60 Ländern dieser Erde – und darauf sind wir stolz.
+
+STELLENBESCHREIBUNG
+
+Die Schaffung von Transparenz über interne und externe Daten, sowie die Gewinnung neuer Erkenntnisse aus den vorhandenen Daten stellt die Hauptaufgabe des Machine Learning Teams bei Doka dar. Dafür suchen wir eine analytisch denkende Persönlichkeit, die ebenso für dieses Thema brennt, wie wir!
+
+Ihr Schwerpunkt liegt in der Mitarbeit und Durchführung von End-to-End Data Science Projekten. In dieser neu geschaffenen Funktion haben Sie außerdem die Möglichkeit, die übergreifende Datenarchitektur für Big Data und Data Analytics mitzugestalten.",,12d,False,,,,,,,,,,,,,,,,,
+,,,,,,30d+,False,,,,,,,,,,,,,,,,,
+,,,,,,30d+,False,,,,,,,,,,,,,,,,,
+Liebherr-Werk Nenzing GmbH,3.9,Nenzing,Data Engineer (m/w/d),"Aufgaben
+Design, Entwicklung, Testung und Wartung von Datenspeicherarchitekturen
+Identifizierung, Design, Implementierung und Optimierung von automatisierten Datenprozessen
+Aufbereitung der Rohdaten gemäß den Anforderungen der Fachabteilungen
+Erzeugung von Datenzugriffsschichten für Tools bzw. Data Analyst zur Unterstützung in deren Anwendungen
+Kooperation mit Fachexperten zur Erweiterung der Funktionalität der Datensysteme
+Aufzeigen von Möglichkeiten zur Steigerung der Zuverlässigkeit, Effizienz und Qualität der Daten",,9d,False,,,,,,,,,,,,,,,,,
+,,,,,,30d+,False,,,,,,,,,,,,,,,,,
+Raiffeisen Bank International,4.0,Vienna,Data Warehouse DevOps Engineer (f/m/x),"Data Warehouse DevOps Engineer (f/m/x)
+
+We are looking for a service-oriented person to help us present the highest value of the big amount of
+data in our Enterprise Data Warehouse (EDWH). The right candidate is comfortable with
+technical and organisational challenges, can speak and act in the interests of our service and
+really wants to experience an Adaptive Data Driven Organization.
+
+
+
+#full-time
+(38.5h / week)",,15d,False,,,,,,,,,,,,,,,,,
+,,,Data Virtualization (Denodo) Engineer (f/m/x),"Data Virtualization (Denodo) Engineer (f/m/x)
+
+Within RBI, data virtualization is becoming more and more popular. Using Denodo as a governed platform, we aim to explore data virtualization possibilities for RBI users across the group. Data virtualization is an enabler for our future data mesh, it’s used for data quality checks (DQI and AI based), as integration layer and for connecting multiple sources in a single place to consume, with the tool of your choice, at once to generate actionable insights.
+You will become a member of our team, managing all BI and data virtualization platforms within RBI. We consult and coach others on how to use our platform in the best way and share our knowhow within a group-wide community. In our team we live an open, authentic, supportive, honest and innovative team culture, which is based on solid feedback culture and trust.",,30d+,False,,,,,,,,,,,,,,,,,
+,,,,,,23d,True,,,,,,,,,,,,,,,,,
+Finmatics GmbH,5.0,Heimarbeit,(Senior) Full-Stack Software Engineer (m/f/d),"The Future of Finance – today.
+
+Finmatics is a fast-growing software as a service (SaaS) company that provides artificial intelligence (AI) solutions to thousands of businesses of all sizes. Our mission is to automate financial & accounting processes in order to eliminate unnecessary manual tasks.
+
+As Senior Full-Stack Software Engineer, your work will be a critical part of accomplishing this mission.
+
+Tasks
+
+Design and implement applications with state-of-the-art frameworks for business users
+Requirements
+
+Our Tech Stack (App Team)
+
+Benefits
+
+Be part of shaping the future of financial workflows using the latest technical possibilities.",,30d+,True,,,,,,,,,,,,,,,,,
+,,,,,,24h,False,,,,,,,,,,,,,,,,,
+ReQuest GmbH,5.0,Vienna,Senior Data Engineer (m/f/x),"An established, but niche software development company that produces 10 to 40 GB of data per day for their clients, is looking to scale their business and hence their team. Our client is looking to implement new technology, administration and maintenance solutions and therefore needs an experienced data engineer with a focus on identification, deployment, administration and maintenance of the technology best suited towards typical use cases.
+
+Do you have the relevant experience and the curiosity to drive the research of a range of technologies and potentially build small-scale prototypes? Are you an analytical thinker who would appreciate working within a small but growing team? Then apply now!
+
+Deine Aufgaben im Team
+
+Unsere Erwartungen an Dich
+
+Deine Benefits",,22d,True,,,,,,,,,,,,,,,,,
+data square GmbH,,Vienna,Data Engineer,"Wir unterstützen Firmen und Organisationen beim erforderlichen Wandel durch innovative datengetriebene Lösungen.
+Bei data square arbeiten Menschen, die beruflichen Erfolg und persönliche Weiterentwicklung mit Spaß an der Arbeit verbinden möchten. Ein gutes Gehalt soll auch mit dem guten Gefühl einhergehen, etwas zu bewegen und unsere Kunden ein Stück besser zu machen.
+Wir suchen zur Verstärkung unseres Teams eine:n
+Data Engineer (all genders)
+zur Entwicklung von IT- und Datenlösungen auf der Basis von Daten und Analytics.",,16d,False,,,,,,,,,,,,,,,,,
+,,,,,,7d,False,,,,,,,,,,,,,,,,,

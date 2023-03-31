@@ -99,13 +99,12 @@ or selected test:
 
 ## Wish-list ✨
 
-1. Optimizing the speed of the script. Get rid of all artificial pause scripts.
+1. Optimizing the speed of the script. Get rid of the need for all artificial pause scripts.
 2. Making the driver more stealthy.
-3. Searching job offers by Country/State.
-4. Refactor the code to more of the paradigm Object Oriented Programming (OOP) approach than Functional Programming (FP).
+3. Refactor the code to more of the paradigm Object Oriented Programming (OOP) approach than Functional Programming (FP).
    It's just easier to maintain in the long term.
-5. Add log errors to a file `errors.log`.
-6. Add not crushing `"headless"` mode for the Chrome driver for daily usage (`debug_mode=false`).
+4. Add log errors to a file `errors.log`.
+5. Add not crushing `"headless"` mode for the Chrome driver for daily usage (`debug_mode=false`).
 
 ## Non-wish-list and troubleshoots, and as intended 🔥
 
@@ -121,7 +120,7 @@ or selected test:
    which is not directly available on the job posting itself.
 3. Not sure if the job postings are picked at random, by the glassdoor search engine.
    Even when the population sample is sizeable, there is still room for bias.
-4. There seem to be repeating job postings (multiplicities). But maybe the same job postings are posted more than once by the same company.
+4. There seem to be repeating job postings (multiplicities). But maybe the same job postings are posted more than once by the same company. Some job postings could be fake (ghost jobs).
 5. Sometimes you got the error:
    `Message: unknown error: cannot determine loading status`
    Long story short it means that you should reload the script. Glassdoor likes to block IP which behaves as "unhuman".

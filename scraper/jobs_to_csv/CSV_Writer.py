@@ -9,7 +9,7 @@ from typing import Literal
 
 
 # Internal
-from scraper.config._types import Location
+from scraper.config._types import JobDefault, Location
 from scraper.config.get import get_path_csv_raw, get_encoding
 from scraper._types import Job
 
@@ -183,8 +183,8 @@ class CSV_Writer_RAW(CSV_Writer):
 
     '''
 
-    def __init__(self, location: Location) -> None:
+    def __init__(self, job_title: JobDefault, location: Location) -> None:
         super().__init__(
-            csv_path=get_path_csv_raw(location),
+            csv_path=get_path_csv_raw(job_title, location),
             location=location
         )

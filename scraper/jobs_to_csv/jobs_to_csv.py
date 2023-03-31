@@ -21,7 +21,7 @@ from selenium.webdriver.remote.webelement import WebElement
 
 # Internal
 from scraper._types import Job_values, MyWebDriver, WebElements
-from scraper.config._types import DebugMode, JobNumber, Location
+from scraper.config._types import DebugMode, JobNumber, JobDefault, Location
 from scraper.config.get import get_encoding
 
 from .actions.click_javascript import click_via_javascript
@@ -71,11 +71,20 @@ class GlassdoorJobScraper:
     and anyone else who needs to collect job data from Glassdoor in bulk. 
     '''
 
-    def __init__(self, location: Location, jobs_number: JobNumber, debug_mode: DebugMode, driver: MyWebDriver):
+    def __init__(
+            self,
+            job_title: JobDefault,
+            location: Location,
+            jobs_number: JobNumber,
+            debug_mode: DebugMode,
+            driver: MyWebDriver
+    ):
+        self.job_title = job_title
+        self.location = location
         self.jobs_number = jobs_number
         self.debug_mode = debug_mode
         self.driver = driver
-        self.csv_writer = CSV_Writer_RAW(location)
+        self.csv_writer = CSV_Writer_RAW(job_title, location)
         self.progress_bar = None
         self.number_of_pages = None
 
@@ -98,11 +107,17 @@ class GlassdoorJobScraper:
 
         print("\r")
         print_current_date_time("Start")
+        print(f"Job title: {self.job_title}")
+        print(f"Location: {self.location}")
 
         self.number_of_pages = self._get_total_web_pages()
         if not self.debug_mode:
-            self.progress_bar = enlighten.Counter(desc="Total progress",  unit="jobs",
-                                                  color="green", total=self.jobs_number)
+            self.progress_bar = enlighten.Counter(
+                desc="Total progress",
+                unit="jobs",
+                color="green",
+                total=self.jobs_number
+            )
 
         while self.csv_writer.counter <= self.jobs_number:
 
@@ -130,7 +145,7 @@ class GlassdoorJobScraper:
         '''
 
         jobs_list_buttons = await_element(
-            self.driver, 20, By.XPATH, '//ul[@data-test="jlGrid"]')
+            self.driver, 25, By.XPATH, '//ul[@data-test="jlGrid"]')
 
         jobs_buttons = self.get_jobs_buttons(jobs_list_buttons)
 
@@ -162,7 +177,6 @@ class GlassdoorJobScraper:
                 break
 
             pause()
-
             click_x_pop_up(self.driver)
 
             try:
@@ -172,8 +186,10 @@ class GlassdoorJobScraper:
                 self.driver.refresh()
                 break
 
-            if not self._job_posting_exists(job) and self.debug_mode:
-                self._save_errored_page()
+            if not self._job_posting_exists(job):
+
+                if self.debug_mode:
+                    self._save_errored_page()
 
                 self.driver.refresh()
                 break

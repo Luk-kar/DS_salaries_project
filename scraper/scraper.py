@@ -64,7 +64,7 @@ def scrape_data(
     driver = get_webpage(url, location, debug_mode, driver_path)
 
     glassdoor_job_scraper = GlassdoorJobScraper(
-        location, jobs_number, debug_mode, driver)
+        job_title, location, jobs_number, debug_mode, driver)
 
     glassdoor_job_scraper.save_jobs_to_csv_raw()
 

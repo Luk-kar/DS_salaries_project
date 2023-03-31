@@ -57,11 +57,12 @@ config = get_config()
 # todo update docstring
 
 
-def _get_path_csv(directory: str,
-                  job_title: str = config['jobs_titles']['default'],
-                  location: Location = "",
-                  extension: str = "csv"
-                  ) -> str:
+def _get_path_csv(
+    directory: str,
+    job_title: str = config['jobs_titles']['default'],
+    location: Location = "",
+    extension: str = "csv"
+) -> str:
     '''
     Returns a string representing the file path for a CSV file to be written. 
 
@@ -78,7 +79,9 @@ def _get_path_csv(directory: str,
         OSError: If the generated file path is not a valid file path.
     '''
 
-    directory_main = config['output_path']['main']
+    directory_main = os.path.join(
+        config['output_path']['main'], config['output_path']["raw"]
+    )
     directory_target = os.path.join(directory_main, directory)
     jobs_title = job_title.replace(" ", "_")
     jobs_title_sanitized = sanitize_filename(jobs_title, platform="universal")
@@ -101,7 +104,7 @@ def _get_path_csv(directory: str,
 # todo update docstring
 
 
-def get_path_csv_raw(location: Location) -> str:
+def get_path_csv_raw(job_title: JobDefault, location: Location) -> str:
     '''
     Returns the absolute path to the file where "the raw" 
     CSV files are saved based on the configuration.
@@ -110,7 +113,7 @@ def get_path_csv_raw(location: Location) -> str:
         str: The absolute path to the directory where "the raw" CSV files are saved.
     '''
 
-    return _get_path_csv(directory=config['output_path']['raw'], location=location)
+    return _get_path_csv(directory=job_title, location=location)
 
 
 def get_NA_value() -> NA_value:
