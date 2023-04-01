@@ -17,8 +17,10 @@ countries = [
     # "Netherlands",
     # "Ireland",
     # "Luxembourg",
-    # "Norway",
-    # "Switzerland",
+    "Switzerland",
+    # "United Kingdom",
+    # "United States"
+    # "Malta"
 ]
 
 for country in countries:

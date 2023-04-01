@@ -55,7 +55,7 @@ class CSV_Writer():
         self.location = location
         self.directory_path = os.path.dirname(csv_path)
         self.encoding = get_encoding()
-        self.counter = 1
+        self.counter = 0
 
     def write_observation(self, observation: Job):
         '''
@@ -67,7 +67,7 @@ class CSV_Writer():
 
         '''
 
-        if self.counter == 1:
+        if self.counter == 0:
             self.write_header(observation)
 
         self.write_row(observation)

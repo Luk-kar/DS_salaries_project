@@ -3,15 +3,19 @@ The module returns a webdriver for a specified URL,
 and if an error occurs, it returns a HTTP status code instead.
 '''
 # Python
-import time
+import sys
 
 # External
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.webelement import WebElement
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 # Internal
-from scraper._types import MyWebDriver
+from scraper._types import MyWebDriver, WebElements
 from scraper.config.get import get_config
 from scraper.config._types import DebugMode
 from scraper.jobs_to_csv.elements_query.await_element import await_element
@@ -42,5 +46,20 @@ def get_webpage(
         )
         country_input.send_keys(country)
         country_input.send_keys(Keys.ENTER)
+
+        jobs_list_buttons = await_element(
+            driver, 20, By.XPATH, '//ul[@data-test="jlGrid"]')
+
+        try:
+            jobs_buttons: WebElements = jobs_list_buttons.find_elements(
+                By.TAG_NAME, "li"
+            )
+        except NoSuchElementException as error:
+
+            driver.quit()
+            sys.exit(
+                f"Check if you did not have any misspell in the job title or \
+                    if you were silently blocked by glassdoor.\
+                    \nError: {error}")
 
     return driver

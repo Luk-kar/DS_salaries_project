@@ -44,19 +44,19 @@ def click_next_page(driver: MyWebDriver, jobs_counter: int, jobs_number: int):
             next_page.click()
 
         else:
-            _exit_scraping_when_no_more_jobs(jobs_counter, jobs_number)
+            _exit_scraping_when_no_more_jobs(jobs_counter, jobs_number, driver)
 
         if next_page.get_attribute("disabled") == "":
-            _exit_scraping_when_no_more_jobs(jobs_counter, jobs_number)
+            _exit_scraping_when_no_more_jobs(jobs_counter, jobs_number, driver)
 
     except ElementClickInterceptedException:
         click_via_javascript(driver, next_page)
 
     except NoSuchElementException:
-        _exit_scraping_when_no_more_jobs(jobs_counter, jobs_number)
+        _exit_scraping_when_no_more_jobs(jobs_counter, jobs_number, driver)
 
 
-def _exit_scraping_when_no_more_jobs(jobs_counter: int, jobs_number: int):
+def _exit_scraping_when_no_more_jobs(jobs_counter: int, jobs_number: int, driver: MyWebDriver):
     '''
     Exits the program when there is no more jobs to scrape from the website.
 
@@ -64,6 +64,8 @@ def _exit_scraping_when_no_more_jobs(jobs_counter: int, jobs_number: int):
     - jobs_counter (int): The number of jobs that have been scraped so far.
     - jobs_number (int): The total number of jobs to scrape.
     '''
+
+    driver.quit()
 
     sys.exit(
         "Scraping terminated before reaching target number of jobs.\n"

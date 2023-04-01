@@ -199,7 +199,14 @@ class GlassdoorJobScraper:
             if self.debug_mode:
                 print_key_value_pairs(job)
 
-            self.csv_writer.write_observation(job)
+            try:
+
+                self.csv_writer.write_observation(job)
+
+            except SystemExit as exit_msg:
+
+                self.driver.quit()
+                sys.exit(exit_msg)
 
             if self.progress_bar:
                 self.progress_bar.update()
@@ -274,8 +281,11 @@ class GlassdoorJobScraper:
         Returns:
             - An integer representing the index of the next job button to click.
         '''
+        try:
+            return self.csv_writer.counter % len(jobs_buttons)
 
-        return (self.csv_writer.counter - 1) % len(jobs_buttons)
+        except ZeroDivisionError:
+            return 0
 
     def _save_errored_page(self):
         '''

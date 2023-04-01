@@ -54,8 +54,6 @@ def get_url(url: Url, job_title: JobDefault) -> str:
 
 config = get_config()
 
-# todo update docstring
-
 
 def _get_path_csv(
     directory: str,
@@ -68,7 +66,8 @@ def _get_path_csv(
 
     Args:
         directory (str): A string representing the directory name for the CSV file.
-        job_title (str): A string representing the job title. 
+        job_title (str): A string representing the job title.
+        location (str): A string representing the location for the job. 
         Default is `config['jobs_titles']['default']`.
         extension (str): A string representing the file extension. Default is "csv".
 
@@ -101,13 +100,15 @@ def _get_path_csv(
 
     return csv_file_target_sanitized
 
-# todo update docstring
-
 
 def get_path_csv_raw(job_title: JobDefault, location: Location) -> str:
     '''
     Returns the absolute path to the file where "the raw" 
     CSV files are saved based on the configuration.
+
+    Args:
+        directory (str): A string representing the directory name for the CSV file.
+        job_title (str): A string representing the job title.
 
     Returns:
         str: The absolute path to the directory where "the raw" CSV files are saved.

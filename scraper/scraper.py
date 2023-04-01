@@ -20,8 +20,6 @@ from scraper.jobs_to_csv.jobs_to_csv import GlassdoorJobScraper
 
 config = get_config()
 
-# todo update the docstring
-
 
 def scrape_data(
         job_title: str = config['jobs_titles']['default'],
@@ -35,6 +33,9 @@ def scrape_data(
 
     Args:
         - job_title (str, optional): The job title to search for. 
+        Defaults to the value in the global config data file.
+
+        - location (str, optional): The location to search for jobs in. 
         Defaults to the value in the global config data file.
 
         - jobs_number (int, optional): The number of job postings to scrape. 
@@ -67,6 +68,8 @@ def scrape_data(
         job_title, location, jobs_number, debug_mode, driver)
 
     glassdoor_job_scraper.save_jobs_to_csv_raw()
+
+    driver.quit()
 
     sys.exit(
         f"You successfully scraped {jobs_number} postings for the job position!\n- {job_title}\n")
