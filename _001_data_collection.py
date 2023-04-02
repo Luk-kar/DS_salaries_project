@@ -12,15 +12,10 @@ countries = config['locations']['others'][1:]
 
 countries = [
     # "Austria",
-    # "Denmark",
-    # "Greece",
-    # "Netherlands",
-    # "Ireland",
-    # "Luxembourg",
-    "Switzerland",
-    # "United Kingdom",
-    # "United States"
-    # "Malta"
+    "Canada",
+    # "Czech Republic",
+    # "Finland",
+    # ""
 ]
 
 for country in countries:
@@ -35,6 +30,6 @@ for country in countries:
     except Exception as _error:
         logging.error(traceback.format_exc())
 
-print(f"Scraping for all countries has ended.")
+print(f"\rScraping for all countries has ended.")
 print_current_date_time("End")
 print(countries)

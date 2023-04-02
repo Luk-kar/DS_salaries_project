@@ -8,6 +8,8 @@ It functions without any authentication e.g. user sign-ins/ API tokens and keys.
 
 The script has been tested and verified to be working as expected for a job with a target job size of < 900 individual listings.
 
+It is advised to use VPN during running the script.
+
 ## Usage 🔨
 
 ```
@@ -75,7 +77,7 @@ Script scrapes:
 
 ## Purpose 🧭
 
-Scraping data for Exploratory data analysis (EDA) for conditions and requirements for a chosen career path. In that case **data engineer**.
+Scraping data for Exploratory data analysis (EDA) for conditions and requirements for a chosen career path. In that case: **data engineer**.
 
 ## Prerequisites 🧰
 
@@ -86,25 +88,26 @@ Look at:
 
 ## Running the tests 🧪
 
-To run tests, write down in the terminal, in the program folder:
-`python -m unittest`
-or
-`scripts\run_tests.bat`
-or if selected file:
-`python -m unittest -s test -p "test_webdriver.py"`
-or selected class:
-`python -m unittest discover -s test -p "test_webdriver.py" -k TestJobValueGetterFunctions`
-or selected test:
+To run tests, write down in the terminal, in the program's folder: <br>
+`python -m unittest`<br>
+or<br>
+`scripts\run_tests.bat`<br>
+or if selected file:<br>
+`python -m unittest -s test -p "test_webdriver.py"`<br>
+or selected class in the file:<br>
+`python -m unittest discover -s test -p "test_webdriver.py" -k TestJobValueGetterFunctions`<br>
+or selected test in the class:<br>
 `python -m unittest test.test_webdriver.TestJobValueGetterFunctions.test_add_values`
 
 ## Wish-list ✨
 
-1. Optimizing the speed of the script. Get rid of the need for all artificial pause scripts.
+1. Optimizing the speed of the script. Get rid of the need for all artificial `pause` functions.
 2. Making the driver more stealthy.
 3. Refactor the code to more of the paradigm Object Oriented Programming (OOP) approach than Functional Programming (FP).
    It's just easier to maintain in the long term.
 4. Add log errors to a file `errors.log`.
-5. Add not crushing `"headless"` mode for the Chrome driver for daily usage (`debug_mode=false`).
+5. Add not crushing `"headless"` mode for the Chrome driver for production usage (`debug_mode=false`).
+6. Do multiprocessing for many countries, and jobs. Keep in mind that it probably has to be done by many different IPs, to avoid bot detection and therefore blockage. Also, it helps to speed up scraping by not allowing glassdoor to trim your connection bandwidth down when there are too many requests on your side.
 
 ## Non-wish-list and troubleshoots, and as intended 🔥
 
@@ -113,22 +116,25 @@ or selected test:
    The links are displayed in a separate pop-up on the page, and you cannot be sure that they will load properly.
    The main goal of this script is exploratory data analysis (EDA).
    If you are looking for a job, there is a much more efficient approach than using Selenium.
-   For example, you can use BeautifulSoup to scrape job postings directly without the browser,
+   For example, you can use BeautifulSoup to scrape job postings directly without using the browser,
    rather than using a job aggregator on the page.
-2. The cap is set at 900 jobs (note that this number may be outdated when you read this):
+2. The cap is set at 900 jobs _(note that this number may be outdated when you read this)_:
    One of the reasons why I use implementation through the main aggregation page is that it provides information on how old the job posting is,
    which is not directly available on the job posting itself.
 3. Not sure if the job postings are picked at random, by the glassdoor search engine.
    Even when the population sample is sizeable, there is still room for bias.
-4. There seem to be repeating job postings (multiplicities). But maybe the same job postings are posted more than once by the same company. Some job postings could be fake (ghost jobs).
-5. Sometimes you got the error:
-   `Message: unknown error: cannot determine loading status`
+4. Overall glassdoor has some issues with duplicates. Not sure how this issue could be solved _(Maybe it is anti-bot protection )_. What I know I'm not the only one having this problem:<br>
+   [stackoverflow - scraping glassdoor returns duplicate entries](https://stackoverflow.com/questions/74193851/)
+5. Some job postings could be fake (ghost jobs).
+6. Sometimes you got the error:<br>
+   `Message: unknown error: cannot determine loading status`<br>
    Long story short it means that you should reload the script. Glassdoor likes to block IP which behaves as "unhuman".
-6. Due to A/B tests and many possible format varieties/changes of salary data, it is not advised to do parsing it in the runtime.
-7. In CSV files empty `na_values` is a value that was not found and is optional.
-8. If there are no values in the job description or button, then a corresponding error is raised.
-9. Overall glassdoor has some issues with duplicates. Not sure how this issue could be solved. I'm not the only one having this problem:
-   [stackoverflow - scraping glassdoor returns duplicate entries](https://stackoverflow.com/questions/74193851/)scraping-glassdoor-returns-duplicate-entries
+7. Due to A/B tests and many possible format varieties/changes of salary data, it is not advised to do parsing it in the runtime.
+8. In CSV files `na_values` is a value that is empty, and was not found, and is optional.
+9. As mentioned previously, if there are no values in the job description or button, then a corresponding error is raised. Those values should be on each job posting.
+10. When using Chrome you could have the following error:<br>
+    `Passthrough is not supported, GL is disabled`<br>
+    From my experience you shouldn't worry about that too much.
 
 ## License 📜
 

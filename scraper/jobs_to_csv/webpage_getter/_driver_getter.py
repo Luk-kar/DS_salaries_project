@@ -45,8 +45,7 @@ def get_driver(
 
     options = webdriver.ChromeOptions()
 
-    # to simulate human behavior for bot detection
-    options.add_argument("USER AGENT")
+    _make_driver_stealthy(options)
 
     # todo debug_mode=True add headless mode
 
@@ -67,3 +66,9 @@ def get_driver(
     driver = webdriver.Chrome(  # type: ignore [call-arg]
         service=service_obj, options=options)
     return driver
+
+
+def _make_driver_stealthy(options: webdriver.ChromeOptions):
+    '''Adding arguments to a driver to avoid bot detection'''
+
+    options.add_argument("USER AGENT")
