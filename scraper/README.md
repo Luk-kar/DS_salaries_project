@@ -88,6 +88,9 @@ Look at:
 
 ## Running the tests 🧪
 
+On Windows `Run as Administrator` to avoid a bug:<br>
+`PermissionError: [WinError 5] Access is denied`
+
 To run tests, write down in the terminal, in the program's folder: <br>
 `python -m unittest`<br>
 or<br>

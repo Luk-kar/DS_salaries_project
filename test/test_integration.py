@@ -91,6 +91,8 @@ class TestIntegration(unittest.TestCase):
         cls.target_folders = raw_dir_path
         cls.target_directory_files_before = cls._get_csv_files(
             cls.target_folders)
+        cls.target_directories_before = cls._get_directories(
+            cls.target_folders)
 
     def setUp(self) -> None:
 
@@ -202,6 +204,18 @@ class TestIntegration(unittest.TestCase):
 
         return csv_files
 
+    @staticmethod
+    def _get_directories(directory: str) -> list[str]:
+
+        csv_dirs = []
+
+        for root, dirs, _ in os.walk(directory):
+            for dir in dirs:
+                dir_path = os.path.join(root, dir)
+                csv_dirs.append(dir_path)
+
+        return csv_dirs
+
     def _test_csv_file_structure(self, csv_file_path: str):
 
         delimiter = self.csv['delimiter']
@@ -253,14 +267,15 @@ class TestIntegration(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
 
-        target_folder = cls.target_folders
-        before_files = cls.target_directory_files_before
-
         new_files = cls._get_created_files()
 
-        for filename in new_files:
-            if filename not in before_files:
-                os.remove(filename)
+        for file in new_files:
+            os.remove(file)
+
+        new_dirs = cls._get_created_dirs()
+
+        for dir in new_dirs:
+            os.remove(dir)
 
         super().tearDownClass()
 
@@ -272,6 +287,17 @@ class TestIntegration(unittest.TestCase):
         after_files = cls._get_csv_files(target_folder)
 
         difference = set(after_files) - set(before_files)
+
+        return difference
+
+    @classmethod
+    def _get_created_dirs(cls):
+
+        target_folder = cls.target_folders
+        before_dirs = cls.target_directories_before
+        after_dirs = cls._get_directories(target_folder)
+
+        difference = set(after_dirs) - set(before_dirs)
 
         return difference
 
