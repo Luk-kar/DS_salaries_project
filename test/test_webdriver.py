@@ -455,3 +455,7 @@ class TestJobValueGetterFunctions(unittest.TestCase):
             return mock_return_elements
 
         return _mock_list_side_effect
+
+
+if __name__ == '__main__':
+    unittest.main()

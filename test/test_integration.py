@@ -16,7 +16,7 @@ from time import sleep
 import _csv
 
 # Internal
-from scraper.config.get import get_encoding, get_path_csv_raw
+from scraper.config.get import get_encoding, get_path_csv_raw, get_config
 from scraper.scraper import scrape_data
 
 
@@ -82,9 +82,15 @@ class TestIntegration(unittest.TestCase):
                 'Benefits_rating': regex['0.0-5.0'],
             }
         }
-        cls.target_folder = os.path.dirname(get_path_csv_raw())
+        config = get_config()
+        raw_dir_path = os.path.join(
+            config['output_path']['main'],
+            config['output_path']['raw']
+        )
+
+        cls.target_folders = raw_dir_path
         cls.target_directory_files_before = cls._get_csv_files(
-            cls.target_folder)
+            cls.target_folders)
 
     def setUp(self) -> None:
 
@@ -106,7 +112,7 @@ class TestIntegration(unittest.TestCase):
             lambda: scrape_data(jobs_number=self.jobs_number, debug_mode=True)
         )
 
-    def test_in_production(self):
+    def test_in_production_default_job_location(self):
         """
         Tests that data is scraped correctly in normal usage.
 
@@ -119,6 +125,47 @@ class TestIntegration(unittest.TestCase):
             lambda: scrape_data(jobs_number=self.jobs_number, debug_mode=False)
         )
 
+    def test_in_production_custom_job_location(self):
+        """
+        Tests that data is scraped correctly in normal usage.
+
+        This method creates a file using the scrape_data function 
+        with debug_mode=False and checks that 
+        the file is valid using the _check_if_created_file_is_valid method.
+        """
+
+        self._check_if_created_file_is_valid(
+            lambda: scrape_data(
+                job_title="Software Engineer",
+                location="Germany",
+                jobs_number=self.jobs_number,
+                debug_mode=False
+            )
+        )
+
+    def test_in_production_no_job_in_location(self):
+        """
+        Tests that data is scraped correctly in normal usage.
+
+        This method creates a file using the scrape_data function 
+        with debug_mode=False and checks that 
+        the file is valid using the _check_if_created_file_is_valid method.
+        """
+        job_title = "Pirate"
+        location = "Somalia"
+        jobs_number = self.jobs_number
+        jobs_counter = 0
+        exit_msg = "Scraping terminated before reaching target number of jobs.\n"
+        f"Target number of jobs {jobs_number}, got {jobs_counter}."
+
+        with self.assertRaisesRegex(SystemExit, exit_msg):
+            scrape_data(
+                job_title=job_title,
+                location=location,
+                jobs_number=jobs_number,
+                debug_mode=False
+            )
+
     @staticmethod
     def _wait_for_glassdoor_server():
         time_span = random.uniform(1.25, 1.7)
@@ -127,20 +174,19 @@ class TestIntegration(unittest.TestCase):
     def _check_if_created_file_is_valid(self, scrape_data_function):
 
         before_files = self._get_csv_files(
-            self.target_folder)
+            self.target_folders)
 
         with self.assertRaises(SystemExit):
             scrape_data_function()
 
         after_files = self._get_csv_files(
-            self.target_folder)
+            self.target_folders)
 
         difference = set(after_files) - set(before_files)
 
-        for filename in difference:
-            if filename not in before_files:
-                file_path = os.path.join(self.target_folder, filename)
-                self._test_csv_file_structure(file_path)
+        for file in difference:
+            if file not in before_files:
+                self._test_csv_file_structure(file)
                 break
 
     @staticmethod
@@ -148,9 +194,11 @@ class TestIntegration(unittest.TestCase):
 
         csv_files = []
 
-        for filename in os.listdir(directory):
-            if filename.endswith('.csv'):
-                csv_files.append(filename)
+        for root, _, files in os.walk(directory):
+            for file in files:
+                if file.endswith('.csv'):
+                    file_path = os.path.join(root, file)
+                    csv_files.append(file_path)
 
         return csv_files
 
@@ -205,25 +253,28 @@ class TestIntegration(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
 
-        target_folder = cls.target_folder
+        target_folder = cls.target_folders
         before_files = cls.target_directory_files_before
 
         new_files = cls._get_created_files()
 
         for filename in new_files:
             if filename not in before_files:
-                new_file_path = os.path.join(target_folder, filename)
-                os.remove(new_file_path)
+                os.remove(filename)
 
         super().tearDownClass()
 
     @classmethod
     def _get_created_files(cls):
 
-        target_folder = cls.target_folder
+        target_folder = cls.target_folders
         before_files = cls.target_directory_files_before
         after_files = cls._get_csv_files(target_folder)
 
         difference = set(after_files) - set(before_files)
 
         return difference
+
+
+if __name__ == '__main__':
+    unittest.main()

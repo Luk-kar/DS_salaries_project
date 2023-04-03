@@ -74,7 +74,7 @@ url:
     # base + job + keyword + job + location + ?
     001_base: "https://www.glassdoor.com/Job/jobs.htm?suggestCount=0&suggestChosen=false&clickSource=searchBtn&typedKeyword="
     002_keyword: "&sc.keyword="
-    # The default location is US
+    # If empty the default location is US
     003_location: "&locT=&locId=&jobType="
 # Update this path for your driver app... or write "auto-install", if you want to auto-install for you Chrome/any browser
 # driver_path: "auto-install"

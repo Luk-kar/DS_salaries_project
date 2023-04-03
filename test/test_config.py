@@ -26,7 +26,7 @@ from scraper.config.get import (
     get_NA_value,
     get_encoding
 )
-from scraper.config._types import Config, JobNumber, JobSimilar, Url
+from scraper.config._types import Config, JobNumber, JobSimilar, Url, Locations
 
 
 class TestConfigData(unittest.TestCase):
@@ -41,7 +41,7 @@ class TestConfigData(unittest.TestCase):
         self.url = get_url(self.config['url'],
                            self.config['jobs_titles']['default'])
 
-    def _is_empty_string(self, string: str):
+    def _assert_is_not_empty_string(self, string: str):
         '''assert if is it not an empty string'''
 
         self.assertIsInstance(string, str)
@@ -77,7 +77,7 @@ class TestConfigData(unittest.TestCase):
 
         job_title = self.config['jobs_titles']['default']
 
-        self._is_empty_string(job_title)
+        self._assert_is_not_empty_string(job_title)
         self.assertTrue(
             self._is_valid_file_name(job_title)
         )
@@ -90,10 +90,24 @@ class TestConfigData(unittest.TestCase):
         self.assertIsInstance(jobs, list)
 
         for job in jobs:
-            self._is_empty_string(job)
+            self._assert_is_not_empty_string(job)
             self.assertTrue(
                 self._is_valid_file_name(job)
             )
+
+    def test_jobs_locations(self):
+        '''assert if is any of the jobs, not an empty string'''
+
+        locations: Locations = self.config['locations']
+
+        default = locations['default']
+        self.assertIsInstance(default, str)
+
+        others = locations['others']
+        self.assertIsInstance(others, list)
+
+        for location in others:
+            self._assert_is_not_empty_string(location)
 
     def test_jobs_number(self):
         '''test if is it greater than 0'''
@@ -101,6 +115,7 @@ class TestConfigData(unittest.TestCase):
         jobs_number: JobNumber = self.config['jobs_number']
         self.assertIsInstance(jobs_number, int)
         self.assertGreater(jobs_number, 0)
+        self.assertLessEqual(jobs_number, 900)  # Glassdoor cap
 
     def test_url(self):
         '''test if are there url's types'''
@@ -128,7 +143,7 @@ class TestConfigData(unittest.TestCase):
         '''check if the driver exists on the local machine'''
 
         path_file: str = self.config['driver_path']
-        self._is_empty_string(path_file)
+        self._assert_is_not_empty_string(path_file)
         self.assertTrue(os.path.exists(path_file))
         self.assertTrue(os.path.isfile(path_file))
 
@@ -151,7 +166,7 @@ class TestConfigData(unittest.TestCase):
     def test_encoding_value(self):
         """check if not an empty string"""
 
-        self._is_empty_string(get_encoding())
+        self._assert_is_not_empty_string(get_encoding())
 
     def test_output_path_raw(self):
         '''check correctness of path'''

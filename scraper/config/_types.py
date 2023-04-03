@@ -13,7 +13,7 @@ JobNumber = Annotated[int, Gt(0)]
 Location = str
 Locations = {
     'default': Literal[""],
-    'others': list[Location]
+    'others': list[str]
 }
 Url = dict[str, str]
 DriverPath = str

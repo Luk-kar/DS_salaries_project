@@ -101,7 +101,10 @@ def _get_path_csv(
     return csv_file_target_sanitized
 
 
-def get_path_csv_raw(job_title: JobDefault, location: Location) -> str:
+def get_path_csv_raw(
+        job_title: JobDefault = config['jobs_titles']['default'],
+        location: Location = config['locations']['default']
+) -> str:
     '''
     Returns the absolute path to the file where "the raw" 
     CSV files are saved based on the configuration.
