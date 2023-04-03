@@ -104,7 +104,11 @@ class TestWebAccess(unittest.TestCase):
         self.assertTrue(self._is_html(page_source))
         self.assertIsInstance(driver, MyWebDriver)
 
-    def test_get_webpage_failure(self):
+    webpage_getter_path = "scraper.jobs_to_csv.webpage_getter.webpage_getter"
+
+    @patch(f"{webpage_getter_path}.random.randint", return_value=2)
+    @patch(f"{webpage_getter_path}.random.uniform", return_value=0.5)
+    def test_get_webpage_failure(self, mock_chances, mock_time_span):
 
         with self.assertRaises((
             requests.exceptions.ConnectionError,
@@ -115,7 +119,9 @@ class TestWebAccess(unittest.TestCase):
 
     def _is_html(self, page_source):
 
-        return bool(BeautifulSoup(page_source, "html.parser").find())
+        return bool(
+            BeautifulSoup(page_source, "html.parser").find()
+        )
 
 
 class TestXpath(unittest.TestCase):

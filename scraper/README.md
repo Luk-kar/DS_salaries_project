@@ -93,7 +93,7 @@ To run tests, write down in the terminal, in the program's folder: <br>
 or<br>
 `scripts\run_tests.bat`<br>
 or if selected file:<br>
-`python -m unittest -s test -p "test_webdriver.py"`<br>
+`python -m unittest discover -s test -p "test_webdriver.py"`<br>
 or selected class in the file:<br>
 `python -m unittest discover -s test -p "test_webdriver.py" -k TestJobValueGetterFunctions`<br>
 or selected test in the class:<br>
@@ -107,7 +107,7 @@ or selected test in the class:<br>
    It's just easier to maintain in the long term.
 4. Add log errors to a file `errors.log`.
 5. Add not crushing `"headless"` mode for the Chrome driver for production usage (`debug_mode=false`).
-6. Do multiprocessing for many countries, and jobs. Keep in mind that it probably has to be done by many different IPs, to avoid bot detection and therefore blockage. Also, it helps to speed up scraping by not allowing glassdoor to trim your connection bandwidth down when there are too many requests on your side.
+6. Do multithreading for many countries, and jobs. Keep in mind that it probably has to be done by many different IPs, to avoid bot detection and therefore blockage. Also, it helps to speed up scraping by not allowing glassdoor to trim your connection bandwidth down when there are too many requests on your side.
 
 ## Non-wish-list and troubleshoots, and as intended 🔥
 
@@ -126,13 +126,15 @@ or selected test in the class:<br>
 4. Overall glassdoor has some issues with duplicates. Not sure how this issue could be solved _(Maybe it is anti-bot protection )_. What I know I'm not the only one having this problem:<br>
    [stackoverflow - scraping glassdoor returns duplicate entries](https://stackoverflow.com/questions/74193851/)
 5. Some job postings could be fake (ghost jobs).
-6. Sometimes you got the error:<br>
+6. When there are a few results glassdoor gives, job matches with low resembles.<br>
+   E.g. `"Data Engineer"` -> `Android Mobile Developer`
+7. Sometimes you got the error:<br>
    `Message: unknown error: cannot determine loading status`<br>
    Long story short it means that you should reload the script. Glassdoor likes to block IP which behaves as "unhuman".
-7. Due to A/B tests and many possible format varieties/changes of salary data, it is not advised to do parsing it in the runtime.
-8. In CSV files `na_values` is a value that is empty, and was not found, and is optional.
-9. As mentioned previously, if there are no values in the job description or button, then a corresponding error is raised. Those values should be on each job posting.
-10. When using Chrome you could have the following error:<br>
+8. Due to A/B tests and many possible format varieties/changes of salary data, it is not advised to do parsing it in the runtime.
+9. In CSV files `na_values` is a value that is empty, was not found, and is optional.
+10. As mentioned previously, if there are no values in the job description or button, then a corresponding error is raised. Those values should be on each job posting.
+11. When using Chrome you could have the following error:<br>
     `Passthrough is not supported, GL is disabled`<br>
     From my experience you shouldn't worry about that too much.
 

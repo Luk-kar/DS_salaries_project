@@ -8,15 +8,7 @@ from scraper.scraper import scrape_data
 from scraper.jobs_to_csv.debugger.printer import print_current_date_time
 
 config = get_config()
-countries = config['locations']['others'][1:]
-
-countries = [
-    # "Austria",
-    "Canada",
-    # "Czech Republic",
-    # "Finland",
-    # ""
-]
+countries = config['locations']['others']
 
 for country in countries:
     try:
@@ -28,7 +20,7 @@ for country in countries:
 
     # https://stackoverflow.com/a/4992124/12490791
     except Exception as _error:
-        logging.error(traceback.format_exc())
+        logging.error(traceback.format_exc(_error))
 
 print(f"\rScraping for all countries has ended.")
 print_current_date_time("End")

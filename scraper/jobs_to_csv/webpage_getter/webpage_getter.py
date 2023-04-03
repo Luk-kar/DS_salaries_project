@@ -26,8 +26,8 @@ config = get_config()
 
 def get_webpage(
     url: str,
-    country: str,
-    debug_mode: DebugMode,
+    country: str = config["locations"]['default'],
+    debug_mode: DebugMode = config['debug_mode'],
     driver_path: str = config['driver_path']
 ) -> MyWebDriver:
     '''returns browser driver'''
@@ -54,7 +54,8 @@ def get_webpage(
 
 def _get_url(url: str, driver: MyWebDriver):
     """
-    Opens the specified URL in the browser driver provided, retrying up to 5-6 times if WebDriverException occurs.
+    Opens the specified URL in the browser driver provided, retrying up to 5-6 times 
+    if WebDriverException (no loading status) occurs.
 
     Args:
     - url: A string representing the URL to be opened.
@@ -63,7 +64,8 @@ def _get_url(url: str, driver: MyWebDriver):
     Returns: None
 
     Raises: 
-    - sys.exit: If WebDriverException occurs and the function is unable to open the URL after 5-6 retries.
+    - sys.exit: If WebDriverException occurs and 
+    the function is unable to open the URL after 5-6 retries.
 
     Usage: Call this function to open a URL in a browser window.
     """

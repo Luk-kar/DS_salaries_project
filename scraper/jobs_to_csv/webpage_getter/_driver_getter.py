@@ -24,7 +24,7 @@ class InvalidDriverPathError(Exception):
 
 
 class MyService(Service):
-    ''''''
+    '''Custom selenium service with additional arguments validators'''
 
     def __init__(self, executable_path, port=0, service_args=None, log_path=None):
         if not os.path.exists(executable_path):
