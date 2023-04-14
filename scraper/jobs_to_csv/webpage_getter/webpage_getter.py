@@ -44,7 +44,11 @@ def get_webpage(
         country_input: WebElement = search_bar.find_element(
             By.ID, "sc.location"
         )
+
         country_input.send_keys(country)
+
+        # await query result
+        time.sleep(0.5)
         country_input.send_keys(Keys.ENTER)
 
         _wait_until_results_are_loaded(driver)

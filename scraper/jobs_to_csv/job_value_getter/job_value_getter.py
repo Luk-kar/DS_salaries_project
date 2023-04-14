@@ -272,6 +272,10 @@ def _get_job_button_values(job: Job_values, job_button: WebElement):
         'Easy_apply': XpathSearch(
             './/div[@class="css-pxdlb2"]/div[1]'
         ),
+        # In any country outside US the salary info is provided only in the button...
+        'Salary': XpathSearch(
+            './/span[@data-test="detailSalary"]'
+        ),
     }
 
     get_and_add_element_value(
@@ -313,9 +317,6 @@ def _get_job_descriptions_values(job: Job_values, job_post: WebElement):
         ),
         'Description': XpathSearch(
             './/div[@class="jobDescriptionContent desc"]'
-        ),
-        'Salary': XpathSearch(
-            './/span[@data-test="detailSalary"]'
         ),
     }
 

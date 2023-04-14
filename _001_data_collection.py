@@ -22,6 +22,8 @@ for country in countries:
     except Exception as _error:
         logging.error(traceback.format_exc(_error))
 
+# scrape_data(debug_mode=False, jobs_number=900)
+
 print(f"\rScraping for all countries has ended.")
 print_current_date_time("End")
 print(countries)

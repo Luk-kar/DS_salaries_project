@@ -144,10 +144,16 @@ class GlassdoorJobScraper:
             TimeoutException: If a job posting is not found within a specified timeout.
         '''
 
-        jobs_list_buttons = await_element(
-            self.driver, 25, By.XPATH, '//ul[@data-test="jlGrid"]')
+        try:
 
-        jobs_buttons = self.get_jobs_buttons(jobs_list_buttons)
+            jobs_list_buttons = await_element(
+                self.driver, 25, By.XPATH, '//ul[@data-test="jlGrid"]')
+
+            jobs_buttons = self.get_jobs_buttons(jobs_list_buttons)
+
+        except (StaleElementReferenceException, TimeoutException):
+            self.driver.refresh()
+            return
 
         if self.debug_mode:
             print_current_page(self.csv_writer.counter, len(
@@ -182,7 +188,7 @@ class GlassdoorJobScraper:
             try:
                 job = get_values_for_job(self.driver, job_button)
 
-            except TimeoutException:
+            except (TimeoutException, StaleElementReferenceException):
                 self.driver.refresh()
                 break
 
