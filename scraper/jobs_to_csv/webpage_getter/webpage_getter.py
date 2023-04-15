@@ -48,7 +48,8 @@ def get_webpage(
         country_input.send_keys(country)
 
         # await query result
-        time.sleep(0.5)
+        await_time = random.uniform(0.45, 0.6)
+        time.sleep(await_time)
         country_input.send_keys(Keys.ENTER)
 
         _wait_until_results_are_loaded(driver)
