@@ -111,6 +111,7 @@ or selected test in the class:<br>
 4. Add log errors to a file `errors.log`.
 5. Add not crushing `"headless"` mode for the Chrome driver for production usage (`debug_mode=false`).
 6. Do multithreading for many countries, and jobs. Keep in mind that it probably has to be done by many different IPs, to avoid bot detection and therefore blockage. Also, it helps to speed up scraping by not allowing glassdoor to trim your connection bandwidth down when there are too many requests on your side.
+7. Do not save the result if the job posting is a duplicate.
 
 ## Non-wish-list and troubleshoots, and as intended 🔥
 
@@ -140,6 +141,7 @@ or selected test in the class:<br>
 11. When using Chrome you could have the following error:<br>
     `Passthrough is not supported, GL is disabled`<br>
     From my experience you shouldn't worry about that too much.
+12. When downloading en masse, there is quite a chance that some countries could be not downloaded.
 
 ## License 📜
 
