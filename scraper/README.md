@@ -121,7 +121,7 @@ or selected test in the class:<br>
    The main goal of this script is exploratory data analysis (EDA).
    If you are looking for a job, there is a much more efficient approach than using Selenium.
    For example, you can use BeautifulSoup to scrape job postings directly without using the browser,
-   rather than using a job aggregator on the page.
+   rather than using a job aggregator on the page. Also if you want to create a scraper dedicated purely to looking for a job I recommend using [ai-jobs.net](ai-jobs.net)
 2. The cap is set at 900 jobs _(note that this number may be outdated when you read this)_:
    One of the reasons why I use implementation through the main aggregation page is that it provides information on how old the job posting is,
    which is not directly available on the job posting itself.
