@@ -1,0 +1,560 @@
+Region,Country,State,City,Location,latitude,longitude
+Oceania,Australia,,Melbourne,"Australia, Melbourne",-37.8142176,144.9631608
+Oceania,Australia,,North Sydney,"Australia, North Sydney",-33.8354519,151.2083011
+Oceania,Australia,,Sydney,"Australia, Sydney",-33.8698439,151.2082848
+Oceania,Australia,,New South Wales,"Australia, New South Wales",-31.8759835,147.2869493
+Oceania,Australia,,Malvern East,"Australia, Malvern East",-37.876835,145.0658739
+Oceania,Australia,,Helensvale,"Australia, Helensvale",-27.9089705,153.33483217322225
+Oceania,Australia,,Australia,"Australia, Australia",-24.7761086,134.755
+Oceania,Australia,,Parramatta,"Australia, Parramatta",-33.80698855,151.0213894532821
+Oceania,Australia,,Perth,"Australia, Perth",-31.9558933,115.8605855
+Oceania,Australia,,Scoresby,"Australia, Scoresby",-37.9025786,145.2183066
+Oceania,Australia,,Unanderra,"Australia, Unanderra",-34.4546772,150.8460733
+Oceania,Australia,,Brisbane,"Australia, Brisbane",-27.4689682,153.0234991
+Oceania,Australia,,Dampier,"Australia, Dampier",-20.6624798,116.7119013
+Oceania,Australia,,Canberra,"Australia, Canberra",-35.2975906,149.1012676
+Europe,Austria,,Vienna,"Austria, Vienna",48.2083537,16.3725042
+Europe,Austria,,Nenzing,"Austria, Nenzing",47.13372945,9.67841025332389
+Europe,Austria,,Heimarbeit,"Austria, Heimarbeit",,
+Europe,Austria,,Austria,"Austria, Austria",47.59397,14.12456
+Europe,Austria,,Klagenfurt am Wörthersee,"Austria, Klagenfurt am Wörthersee",46.623943,14.3075976
+Europe,Austria,,Baden,"Austria, Baden",48.0085749,16.2334951
+Europe,Austria,,Steyr,"Austria, Steyr",48.0390046,14.4191276
+Europe,Austria,,Linz,"Austria, Linz",48.3059078,14.286198
+Europe,Austria,,Graz,"Austria, Graz",47.0708678,15.4382786
+Europe,Austria,,Köstendorf,"Austria, Köstendorf",47.9568047,13.1978045
+Europe,Austria,,Wels,"Austria, Wels",48.1565472,14.0243752
+Europe,Austria,,Korneuburg,"Austria, Korneuburg",48.3440605,16.3334321
+Europe,Austria,,Leonding,"Austria, Leonding",48.2793314,14.2487457
+Europe,Austria,,Höchst,"Austria, Höchst",47.4598203,9.6379578
+Europe,Austria,,Villach,"Austria, Villach",46.6167284,13.8500268
+Europe,Austria,,Hard,"Austria, Hard",47.489391,9.6916539
+Europe,Austria,,Thüringen,"Austria, Thüringen",47.198078300000006,9.765660147359817
+Europe,Austria,,Thalheim bei Wels,"Austria, Thalheim bei Wels",48.1522388,14.030993
+Europe,Austria,,Eberstalzell,"Austria, Eberstalzell",48.0433366,13.9814852
+Europe,Austria,,Salzburg,"Austria, Salzburg",47.7981346,13.0464806
+Europe,Austria,,Elsbethen,"Austria, Elsbethen",47.7592351,13.0825458
+Europe,Austria,,Wiener Neudorf,"Austria, Wiener Neudorf",48.0885947,16.318448723546133
+Europe,Austria,,Vorarlberg,"Austria, Vorarlberg",47.25,9.9166667
+Europe,Austria,,Krems an der Donau,"Austria, Krems an der Donau",48.409809300000006,15.60631866409324
+Europe,Austria,,Innsbruck,"Austria, Innsbruck",47.2654296,11.3927685
+Europe,Austria,,Upper Austria,"Austria, Upper Austria",48.25,14.0
+Europe,Austria,,Kalsdorf bei Graz,"Austria, Kalsdorf bei Graz",46.95820285,15.476358638500674
+Europe,Austria,,Stetten,"Austria, Stetten",48.0892761,15.0660972
+Europe,Belgium,,Sint-Niklaas,"Belgium, Sint-Niklaas",51.1646685,4.1395124
+Europe,Belgium,,Sint-Joost-Ten-Node,"Belgium, Sint-Joost-Ten-Node",50.8508197,4.3691634
+Europe,Belgium,,Belgium,"Belgium, Belgium",50.6402809,4.6667145
+Europe,Belgium,,Mechelen,"Belgium, Mechelen",51.0281381,4.4803453
+Europe,Belgium,,Kontich,"Belgium, Kontich",51.1353297,4.4454784
+Europe,Belgium,,Meulebeke,"Belgium, Meulebeke",50.94858225,3.286389945227539
+Europe,Belgium,,Tielt,"Belgium, Tielt",50.999964750000004,3.3414263284671195
+Europe,Belgium,,Schaarbeek,"Belgium, Schaarbeek",50.8676041,4.3737121
+Europe,Belgium,,Brussels,"Belgium, Brussels",50.8465573,4.351697
+Europe,Belgium,,Antwerp,"Belgium, Antwerp",51.2211097,4.3997081
+Europe,Belgium,,Puurs,"Belgium, Puurs",51.0762086,4.2817075
+Europe,Belgium,,Ieper,"Belgium, Ieper",50.8521947,2.8846047
+Europe,Belgium,,Zaventem,"Belgium, Zaventem",50.8806207,4.4730008
+Europe,Belgium,,Kortrijk,"Belgium, Kortrijk",50.8276429,3.2659884
+Europe,Belgium,,Evergem,"Belgium, Evergem",51.1087891,3.7078565
+Europe,Belgium,,Edegem,"Belgium, Edegem",51.1548066,4.4458312
+Europe,Belgium,,Heist-op-den-Berg,"Belgium, Heist-op-den-Berg",51.06251575,4.71943107216415
+Europe,Belgium,,Roeselare,"Belgium, Roeselare",50.9444948,3.124765
+Europe,Belgium,,Zulte,"Belgium, Zulte",50.9400485,3.475305501634618
+Europe,Belgium,,Hasselt,"Belgium, Hasselt",50.9303735,5.3378043
+Europe,Belgium,,Westerlo,"Belgium, Westerlo",51.086694,4.9168675
+Europe,Belgium,,Temse,"Belgium, Temse",51.1253635,4.2133313
+Europe,Belgium,,Walloon Brabant,"Belgium, Walloon Brabant",50.666245,4.550044083650228
+Europe,Belgium,,Anderlecht,"Belgium, Anderlecht",50.8390983,4.3296526
+Europe,Belgium,,Hoboken,"Belgium, Hoboken",51.1794946,4.3617847
+Europe,Belgium,,Diegem,"Belgium, Diegem",50.8945555,4.4365042
+Europe,Belgium,,Mol,"Belgium, Mol",51.1840421,5.1155267
+Europe,Belgium,,Emelgem,"Belgium, Emelgem",50.9231485,3.2301424
+Europe,Belgium,,Heuvelland,"Belgium, Heuvelland",50.773569,2.8326917
+Europe,Belgium,,Flemish Brabant,"Belgium, Flemish Brabant",50.8686516,4.7886237984620905
+Europe,Belgium,,Wilrijk,"Belgium, Wilrijk",51.1700864,4.3942577
+Europe,Belgium,,Aartselaar,"Belgium, Aartselaar",51.133297,4.3870241
+Europe,Belgium,,Lier,"Belgium, Lier",51.131069,4.5696516
+Europe,Belgium,,Brugge,"Belgium, Brugge",51.2085526,3.226772
+Europe,Belgium,,Meise,"Belgium, Meise",50.9341625,4.3287322
+North America,Canada,,Toronto,"Canada, Toronto",43.6534817,-79.3839347
+North America,Canada,,Vancouver,"Canada, Vancouver",49.2608724,-123.113952
+Europe,Czech_Republic,,Prague,"Czech_Republic, Prague",50.0874654,14.4212535
+Europe,Czech_Republic,,Czech Republic,"Czech_Republic, Czech Republic",49.7439047,15.3381061
+Europe,Czech_Republic,,Ostrava,"Czech_Republic, Ostrava",49.8349139,18.2820084
+Europe,Czech_Republic,,Brno,"Czech_Republic, Brno",49.1922443,16.6113382
+Europe,Denmark,,Denmark,"Denmark, Denmark",55.670249,10.3333283
+Europe,Denmark,,Copenhagen,"Denmark, Copenhagen",55.6867243,12.5700724
+Europe,Denmark,,Aarhus,"Denmark, Aarhus",56.1496278,10.2134046
+Europe,Denmark,,Viby,"Denmark, Viby",56.1290327,10.1624334
+Europe,Denmark,,Frederiksberg,"Denmark, Frederiksberg",55.678016,12.5326186
+Europe,Denmark,,Northern Jutland,"Denmark, Northern Jutland",,
+Europe,Denmark,,Kongens Lyngby,"Denmark, Kongens Lyngby",55.7718649,12.5051413
+Europe,Denmark,,Ballerup,"Denmark, Ballerup",55.7303589,12.3612313
+Europe,Denmark,,Silkeborg,"Denmark, Silkeborg",56.169453,9.5495141
+Europe,Denmark,,Kalundborg,"Denmark, Kalundborg",55.6833793,11.0993619
+Europe,Denmark,,Virum,"Denmark, Virum",55.7939593,12.4694709
+Europe,Denmark,,Hillerød,"Denmark, Hillerød",55.9285735,12.3063909
+Europe,Denmark,,Gentofte,"Denmark, Gentofte",55.7459656,12.5510249
+Europe,Denmark,,Branderup,"Denmark, Branderup",55.1220082,9.0686157
+Europe,Denmark,,Esbjerg,"Denmark, Esbjerg",55.4664892,8.4520751
+Europe,Denmark,,Randers,"Denmark, Randers",56.4355428,10.0425957
+Europe,Denmark,,Odense,"Denmark, Odense",55.3997225,10.3852104
+Europe,Denmark,,Lystrup,"Denmark, Lystrup",56.2363205,10.238378
+Europe,Finland,,Finland,"Finland, Finland",63.2467777,25.9209164
+Europe,Finland,,Helsinki,"Finland, Helsinki",60.1674881,24.9427473
+Europe,Finland,,Espoo,"Finland, Espoo",60.2047672,24.6568435
+Europe,Finland,,Vantaa,"Finland, Vantaa",60.2921321,25.0411832
+Europe,Finland,,Tampere,"Finland, Tampere",61.4980214,23.7603118
+Europe,France,,Paris,"France, Paris",48.8534951,2.3483915
+Europe,France,,Télétravail,"France, Télétravail",,
+Europe,France,,Lyon,"France, Lyon",45.7578137,4.8320114
+Europe,France,,Rouen,"France, Rouen",49.4404591,1.0939658
+Europe,France,,Lille,"France, Lille",50.6365654,3.0635282
+Europe,France,,Clermont-Ferrand,"France, Clermont-Ferrand",45.7774551,3.0819427
+Europe,France,,Antony,"France, Antony",48.753554,2.2959423
+Europe,France,,Nantes,"France, Nantes",47.2186371,-1.5541362
+Europe,France,,Courbevoie,"France, Courbevoie",48.8953328,2.2561602
+Europe,France,,Villeneuve-d'Ascq,"France, Villeneuve-d'Ascq",50.6193174,3.1314002
+Europe,France,,Fontenay-sous-Bois,"France, Fontenay-sous-Bois",48.8490721,2.4749347
+Europe,France,,Strasbourg,"France, Strasbourg",48.584614,7.7507127
+Europe,France,,Châtillon,"France, Châtillon",46.6591772,5.7302769
+Europe,France,,Suresnes,"France, Suresnes",48.8709053,2.2255727
+Europe,France,,Grenoble,"France, Grenoble",45.1875602,5.7357819
+Europe,France,,Bernin,"France, Bernin",45.2693836,5.8664744
+Europe,France,,Bezons,"France, Bezons",48.9250016,2.2105491
+Europe,France,,Charenton-le-Pont,"France, Charenton-le-Pont",48.8198479,2.4159508
+Europe,France,,Marseille,"France, Marseille",43.2961743,5.3699525
+Europe,France,,France,"France, France",46.603354,1.8883335
+Europe,France,,Saint-Cloud,"France, Saint-Cloud",48.8437412,2.219344
+Europe,France,,Issy-les-Moulineaux,"France, Issy-les-Moulineaux",48.8250508,2.273457
+Europe,France,,Niort,"France, Niort",46.3241132,-0.4649403
+Europe,France,,Caen,"France, Caen",49.1813403,-0.3635615
+Europe,France,,Bordeaux,"France, Bordeaux",44.841225,-0.5800364
+Europe,France,,Toulouse,"France, Toulouse",43.6044622,1.4442469
+Europe,France,,Montrouge,"France, Montrouge",48.8188544,2.3194375
+Europe,France,,Clichy,"France, Clichy",48.9026,2.30551
+Europe,France,,Meudon,"France, Meudon",48.8126688,2.2385432
+Europe,France,,Massy,"France, Massy",49.6902106,1.399492
+Europe,France,,Bagneux,"France, Bagneux",49.458056,3.279444
+Europe,France,,Aubagne,"France, Aubagne",43.2924385,5.5703031
+Europe,France,,Ile-de-France,"France, Ile-de-France",48.6443057,2.7537863
+Europe,France,,Puteaux,"France, Puteaux",48.8841522,2.2368863
+Europe,France,,Ancenis,"France, Ancenis",47.3648141,-1.1816088
+Europe,France,,Orly,"France, Orly",48.7431683,2.402391
+Europe,France,,Lezennes,"France, Lezennes",50.6146341,3.1165338
+Europe,France,,Gennevilliers,"France, Gennevilliers",48.9254221,2.2940122
+Europe,France,,Le Plessis-Robinson,"France, Le Plessis-Robinson",48.7811049,2.2619632
+Europe,France,,Asnières-sur-Seine,"France, Asnières-sur-Seine",48.9105948,2.2890454
+Europe,France,,La Farlède,"France, La Farlède",43.1597,6.04317
+Europe,France,,Roissy-en-France,"France, Roissy-en-France",49.0032865,2.5176985
+Europe,France,,La Crèche,"France, La Crèche",46.3624398,-0.2970798
+Europe,France,,Boulogne-Billancourt,"France, Boulogne-Billancourt",48.8356649,2.240206
+Europe,France,,Saint-Hippolyte-du-Fort,"France, Saint-Hippolyte-du-Fort",43.9643602,3.8564364
+Europe,France,,Rueil-Malmaison,"France, Rueil-Malmaison",48.87778,2.1802832
+Europe,France,,Cambrai,"France, Cambrai",50.1757546,3.2346145
+Europe,France,,La Madeleine,"France, La Madeleine",50.654401,3.0733338
+Europe,France,,Rungis,"France, Rungis",48.7484048,2.3472665
+Europe,France,,Blagnac,"France, Blagnac",43.6434,1.37799
+Europe,France,,Tavaux,"France, Tavaux",47.0371,5.40338
+Europe,France,,Croix,"France, Croix",50.6802124,3.1564365
+Europe,France,,Cannes,"France, Cannes",43.5515198,7.0134418
+Europe,Germany,,Dresden,"Germany, Dresden",51.0493286,13.7381437
+Europe,Germany,,Munich,"Germany, Munich",48.1371079,11.5753822
+Europe,Germany,,Freiburg im Breisgau,"Germany, Freiburg im Breisgau",47.9960901,7.8494005
+Europe,Germany,,Heilbronn,"Germany, Heilbronn",49.142291,9.218655
+Europe,Germany,,Offenburg,"Germany, Offenburg",48.4716556,7.944378
+Europe,Germany,,Hamburg,"Germany, Hamburg",53.550341,10.000654
+Europe,Germany,,Rastede,"Germany, Rastede",53.2467081,8.201904
+Europe,Germany,,Köln,"Germany, Köln",50.938361,6.959974
+Europe,Germany,,Ingolstadt,"Germany, Ingolstadt",48.7630165,11.4250395
+Europe,Germany,,Bonn,"Germany, Bonn",50.735851,7.10066
+Europe,Germany,,Karlsruhe,"Germany, Karlsruhe",49.0068705,8.4034195
+Europe,Germany,,Tübingen,"Germany, Tübingen",48.5236164,9.0535531
+Europe,Germany,,Berlin,"Germany, Berlin",52.5170365,13.3888599
+Europe,Germany,,Gütersloh,"Germany, Gütersloh",51.9063997,8.3782078
+Europe,Germany,,Schwäbisch Gmünd,"Germany, Schwäbisch Gmünd",48.7999036,9.7977584
+Europe,Germany,,North Rhine-Westphalia,"Germany, North Rhine-Westphalia",51.4789205,7.5543751
+Europe,Germany,,Essen,"Germany, Essen",51.4582235,7.0158171
+Europe,Germany,,Bavaria,"Germany, Bavaria",48.9467562,11.4038717
+Europe,Germany,,Düsseldorf,"Germany, Düsseldorf",51.2254018,6.7763137
+Europe,Germany,,Kleinostheim,"Germany, Kleinostheim",50.0038042,9.0655061
+Europe,Germany,,Heidelberg,"Germany, Heidelberg",49.4093582,8.694724
+Europe,Germany,,Kassel,"Germany, Kassel",51.3154546,9.4924096
+Europe,Germany,,Bietigheim-Bissingen,"Germany, Bietigheim-Bissingen",48.9502631,9.1383314
+Europe,Germany,,Stuttgart,"Germany, Stuttgart",48.7784485,9.1800132
+Europe,Germany,,Schorndorf,"Germany, Schorndorf",48.8055169,9.5272665
+Europe,Germany,,Fürth,"Germany, Fürth",49.4772475,10.9893626
+Europe,Germany,,Germany,"Germany, Germany",51.1638175,10.4478313
+Europe,Germany,,Ravensburg,"Germany, Ravensburg",47.7811014,9.612468
+Europe,Germany,,Heimarbeit,"Germany, Heimarbeit",49.8953218,9.2354524
+Europe,Germany,,Frankfurt am Main,"Germany, Frankfurt am Main",50.1106444,8.6820917
+Europe,Germany,,Darmstadt,"Germany, Darmstadt",49.8851869,8.6736295
+Europe,Germany,,Sternenfels,"Germany, Sternenfels",49.0499637,8.8510968
+Europe,Germany,,Halle (Saale),"Germany, Halle (Saale)",51.4825041,11.9705452
+Europe,Germany,,Ulm,"Germany, Ulm",48.3974003,9.9934336
+Europe,Germany,,Görlitz,"Germany, Görlitz",51.1563185,14.991018
+Europe,Germany,,Oberkochen,"Germany, Oberkochen",48.7855073,10.1106691
+Europe,Germany,,Erlangen,"Germany, Erlangen",49.5928616,11.0056
+Europe,Germany,,Ostenfeld (Husum),"Germany, Ostenfeld (Husum)",54.4635898,9.2327511
+Europe,Germany,,Gummersbach,"Germany, Gummersbach",51.0277658,7.5630545
+Europe,Germany,,Duisburg,"Germany, Duisburg",51.434999,6.759562
+Europe,Germany,,Leipzig,"Germany, Leipzig",51.3406321,12.3747329
+Europe,Germany,,Overath,"Germany, Overath",50.9320015,7.2839042
+Europe,Germany,,Wolfsburg,"Germany, Wolfsburg",52.4205588,10.7861682
+Europe,Germany,,Ottobrunn,"Germany, Ottobrunn",48.0643823,11.6675042
+Europe,Germany,,Mülheim an der Ruhr,"Germany, Mülheim an der Ruhr",51.4272925,6.8829192
+Europe,Germany,,Chemnitz,"Germany, Chemnitz",50.8322608,12.9252977
+Europe,Germany,,Rostock,"Germany, Rostock",54.0924445,12.1286127
+Europe,Germany,,Osnabrück,"Germany, Osnabrück",52.2719595,8.047635
+Europe,Germany,,Hannover,"Germany, Hannover",52.3744779,9.7385532
+Europe,Germany,,Potsdam,"Germany, Potsdam",52.4009309,13.0591397
+Europe,Germany,,Dortmund,"Germany, Dortmund",51.5142273,7.4652789
+Europe,Germany,,Eching,"Germany, Eching",48.3,11.6167
+Europe,Germany,,Oldenburg (Oldenburg),"Germany, Oldenburg (Oldenburg)",53.1389753,8.2146017
+Europe,Germany,,Magdeburg,"Germany, Magdeburg",52.1315889,11.6399609
+Europe,Germany,,Braunschweig,"Germany, Braunschweig",52.2646577,10.5236066
+Europe,Germany,,Mannheim,"Germany, Mannheim",49.4892913,8.4673098
+Europe,Germany,,Plauen,"Germany, Plauen",50.4950632,12.1346523
+Europe,Germany,,Bochum,"Germany, Bochum",51.4818111,7.2196635
+Europe,Germany,,Kempten (Allgäu),"Germany, Kempten (Allgäu)",47.7267063,10.3168835
+Europe,Germany,,Aalen,"Germany, Aalen",48.8362705,10.0931765
+Europe,Germany,,Villingen-Schwenningen,"Germany, Villingen-Schwenningen",48.0632359,8.4945022
+Europe,Germany,,Erfurt,"Germany, Erfurt",50.9777974,11.0287364
+Europe,Germany,,Nuremberg,"Germany, Nuremberg",49.453872,11.077298
+Europe,Greece,,Xánthi,"Greece, Xánthi",41.1380289,24.8862688
+Europe,Greece,,Heraklion Airport Terminal,"Greece, Heraklion Airport Terminal",35.34146,25.171464
+Europe,Greece,,Patras,"Greece, Patras",38.246242,21.7350847
+Europe,Greece,,Thessaloníki,"Greece, Thessaloníki",40.6403167,22.9352716
+Europe,Greece,,Athens,"Greece, Athens",37.9839412,23.7283052
+Europe,Greece,,Cyprus,"Greece, Cyprus",40.9823313,24.7013451
+Europe,Greece,,Greece,"Greece, Greece",38.9953683,21.9877132
+Europe,Greece,,Corinth,"Greece, Corinth",37.9385413,22.9273768
+Asia,Hong_Kong,,Hong Kong,"Hong_Kong, Hong Kong",22.2793278,114.1628131
+Asia,Hong_Kong,,Central,"Hong_Kong, Central",22.2850394,114.1583819
+Asia,Hong_Kong,,Kwun Tong,"Hong_Kong, Kwun Tong",22.312937,114.22561
+Asia,Hong_Kong,,Kowloon City,"Hong_Kong, Kowloon City",22.3301595,114.1899368
+Asia,Hong_Kong,,Hung Hom,"Hong_Kong, Hung Hom",22.3031874,114.1820106
+Asia,Hong_Kong,,Quarry Bay,"Hong_Kong, Quarry Bay",22.2877545,114.2149322
+Asia,Hong_Kong,,Kowloon Bay,"Hong_Kong, Kowloon Bay",22.3231377,114.21412352083235
+Asia,Hong_Kong,,Sha Tin,"Hong_Kong, Sha Tin",22.3815527,114.1904697
+Asia,Hong_Kong,,San Po Kong,"Hong_Kong, San Po Kong",22.336665,114.1984071
+Asia,Hong_Kong,,Causeway Bay,"Hong_Kong, Causeway Bay",22.2820777,114.1891587
+Asia,Hong_Kong,,Hong Kong Island,"Hong_Kong, Hong Kong Island",22.2850394,114.1583819
+Europe,Hungary,,Budapest,"Hungary, Budapest",47.48138955,19.14609412691246
+Europe,Hungary,,Debrecen,"Hungary, Debrecen",47.531399,21.6259782
+Europe,Hungary,,Hungary,"Hungary, Hungary",47.1817585,19.5060937
+Europe,Hungary,,Biatorbágy,"Hungary, Biatorbágy",47.4739442,18.8232855
+Europe,Hungary,,Pécs,"Hungary, Pécs",46.0765092,18.2280317
+Europe,Hungary,,Miskolc,"Hungary, Miskolc",48.1030643,20.7900429
+Europe,Ireland,,Dublin,"Ireland, Dublin",53.3498006,-6.2602964
+Europe,Ireland,,Letterkenny,"Ireland, Letterkenny",54.9517933,-7.7354381
+Europe,Ireland,,Waterford,"Ireland, Waterford",52.2609997,-7.1119081
+Europe,Ireland,,Limerick,"Ireland, Limerick",52.661252,-8.6301239
+Europe,Ireland,,Cork,"Ireland, Cork",51.897077,-8.4654674
+Europe,Ireland,,Galway,"Ireland, Galway",53.2744122,-9.0490601
+Europe,Ireland,,Louth,"Ireland, Louth",53.90628485,-6.532050201271116
+Europe,Ireland,,Saint Margaret's,"Ireland, Saint Margaret's",53.4320032,-6.303592547688023
+Europe,Ireland,,Kildare,"Ireland, Kildare",53.15436455,-6.8184175660976445
+Europe,Israel,,Tel Aviv-Yafo,"Israel, Tel Aviv-Yafo",32.0852997,34.7818064
+Europe,Israel,,Hod HaSharon,"Israel, Hod HaSharon",32.1561974,34.8930354
+Europe,Israel,,Herzliya,"Israel, Herzliya",32.1676842,34.83082794429146
+Europe,Israel,,Israel,"Israel, Israel",30.8124247,34.8594762
+Europe,Israel,,Yehud,"Israel, Yehud",32.0340632,34.8939595
+Europe,Israel,,Ramat Gan,"Israel, Ramat Gan",32.0686867,34.8246812
+Europe,Israel,,Jerusalem,"Israel, Jerusalem",31.7788242,35.2257626
+Europe,Israel,,Petah Tikva,"Israel, Petah Tikva",32.0877639,34.8859985
+Europe,Israel,,Tel Aviv,"Israel, Tel Aviv",32.0852997,34.7818064
+Europe,Israel,,Southern,"Israel, Southern",14.4789419,121.0285554
+Europe,Israel,,Raanana,"Israel, Raanana",32.1861481,34.8675905
+Europe,Italy,,Pero,"Italy, Pero",45.5101617,9.0894415
+Europe,Italy,,Italy,"Italy, Italy",42.6384261,12.674297
+Europe,Italy,,Como,"Italy, Como",45.939475900000005,9.149410145408947
+Europe,Italy,,Bergamo,"Italy, Bergamo",45.756655699999996,9.754219200862249
+Europe,Italy,,Roma,"Italy, Roma",41.8933203,12.4829321
+Europe,Italy,,Bologna,"Italy, Bologna",44.4938203,11.3426327
+Europe,Italy,,Telelavoro,"Italy, Telelavoro",,
+Europe,Italy,,Lombardy,"Italy, Lombardy",45.5703694,9.7732524
+Europe,Italy,,Agrate Brianza,"Italy, Agrate Brianza",45.5761735,9.3509475
+Europe,Italy,,Turin,"Italy, Turin",45.0677551,7.6824892
+Europe,Italy,,Parma,"Italy, Parma",44.8013678,10.3280833
+Europe,Italy,,Arzignano,"Italy, Arzignano",45.519292,11.338594
+Europe,Italy,,Napoli,"Italy, Napoli",40.8358846,14.2487679
+Europe,Italy,,San Donato Milanese,"Italy, San Donato Milanese",45.41807,9.27165
+Europe,Italy,,Casalecchio di Reno,"Italy, Casalecchio di Reno",44.4760177,11.2756857
+Europe,Italy,,Brugine,"Italy, Brugine",45.296592,11.995113
+Europe,Italy,,Sgonico,"Italy, Sgonico",45.7360238,13.7482449
+Europe,Italy,,Catania,"Italy, Catania",37.5023612,15.0873718
+Europe,Italy,,Verona,"Italy, Verona",45.4384958,10.9924122
+Europe,Italy,,Piedmont,"Italy, Piedmont",45.060735,7.923549
+Europe,Italy,,Frosinone,"Italy, Frosinone",41.628546799999995,13.57584977062367
+Europe,Italy,,Assago,"Italy, Assago",45.4053966,9.1313547
+Europe,Italy,,Rozzano,"Italy, Rozzano",45.3832366,9.1541309
+Europe,Italy,,Bari,"Italy, Bari",41.1257843,16.8620293
+Europe,Italy,,Padova,"Italy, Padova",45.4077172,11.8734455
+Europe,Italy,,Arcole,"Italy, Arcole",45.3582108,11.2860916
+Europe,Italy,,Porto San Giorgio,"Italy, Porto San Giorgio",43.1826562,13.7933863
+Europe,Luxembourg,,Luxembourg,"Luxembourg, Luxembourg",49.6112768,6.129799
+Europe,Luxembourg,,Kayl,"Luxembourg, Kayl",49.4861302,6.041472
+Europe,Luxembourg,,Esch-sur-Alzette,"Luxembourg, Esch-sur-Alzette",49.4959628,5.9850306
+Europe,Luxembourg,,Bertrange,"Luxembourg, Bertrange",49.6106029,6.0501598
+Europe,Luxembourg,,Hesperange,"Luxembourg, Hesperange",49.5729552,6.1615727
+Europe,Luxembourg,,Capellen,"Luxembourg, Capellen",49.64243535,5.980589336785849
+Europe,Luxembourg,,Kehlen,"Luxembourg, Kehlen",49.6675477,6.0357089
+Europe,Luxembourg,,Dudelange,"Luxembourg, Dudelange",49.4786477,6.0847792
+Europe,Luxembourg,,Senningerberg,"Luxembourg, Senningerberg",49.649554,6.2262751
+Europe,Luxembourg,,Niederanven,"Luxembourg, Niederanven",49.6512224,6.2552342
+Europe,Netherlands,,Leusden,"Netherlands, Leusden",52.1187668,5.417118899734083
+Europe,Netherlands,,Eindhoven,"Netherlands, Eindhoven",51.4392648,5.478633
+Europe,Netherlands,,Amsterdam,"Netherlands, Amsterdam",52.3730796,4.8924534
+Europe,Netherlands,,Arnhem,"Netherlands, Arnhem",51.984257,5.9108573
+Europe,Netherlands,,Vianen,"Netherlands, Vianen",51.9890128,5.0937164
+Europe,Netherlands,,Utrecht,"Netherlands, Utrecht",52.080985600000005,5.12768396945229
+Europe,Netherlands,,Almere,"Netherlands, Almere",52.3705038,5.2185859
+Europe,Netherlands,,Den Bosch,"Netherlands, Den Bosch",51.6889387,5.303116
+Europe,Netherlands,,Veldhoven,"Netherlands, Veldhoven",51.4190691,5.4045572
+Europe,Netherlands,,Alkmaar,"Netherlands, Alkmaar",52.600853799999996,4.817099446443963
+Europe,Netherlands,,Apeldoorn,"Netherlands, Apeldoorn",52.17957375,5.930077460807249
+Europe,Netherlands,,The Hague,"Netherlands, The Hague",52.0799838,4.3113461
+Europe,Netherlands,,Gouda,"Netherlands, Gouda",52.018119350000006,4.711122134697802
+Europe,Netherlands,,Raamsdonksveer,"Netherlands, Raamsdonksveer",51.6961345,4.8745894
+Europe,Netherlands,,Hoofddorp,"Netherlands, Hoofddorp",52.305554,4.6926644
+Europe,Netherlands,,Roermond,"Netherlands, Roermond",51.1933903,5.9882649
+Europe,Netherlands,,Rotterdam,"Netherlands, Rotterdam",51.9244424,4.47775
+Europe,Netherlands,,Zeist,"Netherlands, Zeist",52.086531750000006,5.249007957671885
+Oceania,New_Zealand,,Auckland,"New_Zealand, Auckland",-36.852095,174.7631803
+Oceania,New_Zealand,,Wellington,"New_Zealand, Wellington",-41.2887953,174.7772114
+Oceania,New_Zealand,,Christchurch,"New_Zealand, Christchurch",-43.530955,172.6366455
+Oceania,New_Zealand,,New Zealand,"New_Zealand, New Zealand",-41.5000831,172.8344077
+Oceania,New_Zealand,,Berlins,"New_Zealand, Berlins",-41.8584766,171.8389025
+Oceania,New_Zealand,,ONEHUNGA,"New_Zealand, ONEHUNGA",-36.9237924,174.7857738
+Oceania,New_Zealand,,Milton,"New_Zealand, Milton",-46.1167784,169.9624539
+Europe,Norway,,Norway,"Norway, Norway",61.1529386,8.7876653
+Europe,Norway,,Oslo,"Norway, Oslo",59.9133301,10.7389701
+Europe,Norway,,Kristiansand,"Norway, Kristiansand",58.085627599999995,7.93185802875815
+Europe,Norway,,Hamar,"Norway, Hamar",61.0014937,11.16479641006573
+Europe,Norway,,Lysaker,"Norway, Lysaker",59.9130129,10.6365628
+Europe,Norway,,Stavanger,"Norway, Stavanger",58.9699675,5.7318101
+Europe,Norway,,Bergen,"Norway, Bergen",60.3943055,5.3259192
+Europe,Norway,,Fornebu,"Norway, Fornebu",59.8995111,10.6286917
+Europe,Poland,,Poland,"Poland, Poland",52.215933,19.134422
+Europe,Poland,,Kraków,"Poland, Kraków",50.0619474,19.9368564
+Europe,Poland,,Poznań,"Poland, Poznań",52.4006632,16.91973259178088
+Europe,Poland,,Łódź,"Poland, Łódź",51.7687323,19.4569911
+Europe,Poland,,Gliwice,"Poland, Gliwice",50.294113,18.6657306
+Europe,Poland,,Wrocław,"Poland, Wrocław",51.1089776,17.0326689
+Europe,Poland,,Katowice,"Poland, Katowice",50.2598987,19.0215852
+Europe,Poland,,Gdańsk,"Poland, Gdańsk",54.3706858,18.61298210330077
+Europe,Poland,,Mirków,"Poland, Mirków",51.1662782,17.1588597
+Europe,Poland,,Gdynia,"Poland, Gdynia",54.5164982,18.5402738
+Europe,Poland,,Sopot,"Poland, Sopot",54.4430399,18.561309520130756
+Europe,Portugal,,Home office,"Portugal, Home office",,
+Europe,Portugal,,Portugal,"Portugal, Portugal",39.6621648,-8.1353519
+Europe,Portugal,,Porto,"Portugal, Porto",41.1494512,-8.6107884
+Europe,Portugal,,Amadora,"Portugal, Amadora",38.7595162,-9.223677009460125
+Europe,Portugal,,Coimbra,"Portugal, Coimbra",40.2111931,-8.4294632
+Europe,Portugal,,Ovar,"Portugal, Ovar",40.8456684,-8.64847761987809
+Europe,Portugal,,Évora,"Portugal, Évora",38.5707742,-7.9092808
+Europe,Portugal,,Faro,"Portugal, Faro",37.0162727,-7.9351771
+Europe,Portugal,,Aveiro,"Portugal, Aveiro",40.640496,-8.6537841
+Europe,Portugal,,Póvoa de Varzim,"Portugal, Póvoa de Varzim",41.3794188,-8.7598689
+Europe,Portugal,,Oeiras,"Portugal, Oeiras",38.7124971,-9.271300382407272
+Europe,Portugal,,Braga,"Portugal, Braga",41.5510583,-8.4280045
+Europe,Romania,,Băbeni,"Romania, Băbeni",44.9753376,24.234565
+Europe,Romania,,Romania,"Romania, Romania",45.9852129,24.6859225
+Europe,Romania,,Bucharest,"Romania, Bucharest",44.4361414,26.1027202
+Europe,Romania,,Timişoara,"Romania, Timişoara",45.7538355,21.2257474
+Europe,Romania,,Cluj-Napoca,"Romania, Cluj-Napoca",46.769379,23.5899542
+Europe,Romania,,Sibiu,"Romania, Sibiu",45.7973912,24.1519202
+Europe,Romania,,Oradea,"Romania, Oradea",47.058715,21.927919041661156
+Europe,Romania,,Iaşi,"Romania, Iaşi",47.1615416,27.5837224
+Asia,Singapore,,Singapore,"Singapore, Singapore",1.357107,103.8194992
+Asia,Singapore,,Queenstown Estate,"Singapore, Queenstown Estate",1.297469,103.79497893458912
+Europe,Spain,,Madrid,"Spain, Madrid",40.4167047,-3.7035825
+Europe,Spain,,Trabajo en remoto,"Spain, Trabajo en remoto",,
+Europe,Spain,,Barcelona,"Spain, Barcelona",41.3828939,2.1774322
+Europe,Spain,,Spain,"Spain, Spain",39.3260685,-4.8379791
+Europe,Spain,,Zaragoza,"Spain, Zaragoza",41.6521342,-0.8809428
+Europe,Spain,,Boadilla del Monte,"Spain, Boadilla del Monte",40.4053485,-3.8764663
+Europe,Spain,,Marbella,"Spain, Marbella",36.508976,-4.88562
+Europe,Spain,,Sotogrande,"Spain, Sotogrande",36.2820648,-5.2970604
+Europe,Spain,,Getafe,"Spain, Getafe",40.3081807,-3.7302679
+Europe,Spain,,Arrasate / Mondragón,"Spain, Arrasate / Mondragón",43.0656783,-2.4900779
+Europe,Spain,,Tres Cantos,"Spain, Tres Cantos",40.6065826,-3.7065333
+Europe,Spain,,Toledo,"Spain, Toledo",39.8560679,-4.0239568
+Europe,Sweden,,Stockholm,"Sweden, Stockholm",59.3251172,18.0710935
+Europe,Sweden,,Finspång,"Sweden, Finspång",58.8,15.833333
+Europe,Sweden,,Kista,"Sweden, Kista",59.403311,17.9442849
+Europe,Sweden,,Gothenburg,"Sweden, Gothenburg",57.7072326,11.9670171
+Europe,Sweden,,Solna,"Sweden, Solna",59.361367,18.0013693
+Europe,Sweden,,Piteå,"Sweden, Piteå",65.3134652,21.4900252
+Europe,Sweden,,Danderyd,"Sweden, Danderyd",59.4043647,18.0358505
+Europe,Sweden,,Sweden,"Sweden, Sweden",59.6749712,14.5208584
+Europe,Sweden,,Karlstad,"Sweden, Karlstad",59.3809146,13.5027631
+Europe,Sweden,,Lund,"Sweden, Lund",55.7029296,13.1929449
+Europe,Sweden,,Kalmar,"Sweden, Kalmar",57.02784235,16.575102000807693
+Europe,Sweden,,Bromma,"Sweden, Bromma",59.339769,17.9395411
+Europe,Sweden,,Malmö,"Sweden, Malmö",55.6052931,13.0001566
+Europe,Sweden,,Herräng,"Sweden, Herräng",60.1294737,18.647286
+Europe,Sweden,,Luleå,"Sweden, Luleå",65.5831187,22.1459535
+Europe,Sweden,,Rotebro,"Sweden, Rotebro",59.4765285,17.9116924
+Europe,Sweden,,Södertälje,"Sweden, Södertälje",59.1964289,17.6271663
+Europe,Sweden,,Sollentuna,"Sweden, Sollentuna",59.4293164,17.9500556
+Europe,Sweden,,Sundbyberg,"Sweden, Sundbyberg",59.3628802,17.9681359
+Europe,Switzerland,,Basel,"Switzerland, Basel",47.5581077,7.5878261
+Europe,Switzerland,,Cham,"Switzerland, Cham",47.1823761,8.4611036
+Europe,Switzerland,,Sarnen,"Switzerland, Sarnen",46.8956729,8.2461492
+Europe,Switzerland,,Switzerland,"Switzerland, Switzerland",46.7985624,8.2319736
+Europe,Switzerland,,Argovia,"Switzerland, Argovia",47.412396,8.1948321
+Europe,Switzerland,,Lausanne,"Switzerland, Lausanne",46.5218269,6.6327025
+Europe,Switzerland,,Zug,"Switzerland, Zug",47.1486137,8.5539378
+Europe,Switzerland,,Geneva,"Switzerland, Geneva",46.2017559,6.1466014
+Europe,Switzerland,,Zürich,"Switzerland, Zürich",47.3744489,8.5410422
+Europe,Switzerland,,Illnau-Effretikon,"Switzerland, Illnau-Effretikon",47.43142195,8.715716576799185
+Europe,Switzerland,,Zollikofen,"Switzerland, Zollikofen",46.9959463,7.4576417
+Europe,Switzerland,,Seon,"Switzerland, Seon",47.3460005,8.1593554
+Europe,Switzerland,,Bern,"Switzerland, Bern",46.9482713,7.4514512
+Europe,Switzerland,,Baar,"Switzerland, Baar",47.1951976,8.5253985
+Europe,Switzerland,,Muttenz,"Switzerland, Muttenz",47.525113,7.6477401
+Europe,Switzerland,,Liestal,"Switzerland, Liestal",47.4839723,7.7347783
+Europe,Switzerland,,Lenzburg,"Switzerland, Lenzburg",47.3873136,8.1821873
+Europe,Switzerland,,Pratteln,"Switzerland, Pratteln",47.5192013,7.6944741
+Europe,Switzerland,,Wallisellen,"Switzerland, Wallisellen",47.4166195,8.5919985
+Europe,Switzerland,,Dübendorf,"Switzerland, Dübendorf",47.3968244,8.6183023
+Europe,Switzerland,,Winterthur,"Switzerland, Winterthur",47.4991723,8.7291498
+Europe,Switzerland,,Jonschwil,"Switzerland, Jonschwil",47.4231947,9.0865706
+Europe,Switzerland,,Hergiswil,"Switzerland, Hergiswil",46.9840938,8.3104542
+Europe,Switzerland,,Schötz,"Switzerland, Schötz",47.1698443,7.9884821
+Europe,Turkey,,Turkey,"Turkey, Turkey",38.9597594,34.9249653
+Europe,Turkey,,Istanbul,"Turkey, Istanbul",41.0091982,28.9662187
+Europe,Turkey,,Ankara,"Turkey, Ankara",39.9207886,32.8540482
+Europe,Turkey,,Maslak,"Turkey, Maslak",41.1099991,29.020591
+Europe,United_Kingdom, England,Derby,"United_Kingdom,  England, Derby",52.9212617,-1.4761491
+Europe,United_Kingdom,,United Kingdom,"United_Kingdom, United Kingdom",54.7023545,-3.2765753
+Europe,United_Kingdom, England,London,"United_Kingdom,  England, London",51.5073359,-0.12765
+Europe,United_Kingdom, England,Chester,"United_Kingdom,  England, Chester",53.1908873,-2.8908955
+Europe,United_Kingdom, England,Southampton,"United_Kingdom,  England, Southampton",50.9025349,-1.404189
+Europe,United_Kingdom, England,Newcastle upon Tyne,"United_Kingdom,  England, Newcastle upon Tyne",54.9738474,-1.6131572
+Europe,United_Kingdom, Scotland,Glasgow,"United_Kingdom,  Scotland, Glasgow",55.861155,-4.2501687
+Europe,United_Kingdom, Scotland,Edinburgh,"United_Kingdom,  Scotland, Edinburgh",55.9533456,-3.1883749
+Europe,United_Kingdom, England,Bristol,"United_Kingdom,  England, Bristol",51.4538022,-2.5972985
+Europe,United_Kingdom, England,Leeds,"United_Kingdom,  England, Leeds",53.7974185,-1.5437941
+Europe,United_Kingdom, Northern Ireland,Belfast,"United_Kingdom,  Northern Ireland, Belfast",54.596391,-5.9301829
+Europe,United_Kingdom, England,Sunbury,"United_Kingdom,  England, Sunbury",51.418324,-0.4173517
+Europe,United_Kingdom, England,Stoke Poges,"United_Kingdom,  England, Stoke Poges",51.545186599999994,-0.5880796508332031
+Europe,United_Kingdom, England,Halifax,"United_Kingdom,  England, Halifax",53.7229229,-1.8604874
+Europe,United_Kingdom, England,Milton Keynes,"United_Kingdom,  England, Milton Keynes",52.0406502,-0.7594092
+Europe,United_Kingdom, England,Bracknell,"United_Kingdom,  England, Bracknell",51.4143513,-0.7449925
+Europe,United_Kingdom, England,Reading,"United_Kingdom,  England, Reading",51.456659,-0.9696512
+Europe,United_Kingdom, England,Manchester,"United_Kingdom,  England, Manchester",53.4794892,-2.2451148
+Europe,United_Kingdom, East of England,Cambridge,"United_Kingdom,  East of England, Cambridge",53.7310226,-0.4315053
+Europe,United_Kingdom, England,Brentford,"United_Kingdom,  England, Brentford",51.4863958,-0.3216623
+Europe,United_Kingdom, England,Whitley Bay,"United_Kingdom,  England, Whitley Bay",55.0422091,-1.4454353
+Europe,United_Kingdom, England,Birmingham,"United_Kingdom,  England, Birmingham",52.4796992,-1.9026911
+Europe,United_Kingdom,,Scotland,"United_Kingdom, Scotland",56.7861112,-4.1140518
+Europe,United_Kingdom, England,Royal Tunbridge Wells,"United_Kingdom,  England, Royal Tunbridge Wells",51.1371483,0.2673446
+Europe,United_Kingdom, South East England,Windsor,"United_Kingdom,  South East England, Windsor",54.9818772,-1.4181684
+North America,United_States, CA,Long Beach,"United_States,  CA, Long Beach",33.7690164,-118.191604
+North America,United_States, NJ,Trenton,"United_States,  NJ, Trenton",40.2205944,-74.7597219
+North America,United_States, CA,Irvine,"United_States,  CA, Irvine",33.6856969,-117.8259819
+North America,United_States, DC,Washington,"United_States,  DC, Washington",38.8950368,-77.0365427
+North America,United_States, CA,Santa Clara,"United_States,  CA, Santa Clara",37.2333253,-121.6846349
+North America,United_States, NY,New York,"United_States,  NY, New York",40.7127281,-74.0060152
+North America,United_States, MA,Boston,"United_States,  MA, Boston",42.3554334,-71.060511
+North America,United_States, CA,San Diego,"United_States,  CA, San Diego",32.7174202,-117.1627728
+North America,United_States, MN,Braham,"United_States,  MN, Braham",45.7247444,-93.1706367
+North America,United_States, CA,Los Angeles,"United_States,  CA, Los Angeles",34.0536909,-118.242766
+North America,United_States, GA,Atlanta,"United_States,  GA, Atlanta",33.7489924,-84.3902644
+North America,United_States, TX,Westlake,"United_States,  TX, Westlake",32.991226,-97.1943701
+North America,United_States, NJ,Princeton,"United_States,  NJ, Princeton",40.3492744,-74.6592958
+North America,United_States, VA,McLean,"United_States,  VA, McLean",38.9318369,-77.1671337963356
+North America,United_States, TX,Austin,"United_States,  TX, Austin",30.2711286,-97.7436995
+North America,United_States, TX,Dallas,"United_States,  TX, Dallas",32.7762719,-96.7968559
+North America,United_States, CO,Littleton,"United_States,  CO, Littleton",39.613321,-105.016649
+North America,United_States, NC,Raleigh,"United_States,  NC, Raleigh",35.7803977,-78.6390989
+North America,United_States, DE,Wilmington,"United_States,  DE, Wilmington",39.7459468,-75.546589
+North America,United_States,,Texas,"United_States, Texas",31.2638905,-98.5456116
+North America,United_States, TX,Plano,"United_States,  TX, Plano",33.04675485,-96.814098766682
+North America,United_States, MI,Dearborn,"United_States,  MI, Dearborn",42.3222599,-83.1763145
+North America,United_States, NV,Las Vegas,"United_States,  NV, Las Vegas",36.1672559,-115.148516
+North America,United_States, TX,Frisco,"United_States,  TX, Frisco",33.1505998,-96.8238183
+North America,United_States, NJ,Edison,"United_States,  NJ, Edison",40.518157,-74.4113926
+North America,United_States, OH,Cincinnati,"United_States,  OH, Cincinnati",39.1014537,-84.5124602
+North America,United_States, TX,Irving,"United_States,  TX, Irving",32.8295183,-96.9442177
+North America,United_States, TX,Houston,"United_States,  TX, Houston",29.7589382,-95.3676974
+North America,United_States, CA,Mountain View,"United_States,  CA, Mountain View",37.3893889,-122.0832101
+North America,United_States, FL,Tampa,"United_States,  FL, Tampa",27.9477595,-82.458444
+North America,United_States, NJ,Newark,"United_States,  NJ, Newark",40.735657,-74.1723667
+North America,United_States, IL,Chicago,"United_States,  IL, Chicago",41.8755616,-87.6244212
+North America,United_States, IL,Dekalb,"United_States,  IL, Dekalb",41.8903447,-88.7713953
+North America,United_States, UT,Pleasant Grove,"United_States,  UT, Pleasant Grove",40.3789884,-111.74322233051899
+North America,United_States, UT,Murray,"United_States,  UT, Murray",40.6667841,-111.888417
+North America,United_States, OH,Columbus,"United_States,  OH, Columbus",39.9622601,-83.0007065
+North America,United_States, CA,San Jose,"United_States,  CA, San Jose",37.3361663,-121.890591
+North America,United_States, VA,Roanoke,"United_States,  VA, Roanoke",37.270973,-79.9414313
+North America,United_States, WI,Milwaukee,"United_States,  WI, Milwaukee",43.0349931,-87.922497
+North America,United_States, WA,Seattle,"United_States,  WA, Seattle",47.6038321,-122.330062
+North America,United_States,,Mississippi,"United_States, Mississippi",32.9715285,-89.7348497
+North America,United_States, NC,Charlotte,"United_States,  NC, Charlotte",35.2272086,-80.8430827
+North America,United_States, IA,Iowa City,"United_States,  IA, Iowa City",41.6612561,-91.5299106
+North America,United_States,,United States,"United_States, United States",39.7837304,-100.445882
+North America,United_States, AZ,Chandler,"United_States,  AZ, Chandler",33.3062031,-111.8411851
+North America,United_States, CA,Burbank,"United_States,  CA, Burbank",34.1812089,-118.307201
+North America,United_States, KY,Louisville,"United_States,  KY, Louisville",38.2542376,-85.759407
+North America,United_States, GA,Alpharetta,"United_States,  GA, Alpharetta",34.0709576,-84.2747329
+North America,United_States, IL,Deerfield,"United_States,  IL, Deerfield",42.1711365,-87.8445119
+North America,United_States, VA,Springfield,"United_States,  VA, Springfield",38.7767435,-77.1807019310668
+North America,United_States, CA,Pasadena,"United_States,  CA, Pasadena",34.1476452,-118.1444779
+North America,United_States, CA,San Francisco,"United_States,  CA, San Francisco",37.7790262,-122.419906
+North America,United_States, VA,Richmond,"United_States,  VA, Richmond",37.5385087,-77.43428
+North America,United_States, CA,Cupertino,"United_States,  CA, Cupertino",37.3228934,-122.0322895
+North America,United_States, RI,Smithfield,"United_States,  RI, Smithfield",41.9220433,-71.549507
+North America,United_States, FL,Jacksonville,"United_States,  FL, Jacksonville",30.3321838,-81.655651
+North America,United_States, TN,Nashville,"United_States,  TN, Nashville",36.1622767,-86.7742984
+North America,United_States, NJ,Jersey City,"United_States,  NJ, Jersey City",40.7215682,-74.047455
+North America,United_States, MD,Ellicott City,"United_States,  MD, Ellicott City",39.275735850000004,-76.831741741596
+North America,United_States, OR,Portland,"United_States,  OR, Portland",45.5202471,-122.674194
+North America,United_States, VA,Alexandria,"United_States,  VA, Alexandria",38.8051095,-77.0470229
+North America,United_States, IN,Indianapolis,"United_States,  IN, Indianapolis",39.7683331,-86.1583502
+North America,United_States, PA,Media,"United_States,  PA, Media",39.9167783,-75.387693
+North America,United_States, VA,Reston,"United_States,  VA, Reston",38.955696,-77.34188283719988
+North America,United_States, NC,Cary,"United_States,  NC, Cary",35.7882893,-78.7812081
+North America,United_States, CA,Marina del Rey,"United_States,  CA, Marina del Rey",33.9776848,-118.448647
+North America,United_States, NJ,Fort Lee,"United_States,  NJ, Fort Lee",40.8509333,-73.9701382
+North America,United_States, TX,Addison,"United_States,  TX, Addison",32.960477850000004,-96.8300673063398
+North America,United_States, TX,Fort Worth,"United_States,  TX, Fort Worth",32.753177,-97.3327459
+North America,United_States, CA,Santa Monica,"United_States,  CA, Santa Monica",34.0194704,-118.491227
+North America,United_States, MA,Cambridge,"United_States,  MA, Cambridge",42.3750997,-71.1056157
+North America,United_States, TX,Grand Prairie,"United_States,  TX, Grand Prairie",32.7459645,-96.9977846
+North America,United_States, MD,Columbia,"United_States,  MD, Columbia",39.1938429,-76.86460919353361
+North America,United_States, AZ,Peoria,"United_States,  AZ, Peoria",33.5806115,-112.237294
+North America,United_States, MD,Towson,"United_States,  MD, Towson",39.396459050000004,-76.61481481790992
+North America,United_States,,Minnesota,"United_States, Minnesota",45.9896587,-94.6113288
+North America,United_States, CA,Ontario,"United_States,  CA, Ontario",34.065846,-117.6484304
+North America,United_States, MN,Oakdale,"United_States,  MN, Oakdale",44.985624,-92.9645794
+North America,United_States, GA,Rome,"United_States,  GA, Rome",34.257038,-85.1646726
+North America,United_States, MI,Rothbury,"United_States,  MI, Rothbury",43.507232,-86.347572
+North America,United_States, OR,Myrtle Point,"United_States,  OR, Myrtle Point",43.0635936,-124.1392815
+North America,United_States, TX,Seguin,"United_States,  TX, Seguin",29.575964550000002,-97.9426357870309
+North America,United_States, PA,Philadelphia,"United_States,  PA, Philadelphia",39.9527237,-75.1635262
+North America,United_States, MN,Shoreview,"United_States,  MN, Shoreview",45.0722056,-93.1282878
+North America,United_States, UT,Lehi,"United_States,  UT, Lehi",40.3881114,-111.8486019
+North America,United_States, MT,Malta,"United_States,  MT, Malta",48.3596948,-107.8726879
+North America,United_States, FL,Saint Petersburg,"United_States,  FL, Saint Petersburg",27.7703796,-82.6695085
+North America,United_States, CA,Foster City,"United_States,  CA, Foster City",37.5600336,-122.2688522
+North America,United_States, CT,Hartford,"United_States,  CT, Hartford",41.764582,-72.6908547
+North America,United_States, MD,Baltimore,"United_States,  MD, Baltimore",39.2908816,-76.610759
+North America,United_States, AZ,Mesa,"United_States,  AZ, Mesa",33.4151005,-111.831455
+North America,United_States, GA,Roswell,"United_States,  GA, Roswell",34.02332,-84.360022
+North America,United_States, TN,Memphis,"United_States,  TN, Memphis",35.1460249,-90.0517638
+North America,United_States, MI,Troy,"United_States,  MI, Troy",42.6055893,-83.1499304
+North America,United_States, NH,Portsmouth,"United_States,  NH, Portsmouth",43.0702223,-70.7548621
+North America,United_States, CA,Scotts Valley,"United_States,  CA, Scotts Valley",37.0510595,-122.014684
+North America,United_States, MA,Chelmsford,"United_States,  MA, Chelmsford",42.5968617,-71.3517602
+North America,United_States, CA,Goleta,"United_States,  CA, Goleta",34.4358295,-119.8276389
+North America,United_States, CO,Denver,"United_States,  CO, Denver",39.7392364,-104.984862
+North America,United_States, CA,Carlsbad,"United_States,  CA, Carlsbad",33.1580933,-117.3505966
+North America,United_States, CA,Fremont,"United_States,  CA, Fremont",37.5482697,-121.988571
+North America,United_States, NC,Durham,"United_States,  NC, Durham",35.996653,-78.9018053
+North America,United_States, HI,Honolulu,"United_States,  HI, Honolulu",21.304547,-157.855676
+North America,United_States, MI,Warren,"United_States,  MI, Warren",38.7535106,-91.1453948
+North America,United_States, MO,Saint Louis,"United_States,  MO, Saint Louis",38.6280278,-90.1910154
