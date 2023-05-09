@@ -76,8 +76,8 @@ Europe,Belgium,,Aartselaar,"Belgium, Aartselaar",51.133297,4.3870241
 Europe,Belgium,,Lier,"Belgium, Lier",51.131069,4.5696516
 Europe,Belgium,,Brugge,"Belgium, Brugge",51.2085526,3.226772
 Europe,Belgium,,Meise,"Belgium, Meise",50.9341625,4.3287322
-North America,Canada,,Toronto,"Canada, Toronto",43.6534817,-79.3839347
-North America,Canada,,Vancouver,"Canada, Vancouver",49.2608724,-123.113952
+North America,Canada,Ontario,Toronto,"Canada, Ontario, Toronto",43.6534817,-79.3839347
+North America,Canada,British Columbia,Vancouver,"Canada, British Columbia, Vancouver",49.2608724,-123.113952
 Europe,Czech_Republic,,Prague,"Czech_Republic, Prague",50.0874654,14.4212535
 Europe,Czech_Republic,,Czech Republic,"Czech_Republic, Czech Republic",49.7439047,15.3381061
 Europe,Czech_Republic,,Ostrava,"Czech_Republic, Ostrava",49.8349139,18.2820084
