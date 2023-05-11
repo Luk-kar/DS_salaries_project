@@ -29,7 +29,7 @@ Europe,Austria,,Leonding,"Austria, Leonding",48.2793314,14.2487457
 Europe,Austria,,Höchst,"Austria, Höchst",47.4598203,9.6379578
 Europe,Austria,,Villach,"Austria, Villach",46.6167284,13.8500268
 Europe,Austria,,Hard,"Austria, Hard",47.489391,9.6916539
-Europe,Austria,,Thüringen,"Austria, Thüringen",47.198078300000006,9.765660147359817
+Europe,Austria,,Thüringen,"Austria, Thüringen",47.198078300000006,9.765660147359815
 Europe,Austria,,Thalheim bei Wels,"Austria, Thalheim bei Wels",48.1522388,14.030993
 Europe,Austria,,Eberstalzell,"Austria, Eberstalzell",48.0433366,13.9814852
 Europe,Austria,,Salzburg,"Austria, Salzburg",47.7981346,13.0464806
@@ -47,7 +47,7 @@ Europe,Belgium,,Belgium,"Belgium, Belgium",50.6402809,4.6667145
 Europe,Belgium,,Mechelen,"Belgium, Mechelen",51.0281381,4.4803453
 Europe,Belgium,,Kontich,"Belgium, Kontich",51.1353297,4.4454784
 Europe,Belgium,,Meulebeke,"Belgium, Meulebeke",50.94858225,3.286389945227539
-Europe,Belgium,,Tielt,"Belgium, Tielt",50.999964750000004,3.3414263284671195
+Europe,Belgium,,Tielt,"Belgium, Tielt",50.99996475,3.3414263284671195
 Europe,Belgium,,Schaarbeek,"Belgium, Schaarbeek",50.8676041,4.3737121
 Europe,Belgium,,Brussels,"Belgium, Brussels",50.8465573,4.351697
 Europe,Belgium,,Antwerp,"Belgium, Antwerp",51.2211097,4.3997081
@@ -78,10 +78,10 @@ Europe,Belgium,,Brugge,"Belgium, Brugge",51.2085526,3.226772
 Europe,Belgium,,Meise,"Belgium, Meise",50.9341625,4.3287322
 North America,Canada,Ontario,Toronto,"Canada, Ontario, Toronto",43.6534817,-79.3839347
 North America,Canada,British Columbia,Vancouver,"Canada, British Columbia, Vancouver",49.2608724,-123.113952
-Europe,Czech_Republic,,Prague,"Czech_Republic, Prague",50.0874654,14.4212535
-Europe,Czech_Republic,,Czech Republic,"Czech_Republic, Czech Republic",49.7439047,15.3381061
-Europe,Czech_Republic,,Ostrava,"Czech_Republic, Ostrava",49.8349139,18.2820084
-Europe,Czech_Republic,,Brno,"Czech_Republic, Brno",49.1922443,16.6113382
+Europe,Czech Republic,,Prague,"Czech Republic, Prague",50.0874654,14.4212535
+Europe,Czech Republic,,Czech Republic,"Czech Republic, Czech Republic",49.7439047,15.3381061
+Europe,Czech Republic,,Ostrava,"Czech Republic, Ostrava",49.8349139,18.2820084
+Europe,Czech Republic,,Brno,"Czech Republic, Brno",49.1922443,16.6113382
 Europe,Denmark,,Denmark,"Denmark, Denmark",55.670249,10.3333283
 Europe,Denmark,,Copenhagen,"Denmark, Copenhagen",55.6867243,12.5700724
 Europe,Denmark,,Aarhus,"Denmark, Aarhus",56.1496278,10.2134046
@@ -229,17 +229,17 @@ Europe,Greece,,Athens,"Greece, Athens",37.9839412,23.7283052
 Europe,Greece,,Cyprus,"Greece, Cyprus",40.9823313,24.7013451
 Europe,Greece,,Greece,"Greece, Greece",38.9953683,21.9877132
 Europe,Greece,,Corinth,"Greece, Corinth",37.9385413,22.9273768
-Asia,Hong_Kong,,Hong Kong,"Hong_Kong, Hong Kong",22.2793278,114.1628131
-Asia,Hong_Kong,,Central,"Hong_Kong, Central",22.2850394,114.1583819
-Asia,Hong_Kong,,Kwun Tong,"Hong_Kong, Kwun Tong",22.312937,114.22561
-Asia,Hong_Kong,,Kowloon City,"Hong_Kong, Kowloon City",22.3301595,114.1899368
-Asia,Hong_Kong,,Hung Hom,"Hong_Kong, Hung Hom",22.3031874,114.1820106
-Asia,Hong_Kong,,Quarry Bay,"Hong_Kong, Quarry Bay",22.2877545,114.2149322
-Asia,Hong_Kong,,Kowloon Bay,"Hong_Kong, Kowloon Bay",22.3231377,114.21412352083235
-Asia,Hong_Kong,,Sha Tin,"Hong_Kong, Sha Tin",22.3815527,114.1904697
-Asia,Hong_Kong,,San Po Kong,"Hong_Kong, San Po Kong",22.336665,114.1984071
-Asia,Hong_Kong,,Causeway Bay,"Hong_Kong, Causeway Bay",22.2820777,114.1891587
-Asia,Hong_Kong,,Hong Kong Island,"Hong_Kong, Hong Kong Island",22.2850394,114.1583819
+Asia,Hong Kong,,Hong Kong,"Hong Kong, Hong Kong",22.2793278,114.1628131
+Asia,Hong Kong,,Central,"Hong Kong, Central",22.2850394,114.1583819
+Asia,Hong Kong,,Kwun Tong,"Hong Kong, Kwun Tong",22.312937,114.22561
+Asia,Hong Kong,,Kowloon City,"Hong Kong, Kowloon City",22.3301595,114.1899368
+Asia,Hong Kong,,Hung Hom,"Hong Kong, Hung Hom",22.3031874,114.1820106
+Asia,Hong Kong,,Quarry Bay,"Hong Kong, Quarry Bay",22.2877545,114.2149322
+Asia,Hong Kong,,Kowloon Bay,"Hong Kong, Kowloon Bay",22.3231377,114.21412352083236
+Asia,Hong Kong,,Sha Tin,"Hong Kong, Sha Tin",22.3815527,114.1904697
+Asia,Hong Kong,,San Po Kong,"Hong Kong, San Po Kong",22.336665,114.1984071
+Asia,Hong Kong,,Causeway Bay,"Hong Kong, Causeway Bay",22.2820777,114.1891587
+Asia,Hong Kong,,Hong Kong Island,"Hong Kong, Hong Kong Island",22.2850394,114.1583819
 Europe,Hungary,,Budapest,"Hungary, Budapest",47.48138955,19.14609412691246
 Europe,Hungary,,Debrecen,"Hungary, Debrecen",47.531399,21.6259782
 Europe,Hungary,,Hungary,"Hungary, Hungary",47.1817585,19.5060937
@@ -268,8 +268,8 @@ Europe,Israel,,Southern,"Israel, Southern",14.4789419,121.0285554
 Europe,Israel,,Raanana,"Israel, Raanana",32.1861481,34.8675905
 Europe,Italy,,Pero,"Italy, Pero",45.5101617,9.0894415
 Europe,Italy,,Italy,"Italy, Italy",42.6384261,12.674297
-Europe,Italy,,Como,"Italy, Como",45.939475900000005,9.149410145408947
-Europe,Italy,,Bergamo,"Italy, Bergamo",45.756655699999996,9.754219200862249
+Europe,Italy,,Como,"Italy, Como",45.939475900000005,9.149410145408948
+Europe,Italy,,Bergamo,"Italy, Bergamo",45.7566557,9.754219200862249
 Europe,Italy,,Roma,"Italy, Roma",41.8933203,12.4829321
 Europe,Italy,,Bologna,"Italy, Bologna",44.4938203,11.3426327
 Europe,Italy,,Telelavoro,"Italy, Telelavoro",,
@@ -286,7 +286,7 @@ Europe,Italy,,Sgonico,"Italy, Sgonico",45.7360238,13.7482449
 Europe,Italy,,Catania,"Italy, Catania",37.5023612,15.0873718
 Europe,Italy,,Verona,"Italy, Verona",45.4384958,10.9924122
 Europe,Italy,,Piedmont,"Italy, Piedmont",45.060735,7.923549
-Europe,Italy,,Frosinone,"Italy, Frosinone",41.628546799999995,13.57584977062367
+Europe,Italy,,Frosinone,"Italy, Frosinone",41.6285468,13.57584977062367
 Europe,Italy,,Assago,"Italy, Assago",45.4053966,9.1313547
 Europe,Italy,,Rozzano,"Italy, Rozzano",45.3832366,9.1541309
 Europe,Italy,,Bari,"Italy, Bari",41.1257843,16.8620293
@@ -312,7 +312,7 @@ Europe,Netherlands,,Utrecht,"Netherlands, Utrecht",52.080985600000005,5.12768396
 Europe,Netherlands,,Almere,"Netherlands, Almere",52.3705038,5.2185859
 Europe,Netherlands,,Den Bosch,"Netherlands, Den Bosch",51.6889387,5.303116
 Europe,Netherlands,,Veldhoven,"Netherlands, Veldhoven",51.4190691,5.4045572
-Europe,Netherlands,,Alkmaar,"Netherlands, Alkmaar",52.600853799999996,4.817099446443963
+Europe,Netherlands,,Alkmaar,"Netherlands, Alkmaar",52.6008538,4.817099446443963
 Europe,Netherlands,,Apeldoorn,"Netherlands, Apeldoorn",52.17957375,5.930077460807249
 Europe,Netherlands,,The Hague,"Netherlands, The Hague",52.0799838,4.3113461
 Europe,Netherlands,,Gouda,"Netherlands, Gouda",52.018119350000006,4.711122134697802
@@ -321,16 +321,16 @@ Europe,Netherlands,,Hoofddorp,"Netherlands, Hoofddorp",52.305554,4.6926644
 Europe,Netherlands,,Roermond,"Netherlands, Roermond",51.1933903,5.9882649
 Europe,Netherlands,,Rotterdam,"Netherlands, Rotterdam",51.9244424,4.47775
 Europe,Netherlands,,Zeist,"Netherlands, Zeist",52.086531750000006,5.249007957671885
-Oceania,New_Zealand,,Auckland,"New_Zealand, Auckland",-36.852095,174.7631803
-Oceania,New_Zealand,,Wellington,"New_Zealand, Wellington",-41.2887953,174.7772114
-Oceania,New_Zealand,,Christchurch,"New_Zealand, Christchurch",-43.530955,172.6366455
-Oceania,New_Zealand,,New Zealand,"New_Zealand, New Zealand",-41.5000831,172.8344077
-Oceania,New_Zealand,,Berlins,"New_Zealand, Berlins",-41.8584766,171.8389025
-Oceania,New_Zealand,,ONEHUNGA,"New_Zealand, ONEHUNGA",-36.9237924,174.7857738
-Oceania,New_Zealand,,Milton,"New_Zealand, Milton",-46.1167784,169.9624539
+Oceania,New Zealand,,Auckland,"New Zealand, Auckland",-36.852095,174.7631803
+Oceania,New Zealand,,Wellington,"New Zealand, Wellington",-41.2887953,174.7772114
+Oceania,New Zealand,,Christchurch,"New Zealand, Christchurch",-43.530955,172.6366455
+Oceania,New Zealand,,New Zealand,"New Zealand, New Zealand",-41.5000831,172.8344077
+Oceania,New Zealand,,Berlins,"New Zealand, Berlins",-41.8584766,171.8389025
+Oceania,New Zealand,,ONEHUNGA,"New Zealand, ONEHUNGA",-36.9237924,174.7857738
+Oceania,New Zealand,,Milton,"New Zealand, Milton",-46.1167784,169.9624539
 Europe,Norway,,Norway,"Norway, Norway",61.1529386,8.7876653
 Europe,Norway,,Oslo,"Norway, Oslo",59.9133301,10.7389701
-Europe,Norway,,Kristiansand,"Norway, Kristiansand",58.085627599999995,7.93185802875815
+Europe,Norway,,Kristiansand,"Norway, Kristiansand",58.0856276,7.93185802875815
 Europe,Norway,,Hamar,"Norway, Hamar",61.0014937,11.16479641006573
 Europe,Norway,,Lysaker,"Norway, Lysaker",59.9130129,10.6365628
 Europe,Norway,,Stavanger,"Norway, Stavanger",58.9699675,5.7318101
@@ -346,11 +346,11 @@ Europe,Poland,,Katowice,"Poland, Katowice",50.2598987,19.0215852
 Europe,Poland,,Gdańsk,"Poland, Gdańsk",54.3706858,18.61298210330077
 Europe,Poland,,Mirków,"Poland, Mirków",51.1662782,17.1588597
 Europe,Poland,,Gdynia,"Poland, Gdynia",54.5164982,18.5402738
-Europe,Poland,,Sopot,"Poland, Sopot",54.4430399,18.561309520130756
+Europe,Poland,,Sopot,"Poland, Sopot",54.4430399,18.56130952013076
 Europe,Portugal,,Home office,"Portugal, Home office",,
 Europe,Portugal,,Portugal,"Portugal, Portugal",39.6621648,-8.1353519
 Europe,Portugal,,Porto,"Portugal, Porto",41.1494512,-8.6107884
-Europe,Portugal,,Amadora,"Portugal, Amadora",38.7595162,-9.223677009460125
+Europe,Portugal,,Amadora,"Portugal, Amadora",38.7595162,-9.223677009460124
 Europe,Portugal,,Coimbra,"Portugal, Coimbra",40.2111931,-8.4294632
 Europe,Portugal,,Ovar,"Portugal, Ovar",40.8456684,-8.64847761987809
 Europe,Portugal,,Évora,"Portugal, Évora",38.5707742,-7.9092808
@@ -365,7 +365,7 @@ Europe,Romania,,Bucharest,"Romania, Bucharest",44.4361414,26.1027202
 Europe,Romania,,Timişoara,"Romania, Timişoara",45.7538355,21.2257474
 Europe,Romania,,Cluj-Napoca,"Romania, Cluj-Napoca",46.769379,23.5899542
 Europe,Romania,,Sibiu,"Romania, Sibiu",45.7973912,24.1519202
-Europe,Romania,,Oradea,"Romania, Oradea",47.058715,21.927919041661156
+Europe,Romania,,Oradea,"Romania, Oradea",47.058715,21.92791904166116
 Europe,Romania,,Iaşi,"Romania, Iaşi",47.1615416,27.5837224
 Asia,Singapore,,Singapore,"Singapore, Singapore",1.357107,103.8194992
 Asia,Singapore,,Queenstown Estate,"Singapore, Queenstown Estate",1.297469,103.79497893458912
@@ -428,133 +428,133 @@ Europe,Turkey,,Turkey,"Turkey, Turkey",38.9597594,34.9249653
 Europe,Turkey,,Istanbul,"Turkey, Istanbul",41.0091982,28.9662187
 Europe,Turkey,,Ankara,"Turkey, Ankara",39.9207886,32.8540482
 Europe,Turkey,,Maslak,"Turkey, Maslak",41.1099991,29.020591
-Europe,United_Kingdom," England",Derby,"United_Kingdom,  England, Derby",52.9212617,-1.4761491
-Europe,United_Kingdom,,United Kingdom,"United_Kingdom, United Kingdom",54.7023545,-3.2765753
-Europe,United_Kingdom," England",London,"United_Kingdom,  England, London",51.5073359,-0.12765
-Europe,United_Kingdom," England",Chester,"United_Kingdom,  England, Chester",53.1908873,-2.8908955
-Europe,United_Kingdom," England",Southampton,"United_Kingdom,  England, Southampton",50.9025349,-1.404189
-Europe,United_Kingdom," England",Newcastle upon Tyne,"United_Kingdom,  England, Newcastle upon Tyne",54.9738474,-1.6131572
-Europe,United_Kingdom," Scotland",Glasgow,"United_Kingdom,  Scotland, Glasgow",55.861155,-4.2501687
-Europe,United_Kingdom," Scotland",Edinburgh,"United_Kingdom,  Scotland, Edinburgh",55.9533456,-3.1883749
-Europe,United_Kingdom," England",Bristol,"United_Kingdom,  England, Bristol",51.4538022,-2.5972985
-Europe,United_Kingdom," England",Leeds,"United_Kingdom,  England, Leeds",53.7974185,-1.5437941
-Europe,United_Kingdom," Northern Ireland",Belfast,"United_Kingdom,  Northern Ireland, Belfast",54.596391,-5.9301829
-Europe,United_Kingdom," England",Sunbury,"United_Kingdom,  England, Sunbury",51.418324,-0.4173517
-Europe,United_Kingdom," England",Stoke Poges,"United_Kingdom,  England, Stoke Poges",51.545186599999994,-0.5880796508332031
-Europe,United_Kingdom," England",Halifax,"United_Kingdom,  England, Halifax",53.7229229,-1.8604874
-Europe,United_Kingdom," England",Milton Keynes,"United_Kingdom,  England, Milton Keynes",52.0406502,-0.7594092
-Europe,United_Kingdom," England",Bracknell,"United_Kingdom,  England, Bracknell",51.4143513,-0.7449925
-Europe,United_Kingdom," England",Reading,"United_Kingdom,  England, Reading",51.456659,-0.9696512
-Europe,United_Kingdom," England",Manchester,"United_Kingdom,  England, Manchester",53.4794892,-2.2451148
-Europe,United_Kingdom," East of England",Cambridge,"United_Kingdom,  East of England, Cambridge",53.7310226,-0.4315053
-Europe,United_Kingdom," England",Brentford,"United_Kingdom,  England, Brentford",51.4863958,-0.3216623
-Europe,United_Kingdom," England",Whitley Bay,"United_Kingdom,  England, Whitley Bay",55.0422091,-1.4454353
-Europe,United_Kingdom," England",Birmingham,"United_Kingdom,  England, Birmingham",52.4796992,-1.9026911
-Europe,United_Kingdom,,Scotland,"United_Kingdom, Scotland",56.7861112,-4.1140518
-Europe,United_Kingdom," England",Royal Tunbridge Wells,"United_Kingdom,  England, Royal Tunbridge Wells",51.1371483,0.2673446
-Europe,United_Kingdom," South East England",Windsor,"United_Kingdom,  South East England, Windsor",54.9818772,-1.4181684
-North America,United_States," CA",Long Beach,"United_States,  CA, Long Beach",33.7690164,-118.191604
-North America,United_States," NJ",Trenton,"United_States,  NJ, Trenton",40.2205944,-74.7597219
-North America,United_States," CA",Irvine,"United_States,  CA, Irvine",33.6856969,-117.8259819
-North America,United_States," DC",Washington,"United_States,  DC, Washington",38.8950368,-77.0365427
-North America,United_States," CA",Santa Clara,"United_States,  CA, Santa Clara",37.2333253,-121.6846349
-North America,United_States," NY",New York,"United_States,  NY, New York",40.7127281,-74.0060152
-North America,United_States," MA",Boston,"United_States,  MA, Boston",42.3554334,-71.060511
-North America,United_States," CA",San Diego,"United_States,  CA, San Diego",32.7174202,-117.1627728
-North America,United_States," MN",Braham,"United_States,  MN, Braham",45.7247444,-93.1706367
-North America,United_States," CA",Los Angeles,"United_States,  CA, Los Angeles",34.0536909,-118.242766
-North America,United_States," GA",Atlanta,"United_States,  GA, Atlanta",33.7489924,-84.3902644
-North America,United_States," TX",Westlake,"United_States,  TX, Westlake",32.991226,-97.1943701
-North America,United_States," NJ",Princeton,"United_States,  NJ, Princeton",40.3492744,-74.6592958
-North America,United_States," VA",McLean,"United_States,  VA, McLean",38.9318369,-77.1671337963356
-North America,United_States," TX",Austin,"United_States,  TX, Austin",30.2711286,-97.7436995
-North America,United_States," TX",Dallas,"United_States,  TX, Dallas",32.7762719,-96.7968559
-North America,United_States," CO",Littleton,"United_States,  CO, Littleton",39.613321,-105.016649
-North America,United_States," NC",Raleigh,"United_States,  NC, Raleigh",35.7803977,-78.6390989
-North America,United_States," DE",Wilmington,"United_States,  DE, Wilmington",39.7459468,-75.546589
-North America,United_States,,Texas,"United_States, Texas",31.2638905,-98.5456116
-North America,United_States," TX",Plano,"United_States,  TX, Plano",33.04675485,-96.814098766682
-North America,United_States," MI",Dearborn,"United_States,  MI, Dearborn",42.3222599,-83.1763145
-North America,United_States," NV",Las Vegas,"United_States,  NV, Las Vegas",36.1672559,-115.148516
-North America,United_States," TX",Frisco,"United_States,  TX, Frisco",33.1505998,-96.8238183
-North America,United_States," NJ",Edison,"United_States,  NJ, Edison",40.518157,-74.4113926
-North America,United_States," OH",Cincinnati,"United_States,  OH, Cincinnati",39.1014537,-84.5124602
-North America,United_States," TX",Irving,"United_States,  TX, Irving",32.8295183,-96.9442177
-North America,United_States," TX",Houston,"United_States,  TX, Houston",29.7589382,-95.3676974
-North America,United_States," CA",Mountain View,"United_States,  CA, Mountain View",37.3893889,-122.0832101
-North America,United_States," FL",Tampa,"United_States,  FL, Tampa",27.9477595,-82.458444
-North America,United_States," NJ",Newark,"United_States,  NJ, Newark",40.735657,-74.1723667
-North America,United_States," IL",Chicago,"United_States,  IL, Chicago",41.8755616,-87.6244212
-North America,United_States," IL",Dekalb,"United_States,  IL, Dekalb",41.8903447,-88.7713953
-North America,United_States," UT",Pleasant Grove,"United_States,  UT, Pleasant Grove",40.3789884,-111.74322233051899
-North America,United_States," UT",Murray,"United_States,  UT, Murray",40.6667841,-111.888417
-North America,United_States," OH",Columbus,"United_States,  OH, Columbus",39.9622601,-83.0007065
-North America,United_States," CA",San Jose,"United_States,  CA, San Jose",37.3361663,-121.890591
-North America,United_States," VA",Roanoke,"United_States,  VA, Roanoke",37.270973,-79.9414313
-North America,United_States," WI",Milwaukee,"United_States,  WI, Milwaukee",43.0349931,-87.922497
-North America,United_States," WA",Seattle,"United_States,  WA, Seattle",47.6038321,-122.330062
-North America,United_States,,Mississippi,"United_States, Mississippi",32.9715285,-89.7348497
-North America,United_States," NC",Charlotte,"United_States,  NC, Charlotte",35.2272086,-80.8430827
-North America,United_States," IA",Iowa City,"United_States,  IA, Iowa City",41.6612561,-91.5299106
-North America,United_States,,United States,"United_States, United States",39.7837304,-100.445882
-North America,United_States," AZ",Chandler,"United_States,  AZ, Chandler",33.3062031,-111.8411851
-North America,United_States," CA",Burbank,"United_States,  CA, Burbank",34.1812089,-118.307201
-North America,United_States," KY",Louisville,"United_States,  KY, Louisville",38.2542376,-85.759407
-North America,United_States," GA",Alpharetta,"United_States,  GA, Alpharetta",34.0709576,-84.2747329
-North America,United_States," IL",Deerfield,"United_States,  IL, Deerfield",42.1711365,-87.8445119
-North America,United_States," VA",Springfield,"United_States,  VA, Springfield",38.7767435,-77.1807019310668
-North America,United_States," CA",Pasadena,"United_States,  CA, Pasadena",34.1476452,-118.1444779
-North America,United_States," CA",San Francisco,"United_States,  CA, San Francisco",37.7790262,-122.419906
-North America,United_States," VA",Richmond,"United_States,  VA, Richmond",37.5385087,-77.43428
-North America,United_States," CA",Cupertino,"United_States,  CA, Cupertino",37.3228934,-122.0322895
-North America,United_States," RI",Smithfield,"United_States,  RI, Smithfield",41.9220433,-71.549507
-North America,United_States," FL",Jacksonville,"United_States,  FL, Jacksonville",30.3321838,-81.655651
-North America,United_States," TN",Nashville,"United_States,  TN, Nashville",36.1622767,-86.7742984
-North America,United_States," NJ",Jersey City,"United_States,  NJ, Jersey City",40.7215682,-74.047455
-North America,United_States," MD",Ellicott City,"United_States,  MD, Ellicott City",39.275735850000004,-76.831741741596
-North America,United_States," OR",Portland,"United_States,  OR, Portland",45.5202471,-122.674194
-North America,United_States," VA",Alexandria,"United_States,  VA, Alexandria",38.8051095,-77.0470229
-North America,United_States," IN",Indianapolis,"United_States,  IN, Indianapolis",39.7683331,-86.1583502
-North America,United_States," PA",Media,"United_States,  PA, Media",39.9167783,-75.387693
-North America,United_States," VA",Reston,"United_States,  VA, Reston",38.955696,-77.34188283719988
-North America,United_States," NC",Cary,"United_States,  NC, Cary",35.7882893,-78.7812081
-North America,United_States," CA",Marina del Rey,"United_States,  CA, Marina del Rey",33.9776848,-118.448647
-North America,United_States," NJ",Fort Lee,"United_States,  NJ, Fort Lee",40.8509333,-73.9701382
-North America,United_States," TX",Addison,"United_States,  TX, Addison",32.960477850000004,-96.8300673063398
-North America,United_States," TX",Fort Worth,"United_States,  TX, Fort Worth",32.753177,-97.3327459
-North America,United_States," CA",Santa Monica,"United_States,  CA, Santa Monica",34.0194704,-118.491227
-North America,United_States," MA",Cambridge,"United_States,  MA, Cambridge",42.3750997,-71.1056157
-North America,United_States," TX",Grand Prairie,"United_States,  TX, Grand Prairie",32.7459645,-96.9977846
-North America,United_States," MD",Columbia,"United_States,  MD, Columbia",39.1938429,-76.86460919353361
-North America,United_States," AZ",Peoria,"United_States,  AZ, Peoria",33.5806115,-112.237294
-North America,United_States," MD",Towson,"United_States,  MD, Towson",39.396459050000004,-76.61481481790992
-North America,United_States,,Minnesota,"United_States, Minnesota",45.9896587,-94.6113288
-North America,United_States," CA",Ontario,"United_States,  CA, Ontario",34.065846,-117.6484304
-North America,United_States," MN",Oakdale,"United_States,  MN, Oakdale",44.985624,-92.9645794
-North America,United_States," GA",Rome,"United_States,  GA, Rome",34.257038,-85.1646726
-North America,United_States," MI",Rothbury,"United_States,  MI, Rothbury",43.507232,-86.347572
-North America,United_States," OR",Myrtle Point,"United_States,  OR, Myrtle Point",43.0635936,-124.1392815
-North America,United_States," TX",Seguin,"United_States,  TX, Seguin",29.575964550000002,-97.9426357870309
-North America,United_States," PA",Philadelphia,"United_States,  PA, Philadelphia",39.9527237,-75.1635262
-North America,United_States," MN",Shoreview,"United_States,  MN, Shoreview",45.0722056,-93.1282878
-North America,United_States," UT",Lehi,"United_States,  UT, Lehi",40.3881114,-111.8486019
-North America,United_States," MT",Malta,"United_States,  MT, Malta",48.3596948,-107.8726879
-North America,United_States," FL",Saint Petersburg,"United_States,  FL, Saint Petersburg",27.7703796,-82.6695085
-North America,United_States," CA",Foster City,"United_States,  CA, Foster City",37.5600336,-122.2688522
-North America,United_States," CT",Hartford,"United_States,  CT, Hartford",41.764582,-72.6908547
-North America,United_States," MD",Baltimore,"United_States,  MD, Baltimore",39.2908816,-76.610759
-North America,United_States," AZ",Mesa,"United_States,  AZ, Mesa",33.4151005,-111.831455
-North America,United_States," GA",Roswell,"United_States,  GA, Roswell",34.02332,-84.360022
-North America,United_States," TN",Memphis,"United_States,  TN, Memphis",35.1460249,-90.0517638
-North America,United_States," MI",Troy,"United_States,  MI, Troy",42.6055893,-83.1499304
-North America,United_States," NH",Portsmouth,"United_States,  NH, Portsmouth",43.0702223,-70.7548621
-North America,United_States," CA",Scotts Valley,"United_States,  CA, Scotts Valley",37.0510595,-122.014684
-North America,United_States," MA",Chelmsford,"United_States,  MA, Chelmsford",42.5968617,-71.3517602
-North America,United_States," CA",Goleta,"United_States,  CA, Goleta",34.4358295,-119.8276389
-North America,United_States," CO",Denver,"United_States,  CO, Denver",39.7392364,-104.984862
-North America,United_States," CA",Carlsbad,"United_States,  CA, Carlsbad",33.1580933,-117.3505966
-North America,United_States," CA",Fremont,"United_States,  CA, Fremont",37.5482697,-121.988571
-North America,United_States," NC",Durham,"United_States,  NC, Durham",35.996653,-78.9018053
-North America,United_States," HI",Honolulu,"United_States,  HI, Honolulu",21.304547,-157.855676
-North America,United_States," MI",Warren,"United_States,  MI, Warren",38.7535106,-91.1453948
-North America,United_States," MO",Saint Louis,"United_States,  MO, Saint Louis",38.6280278,-90.1910154
+Europe,United Kingdom,England,Derby,"United Kingdom,  England, Derby",52.9212617,-1.4761491
+Europe,United Kingdom,,United Kingdom,"United Kingdom, United Kingdom",54.7023545,-3.2765753
+Europe,United Kingdom,England,London,"United Kingdom,  England, London",51.5073359,-0.12765
+Europe,United Kingdom,England,Chester,"United Kingdom,  England, Chester",53.1908873,-2.8908955
+Europe,United Kingdom,England,Southampton,"United Kingdom,  England, Southampton",50.9025349,-1.404189
+Europe,United Kingdom,England,Newcastle upon Tyne,"United Kingdom,  England, Newcastle upon Tyne",54.9738474,-1.6131572
+Europe,United Kingdom,Scotland,Glasgow,"United Kingdom,  Scotland, Glasgow",55.861155,-4.2501687
+Europe,United Kingdom,Scotland,Edinburgh,"United Kingdom,  Scotland, Edinburgh",55.9533456,-3.1883749
+Europe,United Kingdom,England,Bristol,"United Kingdom,  England, Bristol",51.4538022,-2.5972985
+Europe,United Kingdom,England,Leeds,"United Kingdom,  England, Leeds",53.7974185,-1.5437941
+Europe,United Kingdom,Northern Ireland,Belfast,"United Kingdom,  Northern Ireland, Belfast",54.596391,-5.9301829
+Europe,United Kingdom,England,Sunbury,"United Kingdom,  England, Sunbury",51.418324,-0.4173517
+Europe,United Kingdom,England,Stoke Poges,"United Kingdom,  England, Stoke Poges",51.5451866,-0.5880796508332031
+Europe,United Kingdom,England,Halifax,"United Kingdom,  England, Halifax",53.7229229,-1.8604874
+Europe,United Kingdom,England,Milton Keynes,"United Kingdom,  England, Milton Keynes",52.0406502,-0.7594092
+Europe,United Kingdom,England,Bracknell,"United Kingdom,  England, Bracknell",51.4143513,-0.7449925
+Europe,United Kingdom,England,Reading,"United Kingdom,  England, Reading",51.456659,-0.9696512
+Europe,United Kingdom,England,Manchester,"United Kingdom,  England, Manchester",53.4794892,-2.2451148
+Europe,United Kingdom,East of England,Cambridge,"United Kingdom,  East of England, Cambridge",53.7310226,-0.4315053
+Europe,United Kingdom,England,Brentford,"United Kingdom,  England, Brentford",51.4863958,-0.3216623
+Europe,United Kingdom,England,Whitley Bay,"United Kingdom,  England, Whitley Bay",55.0422091,-1.4454353
+Europe,United Kingdom,England,Birmingham,"United Kingdom,  England, Birmingham",52.4796992,-1.9026911
+Europe,United Kingdom,,Scotland,"United Kingdom, Scotland",56.7861112,-4.1140518
+Europe,United Kingdom,England,Royal Tunbridge Wells,"United Kingdom,  England, Royal Tunbridge Wells",51.1371483,0.2673446
+Europe,United Kingdom,South East England,Windsor,"United Kingdom,  South East England, Windsor",54.9818772,-1.4181684
+North America,United States,CA,Long Beach,"United States,  CA, Long Beach",33.7690164,-118.191604
+North America,United States,NJ,Trenton,"United States,  NJ, Trenton",40.2205944,-74.7597219
+North America,United States,CA,Irvine,"United States,  CA, Irvine",33.6856969,-117.8259819
+North America,United States,DC,Washington,"United States,  DC, Washington",38.8950368,-77.0365427
+North America,United States,CA,Santa Clara,"United States,  CA, Santa Clara",37.2333253,-121.6846349
+North America,United States,NY,New York,"United States,  NY, New York",40.7127281,-74.0060152
+North America,United States,MA,Boston,"United States,  MA, Boston",42.3554334,-71.060511
+North America,United States,CA,San Diego,"United States,  CA, San Diego",32.7174202,-117.1627728
+North America,United States,MN,Braham,"United States,  MN, Braham",45.7247444,-93.1706367
+North America,United States,CA,Los Angeles,"United States,  CA, Los Angeles",34.0536909,-118.242766
+North America,United States,GA,Atlanta,"United States,  GA, Atlanta",33.7489924,-84.3902644
+North America,United States,TX,Westlake,"United States,  TX, Westlake",32.991226,-97.1943701
+North America,United States,NJ,Princeton,"United States,  NJ, Princeton",40.3492744,-74.6592958
+North America,United States,VA,McLean,"United States,  VA, McLean",38.9318369,-77.1671337963356
+North America,United States,TX,Austin,"United States,  TX, Austin",30.2711286,-97.7436995
+North America,United States,TX,Dallas,"United States,  TX, Dallas",32.7762719,-96.7968559
+North America,United States,CO,Littleton,"United States,  CO, Littleton",39.613321,-105.016649
+North America,United States,NC,Raleigh,"United States,  NC, Raleigh",35.7803977,-78.6390989
+North America,United States,DE,Wilmington,"United States,  DE, Wilmington",39.7459468,-75.546589
+North America,United States,,Texas,"United States, Texas",31.2638905,-98.5456116
+North America,United States,TX,Plano,"United States,  TX, Plano",33.04675485,-96.814098766682
+North America,United States,MI,Dearborn,"United States,  MI, Dearborn",42.3222599,-83.1763145
+North America,United States,NV,Las Vegas,"United States,  NV, Las Vegas",36.1672559,-115.148516
+North America,United States,TX,Frisco,"United States,  TX, Frisco",33.1505998,-96.8238183
+North America,United States,NJ,Edison,"United States,  NJ, Edison",40.518157,-74.4113926
+North America,United States,OH,Cincinnati,"United States,  OH, Cincinnati",39.1014537,-84.5124602
+North America,United States,TX,Irving,"United States,  TX, Irving",32.8295183,-96.9442177
+North America,United States,TX,Houston,"United States,  TX, Houston",29.7589382,-95.3676974
+North America,United States,CA,Mountain View,"United States,  CA, Mountain View",37.3893889,-122.0832101
+North America,United States,FL,Tampa,"United States,  FL, Tampa",27.9477595,-82.458444
+North America,United States,NJ,Newark,"United States,  NJ, Newark",40.735657,-74.1723667
+North America,United States,IL,Chicago,"United States,  IL, Chicago",41.8755616,-87.6244212
+North America,United States,IL,Dekalb,"United States,  IL, Dekalb",41.8903447,-88.7713953
+North America,United States,UT,Pleasant Grove,"United States,  UT, Pleasant Grove",40.3789884,-111.743222330519
+North America,United States,UT,Murray,"United States,  UT, Murray",40.6667841,-111.888417
+North America,United States,OH,Columbus,"United States,  OH, Columbus",39.9622601,-83.0007065
+North America,United States,CA,San Jose,"United States,  CA, San Jose",37.3361663,-121.890591
+North America,United States,VA,Roanoke,"United States,  VA, Roanoke",37.270973,-79.9414313
+North America,United States,WI,Milwaukee,"United States,  WI, Milwaukee",43.0349931,-87.922497
+North America,United States,WA,Seattle,"United States,  WA, Seattle",47.6038321,-122.330062
+North America,United States,,Mississippi,"United States, Mississippi",32.9715285,-89.7348497
+North America,United States,NC,Charlotte,"United States,  NC, Charlotte",35.2272086,-80.8430827
+North America,United States,IA,Iowa City,"United States,  IA, Iowa City",41.6612561,-91.5299106
+North America,United States,,United States,"United States, United States",39.7837304,-100.445882
+North America,United States,AZ,Chandler,"United States,  AZ, Chandler",33.3062031,-111.8411851
+North America,United States,CA,Burbank,"United States,  CA, Burbank",34.1812089,-118.307201
+North America,United States,KY,Louisville,"United States,  KY, Louisville",38.2542376,-85.759407
+North America,United States,GA,Alpharetta,"United States,  GA, Alpharetta",34.0709576,-84.2747329
+North America,United States,IL,Deerfield,"United States,  IL, Deerfield",42.1711365,-87.8445119
+North America,United States,VA,Springfield,"United States,  VA, Springfield",38.7767435,-77.1807019310668
+North America,United States,CA,Pasadena,"United States,  CA, Pasadena",34.1476452,-118.1444779
+North America,United States,CA,San Francisco,"United States,  CA, San Francisco",37.7790262,-122.419906
+North America,United States,VA,Richmond,"United States,  VA, Richmond",37.5385087,-77.43428
+North America,United States,CA,Cupertino,"United States,  CA, Cupertino",37.3228934,-122.0322895
+North America,United States,RI,Smithfield,"United States,  RI, Smithfield",41.9220433,-71.549507
+North America,United States,FL,Jacksonville,"United States,  FL, Jacksonville",30.3321838,-81.655651
+North America,United States,TN,Nashville,"United States,  TN, Nashville",36.1622767,-86.7742984
+North America,United States,NJ,Jersey City,"United States,  NJ, Jersey City",40.7215682,-74.047455
+North America,United States,MD,Ellicott City,"United States,  MD, Ellicott City",39.27573585,-76.831741741596
+North America,United States,OR,Portland,"United States,  OR, Portland",45.5202471,-122.674194
+North America,United States,VA,Alexandria,"United States,  VA, Alexandria",38.8051095,-77.0470229
+North America,United States,IN,Indianapolis,"United States,  IN, Indianapolis",39.7683331,-86.1583502
+North America,United States,PA,Media,"United States,  PA, Media",39.9167783,-75.387693
+North America,United States,VA,Reston,"United States,  VA, Reston",38.955696,-77.34188283719988
+North America,United States,NC,Cary,"United States,  NC, Cary",35.7882893,-78.7812081
+North America,United States,CA,Marina del Rey,"United States,  CA, Marina del Rey",33.9776848,-118.448647
+North America,United States,NJ,Fort Lee,"United States,  NJ, Fort Lee",40.8509333,-73.9701382
+North America,United States,TX,Addison,"United States,  TX, Addison",32.960477850000004,-96.8300673063398
+North America,United States,TX,Fort Worth,"United States,  TX, Fort Worth",32.753177,-97.3327459
+North America,United States,CA,Santa Monica,"United States,  CA, Santa Monica",34.0194704,-118.491227
+North America,United States,MA,Cambridge,"United States,  MA, Cambridge",42.3750997,-71.1056157
+North America,United States,TX,Grand Prairie,"United States,  TX, Grand Prairie",32.7459645,-96.9977846
+North America,United States,MD,Columbia,"United States,  MD, Columbia",39.1938429,-76.86460919353361
+North America,United States,AZ,Peoria,"United States,  AZ, Peoria",33.5806115,-112.237294
+North America,United States,MD,Towson,"United States,  MD, Towson",39.39645905,-76.61481481790992
+North America,United States,,Minnesota,"United States, Minnesota",45.9896587,-94.6113288
+North America,United States,CA,Ontario,"United States,  CA, Ontario",34.065846,-117.6484304
+North America,United States,MN,Oakdale,"United States,  MN, Oakdale",44.985624,-92.9645794
+North America,United States,GA,Rome,"United States,  GA, Rome",34.257038,-85.1646726
+North America,United States,MI,Rothbury,"United States,  MI, Rothbury",43.507232,-86.347572
+North America,United States,OR,Myrtle Point,"United States,  OR, Myrtle Point",43.0635936,-124.1392815
+North America,United States,TX,Seguin,"United States,  TX, Seguin",29.57596455,-97.9426357870309
+North America,United States,PA,Philadelphia,"United States,  PA, Philadelphia",39.9527237,-75.1635262
+North America,United States,MN,Shoreview,"United States,  MN, Shoreview",45.0722056,-93.1282878
+North America,United States,UT,Lehi,"United States,  UT, Lehi",40.3881114,-111.8486019
+North America,United States,MT,Malta,"United States,  MT, Malta",48.3596948,-107.8726879
+North America,United States,FL,Saint Petersburg,"United States,  FL, Saint Petersburg",27.7703796,-82.6695085
+North America,United States,CA,Foster City,"United States,  CA, Foster City",37.5600336,-122.2688522
+North America,United States,CT,Hartford,"United States,  CT, Hartford",41.764582,-72.6908547
+North America,United States,MD,Baltimore,"United States,  MD, Baltimore",39.2908816,-76.610759
+North America,United States,AZ,Mesa,"United States,  AZ, Mesa",33.4151005,-111.831455
+North America,United States,GA,Roswell,"United States,  GA, Roswell",34.02332,-84.360022
+North America,United States,TN,Memphis,"United States,  TN, Memphis",35.1460249,-90.0517638
+North America,United States,MI,Troy,"United States,  MI, Troy",42.6055893,-83.1499304
+North America,United States,NH,Portsmouth,"United States,  NH, Portsmouth",43.0702223,-70.7548621
+North America,United States,CA,Scotts Valley,"United States,  CA, Scotts Valley",37.0510595,-122.014684
+North America,United States,MA,Chelmsford,"United States,  MA, Chelmsford",42.5968617,-71.3517602
+North America,United States,CA,Goleta,"United States,  CA, Goleta",34.4358295,-119.8276389
+North America,United States,CO,Denver,"United States,  CO, Denver",39.7392364,-104.984862
+North America,United States,CA,Carlsbad,"United States,  CA, Carlsbad",33.1580933,-117.3505966
+North America,United States,CA,Fremont,"United States,  CA, Fremont",37.5482697,-121.988571
+North America,United States,NC,Durham,"United States,  NC, Durham",35.996653,-78.9018053
+North America,United States,HI,Honolulu,"United States,  HI, Honolulu",21.304547,-157.855676
+North America,United States,MI,Warren,"United States,  MI, Warren",38.7535106,-91.1453948
+North America,United States,MO,Saint Louis,"United States,  MO, Saint Louis",38.6280278,-90.1910154
