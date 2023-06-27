@@ -2,7 +2,7 @@
 
 A Python script that scrapes the popular job listing site "Glassdoor" for information from job listings
 
-The output is in form of a table in a CSV file.
+The output is in a form of a table in a CSV file.
 
 It functions without any authentication e.g. user sign-ins/ API tokens and keys.
 
@@ -38,23 +38,23 @@ Simply modify a config file to provide:
 
 Script scrapes:
 
-- Strings values
-  - A text
+- Strings values:
+  - A text:
     - Company name
     - Job location
     - Job title
     - Job description
-  - Categorical data
+  - Categorical data:
     - Type of Ownership
     - The sector of the company e.g. "Education" (the industry is part of it)
     - The industry of the company e.g. "Primary & Secondary Schools" (it is part of the sector)
-  - A list: Employees' notes about the company
+  - A list: Employees' notes about the company:
     - Pros
     - Cons
     - Benefits reviews
-- Boolean values
+- Boolean values:
   - Easy application (True) or via the company's page (False)
-- Numerical values
+- Numerical values:
   - 0.00 - 1.00
     - Recommend to a friend
     - CEO approval
@@ -66,12 +66,12 @@ Script scrapes:
     - Senior management
     - Work/Life_balance
     - Benefits rating
-  - 0 / 0.00 - ∞
+  - 0 / 0.00 - ∞:
     - Salary (per hour/per year)
     - The year the company was founded
-  - 24h - 30d+
+  - 24h - 30d+:
     - The age of the job posting
-  - Categorical data
+  - Categorical data:
     - The number of employees in the company
     - Revenue in USD
 
