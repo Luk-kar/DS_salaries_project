@@ -1,4 +1,4 @@
-# Data Science Salary Estimator: Project Overview
+# Data Engineer Salary Estimator: Project Overview
 
 <br>
 <div style="text-align:center"><img src="doc\images\Data-processing-bro-readme.png"/></div>
