@@ -23,7 +23,7 @@
 
 ## YouTube Project Walk-Through 📺
 
-The project is based on Ken Jee's repository: **[PlayingNumbers]([https://github.com/PlayingNumbers](https://github.com/PlayingNumbers/ds_salary_proj))**
+The project is based on Ken Jee's repository: **[PlayingNumbers](https://github.com/PlayingNumbers/ds_salary_proj)**
 
 The Video Walk-Through: **[Ken Jee - Data Science Project from Scratch](https://www.youtube.com/playlist?list=PL2zq7klxX5ASFejJj80ob9ZAnBHdz5O1t)**
 
