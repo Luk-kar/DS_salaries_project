@@ -2,7 +2,8 @@
 
 <br>
 <div style="text-align:center"><img src="doc\images\Data-processing-bro-readme.png"/></div>
-<br><br>
+<br>
+
 - Created a tool that estimates data science salaries (MAE ~ $ `18.6K`) to help data engineers negotiate their income when they get a job.
 - Scraped circa `3000` job descriptions from Glassdoor using Python and Selenium from [32 countries](scraper\config\data.yaml) around the world.
 - Engineered features from the text of each job description to quantify the value companies put on `Python`, `SQL`, `Snowflake`, `AWS`, `GPC`, `Apache Spark`, `Apache Kafka`, BI Tools (`Looker`, `Tableau`, etc...)
