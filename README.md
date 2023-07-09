@@ -134,4 +134,4 @@ In this step, I built a flask API endpoint that was hosted on a local webserver 
 
 ## Acknowledgments
 
-This project was inspired by Ken Jee's work, and the author would like to extend special thanks to him.
+This project was inspired by [Ken Jee's work](https://github.com/PlayingNumbers), and the author would like to extend special thanks to him.
