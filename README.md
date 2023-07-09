@@ -1,6 +1,6 @@
 # Data Science Salary Estimator: Project Overview
 
-![Data processing bro](doc\images\Data-processing-bro-readme.png)
+<div style="text-align:center"><img src="doc\images\Data-processing-bro-readme.png" /></div>
 
 - Created a tool that estimates data science salaries (MAE ~ $ `18.6K`) to help data engineers negotiate their income when they get a job.
 - Scraped circa `3000` job descriptions from Glassdoor using Python and Selenium from [32 countries](scraper\config\data.yaml) around the world.
@@ -100,9 +100,9 @@ The data was enriched with additional information (based on the Job Description 
 
 I looked at the distributions of the data and the value counts for the various categorical variables. Below are a few highlights:
 
-![Job Density](doc\images\job-density.png)
-![Average Salary by Country in the World](doc\images\Average_Salary_by_Country_in_the_World.png)
-![Top 10 Tech skills required](doc\images\Top-10-Tech-skills-required.png)
+<img src="doc\images\job-density.png" />
+<img src="doc\images\Average_Salary_by_Country_in_the_World.png" />
+<img src="doc\images\Top-10-Tech-skills-required.png" />
 
 The EDA is in convenient format here 👉 [+100 insights - Data Engineer 🧭🗺️](https://www.kaggle.com/code/lukkardata/100-insights-data-engineer)
 
