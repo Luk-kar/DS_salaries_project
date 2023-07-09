@@ -1,9 +1,8 @@
-import flask
 from flask import Flask, jsonify, request
-import json
-from data_input import data_in
-import numpy as np
 import pickle
+import numpy as np
+
+app = Flask(__name__)
 
 
 def load_models():
@@ -14,25 +13,25 @@ def load_models():
     return model
 
 
-app = Flask(__name__)
-
-
 @app.route("/predict", methods=["GET"])
 def predict():
-    # stub input features
-    # x = np.array(data_in).reshape(1, -1)
-    # x = data_in
+    if request.method == "GET" and request.is_json:
+        input_data = request.get_json().get("input")
+        data_reshaped = np.array(input_data).reshape(1, -1)
+        model = load_models()
+        salary = model.predict(data_reshaped)[0]
 
-    request_json = request.get_json()
-    x = request_json["input"]
+        prediction = round(salary)
+        html_code = 200
 
-    x_in = np.array(x).reshape(1, -1)
+    else:
+        prediction = "invalid input"
+        html_code = 400
 
-    model = load_models()
-    prediction = model.predict(x_in)[0]
-    response = json.dumps({"response": prediction})
-    return response, 200
+    response = jsonify({"salary_predicted": prediction, "currency": "USD"})
+    response.headers.add("Content-Type", "application/json")
+    return response, html_code
 
 
 if __name__ == "__main__":
-    application.run(debug=True)
+    app.run()
