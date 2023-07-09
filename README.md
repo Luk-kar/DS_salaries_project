@@ -1,6 +1,6 @@
 # Data Science Salary Estimator: Project Overview
 
-<div style="text-align:center"><img src="doc\images\Data-processing-bro-readme.png"  height="280" /></div>
+<div style="text-align:center"><img src="doc\images\Data-processing-bro-readme.png"/></div>
 
 - Created a tool that estimates data science salaries (MAE ~ $ `18.6K`) to help data engineers negotiate their income when they get a job.
 - Scraped circa `3000` job descriptions from Glassdoor using Python and Selenium from [32 countries](scraper\config\data.yaml) around the world.
