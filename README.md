@@ -132,7 +132,7 @@ The Random Forest model far outperformed the other approaches on the test and va
 
 ## Productionization 💻
 
-In this step, I built a flask API endpoint that was hosted on a local webserver by following Ken's Jee steps (I had to change a few steps because not everything was up to date). The API endpoint takes in a request from the "GET" method sending in the body values from a job listing and returns an estimated salary.
+In this step, I built **[a flask API endpoint](FlaskAPI)** that was hosted on a local webserver by following Ken's Jee steps (I had to change a few steps because not everything was up to date). The API endpoint takes in a request from the "GET" method sending in the body values from a job listing and returns an estimated salary.
 
 ## Acknowledgments 👍
 
