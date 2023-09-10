@@ -31,7 +31,7 @@ The video and the project are several years old, so keep in mind that some thing
 
 ## Web Scraping 🌐
 
-Tweaked the web scraper GitHub repo to scrape job postings from **[glassdoor.com](https://www.glassdoor.com)**. With each job, we got the following:
+Tweaked **[the web scraper](scraper)** GitHub repo to scrape job postings from **[glassdoor.com](https://www.glassdoor.com)**. With each job, we got the following:
 
 - Company_name
 - Rating
@@ -61,7 +61,7 @@ Tweaked the web scraper GitHub repo to scrape job postings from **[glassdoor.com
 
 ## Data Cleaning 🧹
 
-After scraping the data, I needed to clean it up so that it was usable for our model. I made the following changes and created the following variables:
+After scraping the data, I needed to **[clean](_002_data_cleaning.ipynb)** it up so that it was usable for our model. I made the following changes and created the following variables:
 
 The data extracted directly from the postings:
 
@@ -100,15 +100,17 @@ The data was enriched with additional information (based on the Job Description 
 
 ## EDA 📊
 
+👉 **[+100 insights - Data Engineer 🧭🗺️](https://www.kaggle.com/code/lukkardata/100-insights-data-engineer)**
+
 I looked at the distributions of the data and the value counts for the various categorical variables. Below are a few highlights:
 
 <img src="doc\images\job-density.png" />
 <img src="doc\images\Average_Salary_by_Country_in_the_World.png" />
 <img src="doc\images\Top-10-Tech-skills-required.png" />
 
-The EDA is in convenient format here 👉 **[+100 insights - Data Engineer 🧭🗺️](https://www.kaggle.com/code/lukkardata/100-insights-data-engineer)**
-
 ## Model Building 🧠
+
+**[The Model](_004_model_building.ipynb)**
 
 First, I removed all data without salary information. Secondly, I transformed the categorical variables into dummy variables. I also split the data into train and test sets with a test size of 20%.
 
