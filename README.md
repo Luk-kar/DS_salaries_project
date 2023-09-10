@@ -31,7 +31,7 @@ The video and the project are several years old, so keep in mind that some thing
 
 ## Web Scraping 🌐
 
-Tweaked the web scraper GitHub repo to scrape job postings from glassdoor.com. With each job, we got the following:
+Tweaked the web scraper GitHub repo to scrape job postings from **[glassdoor.com](https://www.glassdoor.com)**. With each job, we got the following:
 
 - Company_name
 - Rating
