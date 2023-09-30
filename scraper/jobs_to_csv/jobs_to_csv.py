@@ -1,8 +1,8 @@
-'''
+"""
 This module contains functions for web scraping of job listings from Glassdoor. 
 It uses Selenium for web automation.
 It also contains functions for writing job data to CSV files in its RAW version.
-'''
+"""
 # Python
 import logging
 import sys
@@ -14,7 +14,7 @@ from selenium.common.exceptions import (
     ElementClickInterceptedException,
     NoSuchElementException,
     StaleElementReferenceException,
-    TimeoutException
+    TimeoutException,
 )
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
@@ -32,7 +32,7 @@ from .CSV_Writer import CSV_Writer_RAW
 from .debugger.printer import (
     print_current_date_time,
     print_current_page,
-    print_key_value_pairs
+    print_key_value_pairs,
 )
 from .elements_query.await_element import await_element
 from .job_parser.job_parser import parse_data
@@ -45,11 +45,11 @@ Pages_Number = Literal["Unknown"] | int  # type: ignore[operator]
 
 
 class GlassdoorJobScraper:
-    '''
-    This class provides a web scraping tool for job listings from Glassdoor 
-    using Selenium for web automation. 
-    The class contains functions for retrieving job data from the search results page, 
-    parsing the job information, and writing the data to CSV files. 
+    """
+    This class provides a web scraping tool for job listings from Glassdoor
+    using Selenium for web automation.
+    The class contains functions for retrieving job data from the search results page,
+    parsing the job information, and writing the data to CSV files.
 
     Attributes:
         jobs_number (int): The number of job listings to scrape.
@@ -67,17 +67,17 @@ class GlassdoorJobScraper:
     - selenium: A package for web automation.
     - typing: A package for type hints.
 
-    This class is intended for use by data scientists, recruiters, 
-    and anyone else who needs to collect job data from Glassdoor in bulk. 
-    '''
+    This class is intended for use by data scientists, recruiters,
+    and anyone else who needs to collect job data from Glassdoor in bulk.
+    """
 
     def __init__(
-            self,
-            job_title: JobDefault,
-            location: Location,
-            jobs_number: JobNumber,
-            debug_mode: DebugMode,
-            driver: MyWebDriver
+        self,
+        job_title: JobDefault,
+        location: Location,
+        jobs_number: JobNumber,
+        debug_mode: DebugMode,
+        driver: MyWebDriver,
     ):
         self.job_title = job_title
         self.location = location
@@ -89,8 +89,8 @@ class GlassdoorJobScraper:
         self.number_of_pages = None
 
     def save_jobs_to_csv_raw(self):
-        '''
-        It scrapes job listings from Glassdoor website 
+        """
+        It scrapes job listings from Glassdoor website
         and writes job data to CSV files in its raw version.
         Each founded job is appended each time to the CSV file separately.
 
@@ -99,11 +99,11 @@ class GlassdoorJobScraper:
 
         Raises:
             NoSuchElementException: If the specified jobs buttons are not found.
-            ElementClickInterceptedException: If a button is found, 
+            ElementClickInterceptedException: If a button is found,
             but is not clickable at the moment.
             StaleElementReferenceException: If a button is no longer present on the page.
             TimeoutException: If a job posting is not found within a specified timeout.
-        '''
+        """
 
         print("\r")
         print_current_date_time("Start")
@@ -116,11 +116,10 @@ class GlassdoorJobScraper:
                 desc="Total progress",
                 unit="jobs",
                 color="green",
-                total=self.jobs_number
+                total=self.jobs_number,
             )
 
         while self.csv_writer.counter <= self.jobs_number:
-
             self._write_job_listings()
 
         if self.progress_bar:
@@ -130,7 +129,7 @@ class GlassdoorJobScraper:
         print("\r")
 
     def _write_job_listings(self):
-        '''
+        """
         Parse job listings on Glassdoor and write data int CSV for each job.
 
         Returns:
@@ -138,16 +137,16 @@ class GlassdoorJobScraper:
 
         Raises:
             NoSuchElementException: If the specified jobs buttons are not found.
-            ElementClickInterceptedException: If a button is found, 
+            ElementClickInterceptedException: If a button is found,
             but is not clickable at the moment.
             StaleElementReferenceException: If a button is no longer present on the page.
             TimeoutException: If a job posting is not found within a specified timeout.
-        '''
+        """
 
         try:
-
             jobs_list_buttons = await_element(
-                self.driver, 25, By.XPATH, '//ul[@data-test="jlGrid"]')
+                self.driver, 25, By.XPATH, '//ul[@data-test="jlGrid"]'
+            )
 
             jobs_buttons = self.get_jobs_buttons(jobs_list_buttons)
 
@@ -156,21 +155,20 @@ class GlassdoorJobScraper:
             return
 
         if self.debug_mode:
-            print_current_page(self.csv_writer.counter, len(
-                jobs_buttons), self.number_of_pages)
+            print_current_page(
+                self.csv_writer.counter, len(jobs_buttons), self.number_of_pages
+            )
 
         click_x_pop_up(self.driver)
 
         saved_button_index = self._calculate_index(jobs_buttons)
 
         for job_button in jobs_buttons[saved_button_index:]:
-
             if self.csv_writer.counter > self.jobs_number:
                 break
 
             if self.debug_mode:
-                print(
-                    f"\rProgress: {self.csv_writer.counter}/{self.jobs_number}")
+                print(f"\rProgress: {self.csv_writer.counter}/{self.jobs_number}")
 
             try:
                 job_button.click()
@@ -193,7 +191,6 @@ class GlassdoorJobScraper:
                 break
 
             if not self._job_posting_exists(job):
-
                 if self.debug_mode:
                     self._save_errored_page()
 
@@ -206,11 +203,9 @@ class GlassdoorJobScraper:
                 print_key_value_pairs(job)
 
             try:
-
                 self.csv_writer.write_observation(job)
 
             except SystemExit as exit_msg:
-
                 self.driver.quit()
                 sys.exit(exit_msg)
 
@@ -218,15 +213,14 @@ class GlassdoorJobScraper:
                 self.progress_bar.update()
 
         else:
-            click_next_page(
-                self.driver, self.csv_writer.counter, self.jobs_number)
+            click_next_page(self.driver, self.csv_writer.counter, self.jobs_number)
 
             # Awaits element to upload all buttons. Traditional awaits elements didn't work out.
             # https://stackoverflow.com/questions/27003423/staleelementreferenceexception-on-python-selenium
             pause()
 
     def get_jobs_buttons(self, jobs_list_buttons: WebElement):
-        '''
+        """
         Extracts job listing buttons from the jobs list container.
 
         Args:
@@ -242,7 +236,7 @@ class GlassdoorJobScraper:
                 the provided container.
             SystemExit: If the scraper was blocked by Glassdoor or if there
                 was a misspelling in the job title.
-        '''
+        """
 
         try:
             jobs_buttons: WebElements = jobs_list_buttons.find_elements(
@@ -252,41 +246,45 @@ class GlassdoorJobScraper:
             sys.exit(
                 f"Check if you did not have any misspell in the job title or \
                     if you were silently blocked by glassdoor.\
-                    \nError: {error}")
+                    \nError: {error}"
+            )
 
         return jobs_buttons
 
     def _get_total_web_pages(self) -> Pages_Number:
-        '''
+        """
         Extracts the total number of pages from the job search results.
 
         Returns:
             - The total number of pages as an integer.
-        '''
+        """
 
         target_element = '//div[@data-test="pagination-footer-text"]'
 
         try:
-            total_pages = await_element(
-                self.driver, 10, By.XPATH, target_element).text.strip().split(" ")[-1]
+            total_pages = (
+                await_element(self.driver, 10, By.XPATH, target_element)
+                .text.strip()
+                .split(" ")[-1]
+            )
             return int(total_pages)
         except (
             TimeoutException,
             NoSuchElementException,
             StaleElementReferenceException,
             IndexError,
-            ValueError
+            ValueError,
         ):
             return "Unknown"
 
     def _calculate_index(self, jobs_buttons: WebElements) -> int:
-        '''
-        Calculates the index of the next job button to click, 
+        """
+        Calculates the index of the next job button to click,
         based on the current saved rows count and the number of job buttons available.
 
         Returns:
             - An integer representing the index of the next job button to click.
-        '''
+        """
         try:
             return self.csv_writer.counter % len(jobs_buttons)
 
@@ -294,37 +292,34 @@ class GlassdoorJobScraper:
             return 0
 
     def _save_errored_page(self):
-        '''
-        his function saves the HTML content of the current page in a file named "error.html" 
-        in the current working directory. In case there is an encoding error 
-        while writing the file, it logs the error message in a file named "logs.log" 
+        """
+        This function saves the HTML content of the current page in a file named "error.html"
+        in the current working directory. In case there is an encoding error
+        while writing the file, it logs the error message in a file named "logs.log"
         in the current working directory.
 
         Returns: None.
-        '''
+        """
 
         try:
-            html = self.driver.execute_script(
-                "return document.body.innerHTML;")
+            html = self.driver.execute_script("return document.body.innerHTML;")
             with open("error.html", "w", encoding=get_encoding()) as file:
                 file.write(html)
 
         except UnicodeEncodeError as error:
-
             logger = logging.getLogger()
             logger.setLevel(logging.INFO)
-            formatter = logging.Formatter(
-                '%(asctime)s | %(levelname)s | %(message)s')
+            formatter = logging.Formatter("%(asctime)s | %(levelname)s | %(message)s")
 
-            file_handler = logging.FileHandler('errors.log')
+            file_handler = logging.FileHandler("errors.log")
             file_handler.setLevel(logging.DEBUG)
             file_handler.setFormatter(formatter)
 
             logger.addHandler(file_handler)
-            logger.error('This is an error message:%s', error)
+            logger.error("This is an error message:%s", error)
 
     def _job_posting_exists(self, job: Job_values) -> bool:
-        '''
+        """
         Checks whether the given job posting has a non-empty 'Company_name' field.
 
         Args:
@@ -332,6 +327,6 @@ class GlassdoorJobScraper:
 
         Returns:
         - A boolean indicating whether the job posting has a company name.
-        '''
+        """
 
-        return job['Company_name'] != ""
+        return job["Company_name"] != ""
