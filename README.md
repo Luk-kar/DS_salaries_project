@@ -6,8 +6,9 @@
 
 - Created a tool that estimates data science salaries (MAE ~ $ `18.6K`) to help data engineers negotiate their income when they get a job.
 - Scraped circa `3000` job descriptions from Glassdoor using Python and Selenium from **[32 countries](scraper\config\data.yaml)** around the world.
-- Engineered features from the text of each job description to quantify the value companies put on `Python`, `SQL`, `Snowflake`, `AWS`, `GPC`, `Apache Spark`, `Apache Kafka`, BI Tools (`Looker`, `Tableau`, etc...)
-- Optimized `Linear`, `Lasso`, and `Random Forest Regressors` using `GridsearchCV` to reach the best model. Built a client-facing API using flask
+- Engineered features from the text of each job description to quantify the value companies put on `Python`, `SQL`, `Snowflake`, `AWS`, `GPC`, `Apache Spark`, `Apache Kafka`, BI Tools (`Looker`, `Tableau`, etc...).
+- Optimized `Linear`, `Lasso`, and `Random Forest Regressors` using `GridsearchCV` to reach the best model.
+- Built a client-facing API using `flask`.
 
 ## Code and Resources Used 📦
 
@@ -19,19 +20,18 @@
 **For Web Framework:** <br>
 `cd FlaskAPI`, `pip install -r requirements.txt`
 
-**[Scraper Github](scraper\README.md)**
-
 ## YouTube Project Walk-Through 📺
 
-The project is based on **[Ken Jee's](https://github.com/PlayingNumbers)** repository: **[ds_salary_proj](https://github.com/PlayingNumbers/ds_salary_proj)**
-
 The Video Walk-Through: **[Ken Jee - Data Science Project from Scratch](https://www.youtube.com/playlist?list=PL2zq7klxX5ASFejJj80ob9ZAnBHdz5O1t)**
+
+The project is based on **[Ken Jee's](https://github.com/PlayingNumbers)** **[ds_salary_proj](https://github.com/PlayingNumbers/ds_salary_proj)**
 
 The video and the project are several years old, so keep in mind that some things could be outdated.
 
 ## Web Scraping 🌐
 
-Tweaked **[the web scraper](scraper)** GitHub repo to scrape job postings from **[glassdoor.com](https://www.glassdoor.com)**. With each job, we got the following:
+Tweaked **[the web scraper](scraper)** GitHub repo to scrape job postings from **[glassdoor.com](https://www.glassdoor.com)**.
+<br>With each job, we got the following:
 
 - Company_name
 - Rating
